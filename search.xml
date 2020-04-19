@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>test</title>
-    <url>/2020/04/18/test/</url>
+    <title>blog birthday</title>
+    <url>/2020/04/19/blog-birthday/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
-    <title>about</title>
-    <url>/2020/04/19/about/</url>
-    <content><![CDATA[<p>cs�����ڶ�<br>ϲ��ʫ�ʸ踳</p>
+    <title>创建博客的初衷</title>
+    <url>/2020/04/19/%E5%88%9B%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E5%88%9D%E8%A1%B7/</url>
+    <content><![CDATA[<h1 id="Github建站原因"><a href="#Github建站原因" class="headerlink" title="Github建站原因"></a>Github建站原因</h1><p>1.相较于CSDN，github更自由</p>
+<p>2.学着使用github，上面有很多大牛，可以开拓眼界</p>
+<h2 id="0x00初衷"><a href="#0x00初衷" class="headerlink" title="0x00初衷"></a>0x00初衷</h2><p>通过博客来记录学习与生活</p>
+<h3 id="0x01最后"><a href="#0x01最后" class="headerlink" title="0x01最后"></a>0x01最后</h3><p>由于刚学习使用hexo，如果页面有什么问题，还请多多包涵。</p>
+<p>如果可以的话，请联系我邮箱MTI1MjQ0ODUwOEBxcS5jb20= （encoded by base64）</p>
 ]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>初衷</tag>
+      </tags>
   </entry>
 </search>

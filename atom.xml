@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-19T08:22:44.105Z</updated>
+  <updated>2020-04-20T06:24:03.834Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>markdown语法学习</title>
+    <link href="http://yoursite.com/2020/04/20/markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://yoursite.com/2020/04/20/markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</id>
+    <published>2020-04-20T05:12:53.000Z</published>
+    <updated>2020-04-20T06:24:03.834Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;markdown介绍&quot;&gt;&lt;a href=&quot;#markdown介绍&quot; class=&quot;headerlink&quot; title=&quot;markdown介绍&quot;&gt;&lt;/a&gt;markdown介绍&lt;/h1&gt;&lt;p&gt;markdown是一种很简单的标记语言，它可以让我们用纯文本去编写文档，然后再转换成HTML等其他文档。
+    
+    </summary>
+    
+    
+      <category term="学习" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="语法" scheme="http://yoursite.com/tags/%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>创建博客的初衷</title>

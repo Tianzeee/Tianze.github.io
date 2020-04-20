@@ -16,4 +16,58 @@
         <tag>初衷</tag>
       </tags>
   </entry>
+  <entry>
+    <title>markdown语法学习</title>
+    <url>/2020/04/20/markdown%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="markdown介绍"><a href="#markdown介绍" class="headerlink" title="markdown介绍"></a>markdown介绍</h1><p>markdown是一种很简单的标记语言，它可以让我们用纯文本去编写文档，然后再转换成HTML等其他文档。<a id="more"></a></p>
+<p>我的文章也是通过markdown来写的，非常方便、简单。</p>
+<h1 id="markdown基本语法"><a href="#markdown基本语法" class="headerlink" title="markdown基本语法"></a>markdown基本语法</h1><h2 id="0x00-标题"><a href="#0x00-标题" class="headerlink" title="0x00 标题"></a>0x00 标题</h2><p>标题前加#，一个#是一级标题，以此类推，最多只有六级标题，标题级数代表字体大小，一级标题字体最大</p>
+<p>实例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#一级标题</span><br><span class="line">##二级标题</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">######六级标题</span><br></pre></td></tr></table></figure>
+<h2 id="0x01-字体"><a href="#0x01-字体" class="headerlink" title="0x01 字体"></a>0x01 字体</h2><p>1.加粗：文字左右用两个*包起来</p>
+<p>2.斜体：文字左右用一个*包起来</p>
+<p>3.斜体加粗：文字左右用三个*包起来</p>
+<p>4.删除线：文字左右用两个~~包起来</p>
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">**加粗字体**</span><br><span class="line">*斜体*</span><br><span class="line">***斜体加粗***</span><br><span class="line">~~删除线~~</span><br></pre></td></tr></table></figure>
+<h2 id="0x02-引用"><a href="#0x02-引用" class="headerlink" title="0x02 引用"></a>0x02 引用</h2><p>在引用的文字前面加&gt;即可。</p>
+<blockquote>
+<p>引用实例</p>
+</blockquote>
+<p>也可以嵌套引用，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; This is the first level of quoting.</span><br><span class="line">&gt;</span><br><span class="line">&gt; &gt; This is nested blockquote.</span><br><span class="line">&gt;</span><br><span class="line">&gt; Back to the first level.</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<blockquote>
+<p>This is the first level of quoting.</p>
+<blockquote>
+<p>This is nested blockquote.</p>
+</blockquote>
+<p>Back to the first level.</p>
+</blockquote>
+<h2 id="0x03-分隔线"><a href="#0x03-分隔线" class="headerlink" title="0x03 分隔线"></a>0x03 分隔线</h2><p>三个或三个以上的 - 或 * 都可以。</p>
+<p>效果如下：</p>
+<hr>
+<h2 id="0x04-图片"><a href="#0x04-图片" class="headerlink" title="0x04 图片"></a>0x04 图片</h2><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">![图片alt](图片地址 &quot;图片title&quot;)</span><br><span class="line"></span><br><span class="line">图片alt是显示在图片下的文字，相当于对图片的解释。</span><br><span class="line">图片title是图片的标题，鼠标移到图片上时显示的内容，可加可不加。</span><br></pre></td></tr></table></figure>
+<h2 id="0x05-超链接"><a href="#0x05-超链接" class="headerlink" title="0x05 超链接"></a>0x05 超链接</h2><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[超链接名](超链接地址 &quot;超链接title&quot;)</span><br><span class="line">title可加可不加</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><a href="https://tianzeee.github.io" target="_blank" rel="noopener">Tianze’s Blog</a></p>
+<h2 id="0x06-代码"><a href="#0x06-代码" class="headerlink" title="0x06 代码"></a>0x06 代码</h2><p>单行代码：两边用一个反引号包起来<br>如下：</p>
+<p> <code>code</code></p>
+<p>代码块：上下用三个反引号包起来，反引号但独占一行。</p>
+<p>如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">(&#96;&#96;&#96;)</span><br><span class="line"> code……</span><br><span class="line"> code……</span><br><span class="line">(&#96;&#96;&#96;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：为了防止转译，上下的三个反引号加了小括号，实际是没有的，这里只是用来演示。</p>
+</blockquote>
+<h2 id="0x07-最后"><a href="#0x07-最后" class="headerlink" title="0x07 最后"></a>0x07 最后</h2><p>还有一些语法如列表、表格、流程图等没有写到，由于用到的很少所以就没仔细去看，如果想了解可以参考<a href="https://www.runoob.com/markdown/md-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>语法</tag>
+      </tags>
+  </entry>
 </search>

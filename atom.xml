@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-20T06:49:21.845Z</updated>
+  <updated>2020-04-21T12:14:48.431Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>汉诺塔问题</title>
+    <link href="http://yoursite.com/2020/04/21/Hanoi/"/>
+    <id>http://yoursite.com/2020/04/21/Hanoi/</id>
+    <published>2020-04-21T09:26:15.000Z</published>
+    <updated>2020-04-21T12:14:48.431Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;有三个柱子A,B,C。A柱上有N(N&amp;gt;1)个直径大小不同，依小到大编号为1，2，，，n的圆盘。
+    
+    </summary>
+    
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>markdown语法学习</title>

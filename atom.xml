@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-26T05:18:56.947Z</updated>
+  <updated>2021-01-26T11:11:37.736Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2020/09/26/SQL-injection-study-notes/"/>
     <id>http://yoursite.com/2020/09/26/SQL-injection-study-notes/</id>
     <published>2020-09-26T03:50:07.000Z</published>
-    <updated>2020-09-26T05:18:56.947Z</updated>
+    <updated>2021-01-26T11:11:37.736Z</updated>
     
     <summary type="html">
     
@@ -36,7 +36,7 @@
     </summary>
     
     
-      <category term="Web安全学习" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
   </entry>
@@ -46,7 +46,7 @@
     <link href="http://yoursite.com/2020/04/27/prompt1-to-win/"/>
     <id>http://yoursite.com/2020/04/27/prompt1-to-win/</id>
     <published>2020-04-27T13:42:18.000Z</published>
-    <updated>2020-07-15T15:37:58.641Z</updated>
+    <updated>2021-01-26T11:11:29.468Z</updated>
     
     <summary type="html">
     
@@ -55,7 +55,7 @@
     </summary>
     
     
-      <category term="Web安全学习" scheme="http://yoursite.com/categories/Web%E5%AE%89%E5%85%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
   </entry>
@@ -84,7 +84,7 @@
     <link href="http://yoursite.com/2020/04/20/markdown-learning/"/>
     <id>http://yoursite.com/2020/04/20/markdown-learning/</id>
     <published>2020-04-20T05:12:53.000Z</published>
-    <updated>2020-07-15T15:37:50.516Z</updated>
+    <updated>2021-01-26T11:10:53.291Z</updated>
     
     <summary type="html">
     
@@ -93,7 +93,7 @@
     </summary>
     
     
-      <category term="学习" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0/"/>
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
   </entry>

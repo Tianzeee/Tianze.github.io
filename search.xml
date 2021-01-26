@@ -48,7 +48,7 @@
 <h2 id="0x07-最后"><a href="#0x07-最后" class="headerlink" title="0x07 最后"></a>0x07 最后</h2><p>还有一些语法如列表、表格、流程图等没有写到，由于用到的很少所以就没仔细去看，如果想了解可以参考<a href="https://www.runoob.com/markdown/md-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p>
 ]]></content>
       <categories>
-        <category>学习</category>
+        <category>学习笔记</category>
       </categories>
   </entry>
   <entry>
@@ -99,7 +99,7 @@
 <p><code>&quot;&gt;&lt;script&gt;/*#*/prompt(1/*#*/)&lt;/script&gt;</code></p>
 ]]></content>
       <categories>
-        <category>Web安全学习</category>
+        <category>学习笔记</category>
       </categories>
   </entry>
   <entry>
@@ -226,7 +226,7 @@
 <h1 id="0x03总结"><a href="#0x03总结" class="headerlink" title="0x03总结"></a>0x03总结</h1><p>通过sqli-labs的练习，基本入门了sql注入，然而我认为这还远远不够。对于盲注，还需要学习python脚本的编写，通过脚本进行自动化注入，也可以使用sqlmap工具。对于刚入门的我，以后还有很多东西要学，各种绕过的姿势等等</p>
 ]]></content>
       <categories>
-        <category>Web安全学习</category>
+        <category>学习笔记</category>
       </categories>
   </entry>
 </search>

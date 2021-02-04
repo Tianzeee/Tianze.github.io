@@ -99,7 +99,7 @@
 <p><code>&quot;&gt;&lt;script&gt;/*#*/prompt(1/*#*/)&lt;/script&gt;</code></p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Web</category>
       </categories>
   </entry>
   <entry>
@@ -226,16 +226,15 @@
 <h1 id="0x03总结"><a href="#0x03总结" class="headerlink" title="0x03总结"></a>0x03总结</h1><p>通过sqli-labs的练习，基本入门了sql注入，然而我认为这还远远不够。对于盲注，还需要学习python脚本的编写，通过脚本进行自动化注入，也可以使用sqlmap工具。对于刚入门的我，以后还有很多东西要学，各种绕过的姿势等等</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Web</category>
       </categories>
   </entry>
   <entry>
     <title>misc入门之图片隐写</title>
     <url>/2021/02/03/introduction-to-misc/</url>
     <content><![CDATA[<p>misc</p>
-<h1 id="主要类型："><a href="#主要类型：" class="headerlink" title="主要类型："></a>主要类型：</h1><h2 id="1-数据编码、图形密码"><a href="#1-数据编码、图形密码" class="headerlink" title="1.数据编码、图形密码"></a>1.数据编码、图形密码</h2><h2 id="2-图片隐写"><a href="#2-图片隐写" class="headerlink" title="2.图片隐写"></a>2.图片隐写</h2><h2 id="3-音频-amp-视频隐写"><a href="#3-音频-amp-视频隐写" class="headerlink" title="3.音频&amp;视频隐写"></a>3.音频&amp;视频隐写</h2><h2 id="4-流量分析"><a href="#4-流量分析" class="headerlink" title="4.流量分析"></a>4.流量分析</h2><h2 id="5-内存取证-在磁盘里隐藏一些东西"><a href="#5-内存取证-在磁盘里隐藏一些东西" class="headerlink" title="5.内存取证-在磁盘里隐藏一些东西"></a>5.内存取证-在磁盘里隐藏一些东西</h2><h2 id="6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息"><a href="#6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息" class="headerlink" title="6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息"></a>6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息</h2><a id="more"></a>
-
-<h1 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h1><h2 id="010editor-winhex"><a href="#010editor-winhex" class="headerlink" title="010editor/winhex"></a>010editor/winhex</h2><h2 id="图片十六进制文件头文件尾-文件模板"><a href="#图片十六进制文件头文件尾-文件模板" class="headerlink" title="图片十六进制文件头文件尾+文件模板"></a>图片十六进制文件头文件尾+文件模板</h2><h2 id="文件属性-exiftools"><a href="#文件属性-exiftools" class="headerlink" title="文件属性(exiftools)"></a>文件属性(exiftools)</h2><h2 id="kali"><a href="#kali" class="headerlink" title="kali"></a>kali</h2><h1 id="010editor："><a href="#010editor：" class="headerlink" title="010editor："></a>010editor：</h1><p>一个字节由两位十六进制数组成</p>
+<h1 id="主要类型："><a href="#主要类型：" class="headerlink" title="主要类型："></a>主要类型：</h1><h2 id="1-数据编码、图形密码"><a href="#1-数据编码、图形密码" class="headerlink" title="1.数据编码、图形密码"></a>1.数据编码、图形密码</h2><h2 id="2-图片隐写"><a href="#2-图片隐写" class="headerlink" title="2.图片隐写"></a>2.图片隐写</h2><h2 id="3-音频-amp-视频隐写"><a href="#3-音频-amp-视频隐写" class="headerlink" title="3.音频&amp;视频隐写"></a>3.音频&amp;视频隐写</h2><a id="more"></a>
+<h2 id="4-流量分析"><a href="#4-流量分析" class="headerlink" title="4.流量分析"></a>4.流量分析</h2><h2 id="5-内存取证-在磁盘里隐藏一些东西"><a href="#5-内存取证-在磁盘里隐藏一些东西" class="headerlink" title="5.内存取证-在磁盘里隐藏一些东西"></a>5.内存取证-在磁盘里隐藏一些东西</h2><h2 id="6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息"><a href="#6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息" class="headerlink" title="6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息"></a>6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息</h2><h1 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h1><h2 id="010editor-winhex"><a href="#010editor-winhex" class="headerlink" title="010editor/winhex"></a>010editor/winhex</h2><h2 id="图片十六进制文件头文件尾-文件模板"><a href="#图片十六进制文件头文件尾-文件模板" class="headerlink" title="图片十六进制文件头文件尾+文件模板"></a>图片十六进制文件头文件尾+文件模板</h2><h2 id="文件属性-exiftools"><a href="#文件属性-exiftools" class="headerlink" title="文件属性(exiftools)"></a>文件属性(exiftools)</h2><h2 id="kali"><a href="#kali" class="headerlink" title="kali"></a>kali</h2><h1 id="010editor："><a href="#010editor：" class="headerlink" title="010editor："></a>010editor：</h1><p>一个字节由两位十六进制数组成</p>
 <p>010左侧显示十六进制右侧显示字符串，如果一个字节不能显示成字符，则会显示成”.”</p>
 <p>alt+4打开模板,没有模板的文件可以用F5加载模板</p>
 <p>010里复制是ctrl+shift+c粘贴是v，kali同理</p>
@@ -271,6 +270,60 @@
 <p>加密lsb隐写，用cloacked-pixel工具的lsb.py脚本来解</p>
 <p><code>python2 lsb.py extract &lt;stego_file&gt; &lt;out_file&gt; &lt;password&gt;</code></p>
 <p>bmp或者pdf文件解密可以用wbStego4.3open工具直接解密</p>
+]]></content>
+      <categories>
+        <category>misc</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>misc之数据编码</title>
+    <url>/2021/02/04/encode/</url>
+    <content><![CDATA[<h1 id="常见进制"><a href="#常见进制" class="headerlink" title="常见进制"></a>常见进制</h1><p>01、hex</p>
+<h1 id="进制转换："><a href="#进制转换：" class="headerlink" title="进制转换："></a>进制转换：</h1><p>二进制转ascii码</p>
+<p>二进制转morse码<br>二进制转二维码（绘图）-用python的PIL库写脚本转</p>
+<a id="more"></a>
+<p>二进制转图片（hex）-用010打开转换的十六进制判断文件头，修改正确后缀打开即可</p>
+<p>二进制转万物<br>………………</p>
+<h1 id="常见编码"><a href="#常见编码" class="headerlink" title="常见编码"></a>常见编码</h1><h2 id="ascii："><a href="#ascii：" class="headerlink" title="ascii："></a>ascii：</h2><p>Ascii主要用来显示现代英语</p>
+<h2 id="base家族："><a href="#base家族：" class="headerlink" title="base家族："></a>base家族：</h2><p>base64：把3个8位字节转化为4个6位字节，之后在6位的前面补两个0，形成8位一个字节的形式，6位2进制能表示的最大数是2的6次方是64，这也是为什么是64个字符（A-Z,a-z,0-9,+,/这64个编码字符，=号不属于编码字符，而是填充字符）的原因</p>
+<p>base32：使用32个可打印字符（A-Z和2-7）对任意字节数据进行编码，编码后的字符串不区分大小写并排除了容易混淆的字符。tips：末尾最多有6个=</p>
+<p>base16：使用数字0-9和字母A-F16个字符对任意字节数据进行编码。tips：不会出现=</p>
+<p>base36：包含0-9加上所有的26个字母，不区分大小写，不包含任何标点，所有的字母要么全大写要么全小写。特点：加密仅支持整数数字，解密仅支持字符串，不支持中文。</p>
+<p>base58：采用的字符集为“123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ”，由纯数字与字母组成而且去掉了容易引起视觉混淆的字符（0：数字零，O：大写O，I：大写i，l:小写L）。9个数字+49个字母=58个。</p>
+<p>base62：26个字母的大小写再加上0-9，相比于base64只是去掉了两个符号（+和/）</p>
+<p>base85：类似于base64的二进制文本编码形式，通过使用五个ascii字符表示四个字节的二进制数据，它可用于将图像嵌入到Adobe PDF文件中。</p>
+<p>base91：由91个字符（0-9，a-z，A-Z,!#$%&amp;()*+,./:;&lt;=&gt;?@[]^_`{|}”）组成</p>
+<p>base92：比base91多一个字符~</p>
+<h2 id="morse："><a href="#morse：" class="headerlink" title="morse："></a>morse：</h2><p>莫尔斯电码，一种早期的数字化通信形式，由 ‘.’ 和 ‘-‘ 组成</p>
+<h2 id="shellcode："><a href="#shellcode：" class="headerlink" title="shellcode："></a>shellcode：</h2><p>一段利用软件漏洞而执行的代码，shellcode为二进制的机器码，因为经常让攻击者获得shell而得名，通常用16进制（如\x55\x68）来表示，可以用16进制格式来表示其他隐写信息。</p>
+<h2 id="urlencode、unicode"><a href="#urlencode、unicode" class="headerlink" title="urlencode、unicode"></a>urlencode、unicode</h2><p>urlencode：url编码又叫百分号编码，是统一资源定位(URL)编码方式。<br>URL地址（常说网址）规定了常用的数字，字母可以直接使用，另外一批作为特殊用户字符也可以直接用（/,:@等），剩下的其它所有字符必须通过%xx编码处理。<br>编码方法很简单，在该字节ascii码的的16进制字符前面加%. 如 空格字符，ascii码是32，对应16进制是’20’，那么urlencode编码结果是:%20。</p>
+<p>unicode：中文又称万国码、国际码、统一码、单一码，是计算机科学领域的业界标准。它整理、编码了世界上大部分的文字系统，使得电脑可以用更为简单的方式来呈现和处理文字。<br>Unicode伴随着通用字符集的标准而发展，同时也以书本的形式对外发表。Unicode至今仍在不断增修，每个新版本都加入更多新的字符。</p>
+<h2 id="aaencode、jjencode、uuencode"><a href="#aaencode、jjencode、uuencode" class="headerlink" title="aaencode、jjencode、uuencode"></a>aaencode、jjencode、uuencode</h2><p>aaencode：可以将js代码转换成常用的网络表情，也就是我们所说的颜文字js加密</p>
+<p>jjencode：由$=~[]{}()_+.;!&quot;“组成</p>
+<p>uuencode：Uuencode是二进制信息和文字信息之间的转换编码，也就是机器和人眼识读的转换。Uuencode编码方案常见于电子邮件信息的传输，目前已被多用途互联网邮件扩展（MIME）大量取代。例如：2Y9V/Y:6SY+JZY+B’Y;*![[R!`</p>
+<h2 id="Jsfuck、brainfuck、ook！、short-ook！"><a href="#Jsfuck、brainfuck、ook！、short-ook！" class="headerlink" title="Jsfuck、brainfuck、ook！、short ook！"></a>Jsfuck、brainfuck、ook！、short ook！</h2><p>jsfuck：用六个字符<a href=""></a>!+来编写javascript程序，直接在浏览器F12的console控制台解码即可。</p>
+<p>brainfuck：由+&lt;&gt;[].-组成</p>
+<p>ook!：全部由ook.!?组成</p>
+<p>short ook！：由.!?组成</p>
+<h2 id="敲击码："><a href="#敲击码：" class="headerlink" title="敲击码："></a>敲击码：</h2><p>是一种以非常简单的方式对文本信息进行编码的方法。因该编码对信息通过使用一系列的点击声音来编码而命名，敲击码是基于 5 ×5 方格波利比奥斯方阵来实现的，不同点是是用 K 字母被整合到 C 中。</p>
+<h2 id="二维码："><a href="#二维码：" class="headerlink" title="二维码："></a>二维码：</h2><p>用某种特定几何图形按一定规律在平面分步的黑白相间的图形记录数据符号信息。</p>
+<p>线性堆叠式二维码  PDF417、U1tracode、Code49、Code 16K</p>
+<p>矩阵式二维码 Data Matrix、Maxi Code、Aztec Code、QP Code、Vericode</p>
+<p>邮政码  主要用于邮件编码  POSTNET、BPO 4-STATE</p>
+<p>QR码的特点</p>
+<p>存储大容量信息</p>
+<p>传统的条形码只能处理20位左右的信息量，与此相比，QR码可处理条形码的几十倍到几百倍的信息量。</p>
+<p>另外，QR码还可以支持所有类型的数据。（如：数字、英文字母、日文字母、汉字、符号、二进制、控制码等）。一个QR码最多可以处理7089字(仅用数字时)的巨大信息量。</p>
+<p>在小空间内打印</p>
+<p>QR码使用纵向和横向两个方向处理数据，如果是相同的信息量，QR码所占空间为条形码的十分之一左右。(还支持Micro QR码，可以在更小空间内处理数据。)</p>
+<p>QR码的基本结构</p>
+<p>QR(Quick-Response) code是被广泛使用的一种二维码，解码速度快。</p>
+<p>格式信息：纠错等级</p>
+<p>版本信息：即二维码的规格，QR码符号共有40种规格的矩阵</p>
+<p>二维码常见考题：</p>
+<p>1.修补定位符</p>
+<p>2.基于纠错等级，只给你一半的信息，需要把剩下的补全。用QRazyBox项目修补</p>
+<h2 id="稀奇古怪的编码"><a href="#稀奇古怪的编码" class="headerlink" title="稀奇古怪的编码"></a>稀奇古怪的编码</h2><p>社会主义核心价值观、与佛论禅、与熊论道</p>
 ]]></content>
       <categories>
         <category>misc</category>

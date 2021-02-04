@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-03T15:01:49.563Z</updated>
+  <updated>2021-02-04T13:50:13.796Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,16 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>misc之数据编码</title>
+    <link href="http://yoursite.com/2021/02/04/encode/"/>
+    <id>http://yoursite.com/2021/02/04/encode/</id>
+    <published>2021-02-04T13:12:10.000Z</published>
+    <updated>2021-02-04T13:50:13.796Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;常见进制&quot;&gt;&lt;a href=&quot;#常见进制&quot; class=&quot;headerlink&quot; title=&quot;常见进制&quot;&gt;&lt;/a&gt;常见进制&lt;/h1&gt;&lt;p&gt;01、hex&lt;/p&gt;
+&lt;h1 id=&quot;进制转换：&quot;&gt;&lt;a href=&quot;#进制转换：&quot; class=&quot;headerlink&quot; title=&quot;进制转换：&quot;&gt;&lt;/a&gt;进制转换：&lt;/h1&gt;&lt;p&gt;二进制转ascii码&lt;/p&gt;
+&lt;p&gt;二进制转morse码&lt;br&gt;二进制转二维码（绘图）-用python的PIL库写脚本转&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="misc" scheme="http://yoursite.com/categories/misc/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>misc入门之图片隐写</title>
     <link href="http://yoursite.com/2021/02/03/introduction-to-misc/"/>
     <id>http://yoursite.com/2021/02/03/introduction-to-misc/</id>
     <published>2021-02-03T14:43:41.000Z</published>
-    <updated>2021-02-03T15:01:49.563Z</updated>
+    <updated>2021-02-04T13:10:30.602Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;misc&lt;/p&gt;
-&lt;h1 id=&quot;主要类型：&quot;&gt;&lt;a href=&quot;#主要类型：&quot; class=&quot;headerlink&quot; title=&quot;主要类型：&quot;&gt;&lt;/a&gt;主要类型：&lt;/h1&gt;&lt;h2 id=&quot;1-数据编码、图形密码&quot;&gt;&lt;a href=&quot;#1-数据编码、图形密码&quot; class=&quot;headerlink&quot; title=&quot;1.数据编码、图形密码&quot;&gt;&lt;/a&gt;1.数据编码、图形密码&lt;/h2&gt;&lt;h2 id=&quot;2-图片隐写&quot;&gt;&lt;a href=&quot;#2-图片隐写&quot; class=&quot;headerlink&quot; title=&quot;2.图片隐写&quot;&gt;&lt;/a&gt;2.图片隐写&lt;/h2&gt;&lt;h2 id=&quot;3-音频-amp-视频隐写&quot;&gt;&lt;a href=&quot;#3-音频-amp-视频隐写&quot; class=&quot;headerlink&quot; title=&quot;3.音频&amp;amp;视频隐写&quot;&gt;&lt;/a&gt;3.音频&amp;amp;视频隐写&lt;/h2&gt;&lt;h2 id=&quot;4-流量分析&quot;&gt;&lt;a href=&quot;#4-流量分析&quot; class=&quot;headerlink&quot; title=&quot;4.流量分析&quot;&gt;&lt;/a&gt;4.流量分析&lt;/h2&gt;&lt;h2 id=&quot;5-内存取证-在磁盘里隐藏一些东西&quot;&gt;&lt;a href=&quot;#5-内存取证-在磁盘里隐藏一些东西&quot; class=&quot;headerlink&quot; title=&quot;5.内存取证-在磁盘里隐藏一些东西&quot;&gt;&lt;/a&gt;5.内存取证-在磁盘里隐藏一些东西&lt;/h2&gt;&lt;h2 id=&quot;6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息&quot;&gt;&lt;a href=&quot;#6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息&quot; class=&quot;headerlink&quot; title=&quot;6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息&quot;&gt;&lt;/a&gt;6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息&lt;/h2&gt;
+&lt;h1 id=&quot;主要类型：&quot;&gt;&lt;a href=&quot;#主要类型：&quot; class=&quot;headerlink&quot; title=&quot;主要类型：&quot;&gt;&lt;/a&gt;主要类型：&lt;/h1&gt;&lt;h2 id=&quot;1-数据编码、图形密码&quot;&gt;&lt;a href=&quot;#1-数据编码、图形密码&quot; class=&quot;headerlink&quot; title=&quot;1.数据编码、图形密码&quot;&gt;&lt;/a&gt;1.数据编码、图形密码&lt;/h2&gt;&lt;h2 id=&quot;2-图片隐写&quot;&gt;&lt;a href=&quot;#2-图片隐写&quot; class=&quot;headerlink&quot; title=&quot;2.图片隐写&quot;&gt;&lt;/a&gt;2.图片隐写&lt;/h2&gt;&lt;h2 id=&quot;3-音频-amp-视频隐写&quot;&gt;&lt;a href=&quot;#3-音频-amp-视频隐写&quot; class=&quot;headerlink&quot; title=&quot;3.音频&amp;amp;视频隐写&quot;&gt;&lt;/a&gt;3.音频&amp;amp;视频隐写&lt;/h2&gt;
     
     </summary>
     
@@ -41,7 +62,7 @@
     <link href="http://yoursite.com/2020/09/26/SQL-injection-study-notes/"/>
     <id>http://yoursite.com/2020/09/26/SQL-injection-study-notes/</id>
     <published>2020-09-26T03:50:07.000Z</published>
-    <updated>2021-01-26T12:14:17.771Z</updated>
+    <updated>2021-02-04T13:51:37.691Z</updated>
     
     <summary type="html">
     
@@ -50,7 +71,7 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
     
     
   </entry>
@@ -60,7 +81,7 @@
     <link href="http://yoursite.com/2020/04/27/prompt1-to-win/"/>
     <id>http://yoursite.com/2020/04/27/prompt1-to-win/</id>
     <published>2020-04-27T13:42:18.000Z</published>
-    <updated>2021-01-26T11:11:29.468Z</updated>
+    <updated>2021-02-04T13:51:30.533Z</updated>
     
     <summary type="html">
     
@@ -69,7 +90,7 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
     
     
   </entry>

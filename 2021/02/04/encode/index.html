@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    misc入门之图片隐写 |  Tianze&#39;s Blog
+    misc之数据编码 |  Tianze&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -46,7 +46,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-misc入门" class="article article-type-post" itemscope
+  <article id="post-misc之数据编码" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -54,7 +54,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  misc入门之图片隐写
+  misc之数据编码
 </h1>
  
 
@@ -63,8 +63,8 @@
 
     
     <div class="article-meta">
-      <a href="/2021/02/03/introduction-to-misc/" class="article-date">
-  <time datetime="2021-02-03T14:43:41.000Z" itemprop="datePublished">2021-02-03</time>
+      <a href="/2021/02/04/encode/" class="article-date">
+  <time datetime="2021-02-04T13:12:10.000Z" itemprop="datePublished">2021-02-04</time>
 </a>
       
   <div class="article-category">
@@ -112,44 +112,52 @@
       
 
       
-      <p>misc</p>
-<h1 id="主要类型："><a href="#主要类型：" class="headerlink" title="主要类型："></a>主要类型：</h1><h2 id="1-数据编码、图形密码"><a href="#1-数据编码、图形密码" class="headerlink" title="1.数据编码、图形密码"></a>1.数据编码、图形密码</h2><h2 id="2-图片隐写"><a href="#2-图片隐写" class="headerlink" title="2.图片隐写"></a>2.图片隐写</h2><h2 id="3-音频-amp-视频隐写"><a href="#3-音频-amp-视频隐写" class="headerlink" title="3.音频&amp;视频隐写"></a>3.音频&amp;视频隐写</h2><a id="more"></a>
-<h2 id="4-流量分析"><a href="#4-流量分析" class="headerlink" title="4.流量分析"></a>4.流量分析</h2><h2 id="5-内存取证-在磁盘里隐藏一些东西"><a href="#5-内存取证-在磁盘里隐藏一些东西" class="headerlink" title="5.内存取证-在磁盘里隐藏一些东西"></a>5.内存取证-在磁盘里隐藏一些东西</h2><h2 id="6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息"><a href="#6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息" class="headerlink" title="6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息"></a>6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息</h2><h1 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h1><h2 id="010editor-winhex"><a href="#010editor-winhex" class="headerlink" title="010editor/winhex"></a>010editor/winhex</h2><h2 id="图片十六进制文件头文件尾-文件模板"><a href="#图片十六进制文件头文件尾-文件模板" class="headerlink" title="图片十六进制文件头文件尾+文件模板"></a>图片十六进制文件头文件尾+文件模板</h2><h2 id="文件属性-exiftools"><a href="#文件属性-exiftools" class="headerlink" title="文件属性(exiftools)"></a>文件属性(exiftools)</h2><h2 id="kali"><a href="#kali" class="headerlink" title="kali"></a>kali</h2><h1 id="010editor："><a href="#010editor：" class="headerlink" title="010editor："></a>010editor：</h1><p>一个字节由两位十六进制数组成</p>
-<p>010左侧显示十六进制右侧显示字符串，如果一个字节不能显示成字符，则会显示成”.”</p>
-<p>alt+4打开模板,没有模板的文件可以用F5加载模板</p>
-<p>010里复制是ctrl+shift+c粘贴是v，kali同理</p>
-<p>010里找不到图片的宽高，可以用图片文件属性的像素值(十进制)，然后转换成十六进制，再在010里搜索找到第一个，然后可以进行修改等<br>文件头到文件尾为图片内容，其余部分为多余或隐藏内容</p>
-<h1 id="文件头尾："><a href="#文件头尾：" class="headerlink" title="文件头尾："></a>文件头尾：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">JPEG (jpg)，                        　　文件头：FFD8FF　　　　　　　　　　　　　　　　　　　　　　　 文件尾：FF D9　　　　　　　　　　　　　　　</span><br><span class="line">PNG (png)，                       　　 文件头：89504E47　　　　　　　　　　　　　　　　　　　　　　文件尾：AE 42 60 82</span><br><span class="line">GIF (gif)，                           　　文件头：47494638　　　　　　　　　　　　　　　　　　　　　　文件尾：00 3B                                                                 </span><br><span class="line">ZIP Archive (zip)，                     文件头：504B0304　　　　　　　　　　　　　　　　　　　　  文件尾：50 4B</span><br><span class="line">kdmv                                    文件头：4B444D56</span><br><span class="line">TIFF (tif)，                           　  文件头：49492A00　　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">Windows Bitmap (bmp)，      　  文件头：424D　　　　　　　　　　　　　　　　　　　　　　　　 </span><br><span class="line">CAD (dwg)，                        　  文件头：41433130　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">Adobe Photoshop (psd)，          文件头：38425053　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">Rich Text Format (rtf)，             文件头：7B5C727466　　　　　　　　　　　　　　　　　　　　  </span><br><span class="line">XML (xml)，                              文件头：3C3F786D6C　　　　　　　　　　　　　　　　　　　　 </span><br><span class="line">HTML (html)，                           文件头：68746D6C3E</span><br><span class="line">Email [thorough only] (eml)，     文件头：44656C69766572792D646174653A</span><br><span class="line">Outlook Express (dbx)，            文件头：CFAD12FEC5FD746F</span><br><span class="line">Outlook (pst)，                         文件头：2142444E</span><br><span class="line">MS Word&#x2F;Excel (xls.or.doc)，      文件头：D0CF11E0</span><br><span class="line">MS Access (mdb)，                    文件头：5374616E64617264204A</span><br><span class="line">WordPerfect (wpd)，                  文件头：FF575043</span><br><span class="line">Adobe Acrobat (pdf)，               文件头：255044462D312E</span><br><span class="line">Quicken (qdf)，                         文件头：AC9EBD8F</span><br><span class="line">Windows Password (pwl)，         文件头：E3828596</span><br><span class="line">RAR Archive (rar)，                    文件头：52617221</span><br><span class="line">Wave (wav)，                            文件头：57415645</span><br><span class="line">AVI (avi)，                                 文件头：41564920</span><br><span class="line">Real Audio (ram)，                     文件头：2E7261FD</span><br><span class="line">Real Media (rm)，                       文件头：2E524D46</span><br><span class="line">MPEG (mpg)，                           文件头：000001BA</span><br><span class="line">MPEG (mpg)，                           文件头：000001B3</span><br><span class="line">Quicktime (mov)，                     文件头：6D6F6F76</span><br><span class="line">Windows Media (asf)，               文件头：3026B2758E66CF11</span><br><span class="line">MIDI (mid)，                              文件头：4D546864</span><br></pre></td></tr></table></figure>
-
-<h1 id="图片隐写分类："><a href="#图片隐写分类：" class="headerlink" title="图片隐写分类："></a>图片隐写分类：</h1><h2 id="简单类隐写："><a href="#简单类隐写：" class="headerlink" title="简单类隐写："></a>简单类隐写：</h2><h3 id="1-属性"><a href="#1-属性" class="headerlink" title="1.属性"></a>1.属性</h3><h3 id="2-文件末尾藏字符串"><a href="#2-文件末尾藏字符串" class="headerlink" title="2.文件末尾藏字符串"></a>2.文件末尾藏字符串</h3><h3 id="3-文件包含"><a href="#3-文件包含" class="headerlink" title="3.文件包含"></a>3.文件包含</h3><h3 id="4-修改文件头"><a href="#4-修改文件头" class="headerlink" title="4.修改文件头"></a>4.修改文件头</h3><h2 id="图种隐写："><a href="#图种隐写：" class="headerlink" title="图种隐写："></a>图种隐写：</h2><h3 id="5-gif动图-用PS或者stegsolve查看每一帧"><a href="#5-gif动图-用PS或者stegsolve查看每一帧" class="headerlink" title="5.gif动图-用PS或者stegsolve查看每一帧"></a>5.gif动图-用PS或者stegsolve查看每一帧</h3><h3 id="6-png（bmp）"><a href="#6-png（bmp）" class="headerlink" title="6.png（bmp）"></a>6.png（bmp）</h3><h3 id="7-jpg"><a href="#7-jpg" class="headerlink" title="7.jpg"></a>7.jpg</h3><h2 id="特征明显的隐写："><a href="#特征明显的隐写：" class="headerlink" title="特征明显的隐写："></a>特征明显的隐写：</h2><h3 id="8-双图隐写"><a href="#8-双图隐写" class="headerlink" title="8.双图隐写"></a>8.双图隐写</h3><h3 id="9-stegpy"><a href="#9-stegpy" class="headerlink" title="9.stegpy"></a>9.stegpy</h3><h3 id="10-silenteye"><a href="#10-silenteye" class="headerlink" title="10.silenteye"></a>10.silenteye</h3><h1 id="文件包含："><a href="#文件包含：" class="headerlink" title="文件包含："></a>文件包含：</h1><p>一张图片文件尾后面藏着另一张图片，通过查找文件头文件尾判断</p>
-<p>直接在010editor里新建一个文件，把后面的十六进制复制到新建文件保存为正确后缀名就可以分离出来</p>
-<h1 id="kali-1"><a href="#kali-1" class="headerlink" title="kali:"></a>kali:</h1><h2 id="1-strings命令：查找可打印的字符串，以换行符或空字符结束"><a href="#1-strings命令：查找可打印的字符串，以换行符或空字符结束" class="headerlink" title="1.strings命令：查找可打印的字符串，以换行符或空字符结束"></a>1.strings命令：查找可打印的字符串，以换行符或空字符结束</h2><p>strings file | grep pass可以查找文件中指定的字符串</p>
-<h2 id="2-grep命令：查找文件里符合条件的字符串"><a href="#2-grep命令：查找文件里符合条件的字符串" class="headerlink" title="2.grep命令：查找文件里符合条件的字符串"></a>2.grep命令：查找文件里符合条件的字符串</h2><p>-a 不忽略二进制数据<br>grep -a “xxx” file</p>
-<h2 id="3-file命令：用来探测给定文件的类型"><a href="#3-file命令：用来探测给定文件的类型" class="headerlink" title="3.file命令：用来探测给定文件的类型"></a>3.file命令：用来探测给定文件的类型</h2><h2 id="4-binwalk工具分离文件"><a href="#4-binwalk工具分离文件" class="headerlink" title="4.binwalk工具分离文件"></a>4.binwalk工具分离文件</h2><p>binwalk -e file提取文件<br>binwalk -D/-dd=jpeg file分解指定类型文件</p>
-<h2 id="5-foremost工具分离所有文件"><a href="#5-foremost工具分离所有文件" class="headerlink" title="5.foremost工具分离所有文件"></a>5.foremost工具分离所有文件</h2><p>foremost file 会得到一个output文件夹</p>
-<h2 id="6-dd命令分离指定文件"><a href="#6-dd命令分离指定文件" class="headerlink" title="6.dd命令分离指定文件"></a>6.dd命令分离指定文件</h2><p>dd if=file of=输出文件 bs=1 skip=24437  //bs设置每次读取1块，skip是指从文件开头跳过24437个块开始复制，这个值可以用binwalk来查看</p>
-<h1 id="gif图种："><a href="#gif图种：" class="headerlink" title="gif图种："></a>gif图种：</h1><p>用PS或者stegsolve查看每一帧</p>
-<p>用Ulead gif工具查看帧的时间间隔，可以把时间间隔换成二进制、莫斯或者培根之类的</p>
-<h1 id="png（bmp）图种："><a href="#png（bmp）图种：" class="headerlink" title="png（bmp）图种："></a>png（bmp）图种：</h1><p>破坏文件头一定不能显示，破坏文件尾还有可能能显示</p>
-<p>png图片有IHDR(文件头数据块header chunk)和IDAT(图像数据块image data chunk)和IEND(图像结束数据块image end data chunk)<br>IHDR包含图片的宽和高和颜色等基本信息，因此可以在IHDR里修改宽和高<br>有些题目会把png文件头删了，所以看到IHDR和IDAT时，就可以判断为png文件，把文件头加上</p>
-<p>CRC即循环冗余校验</p>
-<p>CRC校验码由文件头数据块标识和IHDR共十七位字节进行CRC计算得到，后面四个字节为该png图片的CRC32校验值</p>
-<p>利用CRC校验可以用python脚本爆破png图片的正确高和宽</p>
-<p>通过010的工具计算校验值，若不相同则应该把高度调大，一般都是调大</p>
-<p>pngcheck工具：</p>
-<p>pngcheck.win64.exe -v file查看文件块IDAT，正常的块在65524的时候就满了，若有的IDAT块没有到65524，则这个IDAT块是有问题的，因为他本来应该并入到上一个块里。</p>
-<h1 id="zlib隐写："><a href="#zlib隐写：" class="headerlink" title="zlib隐写："></a>zlib隐写：</h1><p>zlib是一种数据格式，用于存储压缩后的数据</p>
-<p>查看异常的IDAT块，78 9C是zlib压缩的标志</p>
-<p>把从78 9C到00之前的内容复制到python脚本可以解压缩zlib内容，也可以用binwalk -e file直接分解出flag</p>
-<h1 id="lsb隐写："><a href="#lsb隐写：" class="headerlink" title="lsb隐写："></a>lsb隐写：</h1><p>最低有效位隐写，原理就是图片中的像数一般是由三种颜色组成，即三原色，由这三种原色可以组成其他各种颜色，例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像数中的最低的1bit，在人眼看来是看不出来区别的，也把信息隐藏起来了。譬如我们想把’A’隐藏进来的话，如下图，就可以把A转成16进制的0x61再转成二进制的01100001，再修改为红色通道的最低位为这些二进制串。</p>
-<p>可以用stegsolve查看RGB通道的最低位，然后用data extract查看ascii值<br>stegsolve中Alpha是透明度的颜色通道</p>
-<p>也可以用zsteg工具查看通道信息</p>
-<p>kali里zsteg file查看lsb信息或者zsteg file -a尝试所有已知的组合</p>
-<p>导出内容：zsteg -e 所在通道 file &gt; 输出文件名</p>
-<p>之所以归类在png（bmp）图种是因为png是无损压缩，bmp是没有经过压缩的，你修改的信息不会丢失，而像jpg图片对像素进行了有损压缩，你修改的信息可能会被压缩的过程破坏。</p>
-<p>加密lsb隐写，用cloacked-pixel工具的lsb.py脚本来解</p>
-<p><code>python2 lsb.py extract &lt;stego_file&gt; &lt;out_file&gt; &lt;password&gt;</code></p>
-<p>bmp或者pdf文件解密可以用wbStego4.3open工具直接解密</p>
+      <h1 id="常见进制"><a href="#常见进制" class="headerlink" title="常见进制"></a>常见进制</h1><p>01、hex</p>
+<h1 id="进制转换："><a href="#进制转换：" class="headerlink" title="进制转换："></a>进制转换：</h1><p>二进制转ascii码</p>
+<p>二进制转morse码<br>二进制转二维码（绘图）-用python的PIL库写脚本转</p>
+<a id="more"></a>
+<p>二进制转图片（hex）-用010打开转换的十六进制判断文件头，修改正确后缀打开即可</p>
+<p>二进制转万物<br>………………</p>
+<h1 id="常见编码"><a href="#常见编码" class="headerlink" title="常见编码"></a>常见编码</h1><h2 id="ascii："><a href="#ascii：" class="headerlink" title="ascii："></a>ascii：</h2><p>Ascii主要用来显示现代英语</p>
+<h2 id="base家族："><a href="#base家族：" class="headerlink" title="base家族："></a>base家族：</h2><p>base64：把3个8位字节转化为4个6位字节，之后在6位的前面补两个0，形成8位一个字节的形式，6位2进制能表示的最大数是2的6次方是64，这也是为什么是64个字符（A-Z,a-z,0-9,+,/这64个编码字符，=号不属于编码字符，而是填充字符）的原因</p>
+<p>base32：使用32个可打印字符（A-Z和2-7）对任意字节数据进行编码，编码后的字符串不区分大小写并排除了容易混淆的字符。tips：末尾最多有6个=</p>
+<p>base16：使用数字0-9和字母A-F16个字符对任意字节数据进行编码。tips：不会出现=</p>
+<p>base36：包含0-9加上所有的26个字母，不区分大小写，不包含任何标点，所有的字母要么全大写要么全小写。特点：加密仅支持整数数字，解密仅支持字符串，不支持中文。</p>
+<p>base58：采用的字符集为“123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ”，由纯数字与字母组成而且去掉了容易引起视觉混淆的字符（0：数字零，O：大写O，I：大写i，l:小写L）。9个数字+49个字母=58个。</p>
+<p>base62：26个字母的大小写再加上0-9，相比于base64只是去掉了两个符号（+和/）</p>
+<p>base85：类似于base64的二进制文本编码形式，通过使用五个ascii字符表示四个字节的二进制数据，它可用于将图像嵌入到Adobe PDF文件中。</p>
+<p>base91：由91个字符（0-9，a-z，A-Z,!#$%&amp;()*+,./:;&lt;=&gt;?@[]^_`{|}”）组成</p>
+<p>base92：比base91多一个字符~</p>
+<h2 id="morse："><a href="#morse：" class="headerlink" title="morse："></a>morse：</h2><p>莫尔斯电码，一种早期的数字化通信形式，由 ‘.’ 和 ‘-‘ 组成</p>
+<h2 id="shellcode："><a href="#shellcode：" class="headerlink" title="shellcode："></a>shellcode：</h2><p>一段利用软件漏洞而执行的代码，shellcode为二进制的机器码，因为经常让攻击者获得shell而得名，通常用16进制（如\x55\x68）来表示，可以用16进制格式来表示其他隐写信息。</p>
+<h2 id="urlencode、unicode"><a href="#urlencode、unicode" class="headerlink" title="urlencode、unicode"></a>urlencode、unicode</h2><p>urlencode：url编码又叫百分号编码，是统一资源定位(URL)编码方式。<br>URL地址（常说网址）规定了常用的数字，字母可以直接使用，另外一批作为特殊用户字符也可以直接用（/,:@等），剩下的其它所有字符必须通过%xx编码处理。<br>编码方法很简单，在该字节ascii码的的16进制字符前面加%. 如 空格字符，ascii码是32，对应16进制是’20’，那么urlencode编码结果是:%20。</p>
+<p>unicode：中文又称万国码、国际码、统一码、单一码，是计算机科学领域的业界标准。它整理、编码了世界上大部分的文字系统，使得电脑可以用更为简单的方式来呈现和处理文字。<br>Unicode伴随着通用字符集的标准而发展，同时也以书本的形式对外发表。Unicode至今仍在不断增修，每个新版本都加入更多新的字符。</p>
+<h2 id="aaencode、jjencode、uuencode"><a href="#aaencode、jjencode、uuencode" class="headerlink" title="aaencode、jjencode、uuencode"></a>aaencode、jjencode、uuencode</h2><p>aaencode：可以将js代码转换成常用的网络表情，也就是我们所说的颜文字js加密</p>
+<p>jjencode：由$=~[]{}()_+.;!&quot;“组成</p>
+<p>uuencode：Uuencode是二进制信息和文字信息之间的转换编码，也就是机器和人眼识读的转换。Uuencode编码方案常见于电子邮件信息的传输，目前已被多用途互联网邮件扩展（MIME）大量取代。例如：2Y9V/Y:6SY+JZY+B’Y;*![[R!`</p>
+<h2 id="Jsfuck、brainfuck、ook！、short-ook！"><a href="#Jsfuck、brainfuck、ook！、short-ook！" class="headerlink" title="Jsfuck、brainfuck、ook！、short ook！"></a>Jsfuck、brainfuck、ook！、short ook！</h2><p>jsfuck：用六个字符<a href=""></a>!+来编写javascript程序，直接在浏览器F12的console控制台解码即可。</p>
+<p>brainfuck：由+&lt;&gt;[].-组成</p>
+<p>ook!：全部由ook.!?组成</p>
+<p>short ook！：由.!?组成</p>
+<h2 id="敲击码："><a href="#敲击码：" class="headerlink" title="敲击码："></a>敲击码：</h2><p>是一种以非常简单的方式对文本信息进行编码的方法。因该编码对信息通过使用一系列的点击声音来编码而命名，敲击码是基于 5 ×5 方格波利比奥斯方阵来实现的，不同点是是用 K 字母被整合到 C 中。</p>
+<h2 id="二维码："><a href="#二维码：" class="headerlink" title="二维码："></a>二维码：</h2><p>用某种特定几何图形按一定规律在平面分步的黑白相间的图形记录数据符号信息。</p>
+<p>线性堆叠式二维码  PDF417、U1tracode、Code49、Code 16K</p>
+<p>矩阵式二维码 Data Matrix、Maxi Code、Aztec Code、QP Code、Vericode</p>
+<p>邮政码  主要用于邮件编码  POSTNET、BPO 4-STATE</p>
+<p>QR码的特点</p>
+<p>存储大容量信息</p>
+<p>传统的条形码只能处理20位左右的信息量，与此相比，QR码可处理条形码的几十倍到几百倍的信息量。</p>
+<p>另外，QR码还可以支持所有类型的数据。（如：数字、英文字母、日文字母、汉字、符号、二进制、控制码等）。一个QR码最多可以处理7089字(仅用数字时)的巨大信息量。</p>
+<p>在小空间内打印</p>
+<p>QR码使用纵向和横向两个方向处理数据，如果是相同的信息量，QR码所占空间为条形码的十分之一左右。(还支持Micro QR码，可以在更小空间内处理数据。)</p>
+<p>QR码的基本结构</p>
+<p>QR(Quick-Response) code是被广泛使用的一种二维码，解码速度快。</p>
+<p>格式信息：纠错等级</p>
+<p>版本信息：即二维码的规格，QR码符号共有40种规格的矩阵</p>
+<p>二维码常见考题：</p>
+<p>1.修补定位符</p>
+<p>2.基于纠错等级，只给你一半的信息，需要把剩下的补全。用QRazyBox项目修补</p>
+<h2 id="稀奇古怪的编码"><a href="#稀奇古怪的编码" class="headerlink" title="稀奇古怪的编码"></a>稀奇古怪的编码</h2><p>社会主义核心价值观、与佛论禅、与熊论道</p>
 
       
       <!-- reward -->
@@ -214,7 +222,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/02/03/introduction-to-misc/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/02/04/encode/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -230,19 +238,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2021/02/04/encode/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            misc之数据编码
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/09/26/SQL-injection-study-notes/" class="article-nav-link">
+      <a href="/2021/02/03/introduction-to-misc/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">sql注入学习笔记</div>
+        <div class="article-nav-title">misc入门之图片隐写</div>
       </a>
     
   </nav>

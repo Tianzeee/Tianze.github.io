@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-04T13:50:13.796Z</updated>
+  <updated>2021-02-06T09:41:34.896Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>misc之流量分析</title>
+    <link href="http://yoursite.com/2021/02/06/flow-analysis/"/>
+    <id>http://yoursite.com/2021/02/06/flow-analysis/</id>
+    <published>2021-02-06T09:40:29.000Z</published>
+    <updated>2021-02-06T09:41:34.896Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;互联网五层模型&quot;&gt;&lt;a href=&quot;#互联网五层模型&quot; class=&quot;headerlink&quot; title=&quot;互联网五层模型&quot;&gt;&lt;/a&gt;互联网五层模型&lt;/h1&gt;&lt;p&gt;防火墙截取的网络攻击流在公安机关对网络攻击的取证中，流量分析往往是非常重要的一个环节，通过分析流量，我们能获得许多线索。在学习流量分析之前，我们需要明白一些网络的基础知识。
+    
+    </summary>
+    
+    
+      <category term="misc" scheme="http://yoursite.com/categories/misc/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>misc之数据编码</title>

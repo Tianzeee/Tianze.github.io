@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-08T09:27:59.287Z</updated>
+  <updated>2021-02-09T08:56:40.802Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Crypto—之古典密码学入门</title>
+    <link href="http://yoursite.com/2021/02/09/calssical-crypto/"/>
+    <id>http://yoursite.com/2021/02/09/calssical-crypto/</id>
+    <published>2021-02-09T08:52:29.000Z</published>
+    <updated>2021-02-09T08:56:40.802Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Crypto之古典密码学&quot;&gt;&lt;a href=&quot;#Crypto之古典密码学&quot; class=&quot;headerlink&quot; title=&quot;Crypto之古典密码学&quot;&gt;&lt;/a&gt;Crypto之古典密码学&lt;/h2&gt;&lt;h3 id=&quot;什么是密码学&quot;&gt;&lt;a href=&quot;#什么是密码学&quot; class=&quot;headerlink&quot; title=&quot;什么是密码学&quot;&gt;&lt;/a&gt;什么是密码学&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;密码学是一个多面的世界，对一些人来说，它是一个侦探与保密的世界，对另一些人来说，它是数学与计算机的世界。
+    
+    </summary>
+    
+    
+      <category term="crypto" scheme="http://yoursite.com/categories/crypto/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>ARP欺骗</title>

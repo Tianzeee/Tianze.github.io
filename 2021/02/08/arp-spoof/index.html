@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -87,7 +87,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -155,6 +155,11 @@
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210208170715495.png" alt="image-20210208170715495"></p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210208170758475.png" alt="image-20210208170758475"></p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210208172329443.png" alt="image-20210208172329443"></p>
+<h2 id="ARP欺骗防御"><a href="#ARP欺骗防御" class="headerlink" title="ARP欺骗防御"></a>ARP欺骗防御</h2><p>防御原理很简单，就是不让攻击者肆意表明自己就是网关主机。我们进入网关主机（路由器后台地址），网络参数一栏一般有ip与mac绑定一栏，把网关的mac地址与网关地址绑定就好了。只要确定了对应关系，当攻击者发布arp相应包时，就不会更新相应的ip-mac缓存表。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209222549513.png" alt="image-20210209222549513"></p>
+<p>如果想知道对方主机的ip地址其实也容易。我们在Cmd下键入命令<code>arp -a</code>看一下相同mac，就找到了攻击者。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>公共区域的wifi存在钓鱼风险</p>
+<p>在传输数据过程中尽量使用加密程序</p>
 
       
       <!-- reward -->

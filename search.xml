@@ -579,4 +579,20 @@
         <category>crypto</category>
       </categories>
   </entry>
+  <entry>
+    <title>命令查看连过的WIFI密码</title>
+    <url>/2021/02/18/View-WiFi-password/</url>
+    <content><![CDATA[<h2 id="1-win-R调用运行，输入cmd打开命令行窗口"><a href="#1-win-R调用运行，输入cmd打开命令行窗口" class="headerlink" title="1.win+R调用运行，输入cmd打开命令行窗口"></a>1.win+R调用运行，输入cmd打开命令行窗口</h2><a id="more"></a>
+
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210218191658097.png" alt="image-20210218191658097"></p>
+<h2 id="2-输入netsh"><a href="#2-输入netsh" class="headerlink" title="2.输入netsh"></a>2.输入netsh</h2><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210218191839429.png" alt="image-20210218191839429"></p>
+<h2 id="3-在netsh中输入wlan-show-profile查看所有连过的WIFI名"><a href="#3-在netsh中输入wlan-show-profile查看所有连过的WIFI名" class="headerlink" title="3.在netsh中输入wlan show profile查看所有连过的WIFI名"></a>3.在netsh中输入wlan show profile查看所有连过的WIFI名</h2><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210218192009704.png" alt="image-20210218192009704"></p>
+<h2 id="4-在netsh中输入wlan-show-profile-“WIFI名”-key-clear"><a href="#4-在netsh中输入wlan-show-profile-“WIFI名”-key-clear" class="headerlink" title="4.在netsh中输入wlan show profile “WIFI名” key=clear"></a>4.在netsh中输入wlan show profile “WIFI名” key=clear</h2><p>这里我以我手机热点”小小小麻瓜”为例，查看一下密码</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210218192318039.png" alt="image-20210218192318039"></p>
+<p>关键内容即为密码</p>
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+  </entry>
 </search>

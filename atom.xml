@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-18T11:29:32.896Z</updated>
+  <updated>2021-03-02T07:29:26.431Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一句话木马</title>
+    <link href="http://yoursite.com/2021/03/01/yijuhua/"/>
+    <id>http://yoursite.com/2021/03/01/yijuhua/</id>
+    <published>2021-03-01T13:59:17.000Z</published>
+    <updated>2021-03-02T07:29:26.431Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是一句话木马&quot;&gt;&lt;a href=&quot;#什么是一句话木马&quot; class=&quot;headerlink&quot; title=&quot;什么是一句话木马&quot;&gt;&lt;/a&gt;什么是一句话木马&lt;/h2&gt;&lt;p&gt;一句话木马是一个可执行脚本文件，把脚本文件上传到目标服务器，然后文件被解析执行就可以达到控制目标服务器的目的。
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>命令查看连过的WIFI密码</title>

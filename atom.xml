@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-03T03:22:36.779Z</updated>
+  <updated>2021-03-03T07:27:05.313Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈SSRF</title>
+    <link href="http://yoursite.com/2021/03/03/SSRF/"/>
+    <id>http://yoursite.com/2021/03/03/SSRF/</id>
+    <published>2021-03-03T07:25:40.000Z</published>
+    <updated>2021-03-03T07:27:05.313Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;渗透测试&quot;&gt;&lt;a href=&quot;#渗透测试&quot; class=&quot;headerlink&quot; title=&quot;渗透测试&quot;&gt;&lt;/a&gt;渗透测试&lt;/h2&gt;&lt;h3 id=&quot;什么是渗透测试&quot;&gt;&lt;a href=&quot;#什么是渗透测试&quot; class=&quot;headerlink&quot; title=&quot;什么是渗透测试&quot;&gt;&lt;/a&gt;什么是渗透测试&lt;/h3&gt;&lt;p&gt;渗透测试是一种通过模拟使用黑客的技术和方法，挖掘目标系统的安全漏洞，取得系统的控制权，访问系统的机密数据，并发现可能影响业务持续运作安全隐患的一种安全测试和评估方式。
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>一句话木马</title>

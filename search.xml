@@ -671,4 +671,33 @@
         <category>Web</category>
       </categories>
   </entry>
+  <entry>
+    <title>浅谈SSRF</title>
+    <url>/2021/03/03/SSRF/</url>
+    <content><![CDATA[<h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><h3 id="什么是渗透测试"><a href="#什么是渗透测试" class="headerlink" title="什么是渗透测试"></a>什么是渗透测试</h3><p>渗透测试是一种通过模拟使用黑客的技术和方法，挖掘目标系统的安全漏洞，取得系统的控制权，访问系统的机密数据，并发现可能影响业务持续运作安全隐患的一种安全测试和评估方式。<a id="more"></a><br>渗透测试和黑客入侵最大区别在于渗透测试是经过客户授权，采用可控制、非破坏性质的方法和手段发现目标和网络设备中存在弱点，帮助管理者知道自己网络所面临的问题，同时提供安全加固建议, 帮助客户提升系统的安全性。</p>
+<h3 id="渗透测试的分类"><a href="#渗透测试的分类" class="headerlink" title="渗透测试的分类"></a>渗透测试的分类</h3><p>黑盒测试：是指测试人员在不清楚被测单位内部技术架构的情况下，从外部对网络设施的安全性进行测试的过程。黑盒测试借助于真实世界的黑客方法，黑客工具，有组织有步骤的对目标系统进行逐步的渗透和入侵，揭示目标系统中一些已知的和未知的安全漏洞，并评估这些漏洞是否可以被不法分子利用，并造成业务和资产损失。<br>白盒测试: 测试人员可以获取被测单位的网络结构和各种底层技术。在此基础上，使用针对性的测试方法和工具，可以以较小的代价发现和验证系统最严重的安全漏洞 。<br>在实际渗透中，两者各有利弊，需要视情况选择和进行。</p>
+<h2 id="PHP入门"><a href="#PHP入门" class="headerlink" title="PHP入门"></a>PHP入门</h2><p>什么是php？</p>
+<p>PHP（全称：PHP：Hypertext Preprocessor，即”PHP：超文本预处理器”）是一种通用开源脚本语言。<br>PHP 脚本在服务器上执行。<br>尝试在自己的电脑上安装一个web集成环境(phpstudy)并创建自己的第一个PHP文件。</p>
+<h2 id="代码审计时需要关注的点"><a href="#代码审计时需要关注的点" class="headerlink" title="代码审计时需要关注的点"></a>代码审计时需要关注的点</h2><p>事实上，代码审计也有多种思路：例如可以选择先通读代码，理解结构和功能后再从中发现问题——但这种方式的缺点显而易见：十分耗时且令人头疼，不太适用于代码量大的情况；也可以依据经验寻找易出现问题的关键功能——这往往也可以与黑盒测试相结合，定位功能对应的代码后找到关键函数，正向或反向的追踪其中用到的变量（例如文件下载功能处若未经过滤则可能存在任意文件下载漏洞，发现该功能后定位代码段，找到其使用的功能函数——可能是file_get_contents或者别的什么，追踪它使用的变量是否有做安全过滤）；甚至你可以直接尝试定向的挖掘某一类漏洞——依旧是通过可能涉及的函数去寻找…<br>但无论你使用哪种方法进行漏洞挖掘，阅读代码的能力是必不可少的。也就是，你至少得知道开发者在做什么。</p>
+<h2 id="浅谈SSRF"><a href="#浅谈SSRF" class="headerlink" title="浅谈SSRF"></a>浅谈SSRF</h2><h3 id="SSRF的定义与成因"><a href="#SSRF的定义与成因" class="headerlink" title="SSRF的定义与成因"></a>SSRF的定义与成因</h3><p>SSRF(Server-Side Request Forgery:服务器端请求伪造) 是一种由攻击者构造形成，由服务端发起请求的一个安全漏洞。一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。（正是因为它是由服务端发起的，所以它能够请求到与它相连而与外网隔离的内部系统）<br>SSRF漏洞形成的原因大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容，加载指定地址的图片，下载等等。</p>
+<h3 id="SSRF的危害"><a href="#SSRF的危害" class="headerlink" title="SSRF的危害"></a>SSRF的危害</h3><p>内网探测<br>利用file协议读取本地文件等等<br>向内部任意主机的任意端口发送精心构造的Payload，从而攻击内网的web应用，主要是使用GET参数就可以实现的攻击（比如struts2，sqli等）<br>DOS攻击（请求大文件，始终保持连接Keep-Alive Always）</p>
+<h3 id="SSRF代码层成因"><a href="#SSRF代码层成因" class="headerlink" title="SSRF代码层成因"></a>SSRF代码层成因</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210303151944229.png" alt="image-20210303151944229"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210303151959386.png" alt="image-20210303151959386"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210303152008385.png" alt="image-20210303152008385"></p>
+<h3 id="SSRF漏洞的验证"><a href="#SSRF漏洞的验证" class="headerlink" title="SSRF漏洞的验证"></a>SSRF漏洞的验证</h3><p>1.排除法：浏览器f12查看源代码看是否是在本地进行了请求</p>
+<p>比如：该资源地址类型为<a href="http://www.xxx.com/a.php?image=（地址）的就可能存在SSRF漏洞" target="_blank" rel="noopener">http://www.xxx.com/a.php?image=（地址）的就可能存在SSRF漏洞</a></p>
+<p>2.dnslog等工具进行测试，看是否被访问</p>
+<p>3.抓包分析发送的请求是不是由服务器的发送的，如果不是客户端发出的请求，则有可能是，接着找存在HTTP服务的内网地址</p>
+<h3 id="一些绕过"><a href="#一些绕过" class="headerlink" title="一些绕过"></a>一些绕过</h3><p>1、加端口<br>    127.0.0.1:80</p>
+<p>2、短网址</p>
+<p>3、指向任意IP的域名xip.io<br>    127.0.0.1.xip.io</p>
+<p>4、IP限制绕过<br>十进制转换      （转换成16进制再转换回来，把.换成0，<a href="http://0x7f000001，" target="_blank" rel="noopener">http://0x7f000001，</a> 十进制就是<a href="http://2130706433" target="_blank" rel="noopener">http://2130706433</a>   )<br>八进制转换    <a href="http://0177.0.0.1" target="_blank" rel="noopener">http://0177.0.0.1</a></p>
+<p>十六进制转换     <a href="http://0x7f.0.0.1" target="_blank" rel="noopener">http://0x7f.0.0.1</a><br>不同进制组合转换</p>
+<p>5、@绕过<br>    <a href="http://www.baidu.com@127.0.0.1" target="_blank" rel="noopener">http://www.baidu.com@127.0.0.1</a></p>
+<p>6、后面跟参数<br>    <a href="http://127.0.0.1?a=sdagwasdwfa" target="_blank" rel="noopener">http://127.0.0.1?a=sdagwasdwfa</a></p>
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+  </entry>
 </search>

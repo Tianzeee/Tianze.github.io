@@ -162,7 +162,7 @@
 <p>3.遍历目录：</p>
 <p>scandir() 函数返回一个指定目录中的文件和目录的数组。</p>
 <h2 id="木马的特征与查杀-AWD"><a href="#木马的特征与查杀-AWD" class="headerlink" title="木马的特征与查杀(AWD)"></a>木马的特征与查杀(AWD)</h2><p>基于特征检测，检测敏感关键字，如：危险函数、特殊函数<br>工具：D盾</p>
-<p>1、代码执行函数：<br>eval<br>assert<br>pre_replace<br>create_function<br>回调函数 call_user_func、call_user_func_array、register_tick_function、array_filter等等</p>
+<p>1、代码执行函数：<br>eval<br>assert<br>preg_replace<br>create_function<br>回调函数 call_user_func、call_user_func_array、register_tick_function、array_filter等等</p>
 <p>2、命令执行函数：<br>exec()–执行一个外部程序<br>passthru()–执行外部程序并且显示原始输出<br>proc_open()–执行一个命令，并且打开用来输入/输出的文件指针<br>shell_exec()或放在两个反引号里–通过shell环境执行命令<br>system()–执行外部程序，并显示输出<br>popen()–通过参数传递一条命令，并对popen打开的文件执行</p>
 <p>3、文件操作函数：<br>file_ get_contents 一将整个文件读入为一个字符串<br>file_ put_ contents 一将一个字符串写入文件<br>file()一把整个文件读入一个数组中<br>fopen一打开文件或者URL<br>move_ uploaded file 一将上传的文件移动到新位置<br>readfile一读取一个文件，并写入到输出缓冲<br>rename一重命名一个文件或目录<br>rmdir一删除目录<br>unlink &amp; delete 一删除文件</p>
 <p>4、包含函数：<br>require、require_once<br>include、include_once</p>

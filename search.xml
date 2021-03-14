@@ -262,6 +262,8 @@
 <p>查看异常的IDAT块，78 9C是zlib压缩的标志</p>
 <p>把从78 9C到00之前的内容复制到python脚本可以解压缩zlib内容，也可以用binwalk -e file直接分解出flag</p>
 <h1 id="lsb隐写："><a href="#lsb隐写：" class="headerlink" title="lsb隐写："></a>lsb隐写：</h1><p>最低有效位隐写，原理就是图片中的像数一般是由三种颜色组成，即三原色，由这三种原色可以组成其他各种颜色，例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像数中的最低的1bit，在人眼看来是看不出来区别的，也把信息隐藏起来了。譬如我们想把’A’隐藏进来的话，如下图，就可以把A转成16进制的0x61再转成二进制的01100001，再修改为红色通道的最低位为这些二进制串。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/640760-20160129212637693-390049790.png" alt="test1"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/640760-20160129212704114-2030955630.png" alt="test2"></p>
 <p>可以用stegsolve查看RGB通道的最低位，然后用data extract查看ascii值<br>stegsolve中Alpha是透明度的颜色通道</p>
 <p>也可以用zsteg工具查看通道信息</p>
 <p>kali里zsteg file查看lsb信息或者zsteg file -a尝试所有已知的组合</p>

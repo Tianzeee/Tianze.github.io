@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-03T07:27:05.313Z</updated>
+  <updated>2021-03-23T08:28:06.715Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CTFHUB信息泄露</title>
+    <link href="http://yoursite.com/2021/03/23/ctfhub-Information-disclosure/"/>
+    <id>http://yoursite.com/2021/03/23/ctfhub-Information-disclosure/</id>
+    <published>2021-03-23T08:21:26.000Z</published>
+    <updated>2021-03-23T08:28:06.715Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00目录遍历&quot;&gt;&lt;a href=&quot;#0x00目录遍历&quot; class=&quot;headerlink&quot; title=&quot;0x00目录遍历&quot;&gt;&lt;/a&gt;0x00目录遍历&lt;/h2&gt;&lt;p&gt;这题比较简单，目录一个个翻过去就能找到flag
+    
+    </summary>
+    
+    
+      <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>浅谈SSRF</title>

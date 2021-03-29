@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-24T09:52:11.547Z</updated>
+  <updated>2021-03-29T09:00:07.406Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git学习笔记</title>
+    <link href="http://yoursite.com/2021/03/29/Git-learning/"/>
+    <id>http://yoursite.com/2021/03/29/Git-learning/</id>
+    <published>2021-03-29T08:49:02.000Z</published>
+    <updated>2021-03-29T09:00:07.406Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Git是目前最流行的版本控制系统，因为其开源免费并且是分布式的，相比于集中式版本控制系统有其优越性
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>nepctf-little_trick</title>

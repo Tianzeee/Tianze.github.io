@@ -1623,7 +1623,7 @@
     <title>Python-requests模块学习</title>
     <url>/2021/03/31/python-requests-learning/</url>
     <content><![CDATA[<h2 id="Requests模块说明"><a href="#Requests模块说明" class="headerlink" title="Requests模块说明"></a>Requests模块说明</h2><blockquote>
-<p>Requests 是使用 <a href="http://cn.python-requests.org/en/latest/user/intro.html#apache2" target="_blank" rel="noopener">Apache2 Licensed</a> 许可证的 HTTP 库。用 Python 编写，真正的为人类着想。<a id="more"></a></p>
+<p>Requests 是使用 <a href="http://cn.python-requests.org/en/latest/user/intro.html#apache2" target="_blank" rel="noopener">Apache2 Licensed</a> 许可证的 HTTP 库。用 Python 编写，真正的为人类着想。</p>
 <p>Python 标准库中的 <strong>urllib2</strong> 模块提供了你所需要的大多数 HTTP 功能，但是它的 API 太渣了。它是为另一个时代、另一个互联网所创建的。它需要巨量的工作，甚至包括各种方法覆盖，来完成最简单的任务。</p>
 <p>在Python的世界里，事情不应该这么麻烦。</p>
 <p>Requests 使用的是 urllib3，因此继承了它的所有特性。Requests 支持 HTTP 连接保持和连接池，支持使用 cookie 保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。现代、国际化、人性化。</p>
@@ -1655,8 +1655,11 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line">payload &#x3D; &#123;&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: [&#39;value2&#39;, &#39;value3&#39;]&#125;</span><br><span class="line"></span><br><span class="line">r &#x3D; requests.get(&#39;http:&#x2F;&#x2F;httpbin.org&#x2F;get&#39;, params&#x3D;payload)</span><br><span class="line"></span><br><span class="line">print(r.url)</span><br><span class="line"></span><br><span class="line">#输出 ： http:&#x2F;&#x2F;httpbin.org&#x2F;get?key1&#x3D;value1&amp;key2&#x3D;value2&amp;key2&#x3D;value3</span><br></pre></td></tr></table></figure>
 
 <p>3发送POST请求，使用data参数传输数据</p>
-<p>3.1直接传输字典类型到data参数，作为POST请求的数据</p>
+<p>3.1直接传输字典类型到data参数，作为POST请求的数据，requests默认使用<code>application/x-www-form-urlencoded</code>对POST数据编码。如果要传递JSON数据，可以直接传入json参数</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;httpbin.org&#x2F;post&#39;</span><br><span class="line">data &#x3D; &#123;</span><br><span class="line">    &#39;user&#39;: &#39;abc123&#39;,</span><br><span class="line">    &#39;pass&#39;: &#39;admin&#39;</span><br><span class="line">&#125;</span><br><span class="line">response &#x3D; requests.post(url, data&#x3D;data) </span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+
+<p>上传文件需要更复杂的编码格式，但是requests把它简化成<code>files</code>参数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">upload_files &#x3D; &#123;&#39;file&#39;: open(&#39;report.xls&#39;, &#39;rb&#39;)&#125;</span><br><span class="line">r &#x3D; requests.post(url, files&#x3D;upload_files)</span><br></pre></td></tr></table></figure>
 
 <p>3.2通过json参数传递json数据到服务器，Requests库会自动编码，这是新特性,如果还是依靠data参数传递json数据，则需要使用json模块进行数据编码再传递给data参数，复杂了一点，不推荐了吧</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line">url &#x3D; &#39;https:&#x2F;&#x2F;api.github.com&#x2F;some&#x2F;endpoint&#39;</span><br><span class="line">payload &#x3D; &#123;&#39;some&#39;: &#39;data&#39;&#125;</span><br><span class="line">r &#x3D; requests.post(url, json&#x3D;payload)##传递json数据给json参数</span><br></pre></td></tr></table></figure>
@@ -1682,6 +1685,9 @@
 
 <p>结果会报错：</p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/20210331221129.png" alt="image-20210331221129704"></p>
+<p>设置访问代理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">proxies &#x3D; &#123;</span><br><span class="line">           &quot;http&quot;: &quot;http:&#x2F;&#x2F;10.10.10.10:8888&quot;,</span><br><span class="line">           &quot;https&quot;: &quot;http:&#x2F;&#x2F;10.10.10.100:4444&quot;,</span><br><span class="line">          &#125;</span><br><span class="line">r &#x3D; requests.get(&#39;http:&#x2F;&#x2F;m.ctrip.com&#39;, proxies&#x3D;proxies)</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.cnblogs.com/tangdongchu/p/4229049.html" target="_blank" rel="noopener">https://www.cnblogs.com/tangdongchu/p/4229049.html</a></p>
 <p><a href="https://blog.csdn.net/lady_killer9/article/details/109032337" target="_blank" rel="noopener">https://blog.csdn.net/lady_killer9/article/details/109032337</a></p>
 <p><a href="https://juejin.cn/post/6844904008037957639" target="_blank" rel="noopener">https://juejin.cn/post/6844904008037957639</a></p>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-29T09:00:07.406Z</updated>
+  <updated>2021-03-31T14:16:02.974Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python-requests模块学习</title>
+    <link href="http://yoursite.com/2021/03/31/python-requests-learning/"/>
+    <id>http://yoursite.com/2021/03/31/python-requests-learning/</id>
+    <published>2021-03-31T14:13:02.000Z</published>
+    <updated>2021-03-31T14:16:02.974Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Requests模块说明&quot;&gt;&lt;a href=&quot;#Requests模块说明&quot; class=&quot;headerlink&quot; title=&quot;Requests模块说明&quot;&gt;&lt;/a&gt;Requests模块说明&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Requests 是使用 &lt;a href=&quot;http://cn.python-requests.org/en/latest/user/intro.html#apache2&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Apache2 Licensed&lt;/a&gt; 许可证的 HTTP 库。用 Python 编写，真正的为人类着想。
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Git学习笔记</title>

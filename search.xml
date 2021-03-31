@@ -272,6 +272,7 @@
 <p>加密lsb隐写，用cloacked-pixel工具的lsb.py脚本来解</p>
 <p><code>python2 lsb.py extract &lt;stego_file&gt; &lt;out_file&gt; &lt;password&gt;</code></p>
 <p>bmp或者pdf文件解密可以用wbStego4.3open工具直接解密</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=2</a></p>
 ]]></content>
       <categories>
         <category>misc</category>
@@ -326,6 +327,7 @@
 <p>1.修补定位符</p>
 <p>2.基于纠错等级，只给你一半的信息，需要把剩下的补全。用QRazyBox项目修补</p>
 <h2 id="稀奇古怪的编码"><a href="#稀奇古怪的编码" class="headerlink" title="稀奇古怪的编码"></a>稀奇古怪的编码</h2><p>社会主义核心价值观、与佛论禅、与熊论道</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=3" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=3</a></p>
 ]]></content>
       <categories>
         <category>misc</category>
@@ -387,6 +389,7 @@
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210206162630004.png" alt="image-20210206162630004"></p>
 <p>在常见的ctf赛题中，往往是给出一个pcapng文件，需要我们读取这个流量文件，然后从中寻找flag。如果是较为简单的题，直接查找(Ctrl+F选择字符串)即可获得flag</p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210206163245033.png" alt="image-20210206163245033"></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=4" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=4</a></p>
 ]]></content>
       <categories>
         <category>misc</category>
@@ -576,6 +579,7 @@
 <p>整数和字节类型的转换</p>
 <p>这种类型转换在密码方向题目中很常见，整数类型可以直接参与数学计算，字节类型会展示可读的字符</p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209142153434.png" alt="image-20210209142153434"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=5" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=5</a></p>
 ]]></content>
       <categories>
         <category>crypto</category>
@@ -667,7 +671,7 @@
 <p>发送的请求包中，cmd连接密码中再嵌套了一句eval函数，而真正传递命令的是随机参数，随机参数传递base64编码后的命令，传递给cmd后，进行了base64解码，服务器执行解码完的命令。</p>
 <p>把随机参数传递的命令解码后，如下：<br>大致意思为循环遍历路径下的文件。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ini_set(&quot;display_errors&quot;, &quot;0&quot;);</span><br><span class="line">@set_time_limit(0);</span><br><span class="line">function asenc($out)&#123;return $out;&#125;;</span><br><span class="line">function asoutput()&#123;</span><br><span class="line">$output&#x3D;ob_get_contents();</span><br><span class="line">ob_end_clean();</span><br><span class="line">echo &quot;2652a8a9cbcf&quot;;</span><br><span class="line">echo @asenc($output);</span><br><span class="line">echo &quot;76c018cc86&quot;;&#125;</span><br><span class="line">ob_start();</span><br><span class="line">try&#123;</span><br><span class="line">    $D&#x3D;dirname($_SERVER[&quot;SCRIPT_FILENAME&quot;]);</span><br><span class="line">	if($D&#x3D;&#x3D;&quot;&quot;)$D&#x3D;dirname($_SERVER[&quot;PATH_TRANSLATED&quot;]);</span><br><span class="line">	$R&#x3D;&quot;&#123;$D&#125;	&quot;;</span><br><span class="line">	if(substr($D,0,1)!&#x3D;&quot;&#x2F;&quot;)&#123;foreach(range(&quot;C&quot;,&quot;Z&quot;)as $L)if(is_dir(&quot;&#123;$L&#125;:&quot;))$R.&#x3D;&quot;&#123;$L&#125;:&quot;;&#125;</span><br><span class="line">	else&#123;$R.&#x3D;&quot;&#x2F;&quot;;&#125;</span><br><span class="line">	$R.&#x3D;&quot;	&quot;;</span><br><span class="line">	$u&#x3D;(function_exists(&quot;posix_getegid&quot;))?@posix_getpwuid(@posix_geteuid()):&quot;&quot;;$s&#x3D;($u)?$u[&quot;name&quot;]:@get_current_user();</span><br><span class="line">	$R.&#x3D;php_uname();</span><br><span class="line">	$R.&#x3D;&quot;	&#123;$s&#125;&quot;;</span><br><span class="line">	echo $R;;</span><br><span class="line">&#125;catch(Exception $e)&#123;</span><br><span class="line">	echo &quot;ERROR:&#x2F;&#x2F;&quot;.$e-&gt;getMessage();</span><br><span class="line">&#125;;</span><br><span class="line">asoutput();</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
-
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=7" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=7</a></p>
 ]]></content>
       <categories>
         <category>Web</category>
@@ -697,6 +701,7 @@
 <p>十六进制转换     <a href="http://0x7f.0.0.1" target="_blank" rel="noopener">http://0x7f.0.0.1</a><br>不同进制组合转换</p>
 <p>5、@绕过<br>    <a href="http://www.baidu.com@127.0.0.1" target="_blank" rel="noopener">http://www.baidu.com@127.0.0.1</a></p>
 <p>6、后面跟参数<br>    <a href="http://127.0.0.1?a=sdagwasdwfa" target="_blank" rel="noopener">http://127.0.0.1?a=sdagwasdwfa</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=8" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=8</a></p>
 ]]></content>
       <categories>
         <category>Web</category>
@@ -1623,7 +1628,7 @@
     <title>Python-requests模块学习</title>
     <url>/2021/03/31/python-requests-learning/</url>
     <content><![CDATA[<h2 id="Requests模块说明"><a href="#Requests模块说明" class="headerlink" title="Requests模块说明"></a>Requests模块说明</h2><blockquote>
-<p>Requests 是使用 <a href="http://cn.python-requests.org/en/latest/user/intro.html#apache2" target="_blank" rel="noopener">Apache2 Licensed</a> 许可证的 HTTP 库。用 Python 编写，真正的为人类着想。</p>
+<p>Requests 是使用 <a href="http://cn.python-requests.org/en/latest/user/intro.html#apache2" target="_blank" rel="noopener">Apache2 Licensed</a> 许可证的 HTTP 库。用 Python 编写，真正的为人类着想。<a id="more"></a></p>
 <p>Python 标准库中的 <strong>urllib2</strong> 模块提供了你所需要的大多数 HTTP 功能，但是它的 API 太渣了。它是为另一个时代、另一个互联网所创建的。它需要巨量的工作，甚至包括各种方法覆盖，来完成最简单的任务。</p>
 <p>在Python的世界里，事情不应该这么麻烦。</p>
 <p>Requests 使用的是 urllib3，因此继承了它的所有特性。Requests 支持 HTTP 连接保持和连接池，支持使用 cookie 保持会话，支持文件上传，支持自动确定响应内容的编码，支持国际化的 URL 和 POST 数据自动编码。现代、国际化、人性化。</p>
@@ -1687,6 +1692,8 @@
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/20210331221129.png" alt="image-20210331221129704"></p>
 <p>设置访问代理：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">proxies &#x3D; &#123;</span><br><span class="line">           &quot;http&quot;: &quot;http:&#x2F;&#x2F;10.10.10.10:8888&quot;,</span><br><span class="line">           &quot;https&quot;: &quot;http:&#x2F;&#x2F;10.10.10.100:4444&quot;,</span><br><span class="line">          &#125;</span><br><span class="line">r &#x3D; requests.get(&#39;http:&#x2F;&#x2F;m.ctrip.com&#39;, proxies&#x3D;proxies)</span><br></pre></td></tr></table></figure>
+<p>xml请求</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">headers &#x3D; &#123;&#39;Content-type&#39;: &#39;text&#x2F;xml&#39;&#125;</span><br><span class="line">    XML &#x3D; &#39;&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;utf-8&quot;?&gt;&lt;soap:Envelope xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot; xmlns:xsd&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema&quot; xmlns:soap&#x3D;&quot;http:&#x2F;&#x2F;schemas.xmlsoap.org&#x2F;soap&#x2F;envelope&#x2F;&quot;&gt;&lt;soap:Body&gt;&lt;Request xmlns&#x3D;&quot;http:&#x2F;&#x2F;tempuri.org&#x2F;&quot;&gt;&lt;jme&gt;&lt;JobClassFullName&gt;WeChatJSTicket.JobWS.Job.JobRefreshTicket,WeChatJSTicket.JobWS&lt;&#x2F;JobClassFullName&gt;&lt;Action&gt;RUN&lt;&#x2F;Action&gt;&lt;Param&gt;1&lt;&#x2F;Param&gt;&lt;HostIP&gt;127.0.0.1&lt;&#x2F;HostIP&gt;&lt;JobInfo&gt;1&lt;&#x2F;JobInfo&gt;&lt;NeedParallel&gt;false&lt;&#x2F;NeedParallel&gt;&lt;&#x2F;jme&gt;&lt;&#x2F;Request&gt;&lt;&#x2F;soap:Body&gt;&lt;&#x2F;soap:Envelope&gt;&#39;</span><br><span class="line">    url &#x3D; &#39;http:&#x2F;&#x2F;jobws.push.mobile.xxxxxxxx.com&#x2F;RefreshWeiXInTokenJob&#x2F;RefreshService.asmx&#39;</span><br><span class="line">    r &#x3D; requests.post(url,headers&#x3D;headers,data&#x3D;XML)</span><br><span class="line">    #r.encoding &#x3D; &#39;utf-8&#39;</span><br><span class="line">    data &#x3D; r.text</span><br><span class="line">    print data</span><br></pre></td></tr></table></figure>
 
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.cnblogs.com/tangdongchu/p/4229049.html" target="_blank" rel="noopener">https://www.cnblogs.com/tangdongchu/p/4229049.html</a></p>
 <p><a href="https://blog.csdn.net/lady_killer9/article/details/109032337" target="_blank" rel="noopener">https://blog.csdn.net/lady_killer9/article/details/109032337</a></p>

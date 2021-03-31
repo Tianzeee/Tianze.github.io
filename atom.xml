@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-31T14:28:47.081Z</updated>
+  <updated>2021-03-31T14:49:29.356Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,18 +21,12 @@
     <link href="http://yoursite.com/2021/03/31/python-requests-learning/"/>
     <id>http://yoursite.com/2021/03/31/python-requests-learning/</id>
     <published>2021-03-31T14:13:02.000Z</published>
-    <updated>2021-03-31T14:28:47.081Z</updated>
+    <updated>2021-03-31T14:49:29.356Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;Requests模块说明&quot;&gt;&lt;a href=&quot;#Requests模块说明&quot; class=&quot;headerlink&quot; title=&quot;Requests模块说明&quot;&gt;&lt;/a&gt;Requests模块说明&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Requests 是使用 &lt;a
-        
-      
+      &lt;h2 id=&quot;Requests模块说明&quot;&gt;&lt;a href=&quot;#Requests模块说明&quot; class=&quot;headerlink&quot; title=&quot;Requests模块说明&quot;&gt;&lt;/a&gt;Requests模块说明&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Requests 是使用 &lt;a href=&quot;http://cn.python-requests.org/en/latest/user/intro.html#apache2&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Apache2 Licensed&lt;/a&gt; 许可证的 HTTP 库。用 Python 编写，真正的为人类着想。
     
     </summary>
     
@@ -104,7 +98,7 @@
     <link href="http://yoursite.com/2021/03/03/SSRF/"/>
     <id>http://yoursite.com/2021/03/03/SSRF/</id>
     <published>2021-03-03T07:25:40.000Z</published>
-    <updated>2021-03-03T07:27:05.313Z</updated>
+    <updated>2021-03-31T14:50:53.806Z</updated>
     
     <summary type="html">
     
@@ -123,7 +117,7 @@
     <link href="http://yoursite.com/2021/03/01/yijuhua/"/>
     <id>http://yoursite.com/2021/03/01/yijuhua/</id>
     <published>2021-03-01T13:59:17.000Z</published>
-    <updated>2021-03-03T03:22:36.779Z</updated>
+    <updated>2021-03-31T14:52:03.246Z</updated>
     
     <summary type="html">
     
@@ -161,7 +155,7 @@
     <link href="http://yoursite.com/2021/02/09/calssical-crypto/"/>
     <id>http://yoursite.com/2021/02/09/calssical-crypto/</id>
     <published>2021-02-09T08:52:29.000Z</published>
-    <updated>2021-03-01T07:57:04.664Z</updated>
+    <updated>2021-03-31T14:45:24.990Z</updated>
     
     <summary type="html">
     
@@ -200,7 +194,7 @@
     <link href="http://yoursite.com/2021/02/06/flow-analysis/"/>
     <id>http://yoursite.com/2021/02/06/flow-analysis/</id>
     <published>2021-02-06T09:40:29.000Z</published>
-    <updated>2021-02-06T09:41:34.896Z</updated>
+    <updated>2021-03-31T14:53:04.107Z</updated>
     
     <summary type="html">
     
@@ -219,7 +213,7 @@
     <link href="http://yoursite.com/2021/02/04/encode/"/>
     <id>http://yoursite.com/2021/02/04/encode/</id>
     <published>2021-02-04T13:12:10.000Z</published>
-    <updated>2021-02-04T13:50:13.796Z</updated>
+    <updated>2021-03-31T14:53:50.887Z</updated>
     
     <summary type="html">
     
@@ -240,7 +234,7 @@
     <link href="http://yoursite.com/2021/02/03/introduction-to-misc/"/>
     <id>http://yoursite.com/2021/02/03/introduction-to-misc/</id>
     <published>2021-02-03T14:43:41.000Z</published>
-    <updated>2021-03-14T05:50:55.333Z</updated>
+    <updated>2021-03-31T14:45:03.617Z</updated>
     
     <summary type="html">
     

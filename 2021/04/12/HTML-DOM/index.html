@@ -124,12 +124,12 @@
 <p>JavaScript 能够改变页面中的所有 CSS 样式</p>
 <p>JavaScript 能够对页面中的所有事件做出反应</p>
 <h3 id="查找HTML元素"><a href="#查找HTML元素" class="headerlink" title="查找HTML元素"></a>查找HTML元素</h3><p>通过 JavaScript，您需要操作 HTML 元素</p>
-<p>ID查找：getElementById(“id”)</p>
-<p>标签名查找：getElementsByTagName(“tagname”)</p>
-<p>类名查找：getElementsByClassName(“classname”)</p>
+<p>ID查找：document.getElementById(“id”)</p>
+<p>标签名查找：document.getElementsByTagName(“tagname”)</p>
+<p>类名查找：document.getElementsByClassName(“classname”)</p>
 <p>用标签名或类名查找可能会找到很多个HTML DOM元素，它们会组成一个数组，DOM最上面的元素作为数组的第一个值。</p>
 <p>比如：</p>
-<p>getElementsByTagName(“p”)[0]  它会得到第一个p标签元素</p>
+<p>document.getElementsByTagName(“p”)[0]  它会得到第一个p标签元素</p>
 <h2 id="DOM-HTML"><a href="#DOM-HTML" class="headerlink" title="DOM HTML"></a>DOM HTML</h2><p>HTML DOM 允许 JavaScript 改变 HTML 元素的内容。</p>
 <h3 id="改变HTML输出流"><a href="#改变HTML输出流" class="headerlink" title="改变HTML输出流"></a>改变HTML输出流</h3><p>document.write()直接向HTML输出流写内容</p>
 <p>注意：不要在文档(DOM)加载完后使用document.write()，会覆盖文档。</p>

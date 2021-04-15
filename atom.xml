@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-14T08:08:57.446Z</updated>
+  <updated>2021-04-15T15:10:00.832Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript函数学习笔记</title>
+    <link href="http://yoursite.com/2021/04/15/JavaScript-function/"/>
+    <id>http://yoursite.com/2021/04/15/JavaScript-function/</id>
+    <published>2021-04-15T15:05:07.000Z</published>
+    <updated>2021-04-15T15:10:00.832Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学完基础，再学一下函数相关内容
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>浏览器工作原理及前端优化学习</title>
@@ -380,25 +399,6 @@
     
     
       <category term="数据结构与算法" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>markdown语法学习</title>
-    <link href="http://yoursite.com/2020/04/20/markdown-learning/"/>
-    <id>http://yoursite.com/2020/04/20/markdown-learning/</id>
-    <published>2020-04-20T05:12:53.000Z</published>
-    <updated>2021-01-26T11:10:53.291Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;markdown介绍&quot;&gt;&lt;a href=&quot;#markdown介绍&quot; class=&quot;headerlink&quot; title=&quot;markdown介绍&quot;&gt;&lt;/a&gt;markdown介绍&lt;/h1&gt;&lt;p&gt;markdown是一种很简单的标记语言，它可以让我们用纯文本去编写文档，然后再转换成HTML等其他文档。
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
   </entry>

@@ -3710,4 +3710,60 @@
         <category>学习笔记</category>
       </categories>
   </entry>
+  <entry>
+    <title>Python学习笔记1</title>
+    <url>/2021/04/18/Python1/</url>
+    <content><![CDATA[<p>在B站看网课重新学一下Python，方便以后写盲注脚本或者一些有意思的脚本，比如爬虫、讲课抢票等等。<a id="more"></a></p>
+<h2 id="注释符"><a href="#注释符" class="headerlink" title="注释符"></a>注释符</h2><p>1.#单行注释</p>
+<p>2.多行注释</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39;&#39;&#39;</span><br><span class="line">三个单引号包裹的是多行注释</span><br><span class="line">&#39;&#39;&#39;</span><br></pre></td></tr></table></figure>
+
+<p>多行注释也可以先选中多行然后按<code>Ctrl+/</code>来实现</p>
+<p>另外,三个单引号包裹赋值给变量的话表示多行字符串,例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;&#39;&#39;&#39;hello</span><br><span class="line">world&#39;&#39;&#39;</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>print()函数打印输出</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&quot;hello world&quot;) #end不写默认为\n，即默认自动换行</span><br><span class="line">print(&quot;hello world&quot;,end&#x3D;&#39;&#39;) #不换行输出,end里面也可以写其他的东西</span><br><span class="line">print(&quot;aaa&quot;,&quot;bbb&quot;,&quot;ccc&quot;) #,输出空格来分隔字符串</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><p><code>{}</code>和<code>:</code>等等</p>
+<h4 id="f-str"><a href="#f-str" class="headerlink" title="f-str"></a>f-str</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import math</span><br><span class="line">name&#x3D;Tianze</span><br><span class="line">print(f&#39;my nickname is &#123;name&#125;&#39;) #f也可以大写</span><br><span class="line">print(f&#39;the value of pi is approximately &#123;math.pi:.3f&#125;&#39;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="str-format"><a href="#str-format" class="headerlink" title="str.format()"></a>str.format()</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&quot;&#123;&#125; &#123;&#125;&quot;.format(&quot;hello&quot;,&quot;world&quot;))</span><br><span class="line">#花括号里不加数字则顺序，加数字可以指定位置，第一个为0</span><br><span class="line">print(&quot;&#123;1&#125; &#123;0&#125;&quot;.format(&quot;hello&quot;,&quot;world&quot;)) #输出world hello</span><br><span class="line">print(&quot;&#123;0&#125; &#123;1&#125; &#123;0&#125;&quot;.format(&quot;hello&quot;,&quot;world&quot;)) #输出hello world hello</span><br><span class="line">#话括号里也可以设置参数</span><br><span class="line">print(&quot;my name is &#123;name&#125;&quot;.format(name&#x3D;&quot;Tianze&quot;))</span><br></pre></td></tr></table></figure>
+
+<h4 id="str-value"><a href="#str-value" class="headerlink" title="str%value"></a>str%value</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&quot;my name is %s&quot;%&quot;Tianze&quot;)</span><br><span class="line">print(&quot;my age is %d&quot;%20)</span><br></pre></td></tr></table></figure>
+
+<h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>input()函数用于输入，输入的值为str类型，若想得到整数类型，要使用int()强制类型转换</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">password&#x3D;input(&quot;请输入你的密码&quot;)</span><br><span class="line">print(type(password)) #type()函数输出变量类型,这里为str</span><br><span class="line">print(&quot;你的密码为&quot;,password)</span><br><span class="line"></span><br><span class="line">a&#x3D;int(input()) #这里int()把输入值强制类型转换为int</span><br><span class="line">print(a+100)</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p>算术运算符(加减乘除等)、比较运算符(== !=等)、位运算符(&amp; |等)、逻辑运算符(and or等)都和其他语言差不多。但python还有成员运算符(in、not in)和身份运算符(is、not is)</p>
+<h2 id="条件判断语句"><a href="#条件判断语句" class="headerlink" title="条件判断语句"></a>条件判断语句</h2><p>非0和非空值为True，0或者None为False，需要注意的是True和False必须首字母大写才有意义。</p>
+<p>python中else if要写成elif，并且不用<code>{}</code>，而用<code>:</code></p>
+<p>python的缩进很重要，尤其是嵌套很多的时候</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if True:</span><br><span class="line">	print(&quot;True&quot;)</span><br><span class="line">else:</span><br><span class="line">	print(&quot;False&quot;)</span><br><span class="line">	</span><br><span class="line">score&#x3D;89</span><br><span class="line">if score&gt;&#x3D;90 and score&lt;&#x3D;100: #这里也可以写成90&lt;&#x3D;score&lt;&#x3D;100</span><br><span class="line">	print(&quot;A&quot;)</span><br><span class="line">elif score&gt;&#x3D;80:</span><br><span class="line">	print(&quot;B&quot;)</span><br><span class="line">elif score&gt;&#x3D;70:</span><br><span class="line">	print(&quot;C&quot;)</span><br><span class="line">elif score&gt;&#x3D;60:</span><br><span class="line">	print(&quot;D&quot;)</span><br><span class="line">else:</span><br><span class="line">	print(&quot;E&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="import和from-import"><a href="#import和from-import" class="headerlink" title="import和from import"></a>import和from import</h2><p>python用<code>import</code>或者<code>from...import</code>来导入模块，相当于用别人写好的一些功能，我们也可以自己写一个py文件，然后导入。</p>
+<p>整个模块导入：<code>import module</code></p>
+<p>从某个模块中导入某个函数：<code>from module import function</code></p>
+<p>从某个模块中导入多个函数：<code>from module import func1,func2</code></p>
+<p>导入模块中的所有函数：<code>from module import *</code></p>
+<p>as起别名：<code>import module as xxx</code>或者<code>from module import function as xxx</code></p>
+<h2 id="random随机库"><a href="#random随机库" class="headerlink" title="random随机库"></a>random随机库</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">x&#x3D;random.randint(0,2) #随机生成[0,2]的数字</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure>
+
+<h2 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h2><p>综合使用if语句，实现剪刀石头布游戏效果，显示如下提示信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">请输入:剪刀(0)、石头(1)、布(2):</span><br></pre></td></tr></table></figure>
+
+<p>用户输入数字0-2中的一个，与系统随机生成的数字比较后给出结果信息。</p>
+<p>例如：输入0后，显示如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">你的输入为:剪刀(0)</span><br><span class="line">随机生成数字为:1</span><br><span class="line">哈哈,你输了:)</span><br></pre></td></tr></table></figure>
+
+<p>代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import random</span><br><span class="line">a&#x3D;int(input(&quot;请输入:剪刀(0)、石头(1)、布(2):&quot;))</span><br><span class="line">b&#x3D;random.randint(0,2)</span><br><span class="line">print(&quot;随机生成数字为:&#123;&#125;&quot;.format(b))</span><br><span class="line">if a&#x3D;&#x3D;0:</span><br><span class="line">    if b&#x3D;&#x3D;0:</span><br><span class="line">        print(&quot;平局&quot;)</span><br><span class="line">    elif b&#x3D;&#x3D;1:</span><br><span class="line">        print(&quot;哈哈,你输了:)&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;哈哈,你赢了:)&quot;)</span><br><span class="line">elif a&#x3D;&#x3D;1:</span><br><span class="line">    if b&#x3D;&#x3D;0:</span><br><span class="line">        print(&quot;哈哈,你赢了:)&quot;)</span><br><span class="line">    elif b&#x3D;&#x3D;1:</span><br><span class="line">        print(&quot;平局&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;哈哈,你输了:)&quot;)</span><br><span class="line">else:</span><br><span class="line">    if b&#x3D;&#x3D;0:</span><br><span class="line">        print(&quot;哈哈,你输了:)&quot;)</span><br><span class="line">    elif b&#x3D;&#x3D;1:</span><br><span class="line">        print(&quot;哈哈,你赢了:)&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;平局&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>运气真好，第一次运行结果就和示例一样</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210418164205888.png" alt="image-20210418164205888"></p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+  </entry>
 </search>

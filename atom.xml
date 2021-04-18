@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-15T15:10:00.832Z</updated>
+  <updated>2021-04-18T08:53:40.724Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python学习笔记1</title>
+    <link href="http://yoursite.com/2021/04/18/Python1/"/>
+    <id>http://yoursite.com/2021/04/18/Python1/</id>
+    <published>2021-04-18T08:45:10.000Z</published>
+    <updated>2021-04-18T08:53:40.724Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在B站看网课重新学一下Python，方便以后写盲注脚本或者一些有意思的脚本，比如爬虫、讲课抢票等等。
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>JavaScript函数学习笔记</title>
@@ -380,25 +399,6 @@
     
     
       <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>汉诺塔问题</title>
-    <link href="http://yoursite.com/2020/04/21/Hanoi/"/>
-    <id>http://yoursite.com/2020/04/21/Hanoi/</id>
-    <published>2020-04-21T09:26:15.000Z</published>
-    <updated>2021-01-26T12:14:30.555Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;有三个柱子A,B,C。A柱上有N(N&amp;gt;1)个直径大小不同，依小到大编号为1，2，，，n的圆盘。
-    
-    </summary>
-    
-    
-      <category term="数据结构与算法" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
   </entry>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-19T13:56:54.683Z</updated>
+  <updated>2021-04-20T07:41:45.626Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python学习笔记3</title>
+    <link href="http://yoursite.com/2021/04/20/Python3/"/>
+    <id>http://yoursite.com/2021/04/20/Python3/</id>
+    <published>2021-04-20T07:40:43.000Z</published>
+    <updated>2021-04-20T07:41:45.626Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;续2，元组、字典、集合,函数以及文件操作
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Python学习笔记2</title>
@@ -380,25 +399,6 @@
     
     
       <category term="misc" scheme="http://yoursite.com/categories/misc/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>sql注入学习笔记</title>
-    <link href="http://yoursite.com/2020/09/26/SQL-injection-study-notes/"/>
-    <id>http://yoursite.com/2020/09/26/SQL-injection-study-notes/</id>
-    <published>2020-09-26T03:50:07.000Z</published>
-    <updated>2021-02-04T13:51:37.691Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;sql注入作为owasp top 10的榜首，其重要程度不言而喻。这里我通过对sqli-labs靶场的练习，来学习和入门sql注入。
-    
-    </summary>
-    
-    
-      <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
     
     
   </entry>

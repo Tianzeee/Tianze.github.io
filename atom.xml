@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-20T07:41:45.626Z</updated>
+  <updated>2021-04-21T06:31:46.907Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python学习笔记4</title>
+    <link href="http://yoursite.com/2021/04/21/Python4/"/>
+    <id>http://yoursite.com/2021/04/21/Python4/</id>
+    <published>2021-04-21T06:31:06.000Z</published>
+    <updated>2021-04-21T06:31:46.907Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;错误和异常
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Python学习笔记3</title>
@@ -374,26 +393,6 @@
       &lt;h1 id=&quot;常见进制&quot;&gt;&lt;a href=&quot;#常见进制&quot; class=&quot;headerlink&quot; title=&quot;常见进制&quot;&gt;&lt;/a&gt;常见进制&lt;/h1&gt;&lt;p&gt;01、hex&lt;/p&gt;
 &lt;h1 id=&quot;进制转换：&quot;&gt;&lt;a href=&quot;#进制转换：&quot; class=&quot;headerlink&quot; title=&quot;进制转换：&quot;&gt;&lt;/a&gt;进制转换：&lt;/h1&gt;&lt;p&gt;二进制转ascii码&lt;/p&gt;
 &lt;p&gt;二进制转morse码&lt;br&gt;二进制转二维码（绘图）-用python的PIL库写脚本转&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="misc" scheme="http://yoursite.com/categories/misc/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>misc入门之图片隐写</title>
-    <link href="http://yoursite.com/2021/02/03/introduction-to-misc/"/>
-    <id>http://yoursite.com/2021/02/03/introduction-to-misc/</id>
-    <published>2021-02-03T14:43:41.000Z</published>
-    <updated>2021-03-31T14:45:03.617Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;misc&lt;/p&gt;
-&lt;h1 id=&quot;主要类型：&quot;&gt;&lt;a href=&quot;#主要类型：&quot; class=&quot;headerlink&quot; title=&quot;主要类型：&quot;&gt;&lt;/a&gt;主要类型：&lt;/h1&gt;&lt;h2 id=&quot;1-数据编码、图形密码&quot;&gt;&lt;a href=&quot;#1-数据编码、图形密码&quot; class=&quot;headerlink&quot; title=&quot;1.数据编码、图形密码&quot;&gt;&lt;/a&gt;1.数据编码、图形密码&lt;/h2&gt;&lt;h2 id=&quot;2-图片隐写&quot;&gt;&lt;a href=&quot;#2-图片隐写&quot; class=&quot;headerlink&quot; title=&quot;2.图片隐写&quot;&gt;&lt;/a&gt;2.图片隐写&lt;/h2&gt;&lt;h2 id=&quot;3-音频-amp-视频隐写&quot;&gt;&lt;a href=&quot;#3-音频-amp-视频隐写&quot; class=&quot;headerlink&quot; title=&quot;3.音频&amp;amp;视频隐写&quot;&gt;&lt;/a&gt;3.音频&amp;amp;视频隐写&lt;/h2&gt;
     
     </summary>
     

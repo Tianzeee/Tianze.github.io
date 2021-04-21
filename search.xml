@@ -3913,4 +3913,47 @@
         <category>学习笔记</category>
       </categories>
   </entry>
+  <entry>
+    <title>Python学习笔记4</title>
+    <url>/2021/04/21/Python4/</url>
+    <content><![CDATA[<p>错误和异常<a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>即便 Python 程序的语法是正确的，在运行它的时候，也有可能发生错误。运行期检测到的错误被称为异常。</p>
+<p>四个关键词：<code>try</code>、<code>except</code>、<code>else</code>、<code>finally</code></p>
+<p>用<code>try/except</code>就可以异常捕获,用try包含可能发生问题的代码段，except处理异常</p>
+<p>一个 try 语句可能包含多个except子句，分别来处理不同的特定的异常。最多只有一个分支会被执行。</p>
+<p>一个except子句可以同时处理多个异常，这些异常将被放在一个括号里</p>
+<p>如果没有发生异常则执行else代码块</p>
+<p>无论是否发生异常都会执行finally代码块</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>except后面指定错误类型，只有指定错误类型的错误发生了，才执行except代码块</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&quot;------test------1&quot;)</span><br><span class="line">    with open(&quot;123.txt&quot;) as f:</span><br><span class="line">        print(&quot;------test------2&quot;)</span><br><span class="line">except IOError: #文件没找到属于IO异常</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(num)</span><br><span class="line">except NameError: #异常类型想要被捕获，需要一致</span><br><span class="line">    print(&quot;产生错误了&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>一个except可以用括号捕获多个错误类型：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&quot;------test------1&quot;)</span><br><span class="line">    with open(&quot;123.txt&quot;) as f:</span><br><span class="line">        print(&quot;------test------2&quot;)</span><br><span class="line">    print(num)</span><br><span class="line">except (NameError,IOError): #可以将多个异常类型放在括号里</span><br><span class="line">    print(&quot;产生错误了&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>用<code>as</code>输出错误描述：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&quot;------test------1&quot;)</span><br><span class="line">    with open(&quot;123.txt&quot;) as f:</span><br><span class="line">        print(&quot;------test------2&quot;)</span><br><span class="line">    print(num)</span><br><span class="line">except (NameError,IOError) as err:</span><br><span class="line">    print(&quot;产生错误了&quot;)</span><br><span class="line">    print(err)</span><br></pre></td></tr></table></figure>
+
+<p><code>Exception</code>是所有异常的父类，可以捕获所有异常：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&quot;------test------1&quot;)</span><br><span class="line">    with open(&quot;123.txt&quot;) as f:</span><br><span class="line">        print(&quot;------test------2&quot;)</span><br><span class="line">    print(num)</span><br><span class="line">except Exception as err: #Exception是所有异常的父类可以承接所有异常</span><br><span class="line">    print(&quot;产生错误了&quot;)</span><br><span class="line">    print(err)</span><br></pre></td></tr></table></figure>
+
+<p>如果不需要错误描述，就用<code>except</code>就可以了，它相当于一个通配符也可以捕获所有异常：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    print(&quot;------test------1&quot;)</span><br><span class="line">    with open(&quot;123.txt&quot;) as f:</span><br><span class="line">        print(&quot;------test------2&quot;)</span><br><span class="line">    print(num)</span><br><span class="line">except:</span><br><span class="line">    print(&quot;产生错误了&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>try也可以嵌套写，套在try或者else里：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    try:</span><br><span class="line">        with open(&quot;123.txt&quot;) as f:</span><br><span class="line">            print(f.readlines())</span><br><span class="line">    finally:</span><br><span class="line">        print(&quot;文件异常&quot;)</span><br><span class="line">except Exception as err:</span><br><span class="line">    print(&quot;发生异常&quot;)</span><br><span class="line">finally:</span><br><span class="line">    print(&quot;程序执行完毕&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h2><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421142535413.png" alt="image-20210421142535413"></p>
+<p>这里我把古诗写到poetry文件里了，因为gushi这名字不太优雅，我也没写函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">try:</span><br><span class="line">    with open(&quot;poetry.txt&quot;,&quot;w&quot;) as f:</span><br><span class="line">        poem&#x3D;&#39;&#39;&#39;曾经沧海难为水，除却巫山不是云。</span><br><span class="line">取次花丛懒回顾，半缘修道半缘君。&#39;&#39;&#39;</span><br><span class="line">        f.write(poem)</span><br><span class="line">except Exception as err:</span><br><span class="line">    print(err)</span><br><span class="line">try:</span><br><span class="line">    with open(&quot;copy.txt&quot;,&quot;w&quot;) as f:</span><br><span class="line">        with open(&quot;poetry.txt&quot;,&quot;r&quot;) as ff:</span><br><span class="line">            f.write(ff.readline())</span><br><span class="line">            f.write(ff.readline())</span><br><span class="line">except Exception as err:</span><br><span class="line">    print(err)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;复制完毕&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>遇到一点小问题就是中文乱码，在Pycharm里设置一下编码就好了：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421142823074.png" alt="image-20210421142823074"></p>
+<p>这三个地方改一下就不乱码了</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+  </entry>
 </search>

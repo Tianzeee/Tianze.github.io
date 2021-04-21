@@ -3951,6 +3951,19 @@
 <p>遇到一点小问题就是中文乱码，在Pycharm里设置一下编码就好了：</p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421142823074.png" alt="image-20210421142823074"></p>
 <p>这三个地方改一下就不乱码了</p>
+<h2 id="Python编程规范"><a href="#Python编程规范" class="headerlink" title="Python编程规范"></a>Python编程规范</h2><p>1.Python程序第一行加入：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#-*-coding:utf-8-*-</span><br><span class="line">#或者:</span><br><span class="line">#coding&#x3D;utf-8</span><br></pre></td></tr></table></figure>
+
+<p>这样可以在代码中包含中文</p>
+<p>2.使用函数实现单一功能，提高可读性、开发效率和代码重复利用率，方便模块化开发</p>
+<p>3.Python程序加入<code>main</code>函数用于测试程序，或者说是主程序入口：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if __name__&#x3D;&#x3D;&quot;__main__&quot;:</span><br></pre></td></tr></table></figure>
+
+<p><code>if __name__==&quot;__main__&quot;:</code>里的代码块不会被<code>import</code>导入</p>
+<p>所以当py文件被直接运行时，<code>if __name__==&quot;__main__&quot;:</code>里的代码块会被执行；当py文件以模块形式被导入时，<code>if __name__==&quot;__main__&quot;:</code>里的代码块不会执行。当模块不是主程序运行时，它就不会运行，只是变成了方法供调用</p>
+<p>在前面写一些函数，然后在<code>if __name__==&quot;__main__&quot;:</code>里面调用，方便我们查看，或者说方便我们控制多个函数之间的关系和流程，更清楚的管理代码的主流程</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?p=16" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?p=16</a></p>
+<p><a href="https://blog.csdn.net/yjk13703623757/article/details/77918633" target="_blank" rel="noopener">https://blog.csdn.net/yjk13703623757/article/details/77918633</a></p>
 ]]></content>
       <categories>
         <category>学习笔记</category>
@@ -3981,6 +3994,31 @@
 <h3 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h3><p>通过HTTP库向目标站点发起请求，如果服务器正常响应，会得到一个Response</p>
 <h3 id="解析内容"><a href="#解析内容" class="headerlink" title="解析内容"></a>解析内容</h3><p>得到的内容可能是HTML、Json等格式，可以用页面解析库、正则表达式等进行解析</p>
 <h3 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h3><p>保存形式多样，可以存为文本，也可以保存到数据库，或者保存特定格式的文件</p>
+]]></content>
+      <categories>
+        <category>爬虫相关</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>爬虫准备工作</title>
+    <url>/2021/04/21/preparation-for-crawler/</url>
+    <content><![CDATA[<p>以爬取豆瓣电影Top250为例子来学习<a id="more"></a></p>
+<h2 id="需要分析的点"><a href="#需要分析的点" class="headerlink" title="需要分析的点"></a>需要分析的点</h2><h3 id="URL分析"><a href="#URL分析" class="headerlink" title="URL分析"></a>URL分析</h3><p>第一页的URL：<code>https://movie.douban.com/top250</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421165440430.png" alt="image-20210421165440430"></p>
+<p>第二页的URL：<code>https://movie.douban.com/top250?start=25&amp;filter=</code></p>
+<p>把<code>filter</code>参数去掉也正常返回</p>
+<p><code>https://movie.douban.com/top250?start=25</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421165502559.png" alt="image-20210421165502559"></p>
+<p>我把<code>start</code>参数修改成27，也能正常返回：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421165732445.png" alt="image-20210421165732445"></p>
+<p>通过这三次响应可以分析出来，<code>start</code>参数是电影序号，如果是27就从显示28个开始显示，至于为什么我猜可能是因为豆瓣在存储这个数据的时候下标从是0开始的。并且每一页25部电影，250部电影数据分10页。</p>
+<h3 id="分析页面"><a href="#分析页面" class="headerlink" title="分析页面"></a>分析页面</h3><p>利用开发者工具来分析网页，F12打开开发者工具，在Elements下找到需要的数据位置</p>
+<p>点击工具栏最左边的箭头可以定位元素位置，可以快速找到我们需要的数据，最下面那一行也很有用，显示了查找元素所在的标签层级，方便之后获取数据</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421183657096.png" alt="image-20210421183657096"></p>
+<p>Network里可以查看HTTP请求相关内容，可以看看请求包里有什么，比如常见的cookie、User-Agent等等</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421183146701.png" alt="image-20210421183146701"></p>
+<h3 id="是否需要模拟登录"><a href="#是否需要模拟登录" class="headerlink" title="是否需要模拟登录"></a>是否需要模拟登录</h3><p>有些内容只有登录状态下才能查看，所以要先模拟登录，查看网站的cookie等信息然后在请求头加上，这部分还不是很了解，只是知道有这个点</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/piwefei/p/11171063.html" target="_blank" rel="noopener">python模拟登录的四种方法</a></p>
 ]]></content>
       <categories>
         <category>爬虫相关</category>

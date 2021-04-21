@@ -4017,7 +4017,7 @@
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421183657096.png" alt="image-20210421183657096"></p>
 <p>Network里可以查看HTTP请求相关内容，可以看看请求包里有什么，比如常见的cookie、User-Agent等等</p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421183146701.png" alt="image-20210421183146701"></p>
-<h3 id="是否需要模拟登录"><a href="#是否需要模拟登录" class="headerlink" title="是否需要模拟登录"></a>是否需要模拟登录</h3><p>有些内容只有登录状态下才能查看，所以要先模拟登录，查看网站的cookie等信息然后在请求头加上，这部分还不是很了解，只是知道有这个点</p>
+<h3 id="是否需要模拟登录"><a href="#是否需要模拟登录" class="headerlink" title="是否需要模拟登录"></a>是否需要模拟登录</h3><p>有些内容只有登录状态下才能查看，所以要先模拟登录，查看网站的cookie、用户名密码参数等信息然后在python请求的时候加上这部分信息模拟登录，这部分还不是很了解，只是知道有这个点</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/piwefei/p/11171063.html" target="_blank" rel="noopener">python模拟登录的四种方法</a></p>
 ]]></content>
       <categories>

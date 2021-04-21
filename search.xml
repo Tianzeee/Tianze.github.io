@@ -3956,4 +3956,34 @@
         <category>学习笔记</category>
       </categories>
   </entry>
+  <entry>
+    <title>初识爬虫</title>
+    <url>/2021/04/21/web-crawler/</url>
+    <content><![CDATA[<p>不仅介绍了爬虫，还讲了应用场景，受益匪浅<a id="more"></a></p>
+<h2 id="初始爬虫"><a href="#初始爬虫" class="headerlink" title="初始爬虫"></a>初始爬虫</h2><h3 id="什么是爬虫"><a href="#什么是爬虫" class="headerlink" title="什么是爬虫"></a>什么是爬虫</h3><p>按照一定规则，自动抓取互联网信息的程序或脚本。由于互联网数据的多样性和资源的有限性，根据用户需求定向抓取相关网页并分析是现在主流的爬取策略。</p>
+<h3 id="爬虫可以做什么"><a href="#爬虫可以做什么" class="headerlink" title="爬虫可以做什么"></a>爬虫可以做什么</h3><blockquote>
+<p>可以爬取图片、视频等等，只要浏览器能访问的数据都可以用爬虫获取</p>
+</blockquote>
+<p>我自己想的是，可以爬一些自己需要的数据，就比如之前看到某个很厉害的哥哥，用爬虫爬自己需要的论文然后自动下载，相当于爬虫+下载器。也看到过考研的人实时爬取研招网上调剂信息，以求最快获取信息，避免错过好的调剂。</p>
+<p>视频里老师用生活中的商业应用举了两个例子，就是这里让我感觉受益匪浅。一个是电影天堂，它里面的电影的数据好像全是从豆瓣上爬过来的，利用<a href="https://index.baidu.com/v2/index.html#/" target="_blank" rel="noopener">百度指数</a>可以查看某个关键字的指数，相当于查某个关键字的流量把。查了一下电影天堂的搜索指数有十几万，和腾讯视频不相上下，网站上广告很多，然后利用大量的流量来赚广告费。</p>
+<blockquote>
+<p>这种利用网络上的资源作为引流渠道，然后用广告来变现的方式特别的多</p>
+</blockquote>
+<p>还有一个是天眼查，这个网站可以查公司、查老板、查关系，可以查到很多很多相关的信息。可以用来比如找工作看看公司状况、找客户、金融行业投融资行业做一些背景调查等等</p>
+<blockquote>
+<p>它其实是基于数据来进行一些分析提供一些方案的</p>
+<p>这样的网站是卖方案的，或者说是卖会员的(付费查看)，它卖的不是信息本身，卖的是信息之间的关系</p>
+</blockquote>
+<h3 id="爬虫的本质是什么"><a href="#爬虫的本质是什么" class="headerlink" title="爬虫的本质是什么"></a>爬虫的本质是什么</h3><p>模拟浏览器打开网页，获取网页中想要的数据</p>
+<h2 id="搜索引擎原理图"><a href="#搜索引擎原理图" class="headerlink" title="搜索引擎原理图"></a>搜索引擎原理图</h2><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210421153152467.png" alt="image-20210421153152467"></p>
+<p>爬虫相当于上半部分，抓取网页内容到本地或者放到数据库里，而搜索引擎则是在爬虫的基础上再做一些索引等供用户查询</p>
+<h2 id="爬虫基本流程"><a href="#爬虫基本流程" class="headerlink" title="爬虫基本流程"></a>爬虫基本流程</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>通过浏览器查看分析目标网页</p>
+<h3 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h3><p>通过HTTP库向目标站点发起请求，如果服务器正常响应，会得到一个Response</p>
+<h3 id="解析内容"><a href="#解析内容" class="headerlink" title="解析内容"></a>解析内容</h3><p>得到的内容可能是HTML、Json等格式，可以用页面解析库、正则表达式等进行解析</p>
+<h3 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h3><p>保存形式多样，可以存为文本，也可以保存到数据库，或者保存特定格式的文件</p>
+]]></content>
+      <categories>
+        <category>爬虫相关</category>
+      </categories>
+  </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-29T04:34:29.501Z</updated>
+  <updated>2021-05-06T01:31:02.919Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Python学习笔记5</title>
+    <title>Python学习笔记6-re模块</title>
+    <link href="http://yoursite.com/2021/05/06/Python6/"/>
+    <id>http://yoursite.com/2021/05/06/Python6/</id>
+    <published>2021-05-06T01:25:25.000Z</published>
+    <updated>2021-05-06T01:31:02.919Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;用requests获取到数据，然后用BeautifulSoup解析数据，最后用re来提取数据，用xlwt将数据写入Excel文件里
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习笔记5-BeautifulSoup模块</title>
     <link href="http://yoursite.com/2021/04/29/Python5/"/>
     <id>http://yoursite.com/2021/04/29/Python5/</id>
     <published>2021-04-29T01:29:43.000Z</published>
-    <updated>2021-04-29T04:34:29.501Z</updated>
+    <updated>2021-05-06T01:32:02.438Z</updated>
     
     <summary type="html">
     
@@ -376,26 +395,6 @@
     
     
       <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Crypto—之古典密码学入门</title>
-    <link href="http://yoursite.com/2021/02/09/calssical-crypto/"/>
-    <id>http://yoursite.com/2021/02/09/calssical-crypto/</id>
-    <published>2021-02-09T08:52:29.000Z</published>
-    <updated>2021-03-31T14:45:24.990Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Crypto之古典密码学&quot;&gt;&lt;a href=&quot;#Crypto之古典密码学&quot; class=&quot;headerlink&quot; title=&quot;Crypto之古典密码学&quot;&gt;&lt;/a&gt;Crypto之古典密码学&lt;/h2&gt;&lt;h3 id=&quot;什么是密码学&quot;&gt;&lt;a href=&quot;#什么是密码学&quot; class=&quot;headerlink&quot; title=&quot;什么是密码学&quot;&gt;&lt;/a&gt;什么是密码学&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;密码学是一个多面的世界，对一些人来说，它是一个侦探与保密的世界，对另一些人来说，它是数学与计算机的世界。
-    
-    </summary>
-    
-    
-      <category term="crypto" scheme="http://yoursite.com/categories/crypto/"/>
     
     
   </entry>

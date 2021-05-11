@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-06T01:31:02.919Z</updated>
+  <updated>2021-05-11T00:26:16.438Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Python学习笔记6-re模块</title>
+    <title>Python学习笔记6-re和xlwt模块</title>
     <link href="http://yoursite.com/2021/05/06/Python6/"/>
     <id>http://yoursite.com/2021/05/06/Python6/</id>
     <published>2021-05-06T01:25:25.000Z</published>
-    <updated>2021-05-06T01:31:02.919Z</updated>
+    <updated>2021-05-11T00:26:16.438Z</updated>
     
     <summary type="html">
     

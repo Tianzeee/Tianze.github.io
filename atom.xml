@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-11T00:59:15.682Z</updated>
+  <updated>2021-05-13T01:19:05.028Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>爬取豆瓣电影Top250实例</title>
+    <title>Python学习笔记7-SQLite模块及应用</title>
+    <link href="http://yoursite.com/2021/05/13/Python-SQLite/"/>
+    <id>http://yoursite.com/2021/05/13/Python-SQLite/</id>
+    <published>2021-05-13T01:08:23.000Z</published>
+    <updated>2021-05-13T01:19:05.028Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面使用xlwt模块爬取数据到excel表中，这次用sqlite3模块爬取数据到数据库中。
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>应用xlwt爬取豆瓣电影Top250实例</title>
     <link href="http://yoursite.com/2021/05/11/crawler-of-douban-top250/"/>
     <id>http://yoursite.com/2021/05/11/crawler-of-douban-top250/</id>
     <published>2021-05-11T00:57:18.000Z</published>
-    <updated>2021-05-11T00:59:15.682Z</updated>
+    <updated>2021-05-13T01:08:49.923Z</updated>
     
     <summary type="html">
     
@@ -371,25 +390,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;渗透测试&quot;&gt;&lt;a href=&quot;#渗透测试&quot; class=&quot;headerlink&quot; title=&quot;渗透测试&quot;&gt;&lt;/a&gt;渗透测试&lt;/h2&gt;&lt;h3 id=&quot;什么是渗透测试&quot;&gt;&lt;a href=&quot;#什么是渗透测试&quot; class=&quot;headerlink&quot; title=&quot;什么是渗透测试&quot;&gt;&lt;/a&gt;什么是渗透测试&lt;/h3&gt;&lt;p&gt;渗透测试是一种通过模拟使用黑客的技术和方法，挖掘目标系统的安全漏洞，取得系统的控制权，访问系统的机密数据，并发现可能影响业务持续运作安全隐患的一种安全测试和评估方式。
-    
-    </summary>
-    
-    
-      <category term="Web" scheme="http://yoursite.com/categories/Web/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>一句话木马</title>
-    <link href="http://yoursite.com/2021/03/01/yijuhua/"/>
-    <id>http://yoursite.com/2021/03/01/yijuhua/</id>
-    <published>2021-03-01T13:59:17.000Z</published>
-    <updated>2021-03-31T14:52:03.246Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;什么是一句话木马&quot;&gt;&lt;a href=&quot;#什么是一句话木马&quot; class=&quot;headerlink&quot; title=&quot;什么是一句话木马&quot;&gt;&lt;/a&gt;什么是一句话木马&lt;/h2&gt;&lt;p&gt;一句话木马是一个可执行脚本文件，把脚本文件上传到目标服务器，然后文件被解析执行就可以达到控制目标服务器的目的。
     
     </summary>
     

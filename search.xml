@@ -4163,4 +4163,65 @@
         <category>爬虫相关</category>
       </categories>
   </entry>
+  <entry>
+    <title>数据可视化-Flask学习笔记1</title>
+    <url>/2021/05/14/Flask1/</url>
+    <content><![CDATA[<p>Flask框架比较轻便容易上手，适合入门学习，可以用来完成数据可视化项目<a id="more"></a></p>
+<h2 id="关于Flask框架"><a href="#关于Flask框架" class="headerlink" title="关于Flask框架"></a>关于Flask框架</h2><p>Flask是一个使用Python编写的轻量级 Web 应用框架，其WSGI工具箱采用 Werkzeug ，模板引擎则使用 Jinja2 。它主要面向需求简单的小应用</p>
+<p>可以说Flask框架的核心就是Werkzeug(请求路由转发)和Jinja2(模板渲染)</p>
+<p>Flask其他几乎所有的功能(数据库访问、验证Web表单和用户身份认证等)，Flask框架是不支持的。但是可以用别人写好的扩展来实现</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513221308588.png" alt="image-20210513221308588"></p>
+<h3 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h3><p>Flask的基本模式为在程序里将一个视图函数分配给一个URL，每当用户访问这个URL时，系统就会执行给该URL分配好的视图函数，获取函数的返回值并将其显示到浏览器上，其工作过程见图。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210514124735851.png" alt="image-20210514124735851"></p>
+<h3 id="Web应用程序"><a href="#Web应用程序" class="headerlink" title="Web应用程序"></a>Web应用程序</h3><p>Flask作为Web框架，它的作用主要是为了开发Web应用程序。那么首先来了解下Web应用程</p>
+<p>序。Web应用程序 (World Wide Web)诞生最初的目的，是为了利用互联网交流工作文档。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513220703372.png" alt="image-20210513220703372"></p>
+<p>一切从客户端发起请求开始。</p>
+<p>所有Flask程序都必须创建一个程序实例。</p>
+<p>当客户端想要获取资源时，一般会通过浏览器发起HTTP请求。</p>
+<p>此时，Web服务器使用一种名为WEB服务器网关接口的WSGI（Web Server Gateway Interface）</p>
+<p>协议，把来自客户端的请求都交给Flask程序实例。</p>
+<p>Flask使用Werkzeug来做路由分发（URL请求和视图函数之间的对应关系）。根据每个URL请求，</p>
+<p>找到具体的视图函数。</p>
+<p>在Flask程序中，路由一般是通过程序实例的装饰器实现。通过调用视图函数，获取到数据后，把</p>
+<p>数据传入HTML模板文件中，模板引擎负责渲染HTTP响应数据，然后由Flask返回响应数据给浏览</p>
+<p>器，最后浏览器显示返回的结果。</p>
+<h2 id="Flask程序运行过程"><a href="#Flask程序运行过程" class="headerlink" title="Flask程序运行过程"></a>Flask程序运行过程</h2><p>所有Flask程序必须有一个程序实例。</p>
+<p>Flask调用视图函数后，会将视图函数的返回值作为响应的内容，返回给客户端。一般情况下，响应</p>
+<p>内容主要是字符串和状态码。</p>
+<p>当客户端想要获取资源时，一般会通过浏览器发起HTTP请求。此时，Web服务器使用WSGI（Web</p>
+<p>Server Gateway Interface）协议，把来自客户端的所有请求都交给Flask程序实例。WSGI是为 Python</p>
+<p>语言定义的Web服务器和Web应用程序之间的一种简单而通用的接口，它封装了接受HTTP请求、解析</p>
+<p>HTTP请求、发送HTTP，响应等等的这些底层的代码和操作，使开发者可以高效的编写Web应用。</p>
+<p>程序实例使用Werkzeug来做路由分发（URL请求和视图函数之间的对应关系）。根据每个URL请</p>
+<p>求，找到具体的视图函数。 在Flask程序中，路由的实现一般是通过程序实例的route装饰器实现。</p>
+<p>route装饰器内部会调用add_url_route()方法实现路由注册。调用视图函数，获取响应数据后，把数据传入HTML模板文件中，模板引擎负责渲染响应数据，然后</p>
+<p>由Flask返回响应数据给浏览器，最后浏览器处理返回的结果显示给客户端。</p>
+<h2 id="为什么要用Web框架"><a href="#为什么要用Web框架" class="headerlink" title="为什么要用Web框架"></a>为什么要用Web框架</h2><p>web网站发展至今，特别是服务器端，涉及到的知识、内容，非常广泛。这对程序员的要求会越来越</p>
+<p>高。如果采用成熟，稳健的框架，那么一些基础的工作，比如，网络操作、数据库访问、会话管理等都</p>
+<p>可以让框架来处理，那么程序开发人员可以把精力放在具体的业务逻辑上面。使用Web框架开发Web应</p>
+<p>用程序可以降低开发难度，提高开发效率。</p>
+<p>总结一句话：避免重复造轮子。</p>
+<h2 id="创建Flask项目"><a href="#创建Flask项目" class="headerlink" title="创建Flask项目"></a>创建Flask项目</h2><p>Pycharm里点击File下的New Project</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513223115248.png" alt="image-20210513223115248"></p>
+<p>选择Flask然后Create即可</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513223210826.png" alt="image-20210513223210826"></p>
+<p>项目目录如下图，其中static文件夹存放css、js文件用来提供网页的素材，templates里存放html网页文件</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513223245858.png" alt="image-20210513223245858"></p>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from flask import Flask #导入Flask类</span><br><span class="line"></span><br><span class="line">app &#x3D; Flask(__name__) #初始化了一个对象,导入了flask框架</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&#39;&#x2F;&#39;) #路由解析,通过用户访问的路径匹配相应的函数</span><br><span class="line">def hello_world():</span><br><span class="line">    return &#39;Hello World!&#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    app.run() #Flask应用程序实例的run方法启动WEB服务器</span><br></pre></td></tr></table></figure>
+
+<h2 id="开启调试模式"><a href="#开启调试模式" class="headerlink" title="开启调试模式"></a>开启调试模式</h2><p>Debug模式的开启，可以更好的定位错误，还可以即时刷新修改的页面，不用重启服务器</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">app.run(debug&#x3D;True) #Pycharm中不起作用</span><br></pre></td></tr></table></figure>
+
+<p>编辑配置里</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513230141595.png" alt="image-20210513230141595"></p>
+<p>勾选flask_debug然后apply应用就可以开启调试模式了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513230201618.png" alt="image-20210513230201618"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://baike.baidu.com/item/flask" target="_blank" rel="noopener">https://baike.baidu.com/item/flask</a></p>
+<p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?p=29" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?p=29</a></p>
+]]></content>
+      <categories>
+        <category>数据可视化</category>
+      </categories>
+  </entry>
 </search>

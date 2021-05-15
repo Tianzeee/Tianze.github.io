@@ -4291,4 +4291,37 @@
         <category>数据可视化</category>
       </categories>
   </entry>
+  <entry>
+    <title>数据可视化-首页制作</title>
+    <url>/2021/05/15/homepage/</url>
+    <content><![CDATA[<p>学完Flask框架的基础后，跟着老师应用flask做了几个页面来显示前面爬到的电影数据<a id="more"></a></p>
+<h2 id="找网页素材"><a href="#找网页素材" class="headerlink" title="找网页素材"></a>找网页素材</h2><p>可以去<a href="http://www.cssmoban.com/" target="_blank" rel="noopener">模板之家</a>或者<a href="http://www.mobanwang.com/" target="_blank" rel="noopener">模板王</a>等类似的资源网站找一些好看的页面，当然很多都开始收费了，找自己喜欢的又免费的可能需要花点时间。</p>
+<p>我用的是下面这个模板页面</p>
+<p><a href="http://www.cssmoban.com/preview/index.html?url=http://demo.kangjingept.com:8020/cssthemes6/btmd_12_Mamba/index.html&amp;id=9296" target="_blank" rel="noopener">http://www.cssmoban.com/preview/index.html?url=http://demo.kangjingept.com:8020/cssthemes6/btmd_12_Mamba/index.html&amp;id=9296</a></p>
+<h2 id="魔改"><a href="#魔改" class="headerlink" title="魔改"></a>魔改</h2><p>在这个模板页面基础上进行一些修改，在浏览器里F12元素快速定位找到需要删除或修改的元素位置，然后在Pycharm里ctrl+f查找到然后删除或修改</p>
+<p>1.把顶部的contact……(Top Bar的section)去掉</p>
+<p>2.把底部的footer-top去掉</p>
+<p>3.中间部分，只留下Our Team Section的title和Counts Section，其他的全部删掉</p>
+<p>4.修改剩下元素的内容为豆瓣电影TOP250相关的内容</p>
+<p>结果如下</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515221327431.png" alt="image-20210515221327431"></p>
+<p>temp.html是最后修改完的页面，然后把这个页面复制，再粘贴新建新的相同界面的页面，我新建了index.html、movie.html、score.html、word.html、team.html。目录结构如下</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515221711401.png" alt="image-20210515221711401"></p>
+<p>然后把留下来的Counts Section里的图像外加上a标签，使其成为图片连接，可以点击图标跳转到相应的页面；把页面左上角的MAMBA的href改为index，点击它可以跳转到首页。</p>
+<p>最后把movie.html改一下，把四个图标去掉就留下一个灰色背景的div，在里面写一个表格来显示之前爬豆瓣电影到数据库的数据，并且在电影中文名上加一个a标签，使它能点击访问。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> &lt;!-- &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; Counts Section &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; --&gt;</span><br><span class="line">&lt;section class&#x3D;&quot;counts section-bg&quot;&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">      &lt;table class&#x3D;&quot;table table-striped&quot;&gt;&lt;!--bootstrap样式--&gt;</span><br><span class="line">          &lt;tr&gt;</span><br><span class="line">              &lt;td&gt;排名&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;电影中文名称&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;电影外国名称&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;评分&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;评价人数&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;寓意&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;相关信息&lt;&#x2F;td&gt;</span><br><span class="line">          &lt;&#x2F;tr&gt;</span><br><span class="line">          &#123;% for movie in movies %&#125;</span><br><span class="line">              &lt;tr&gt;</span><br><span class="line">              &lt;td&gt;&#123;&#123; movie[0] &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;</span><br><span class="line">                  &lt;a href&#x3D;&quot;&#123;&#123; movie[1] &#125;&#125;&quot; target&#x3D;&quot;_blank&quot;&gt;</span><br><span class="line">                  &#123;&#123; movie[3] &#125;&#125;</span><br><span class="line">                  &lt;&#x2F;a&gt;</span><br><span class="line">              &lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;&#123;&#123; movie[4] &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;&#123;&#123; movie[5] &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;&#123;&#123; movie[6] &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;&#123;&#123; movie[7] &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;td&gt;&#123;&#123; movie[8] &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">              &lt;&#x2F;tr&gt;</span><br><span class="line">          &#123;% endfor %&#125;</span><br><span class="line">      &lt;&#x2F;table&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;section&gt;&lt;!-- End Counts Section --&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用Flask路由相应网页"><a href="#用Flask路由相应网页" class="headerlink" title="用Flask路由相应网页"></a>用Flask路由相应网页</h2><p>用前面学的基础语法写6个路由就行了，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">from flask import Flask,render_template</span><br><span class="line">import sqlite3</span><br><span class="line">app &#x3D; Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&#39;&#x2F;&#39;)</span><br><span class="line">def home():</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line"></span><br><span class="line">@app.route(&#39;&#x2F;index&#39;)</span><br><span class="line">def index():</span><br><span class="line">    #return render_template(&quot;index.html&quot;)</span><br><span class="line">    return home()</span><br><span class="line">@app.route(&#39;&#x2F;movie&#39;)</span><br><span class="line">def movie():</span><br><span class="line">    datalist&#x3D;[]</span><br><span class="line">    con&#x3D;sqlite3.connect(&quot;movie.db&quot;)</span><br><span class="line">    cur&#x3D;con.cursor()</span><br><span class="line">    sql&#x3D;&quot;select * from movie250&quot;</span><br><span class="line">    data&#x3D;cur.execute(sql)</span><br><span class="line">    for item in data:</span><br><span class="line">        datalist.append(item)</span><br><span class="line">    cur.close()</span><br><span class="line">    con.close()</span><br><span class="line">    return render_template(&quot;movie.html&quot;,movies&#x3D;datalist)</span><br><span class="line"></span><br><span class="line">@app.route(&#39;&#x2F;score&#39;)</span><br><span class="line">def score():</span><br><span class="line">    return render_template(&quot;score.html&quot;)</span><br><span class="line"></span><br><span class="line">@app.route(&#39;&#x2F;word&#39;)</span><br><span class="line">def word():</span><br><span class="line">    return render_template(&quot;word.html&quot;)</span><br><span class="line"></span><br><span class="line">@app.route(&#39;&#x2F;team&#39;)</span><br><span class="line">def team():</span><br><span class="line">    return render_template(&quot;team.html&quot;)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+
+<p>这样基本就写完了，看下效果：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515224559569.png" alt="image-20210515224559569"></p>
+<p>最后还有一些问题，比如250部电影信息如果全部放在一页显示的话太多了，最好分页显示，不仅加快了访问速度还提高了对访问者的友好度。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?p=32" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?p=32</a></p>
+<p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?p=33" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?p=33</a></p>
+]]></content>
+      <categories>
+        <category>数据可视化</category>
+      </categories>
+  </entry>
 </search>

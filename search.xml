@@ -4217,6 +4217,7 @@
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210513223245858.png" alt="image-20210513223245858"></p>
 <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from flask import Flask #导入Flask类</span><br><span class="line"></span><br><span class="line">app &#x3D; Flask(__name__) #初始化了一个对象,导入了flask框架</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&#39;&#x2F;&#39;) #路由解析,通过用户访问的路径匹配相应的函数</span><br><span class="line">def hello_world():</span><br><span class="line">    return &#39;Hello World!&#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    app.run() #Flask应用程序实例的run方法启动WEB服务器</span><br></pre></td></tr></table></figure>
 
+<p>flask默认监听5000端口，所以开启服务器后访问<code>http://127.0.0.1:5000</code>即可</p>
 <h2 id="开启调试模式"><a href="#开启调试模式" class="headerlink" title="开启调试模式"></a>开启调试模式</h2><p>Debug模式的开启，可以更好的定位错误，还可以即时刷新修改的页面，不用重启服务器</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">app.run(debug&#x3D;True) #Pycharm中不起作用</span><br></pre></td></tr></table></figure>
 

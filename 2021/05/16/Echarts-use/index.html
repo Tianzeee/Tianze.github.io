@@ -78,7 +78,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -138,13 +138,15 @@
 <p>在app.py里再加一个路由解析，把数据库里的score拿出来再做一个统计，然后传给score.html渲染</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#39;&#x2F;score&#39;)</span><br><span class="line">def score():</span><br><span class="line">    score&#x3D;[] #评分</span><br><span class="line">    num&#x3D;[] #每个评分所统计出的电影数量</span><br><span class="line">    con &#x3D; sqlite3.connect(&quot;movie.db&quot;)</span><br><span class="line">    cur &#x3D; con.cursor()</span><br><span class="line">    sql &#x3D; &quot;select score,count(score) from movie250 group by score&quot;</span><br><span class="line">    data &#x3D; cur.execute(sql)</span><br><span class="line">    for item in data:</span><br><span class="line">        score.append(item[0]) #字符串用str(item[0])</span><br><span class="line">        num.append(item[1])</span><br><span class="line">    cur.close()</span><br><span class="line">    con.close()</span><br><span class="line">    return render_template(&quot;score.html&quot;,score&#x3D;score,num&#x3D;num)</span><br></pre></td></tr></table></figure>
 
-<p>因为echarts里的data是[xx,xx]这种类型的，很像python里的列表，所以新建两个列表，一个存评分，一个存各评分的电影数量，然后把数据库的score和count(score)查出来加到两个列表里，因为数据库里的score是数值型的，如果Echarts图表里的data需要数值型可以直接给他用，如果他要的是字符串，那要把把值用str()函数强制转换一下再放到列表里，但是这样处理的结果是score列表里有特殊字符，echarts图表显示不出来，需要用”tojson”把score列表转换成json格式，在模板里用</p>
+<p>因为echarts里的data是[xx,xx]这种类型的，很像python里的列表，所以新建两个列表，一个存评分，一个存各评分的电影数量，然后把数据库的score和count(score)查出来加到两个列表里，因为数据库里的score是数值型的，如果Echarts图表里的data需要数值型可以直接给他用，如果他要的是字符串，那要把把值用str()函数强制转换一下再放到列表里，但是这样处理的结果是score列表里有特殊字符，echarts图表显示不出来，需要用tojson过滤器(它的作用是将变量输出为JSON字符串)，把score列表转换成json格式，在模板里用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; score|tojson &#125;&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这样就可以正常显示了</p>
+<p>这样就可以正常显示了。Jinja2能识别所有类型的变量，此外还可以用过滤器修改变量，过滤器名添加在变量名之后，中间用竖线分隔。上面这种用法就是过滤器</p>
 <p>结果如下</p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516165502857.png" alt="image-20210516165502857"></p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?p=35" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?p=35</a></p>
+<p><a href="https://www.cnblogs.com/bmjoker/p/13508538.html" target="_blank" rel="noopener">https://www.cnblogs.com/bmjoker/p/13508538.html</a></p>
+<p><a href="http://www.bjhee.com/jinja2-filter.html" target="_blank" rel="noopener">http://www.bjhee.com/jinja2-filter.html</a></p>
 
       
       <!-- reward -->

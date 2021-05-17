@@ -13,7 +13,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    数据可视化-Echarts应用 |  Tianze&#39;s Blog
+    数据可视化-WordCloud简单应用 |  Tianze&#39;s Blog
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -46,7 +46,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-数据可视化-Echarts应用" class="article article-type-post" itemscope
+  <article id="post-数据可视化-WordCloud简单应用" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -54,7 +54,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  数据可视化-Echarts应用
+  数据可视化-WordCloud简单应用
 </h1>
  
 
@@ -63,8 +63,8 @@
 
     
     <div class="article-meta">
-      <a href="/2021/05/16/Echarts-use/" class="article-date">
-  <time datetime="2021-05-16T08:57:41.000Z" itemprop="datePublished">2021-05-16</time>
+      <a href="/2021/05/17/simple-wordcloud/" class="article-date">
+  <time datetime="2021-05-17T05:47:23.000Z" itemprop="datePublished">2021-05-17</time>
 </a>
       
   <div class="article-category">
@@ -112,41 +112,35 @@
       
 
       
-      <p>前面看了下echarts的基础，现在用echarts来做一个显示电影评分的图在score.html上<a id="more"></a></p>
-<h2 id="找图表"><a href="#找图表" class="headerlink" title="找图表"></a>找图表</h2><p><a href="https://echarts.apache.org/examples/zh/index.html" target="_blank" rel="noopener">https://echarts.apache.org/examples/zh/index.html</a> 在echarts官网实例里面找，我跟着老师找了一个<a href="https://echarts.apache.org/v4/examples/zh/editor.html?c=bar-simple" target="_blank" rel="noopener">Bar Simple</a> 的柱状图，这是一个最基本的柱状图内容非常少。跟着老师的学习方法：去看看别人的图表是怎么写的，有哪些内容可以借鉴，遇到不懂的组件直接在<a href="https://echarts.apache.org/zh/option.html#title" target="_blank" rel="noopener">文档的配置项查找</a> 就能知道作用了，多学习多看多借鉴多用就能很快上手。</p>
-<p>比如，我想看看这个标题是怎么得到的，点击一下编辑就能看它是怎么写的了</p>
-<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516162717982.png" alt="image-20210516162717982"></p>
-<p>可以看到里面有个title的值，这个就是标题，直接拿过来用就行了</p>
-<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516162817161.png" alt="image-20210516162817161"></p>
-<p>title下面还有个tooltip，不知道是什么，直接去文档配置项查找看看，知道了是提示框组件，也可以拿来用用</p>
-<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516162917561.png" alt="image-20210516162917561"></p>
-<p>grid之前入门的时候见过，好像是直角坐标系的底板，不清楚怎么用，也去文档配置项查查看</p>
-<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516163227935.png" alt="image-20210516163227935"></p>
-<p>最后在Bar Simple的基础上加了title、tooltip、grid三个组件，结果如下</p>
-<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516163417491.png" alt="image-20210516163417491"></p>
-<h2 id="应用到网页"><a href="#应用到网页" class="headerlink" title="应用到网页"></a>应用到网页</h2><p>可以直接复制左边的option代码，也可以点击右下角的download，把它的页面下载到本地查看</p>
-<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516163546549.png" alt="image-20210516163546549"></p>
-<p>我直接把他下载到本地，然后加到douban_flask项目里的templates文件夹里，然后修改score.html，首先引入js文件，js文件路径要写对</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;&#x2F;static&#x2F;assets&#x2F;js&#x2F;echarts.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+      <p>运用词云，也可以做出很多好看的图片，用于数据可视化<a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>官方文档<a href="https://amueller.github.io/word_cloud/" target="_blank" rel="noopener">https://amueller.github.io/word_cloud/</a> ，只要能大概把他的意思弄清楚，把代码拿过来用就行了</p>
+<p>词云可以生成很多类型的图片，比如单个单词图云、方形词云、遮罩词云、表情符号词云，还可以自定义颜色等等。</p>
+<p>我跟着老师做了一个遮罩的词云，使用遮罩可以生成任意形状的词云，用图片遮罩生成词云，需要图片背景为纯白色</p>
+<h2 id="需要的库"><a href="#需要的库" class="headerlink" title="需要的库"></a>需要的库</h2><p>制作词云需要很多库，需要自己一个一个的安装</p>
+<h3 id="jieba"><a href="#jieba" class="headerlink" title="jieba"></a>jieba</h3><p>需要jieba库来分词，jieba是优秀的中文分词第三方库，中文文本需要通过分词获得单个的词语<br>jieba分词的原理：Jieba分词依靠中文词库，利用一个中文词库，确定汉字之间的关联概率，汉字间概率大的组成词组，形成分词结果，除了分词，用户还可以添加自定义的词组</p>
+<h3 id="matplotlib"><a href="#matplotlib" class="headerlink" title="matplotlib"></a>matplotlib</h3><p>绘图</p>
+<h3 id="wordcloud"><a href="#wordcloud" class="headerlink" title="wordcloud"></a>wordcloud</h3><p>词云</p>
+<h3 id="PIL"><a href="#PIL" class="headerlink" title="PIL"></a>PIL</h3><p>图像处理</p>
+<h3 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h3><p>矩阵运算</p>
+<h3 id="sqlite3"><a href="#sqlite3" class="headerlink" title="sqlite3"></a>sqlite3</h3><p>用数据库里的数据制作图云</p>
+<h2 id="词云制作"><a href="#词云制作" class="headerlink" title="词云制作"></a>词云制作</h2><p>我跟着老师用如下图所示一张树的图片来做一个词云</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210517134110113.png" alt="image-20210517134110113"></p>
+<h3 id="准备词云所需的文字"><a href="#准备词云所需的文字" class="headerlink" title="准备词云所需的文字"></a>准备词云所需的文字</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import jieba #中文分词，把句子变成很多词</span><br><span class="line">from matplotlib import pyplot as plt #绘图，数据可视化，</span><br><span class="line">from wordcloud import WordCloud #词云</span><br><span class="line">from PIL import Image #图片处理</span><br><span class="line">import numpy as np #矩阵运算</span><br><span class="line">import sqlite3 #数据库</span><br><span class="line"></span><br><span class="line">#准备词云所需的文字</span><br><span class="line">con&#x3D;sqlite3.connect(&quot;movie.db&quot;)</span><br><span class="line">cur&#x3D;con.cursor()</span><br><span class="line">sql&#x3D;&quot;select introduction from movie250&quot;</span><br><span class="line">data&#x3D;cur.execute(sql)</span><br><span class="line">text&#x3D;&quot;&quot;</span><br><span class="line">for item in data:</span><br><span class="line">    text&#x3D;text+item[0]</span><br><span class="line">#print(text)</span><br><span class="line">cur.close()</span><br><span class="line">con.close()</span><br></pre></td></tr></table></figure>
 
-<p>把Our Team Section里的标题改为’’豆瓣电影Top250评分分布图’’，把下面那段话去掉，把Counts Section里的四个图表div删除，然后在里面加入dom容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;main&quot; style&#x3D;&quot;width:100%;height:300px;&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#分词</span><br><span class="line">cut&#x3D;jieba.cut(text)</span><br><span class="line">string&#x3D;&#39; &#39;.join(cut)</span><br><span class="line">#print(string)</span><br></pre></td></tr></table></figure>
 
-<p>最后在Footer上面加入script绘图代码，根据需要修改一下dom要获取的id值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line">var dom &#x3D; document.getElementById(&quot;main&quot;);</span><br><span class="line">var myChart &#x3D; echarts.init(dom);</span><br><span class="line">var app &#x3D; &#123;&#125;;</span><br><span class="line">option &#x3D; null;</span><br><span class="line">option &#x3D; &#123;</span><br><span class="line">    title: &#123;</span><br><span class="line">        text: &#39;电影评分表&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    tooltip: &#123;</span><br><span class="line">        trigger: &#39;axis&#39;,</span><br><span class="line">        axisPointer: &#123;</span><br><span class="line">            type: &#39;shadow&#39;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    grid: &#123;</span><br><span class="line">        left: &#39;3%&#39;,</span><br><span class="line">        right: &#39;4%&#39;,</span><br><span class="line">        bottom: &#39;3%&#39;,</span><br><span class="line">        containLabel: true</span><br><span class="line">    &#125;,</span><br><span class="line">    xAxis: &#123;</span><br><span class="line">        type: &#39;category&#39;,</span><br><span class="line">        data: &#123;&#123; score &#125;&#125;  &#123;# 字符串用score|tojson #&#125;</span><br><span class="line">        &lt;!--[&#39;Mon&#39;, &#39;Tue&#39;, &#39;Wed&#39;, &#39;Thu&#39;, &#39;Fri&#39;, &#39;Sat&#39;, &#39;Sun&#39;]--&gt;</span><br><span class="line">    &#125;,</span><br><span class="line">    yAxis: &#123;</span><br><span class="line">        type: &#39;value&#39;</span><br><span class="line">    &#125;,</span><br><span class="line">    series: [&#123;</span><br><span class="line">        data: &#123;&#123; num &#125;&#125;,</span><br><span class="line">        &lt;!--[120, 200, 150, 80, 70, 110, 130],--&gt;</span><br><span class="line">        type: &#39;bar&#39;</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line">;</span><br><span class="line">if (option &amp;&amp; typeof option &#x3D;&#x3D;&#x3D; &quot;object&quot;) &#123;</span><br><span class="line">    myChart.setOption(option, true);</span><br><span class="line">&#125;</span><br><span class="line">       &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="生成遮罩图片"><a href="#生成遮罩图片" class="headerlink" title="生成遮罩图片"></a>生成遮罩图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#生成遮罩图片</span><br><span class="line">img&#x3D;Image.open(r&quot;tree.jpg&quot;) #打开遮罩图片</span><br><span class="line">img_array&#x3D;np.array(img) #将图片转换为数组，用于相应的计算</span><br><span class="line">#词云对象的封装</span><br><span class="line">wc&#x3D;WordCloud(</span><br><span class="line">    background_color&#x3D;&#39;white&#39;,</span><br><span class="line">    mask&#x3D;img_array,</span><br><span class="line">    font_path&#x3D;&quot;msyh.ttc&quot;</span><br><span class="line">    #font_path&#x3D;&quot;STXINGKA.TTF&quot; #字体所在位置C:\Windows\Fonts</span><br><span class="line">)</span><br><span class="line">wc.generate_from_text(string)</span><br></pre></td></tr></table></figure>
 
-<p>在app.py里再加一个路由解析，把数据库里的score拿出来再做一个统计，然后传给score.html渲染</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#39;&#x2F;score&#39;)</span><br><span class="line">def score():</span><br><span class="line">    score&#x3D;[] #评分</span><br><span class="line">    num&#x3D;[] #每个评分所统计出的电影数量</span><br><span class="line">    con &#x3D; sqlite3.connect(&quot;movie.db&quot;)</span><br><span class="line">    cur &#x3D; con.cursor()</span><br><span class="line">    sql &#x3D; &quot;select score,count(score) from movie250 group by score&quot;</span><br><span class="line">    data &#x3D; cur.execute(sql)</span><br><span class="line">    for item in data:</span><br><span class="line">        score.append(item[0]) #字符串用str(item[0])</span><br><span class="line">        num.append(item[1])</span><br><span class="line">    cur.close()</span><br><span class="line">    con.close()</span><br><span class="line">    return render_template(&quot;score.html&quot;,score&#x3D;score,num&#x3D;num)</span><br></pre></td></tr></table></figure>
+<h3 id="绘制图片"><a href="#绘制图片" class="headerlink" title="绘制图片"></a>绘制图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#绘制图片</span><br><span class="line">fig&#x3D;plt.figure(1)</span><br><span class="line">plt.imshow(wc)</span><br><span class="line">plt.axis(&#39;off&#39;) #是否显示坐标轴</span><br></pre></td></tr></table></figure>
 
-<p>因为echarts里的data是[xx,xx]这种类型的，很像python里的列表，所以新建两个列表，一个存评分，一个存各评分的电影数量，然后把数据库的score和count(score)查出来加到两个列表里，因为数据库里的score是数值型的，如果Echarts图表里的data需要数值型可以直接给他用，如果他要的是字符串，那要把把值用str()函数强制转换一下再放到列表里，但是这样处理的结果是score列表里有特殊字符，echarts图表显示不出来，需要用tojson过滤器(它的作用是将变量输出为JSON字符串)，把score列表转换成json格式，在模板里用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; score|tojson &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="显示或输出图片"><a href="#显示或输出图片" class="headerlink" title="显示或输出图片"></a>显示或输出图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#显示生成的词云图片</span><br><span class="line">plt.show()</span><br><span class="line">#输出词云图片到本地</span><br><span class="line">plt.savefig(&quot;.&#x2F;word_default.jpg&quot;) #dpi设置清晰度</span><br></pre></td></tr></table></figure>
 
-<p>这样就可以正常显示了。Jinja2能识别所有类型的变量，此外还可以用过滤器修改变量，过滤器名添加在变量名之后，中间用竖线分隔。上面这种用法就是过滤器</p>
-<p>结果如下</p>
-<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210516165502857.png" alt="image-20210516165502857"></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?p=35" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?p=35</a></p>
-<p><a href="https://www.cnblogs.com/bmjoker/p/13508538.html" target="_blank" rel="noopener">https://www.cnblogs.com/bmjoker/p/13508538.html</a></p>
-<p><a href="http://www.bjhee.com/jinja2-filter.html" target="_blank" rel="noopener">http://www.bjhee.com/jinja2-filter.html</a></p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"># -*-coding&#x3D;utf-8-*-</span><br><span class="line"># @Time     : 2021&#x2F;5&#x2F;17 10:52</span><br><span class="line"># @Auther   : Tianze</span><br><span class="line"># @Email    : 1252448508@qq.com</span><br><span class="line"># @File     : wordcloud_demo.py</span><br><span class="line"># @Software : PyCharm</span><br><span class="line"></span><br><span class="line">#官方文档https:&#x2F;&#x2F;amueller.github.io&#x2F;word_cloud&#x2F;</span><br><span class="line">#只要能大概把他的意思弄清楚，把代码拿过来用就行了</span><br><span class="line">#用图片遮罩生成词云，需要图片背景为纯白色</span><br><span class="line"># 需要jieba库来分词</span><br><span class="line"># jieba是优秀的中文分词第三方库</span><br><span class="line"># 中文文本需要通过分词获得单个的词语</span><br><span class="line"># jieba分词的原理</span><br><span class="line"># Jieba分词依靠中文词库</span><br><span class="line"># 利用一个中文词库，确定汉字之间的关联概率</span><br><span class="line"># 汉字间概率大的组成词组，形成分词结果</span><br><span class="line"># 除了分词，用户还可以添加自定义的词组</span><br><span class="line"># jieba库文章https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_39919165&#x2F;article&#x2F;details&#x2F;111083257</span><br><span class="line"></span><br><span class="line">import jieba #中文分词，把句子变成很多词</span><br><span class="line">from matplotlib import pyplot as plt #绘图，数据可视化，</span><br><span class="line">from wordcloud import WordCloud #词云</span><br><span class="line">from PIL import Image #图片处理</span><br><span class="line">import numpy as np #矩阵运算</span><br><span class="line">import sqlite3 #数据库</span><br><span class="line"></span><br><span class="line">#准备词云所需的文字</span><br><span class="line">con&#x3D;sqlite3.connect(&quot;movie.db&quot;)</span><br><span class="line">cur&#x3D;con.cursor()</span><br><span class="line">sql&#x3D;&quot;select introduction from movie250&quot;</span><br><span class="line">data&#x3D;cur.execute(sql)</span><br><span class="line">text&#x3D;&quot;&quot;</span><br><span class="line">for item in data:</span><br><span class="line">    text&#x3D;text+item[0]</span><br><span class="line">#print(text)</span><br><span class="line">cur.close()</span><br><span class="line">con.close()</span><br><span class="line"></span><br><span class="line">#分词</span><br><span class="line">cut&#x3D;jieba.cut(text)</span><br><span class="line">string&#x3D;&#39; &#39;.join(cut)</span><br><span class="line">#print(string)</span><br><span class="line"></span><br><span class="line">#生成遮罩图片</span><br><span class="line">img&#x3D;Image.open(r&quot;tree.jpg&quot;) #打开遮罩图片</span><br><span class="line">img_array&#x3D;np.array(img) #将图片转换为数组，用于相应的计算</span><br><span class="line">#词云对象的封装</span><br><span class="line">wc&#x3D;WordCloud(</span><br><span class="line">    background_color&#x3D;&#39;white&#39;,</span><br><span class="line">    mask&#x3D;img_array,</span><br><span class="line">    font_path&#x3D;&quot;msyh.ttc&quot;</span><br><span class="line">    #font_path&#x3D;&quot;STXINGKA.TTF&quot; #字体所在位置C:\Windows\Fonts</span><br><span class="line">)</span><br><span class="line">wc.generate_from_text(string)</span><br><span class="line"></span><br><span class="line">#绘制图片</span><br><span class="line">fig&#x3D;plt.figure(1)</span><br><span class="line">plt.imshow(wc)</span><br><span class="line">plt.axis(&#39;off&#39;) #是否显示坐标轴</span><br><span class="line"></span><br><span class="line">#plt.show() #显示生成的词云图片</span><br><span class="line">#输出词云图片到文件</span><br><span class="line">plt.savefig(&quot;.&#x2F;word_default.jpg&quot;,dpi&#x3D;100) #dpi设置清晰度</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210517134623797.png" alt="image-20210517134623797"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?p=36" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?p=36</a></p>
+<p>jieba库文章 <a href="https://blog.csdn.net/weixin_39919165/article/details/111083257" target="_blank" rel="noopener">https://blog.csdn.net/weixin_39919165/article/details/111083257</a></p>
 
       
       <!-- reward -->
@@ -211,7 +205,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/16/Echarts-use/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/17/simple-wordcloud/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -227,19 +221,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2021/05/17/simple-wordcloud/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            数据可视化-WordCloud简单应用
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/05/16/Echart-study/" class="article-nav-link">
+      <a href="/2021/05/16/Echarts-use/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">数据可视化-Echarts入门</div>
+        <div class="article-nav-title">数据可视化-Echarts应用</div>
       </a>
     
   </nav>

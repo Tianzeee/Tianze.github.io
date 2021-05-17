@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-17T02:18:13.229Z</updated>
+  <updated>2021-05-17T05:49:03.705Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据可视化-WordCloud简单应用</title>
+    <link href="http://yoursite.com/2021/05/17/simple-wordcloud/"/>
+    <id>http://yoursite.com/2021/05/17/simple-wordcloud/</id>
+    <published>2021-05-17T05:47:23.000Z</published>
+    <updated>2021-05-17T05:49:03.705Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;运用词云，也可以做出很多好看的图片，用于数据可视化
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>数据可视化-Echarts应用</title>
@@ -370,25 +389,6 @@
       &lt;h2 id=&quot;HTML-DOM简介&quot;&gt;&lt;a href=&quot;#HTML-DOM简介&quot; class=&quot;headerlink&quot; title=&quot;HTML DOM简介&quot;&gt;&lt;/a&gt;HTML DOM简介&lt;/h2&gt;&lt;p&gt;DOM (Document Object Model) 即为文档对象模型，是 HTML 和 XML 文档的编程接口。&lt;/p&gt;
 &lt;p&gt;HTML DOM 定义了访问和操作 HTML 文档的标准方法。&lt;/p&gt;
 &lt;p&gt;DOM 以树结构表达 HTML 文档。
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript学习笔记</title>
-    <link href="http://yoursite.com/2021/04/12/JavaScript/"/>
-    <id>http://yoursite.com/2021/04/12/JavaScript/</id>
-    <published>2021-04-12T07:44:55.000Z</published>
-    <updated>2021-04-14T08:13:17.321Z</updated>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;JavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。
     
     </summary>
     

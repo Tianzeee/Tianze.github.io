@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-17T06:53:51.177Z</updated>
+  <updated>2021-05-20T00:55:06.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微信小程序学习笔记1</title>
+    <link href="http://yoursite.com/2021/05/20/wx-small-program/"/>
+    <id>http://yoursite.com/2021/05/20/wx-small-program/</id>
+    <published>2021-05-20T00:37:34.000Z</published>
+    <updated>2021-05-20T00:55:06.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学校的创业学院有学长招人做小程序之类的开发，所以学习一下小程序开发
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>数据可视化-项目完结</title>
@@ -373,25 +392,6 @@
     
     
       <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>shift后门漏洞复现</title>
-    <link href="http://yoursite.com/2021/04/13/shift-vulnerability/"/>
-    <id>http://yoursite.com/2021/04/13/shift-vulnerability/</id>
-    <published>2021-04-13T06:21:15.000Z</published>
-    <updated>2021-04-13T06:23:38.064Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;看了Y4佬的博客知道了这个漏洞，挺有意思的，所以学习复现一下
-    
-    </summary>
-    
-    
-      <category term="漏洞复现" scheme="http://yoursite.com/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
     
     
   </entry>

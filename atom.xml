@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-20T03:29:57.802Z</updated>
+  <updated>2021-05-20T10:04:43.267Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微信小程序学习笔记2</title>
+    <link href="http://yoursite.com/2021/05/20/wx-small-program2/"/>
+    <id>http://yoursite.com/2021/05/20/wx-small-program2/</id>
+    <published>2021-05-20T10:04:08.000Z</published>
+    <updated>2021-05-20T10:04:43.267Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面学了一些基础组件和框架知识，现在学习API的知识
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>微信小程序学习笔记1</title>
@@ -368,25 +387,6 @@
     <summary type="html">
     
       &lt;p&gt;学完基础，再学一下函数相关内容
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>浏览器工作原理及前端优化学习</title>
-    <link href="http://yoursite.com/2021/04/14/BrowserWorking-and-optimize/"/>
-    <id>http://yoursite.com/2021/04/14/BrowserWorking-and-optimize/</id>
-    <published>2021-04-14T08:06:21.000Z</published>
-    <updated>2021-04-14T08:08:57.446Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前面学了DOM，现在再看浏览器的渲染比较好理解。
     
     </summary>
     

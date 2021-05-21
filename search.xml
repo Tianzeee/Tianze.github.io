@@ -4541,6 +4541,9 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">display:flex;</span><br><span class="line">flex:none;</span><br></pre></td></tr></table></figure>
 
 <p>flex:none，就是flex:0 0 auto的简写，意思是不放大不缩小，项目占据原始大小</p>
+<p>横向滚动也可以配合下面代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.子类名&#123;</span><br><span class="line">  display: inline-block; &#x2F;*行内块元素显示一行*&#x2F;</span><br><span class="line">&#125;</span><br><span class="line">.父类名&#123;</span><br><span class="line">  white-space: nowarp; &#x2F;*超出不换行*&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><code>scroll-x</code>:允许横向滚动，默认false</p>
 <p><code>scroll-y</code>:允许纵向滚动，默认false</p>
 <h3 id="swiper-item"><a href="#swiper-item" class="headerlink" title="swiper-item"></a>swiper-item</h3><p>只能放在swiper组件中，宽高自动设置为100%</p>

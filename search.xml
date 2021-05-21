@@ -4782,4 +4782,99 @@
         <category>学习笔记</category>
       </categories>
   </entry>
+  <entry>
+    <title>微信小程序项目实例学习笔记1</title>
+    <url>/2021/05/22/wx-small-program-project-instance/</url>
+    <content><![CDATA[<p>学完基础之后，跟着老师做个项目案例<a id="more"></a></p>
+<h2 id="尺寸"><a href="#尺寸" class="headerlink" title="尺寸"></a>尺寸</h2><p>官网建议设计师用iPhone6作为视觉稿的标准，因为iPhone6的1px=2rpx，这样换算起来方便，比如屏幕宽度为375px，共有750个物理像素，那么直接用750rpx就行了(750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素)</p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html</a></p>
+<blockquote>
+<p>rpx之前说过可以根据屏幕自适应，通过rpx，我们只需要根据750的设计稿写代码即可，不必担心在各个平台的适配情况。一次开发，在各个平台都会长得一模一样！</p>
+</blockquote>
+<p>把设计图修改为750px宽，可以在PS里面用图像大小(Ctrl+Alt+I)长宽比约束后设置宽度为750像素，这样我们用选框工具量多少就给多少rpx就可以了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521192049652.png" alt="image-20210521192049652"></p>
+<p>看完我还是不太懂他是怎么做到自适应的，反正就这么用吧</p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>可以开着官方文档，一边做一边查文档。</p>
+<h2 id="项目案例"><a href="#项目案例" class="headerlink" title="项目案例"></a>项目案例</h2><p><a href="https://edu.newsight.cn/works_xingqing.php?cid=102&amp;id=1340" target="_blank" rel="noopener">https://edu.newsight.cn/works_xingqing.php?cid=102&amp;id=1340</a></p>
+<p>按照链接里的项目做一个实例</p>
+<h3 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h3><h4 id="全局配置设置window"><a href="#全局配置设置window" class="headerlink" title="全局配置设置window"></a>全局配置设置window</h4><p>因为项目导航栏背景是黑色，所以把新建项目里的<code>&quot;navigationBarBackgroundColor&quot;: &quot;#fff&quot;</code>删掉就行了，因为他默认是黑色</p>
+<p>修改导航栏标题颜色为白色，默认是黑色，所以把他改成<code>&quot;navigationBarTextStyle&quot;:&quot;white&quot;</code></p>
+<p>修改导航栏标题<code>&quot;navigationBarTitleText&quot;: &quot;新视觉实训&quot;</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521193141834.png" alt="image-20210521193141834"></p>
+<h4 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h4><p>因为新建项目会生成一些初始化代码，不需要他们，把页面的wxml、wxss、js和全局样式app.wxss里初始化的内容删掉</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521194206555.png" alt="image-20210521194206555"></p>
+<p>因为js里要存放上图所示的对象，所以输入page选择第二个，就会出现内容为空的page对象</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521193428128.png" alt="image-20210521193428128"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521193857749.png" alt="image-20210521193857749"></p>
+<h3 id="首页头部模块布局"><a href="#首页头部模块布局" class="headerlink" title="首页头部模块布局"></a>首页头部模块布局</h3><p>index.wxml:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;view class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;container hdcon&#39;&gt;</span><br><span class="line">    &lt;navigator open-type&#x3D;&quot;switchTab&quot; url&#x3D;&quot;&#x2F;pages&#x2F;index&#x2F;index&quot; class&#x3D;&#39;logo&#39;&gt;</span><br><span class="line">      &lt;image mode&#x3D;&quot;heightFix&quot; src&#x3D;&quot;&#x2F;images&#x2F;logo.png&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;view  class&#x3D;&#39;kefu&#39;&gt;</span><br><span class="line">      &lt;button open-type&#x3D;&quot;contact&quot; class&#x3D;&quot;btn&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">      &lt;image mode&#x3D;&quot;heightFix&quot; src&#x3D;&quot;&#x2F;images&#x2F;xiaoxi.png&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里学到了一个标签可以用空格来加多个类名，如第二行的<code>class=&#39;container hdcon&#39;</code>，至于躲什么要用这两个类是因为，这个头部的container可以在其他页面复用，所以可以写到全局样式app.wxss里，然后用hdcon类来写首页头部容器自己的特有样式。</p>
+<p>用button按钮覆盖图像来做一个点击图标出现联系客服的效果</p>
+<p>index.wxss:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.header&#123;</span><br><span class="line">  width:100%; &#x2F;*或者750rpx*&#x2F;</span><br><span class="line">  height:90rpx;</span><br><span class="line">  border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">  align-items: center;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon navigator,.hdcon .kefu&#123;</span><br><span class="line">  height:50rpx;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon image&#123;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">.kefu&#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  animation: dh linear 1s infinite alternate;</span><br><span class="line">&#125;</span><br><span class="line">.kefu .btn&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  top:0;</span><br><span class="line">  left:0;</span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>css一直是我的软肋，学的不是很精，布局这一块老是弄得很乱，写不出理想的布局，跟着老师写有些也是似懂非懂，所以记录一下。</p>
+<p>header类布局一个宽高的框来放头部内容，边框可以去掉，这里加上只是为了看看容器有多大</p>
+<p>hdcon类表示头部容器(header-container)，把他设置成弹性布局，这样就使两张图在一个水平方向上，<code>justify-content: space-between</code>设置项目在主轴上两端对齐，<code>align-items: center;</code>设置项目与交叉轴中点对齐(相当于垂直居中)，<code>height:100%</code>继承父类header的高</p>
+<p>因为头部要用的两个图标在PS里量出来高是50像素，所以把height设置成50rpx</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.hdcon navigator,.hdcon .kefu&#123;</span><br><span class="line">  height:50rpx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面也是继承父类的高：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.hdcon image&#123;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里把kefu类设置为相对定位，用于他子类btn的绝对定位做参考。animation调用全局样式里的自定义动画，linear设置动画从头到尾速度相同，动画完成周期为1s，infinite动画无限循环播放，alternate先执行一遍动画，然后再反向执行一遍动画</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.kefu&#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  animation: dh linear 1s infinite alternate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>btn类设置绝对定位，相对于父类kefu类。然后百分比宽高，离左上0px，设置成透明</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.kefu .btn&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  top:0;</span><br><span class="line">  left:0;</span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>app.wxss:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">  padding:0 26rpx;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes dh&#123;</span><br><span class="line">  0%,50%,100%&#123;</span><br><span class="line">    opacity: 1;</span><br><span class="line">  &#125;</span><br><span class="line">  25%&#123;</span><br><span class="line">    opacity: 0;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>container类设置内边距和box-sizing为border-box。因为所有页面都需要用到头部有内边距的容器，所以把他放在全局样式里</p>
+<blockquote>
+<p>box-sizing参考第三篇文章</p>
+<p>在 CSS 盒子模型的默认定义里，你对一个元素所设置的 width 与 height 只会应用到这个元素的内容区。</p>
+<p>如果这个元素有任何的 border 或 padding ，绘制到屏幕上时的盒子宽度和高度会加上设置的边框和内边距值。这意味着当你调整一个元素的宽度和高度时需要时刻注意到这个元素的边框和内边距。当我们实现响应式布局时，这个特点尤其烦人。</p>
+<p>box-sizing 属性可以被用来调整这些表现:</p>
+<p>content-box 是默认值。如果你设置一个元素的宽为100px，那么这个元素的内容区会有100px 宽，并且任何边框和内边距的宽度都会被增加到最后绘制出来的元素宽度中。</p>
+<p>border-box 告诉浏览器：你想要设置的边框和内边距的值是包含在width内的。也就是说，如果你将一个元素的width设为100px，那么这100px会包含它的border和padding，内容区的实际宽度是width减去(border + padding)的值。大多数情况下，这使得我们更容易地设定一个元素的宽高。</p>
+</blockquote>
+<p>然后用@keyframes关键帧来做自定义动画0%、50%和100%时，opacity为1(不透明)，到25%时opacity为0透明</p>
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521214857571.png" alt="image-20210521214857571"></p>
+<p>当然右边那个消息图标会闪动，截图看不到效果</p>
+<h3 id="海报轮播模块布局"><a href="#海报轮播模块布局" class="headerlink" title="海报轮播模块布局"></a>海报轮播模块布局</h3><p>index.wxml新增：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;view class&#x3D;&#39;banner&#39;&gt;</span><br><span class="line">  &lt;swiper indicator-dots autoplay circular&gt;</span><br><span class="line">    &lt;swiper-item&gt;&lt;image src&#x3D;&#39;&#x2F;images&#x2F;banner1.jpg&#39;&gt;&lt;&#x2F;image&gt;&lt;&#x2F;swiper-item&gt;</span><br><span class="line">    &lt;swiper-item&gt;&lt;image src&#x3D;&#39;&#x2F;images&#x2F;banner2.jpg&#39;&gt;&lt;&#x2F;image&gt;&lt;&#x2F;swiper-item&gt;</span><br><span class="line">    &lt;swiper-item&gt;&lt;image src&#x3D;&#39;&#x2F;images&#x2F;banner3.jpg&#39;&gt;&lt;&#x2F;image&gt;&lt;&#x2F;swiper-item&gt;</span><br><span class="line">  &lt;&#x2F;swiper&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>indicator-dots显示指示点，autoplay自动切换，circular无缝滑动</p>
+<p>index.wxss新增：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.banner&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height:295rpx;</span><br><span class="line">  border: 1px solid green;</span><br><span class="line">&#125;</span><br><span class="line">.banner swiper&#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.banner image&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为轮播的图片高295px，所以height设置成295rpx，border边框只是为了测试看用的。因为swiper组件有个150px默认高度，他会超出banner组件，所以把他设置成100%，当然宽也100%。banner模块里的image也设置宽高100%</p>
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521231300346.png" alt="image-20210521231300346"></p>
+<h3 id="专业分类导航滑动模块"><a href="#专业分类导航滑动模块" class="headerlink" title="专业分类导航滑动模块"></a>专业分类导航滑动模块</h3><p>因为横向滚动有两种实现方式，一种注释了的实现，一种没注释的实现。这里顺便记一下快捷键Ctrl+/可以把选中内容注释，和Pycharm一样很方便</p>
+<p>index.wxml新增：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;scroll-view class&#x3D;&#39;major&#39; scroll-x&gt;</span><br><span class="line">  &lt;!-- &lt;view class&#x3D;&#39;majorcon&#39;&gt; --&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng1.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;平面设计&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng2.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;室内设计&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng3.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;UI设计&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng4.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;影视后期&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng5.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;WEB前端&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">  &lt;!-- &lt;&#x2F;view&gt; --&gt;</span><br><span class="line">&lt;&#x2F;scroll-view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里就是在可滚动视图组件里加了五个导航组件，每个导航组件里有图片和文字</p>
+<p>index.wxss新增：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;* .majorcon&#123;</span><br><span class="line">  padding: 20rpx 0;</span><br><span class="line">  display: flex;</span><br><span class="line">  width: 825rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .box&#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">  width: 165rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .pic&#123;</span><br><span class="line">  width: 100rpx;</span><br><span class="line">  height: 100rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .txt&#123;</span><br><span class="line">  font-size: 26rpx;</span><br><span class="line">&#125; *&#x2F;</span><br><span class="line">.major&#123;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">  padding: 30rpx 0;</span><br><span class="line">&#125;</span><br><span class="line">.major .box&#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">  width: 165rpx;</span><br><span class="line">  display: inline-block;</span><br><span class="line">&#125;</span><br><span class="line">.major .pic&#123;</span><br><span class="line">  width: 100rpx;</span><br><span class="line">  height: 100rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .txt&#123;</span><br><span class="line">  font-size: 26rpx;</span><br><span class="line">  margin-top: 8rpx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为PS里量图标宽高是100px，所以pic里面宽高设置100rpx，字体大小同理</p>
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522000515689.png" alt="image-20210522000515689"></p>
+<p>下面一排可以横向滚动，截图看不出来</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV1WQ4y1T7D8?p=25" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1WQ4y1T7D8?p=25</a></p>
+<p><a href="https://my.oschina.net/cc4zj/blog/1831241" target="_blank" rel="noopener">https://my.oschina.net/cc4zj/blog/1831241</a></p>
+<p><a href="https://note.wyzda.com/e8d3d4c02933292f62cce95760ee40dc" target="_blank" rel="noopener">https://note.wyzda.com/e8d3d4c02933292f62cce95760ee40dc</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+<p><a href="https://www.runoob.com/css/css-positioning.html" target="_blank" rel="noopener">https://www.runoob.com/css/css-positioning.html</a></p>
+]]></content>
+      <categories>
+        <category>微信小程序</category>
+      </categories>
+  </entry>
 </search>

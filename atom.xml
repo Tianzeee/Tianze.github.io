@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-20T10:04:43.267Z</updated>
+  <updated>2021-05-21T16:11:55.301Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微信小程序项目实例学习笔记1</title>
+    <link href="http://yoursite.com/2021/05/22/wx-small-program-project-instance/"/>
+    <id>http://yoursite.com/2021/05/22/wx-small-program-project-instance/</id>
+    <published>2021-05-21T16:10:10.000Z</published>
+    <updated>2021-05-21T16:11:55.301Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学完基础之后，跟着老师做个项目案例
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>微信小程序学习笔记2</title>
@@ -368,25 +387,6 @@
     <summary type="html">
     
       &lt;p&gt;在B站看网课重新学一下Python，方便以后写盲注脚本或者一些有意思的脚本，比如爬虫、讲课抢票等等。
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript函数学习笔记</title>
-    <link href="http://yoursite.com/2021/04/15/JavaScript-function/"/>
-    <id>http://yoursite.com/2021/04/15/JavaScript-function/</id>
-    <published>2021-04-15T15:05:07.000Z</published>
-    <updated>2021-04-15T15:10:00.832Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;学完基础，再学一下函数相关内容
     
     </summary>
     

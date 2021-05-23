@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-23T05:06:33.389Z</updated>
+  <updated>2021-05-23T15:37:15.273Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微信小程序学习笔记3</title>
+    <link href="http://yoursite.com/2021/05/23/wx-small-program3/"/>
+    <id>http://yoursite.com/2021/05/23/wx-small-program3/</id>
+    <published>2021-05-23T15:35:48.000Z</published>
+    <updated>2021-05-23T15:37:15.273Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;续二，学习剩下的自定义组件、数据接口调用、页面数据渲染并修改时间戳等等
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>微信小程序项目实例学习笔记2</title>
@@ -59,7 +78,7 @@
     <link href="http://yoursite.com/2021/05/20/wx-small-program2/"/>
     <id>http://yoursite.com/2021/05/20/wx-small-program2/</id>
     <published>2021-05-20T10:04:08.000Z</published>
-    <updated>2021-05-20T10:04:43.267Z</updated>
+    <updated>2021-05-23T15:37:29.426Z</updated>
     
     <summary type="html">
     
@@ -68,17 +87,17 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
     
   </entry>
   
   <entry>
     <title>微信小程序学习笔记1</title>
-    <link href="http://yoursite.com/2021/05/20/wx-small-program/"/>
-    <id>http://yoursite.com/2021/05/20/wx-small-program/</id>
+    <link href="http://yoursite.com/2021/05/20/wx-small-program1/"/>
+    <id>http://yoursite.com/2021/05/20/wx-small-program1/</id>
     <published>2021-05-20T00:37:34.000Z</published>
-    <updated>2021-05-21T15:52:59.757Z</updated>
+    <updated>2021-05-23T15:37:39.555Z</updated>
     
     <summary type="html">
     
@@ -87,7 +106,7 @@
     </summary>
     
     
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
     
     
   </entry>
@@ -368,25 +387,6 @@
     <summary type="html">
     
       &lt;p&gt;续2，元组、字典、集合,函数以及文件操作
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Python学习笔记2</title>
-    <link href="http://yoursite.com/2021/04/19/Python2/"/>
-    <id>http://yoursite.com/2021/04/19/Python2/</id>
-    <published>2021-04-19T13:53:53.000Z</published>
-    <updated>2021-04-19T13:56:54.683Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;循环语句、字符串、列表
     
     </summary>
     

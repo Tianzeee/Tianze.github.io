@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-05-21T16:11:55.301Z</updated>
+  <updated>2021-05-23T05:06:33.389Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>微信小程序项目实例学习笔记2</title>
+    <link href="http://yoursite.com/2021/05/23/wx-small-program-project-instance2/"/>
+    <id>http://yoursite.com/2021/05/23/wx-small-program-project-instance2/</id>
+    <published>2021-05-23T05:04:47.000Z</published>
+    <updated>2021-05-23T05:06:33.389Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;续一，完成项目实例剩下内容
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>微信小程序项目实例学习笔记1</title>
-    <link href="http://yoursite.com/2021/05/22/wx-small-program-project-instance/"/>
-    <id>http://yoursite.com/2021/05/22/wx-small-program-project-instance/</id>
+    <link href="http://yoursite.com/2021/05/22/wx-small-program-project-instance1/"/>
+    <id>http://yoursite.com/2021/05/22/wx-small-program-project-instance1/</id>
     <published>2021-05-21T16:10:10.000Z</published>
-    <updated>2021-05-21T16:11:55.301Z</updated>
+    <updated>2021-05-23T05:05:44.627Z</updated>
     
     <summary type="html">
     
@@ -368,25 +387,6 @@
     <summary type="html">
     
       &lt;p&gt;循环语句、字符串、列表
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Python学习笔记1</title>
-    <link href="http://yoursite.com/2021/04/18/Python1/"/>
-    <id>http://yoursite.com/2021/04/18/Python1/</id>
-    <published>2021-04-18T08:45:10.000Z</published>
-    <updated>2021-04-20T08:52:37.491Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在B站看网课重新学一下Python，方便以后写盲注脚本或者一些有意思的脚本，比如爬虫、讲课抢票等等。
     
     </summary>
     

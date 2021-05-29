@@ -5052,4 +5052,51 @@
         <category>微信小程序</category>
       </categories>
   </entry>
+  <entry>
+    <title>JAVA实验课大作业笔记</title>
+    <url>/2021/05/30/JAVA-GUI/</url>
+    <content><![CDATA[<p>Java实验大作业是做一个GUI，我分配到的是高铁售票系统<a id="more"></a></p>
+<h2 id="简单交互"><a href="#简单交互" class="headerlink" title="简单交互"></a>简单交互</h2><p>初期的时候以为只要做一个在控制台(Console)里交互显示的就可以了，做完找老师验收才知道要做GUI。</p>
+<p>看了老师给的作品，看懂之后，照着它依葫芦画瓢，抄抄改改写写做完了交互的。</p>
+<p>写之前，根据自己分配到的题目，列了个提纲规划一下自己要实现的功能以及要创建的数据表有哪些，如下：(字丑见谅Orz)</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529221703751.png" alt="image-20210529221703751"></p>
+<p>大概过程就是创建三个对象分别为Paid(已购信息)、Passenger(乘客信息)、Railway(高铁信息)，每个对象里面都是简单的定义成员变量以及给每个成员变量写好设定方法(set)和获取方法(get)，然后写数据库查询(sql)的类，然后写对应不同功能的视图类(view)，最后就是创建一个主程序入口用户交互。项目结构如下：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529222511025.png" alt="image-20210529222511025"></p>
+<p>util包和window包是后面GUI的时候写的</p>
+<h2 id="GUI图形化"><a href="#GUI图形化" class="headerlink" title="GUI图形化"></a>GUI图形化</h2><p>本来也想看看老师给的成品，然后自己抄抄改改写写就好了，但是好多GUI的东西都看不懂，索性就直接把第九章的自学了，把书上的每一个Example都敲了一遍，学完再回来写GUI就觉得简单多了</p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>看书自学完第九章GUI，看书的时候除了学了GUI组件之外还学到了之前老师没讲到的内部类和Lambda表达式，看的时候有些地方不是很明白，但不影响我coding。然后看书上用的插件是JavaFX，照着书上教程安装结果报错了，网上搜了很久，发现关于这个插件的信息很少而且有的也是年代久远，没有找到解决办法，于是搜了下其他的GUI插件，就找到了WindowBuilder的教程(前两篇参考文章)，讲的很详细，安装完之后看了教程基本学会了怎么用。</p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>跟之前一样，写之前先用笔写了个草稿，如下，就是规划好了菜单栏。(字太丑了~~)</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529232559640.png" alt="image-20210529232559640"></p>
+<h3 id="主要过程"><a href="#主要过程" class="headerlink" title="主要过程"></a>主要过程</h3><p>登录界面直接复制的，懒得写了。把老师给的成品看了一下，登录进之后主要就是一个主界面(MainFrame)，然后菜单栏里的每个界面对应一个java文件，每个界面无非也就是初始化(initComponents)然后再加上一些响应事件。界面用插件设置好组件并且写完动作事件之后，在最后设置可见，然后在主界面里面的动作事件里<code>new classname()</code>就可以响应了</p>
+<h3 id="学到的点"><a href="#学到的点" class="headerlink" title="学到的点"></a>学到的点</h3><p>1.每个界面用插件做好之后，在最后加上下面两句代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">setLocationRelativeTo(getOwner());</span><br><span class="line">setVisible(true);</span><br></pre></td></tr></table></figure>
+
+<p>第一个可加可不加，只是一个相对位置。第二个一定要加，不然点击就不会显示了</p>
+<p>2.写的时候遇到了要把String类型转为int类型，网上搜了下可以用<code>Integer.parseInt()</code>函数实现</p>
+<p>3.我看老师给的作品里有提示框，查询完之后根据查询返回的int结果来判断是否成功，如下</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">JOptionPane.showMessageDialog(null, &quot;添加成功&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>提示并退出</p>
+<p>4.关闭窗体用<code>dispose()</code>可以实现，比如在退出按钮的动作里加上这个就可以实现退出了</p>
+<h3 id="查询多结果处理"><a href="#查询多结果处理" class="headerlink" title="查询多结果处理"></a>查询多结果处理</h3><p>查询所有车次信息这种功能可能会出现多条数据，一开始不知道怎么办，因为他查出来的数据是动态的，有多少条我不知道不能提前做好多少个文本框，另外因为我没法运行老师的作品，不知道它是怎么写的。所以自己想了个办法，就是创建JScrollPane，里面再加一个JPanel，每一个查出的结果都创建为一个JTextField然后加到JPanel里，这样不就可以实现滚动了嘛，多了就可以有滚动条了，如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">btnNewButton.addActionListener(new ActionListener() &#123;</span><br><span class="line">			public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">				int n&#x3D;0,c&#x3D;0;</span><br><span class="line">				String inf;</span><br><span class="line">				List&lt;Railway&gt; list&#x3D;RailwayView.allRailwayView();</span><br><span class="line">				for(Railway r:list) &#123;					</span><br><span class="line">					n++;</span><br><span class="line">					JTextField textField &#x3D; new JTextField();</span><br><span class="line">					textField.setBounds(0, c, 412, 21);</span><br><span class="line">					panel.add(textField);</span><br><span class="line">					textField.setColumns(10);</span><br><span class="line">					inf&#x3D;&quot;日期:&quot;+r.getDate()+&quot; 时间:&quot;+r.getTime()+&quot; 商务座:&quot;+r.getSy()+&quot; 一等座:&quot;+r.getYy()+&quot; 二等座:&quot;+r.getEy()+&quot; 车号:&quot;+r.getCh();</span><br><span class="line">					textField.setText(inf);</span><br><span class="line">					c+&#x3D;20;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235015172.png" alt="image-20210529235015172"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235023201.png" alt="image-20210529235023201"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235029134.png" alt="image-20210529235029134"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235034975.png" alt="image-20210529235034975"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235042695.png" alt="image-20210529235042695"></p>
+<p>具体的功能页面懒得截了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>写这个GUI的过程遇到了很多的问题，越做到后面越感觉力不从心，因为我觉得我一开始的草稿没有写好，每个数据库里的表的结构没有协调好，因为一个功能(比如购票、退票等等)会牵扯到很多数据表牵一发而动全身，比如购票之后会在paid表里加一条数据，然后passenger表也要相应的加一条数据，但是这个联动没有做好，导致可能购票成功之后只在paid表里加了数据，passenger表没有加上，所以最后我修改了一些东西，把passenger表里的好多列都删了。</p>
+<p>写完之后感觉还有很多优化的点，比如购买了没有的车次要怎么处理，查询没有的车号要怎么处理等等，以及表的结构也有很多问题，基本的功能实现了，但是觉得写的非常烂，还有很大的提升空间。</p>
+<p>所以总结下来就是前期准备工作很重要，要提前想好每个表要有哪些字段，才可以完美地实现需要的功能。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>链接：<a href="https://pan.baidu.com/s/1yOZf_D4k8T91tw1ol_Lo5Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1yOZf_D4k8T91tw1ol_Lo5Q</a><br>提取码：xcsy </p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>这个Java的GUI感觉可以写一些小工具，之前ctf做misc题的时候用到的很多工具(比如Stegsolve等等)可能就是用Java的GUI来写的把，以后有想法的话可以自己做一些小工具，感觉挺好玩的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/cnds123/article/details/103237529" target="_blank" rel="noopener">https://blog.csdn.net/cnds123/article/details/103237529</a></p>
+<p><a href="https://blog.csdn.net/yerenyuan_pku/article/details/82861589" target="_blank" rel="noopener">https://blog.csdn.net/yerenyuan_pku/article/details/82861589</a></p>
+]]></content>
+      <categories>
+        <category>JAVA</category>
+      </categories>
+  </entry>
 </search>

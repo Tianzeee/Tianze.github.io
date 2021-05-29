@@ -5063,6 +5063,9 @@
 <p>大概过程就是创建三个对象分别为Paid(已购信息)、Passenger(乘客信息)、Railway(高铁信息)，每个对象里面都是简单的定义成员变量以及给每个成员变量写好设定方法(set)和获取方法(get)，然后写数据库查询(sql)的类，然后写对应不同功能的视图类(view)，最后就是创建一个主程序入口用户交互。项目结构如下：</p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529222511025.png" alt="image-20210529222511025"></p>
 <p>util包和window包是后面GUI的时候写的</p>
+<p>mysql表及结构：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530001312358.png" alt="image-20210530001312358"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530001349781.png" alt="image-20210530001349781"></p>
 <h2 id="GUI图形化"><a href="#GUI图形化" class="headerlink" title="GUI图形化"></a>GUI图形化</h2><p>本来也想看看老师给的成品，然后自己抄抄改改写写就好了，但是好多GUI的东西都看不懂，索性就直接把第九章的自学了，把书上的每一个Example都敲了一遍，学完再回来写GUI就觉得简单多了</p>
 <h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>看书自学完第九章GUI，看书的时候除了学了GUI组件之外还学到了之前老师没讲到的内部类和Lambda表达式，看的时候有些地方不是很明白，但不影响我coding。然后看书上用的插件是JavaFX，照着书上教程安装结果报错了，网上搜了很久，发现关于这个插件的信息很少而且有的也是年代久远，没有找到解决办法，于是搜了下其他的GUI插件，就找到了WindowBuilder的教程(前两篇参考文章)，讲的很详细，安装完之后看了教程基本学会了怎么用。</p>
 <h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>跟之前一样，写之前先用笔写了个草稿，如下，就是规划好了菜单栏。(字太丑了~~)</p>

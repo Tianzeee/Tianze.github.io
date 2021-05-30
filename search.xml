@@ -5090,6 +5090,19 @@
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235034975.png" alt="image-20210529235034975"></p>
 <p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235042695.png" alt="image-20210529235042695"></p>
 <p>具体的功能页面懒得截了</p>
+<h2 id="登录功能存在SQL注入漏洞"><a href="#登录功能存在SQL注入漏洞" class="headerlink" title="登录功能存在SQL注入漏洞"></a>登录功能存在SQL注入漏洞</h2><p>因为我的登录功能的java是直接复制老师的，我看到它里面用的是statement来查询的，再加上它的查询语句是直接拼接且没有做任何过滤，导致了漏洞的存在。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530104806423.png" alt="image-20210530104806423"></p>
+<p>这里我使用万能密码<code>&#39; or 1=1#</code>就能绕过登录验证了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530104953371.png" alt="image-20210530104953371"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530105008468.png" alt="image-20210530105008468"></p>
+<p>成功进入并且是管理员身份，因为在user表中第一条数据就是admin用户，用万能密码登录后会返回所有数据，根据登录的逻辑<code>result.next()</code>取到的数据就是第一条admin用户，所以登录的身份是admin</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530105258266.png" alt="image-20210530105258266"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530105536845.png" alt="image-20210530105536845"></p>
+<p>如果不是admin用户的话，菜单栏里的前两个菜单是被禁用的。</p>
+<p>修复方法是使用prepareStatement预编译SQL语句，把查询函数用prepareStatement修改了下果然万能密码失效了，网上查了些文章，大概原理就是预编译的sql语句是带着占位符的，并且查询前已经被预编译一次了，之后不会再次编译，只会把接受到动态参数当成一个属性进行解析查询，这样即使接收到<code>&#39; or 1=1</code>这样的参数也只会把他当成属性值来处理而不会作为SQL指令，讲得不是很清楚，可查看(前两篇除外的)参考文章。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530110456054.png" alt="image-20210530110456054"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530110841874.png" alt="image-20210530110841874"></p>
+<p>但是使用prepareStatement就一定安全了吗，前几天刚好看到Ms08067安全实验室公众号里发的Java注入漏洞精选文章里看到一篇名为 “<a href="https://www.cnblogs.com/iyangyuan/p/4809494.html" target="_blank" rel="noopener">用java PreparedStatement就不用担心sql注入了吗？</a>“ 的文章，顿时吸引了我的注意力，因为我觉得预编译应该不能再注入了，看完之后又学到了新的思路。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>写这个GUI的过程遇到了很多的问题，越做到后面越感觉力不从心，因为我觉得我一开始的草稿没有写好，每个数据库里的表的结构没有协调好，因为一个功能(比如购票、退票等等)会牵扯到很多数据表牵一发而动全身，比如购票之后会在paid表里加一条数据，然后passenger表也要相应的加一条数据，但是这个联动没有做好，导致可能购票成功之后只在paid表里加了数据，passenger表没有加上，所以最后我修改了一些东西，把passenger表里的好多列都删了。</p>
 <p>写完之后感觉还有很多优化的点，比如购买了没有的车次要怎么处理，查询没有的车号要怎么处理等等，以及表的结构也有很多问题，基本的功能实现了，但是觉得写的非常烂，还有很大的提升空间。</p>
 <p>所以总结下来就是前期准备工作很重要，要提前想好每个表要有哪些字段，才可以完美地实现需要的功能。</p>
@@ -5097,6 +5110,13 @@
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>这个Java的GUI感觉可以写一些小工具，之前ctf做misc题的时候用到的很多工具(比如Stegsolve等等)可能就是用Java的GUI来写的把，以后有想法的话可以自己做一些小工具，感觉挺好玩的。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/cnds123/article/details/103237529" target="_blank" rel="noopener">https://blog.csdn.net/cnds123/article/details/103237529</a></p>
 <p><a href="https://blog.csdn.net/yerenyuan_pku/article/details/82861589" target="_blank" rel="noopener">https://blog.csdn.net/yerenyuan_pku/article/details/82861589</a></p>
+<p><a href="https://www.zhihu.com/question/43581628" target="_blank" rel="noopener">https://www.zhihu.com/question/43581628</a></p>
+<p><a href="https://www.cnblogs.com/yaochc/p/4957833.html" target="_blank" rel="noopener">https://www.cnblogs.com/yaochc/p/4957833.html</a></p>
+<p><a href="https://www.php.cn/mysql-tutorials-418692.html" target="_blank" rel="noopener">https://www.php.cn/mysql-tutorials-418692.html</a></p>
+<p><a href="https://blog.csdn.net/weixin_45179130/article/details/90761966" target="_blank" rel="noopener">https://blog.csdn.net/weixin_45179130/article/details/90761966</a></p>
+<p><a href="https://juejin.cn/post/6844904036106256397" target="_blank" rel="noopener">https://juejin.cn/post/6844904036106256397</a></p>
+<p><a href="https://blog.nowcoder.net/n/be73b8f592504ae8b1d00368433061be" target="_blank" rel="noopener">https://blog.nowcoder.net/n/be73b8f592504ae8b1d00368433061be</a></p>
+<p><a href="https://www.cnblogs.com/iyangyuan/p/4809494.html" target="_blank" rel="noopener">https://www.cnblogs.com/iyangyuan/p/4809494.html</a></p>
 ]]></content>
       <categories>
         <category>JAVA</category>

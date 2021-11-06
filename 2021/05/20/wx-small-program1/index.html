@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    微信小程序学习笔记1 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-微信小程序学习笔记1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  微信小程序学习笔记1
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/20/wx-small-program1/" class="article-date">
+  <time datetime="2021-05-20T00:37:34.000Z" itemprop="datePublished">2021-05-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">14 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>学校的创业学院有学长招人做小程序之类的开发，所以学习一下小程序开发<a id="more"></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>小程序其实出来很久了吧，我觉得应该每个人都用过，他比较有优势的点就是不占用手机内存，用完即走，像很多app我下完用过一次之后就很少再用了，但是怕以后要用所以没有卸载，这样就一直占用了手机内存，其次他也可以用来引流，微信用户这么多流量肯定也多，像拼多多、小红书就是典型的案例。其他还有很多优势，比如开发成本低、开发门槛低等等。</p>
+<p>小程序的主要开发语言是JavaScript，他和开发普通网页有相似性。</p>
+<h2 id="开发软件"><a href="#开发软件" class="headerlink" title="开发软件"></a>开发软件</h2><p>使用微信官方的开发者工具，搜索微信小程序api进入官网就能下载</p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html</a></p>
+<h3 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210519112705523.png" alt="image-20210519112705523"></p>
+<p>他除了左边模拟器部分，右边的界面感觉和vscode界面很像</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210519114656938.png" alt="image-20210519114656938"></p>
+<p>上图可以看到目录结构，他们的作用如下：</p>
+<p>pages文件夹里面包含一个个具体的页面，每个具体的页面都要包含四个文件(js、json、wxml、wxss)</p>
+<p>utils文件夹存放一些公共文件，比如js、css等等</p>
+<p>app.js是程序入口是小程序的逻辑</p>
+<p>app.json是当前小程序的全局配置，包括了小程序的所有页面路径、页面表现、网络超时时间、底部tab等等。在pages里新建页面除了在图形化方式新建，还可以在app.json里新建，在他的pages里写一个新的路径ctrl+s保存就会自动在pages文件夹生成该页面文件夹了，因为保存之后软件会自动编译</p>
+<p>js页面逻辑</p>
+<p>json页面配置</p>
+<p>wxss页面样式(类似css)，app.wxss是全局样式，会作用于小程序的所有页面，局部样式page.wxss仅对当前页面生效</p>
+<p>wxml页面结构(类似html)</p>
+<p>project.config.json项目配置文件，做一些个性化配置，例如界面颜色、编译配置等等</p>
+<p>sitemap配置小程序及其页面是否允许被微信索引，相当于网站的robots.txt，规定爬虫爬取范围</p>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>组件相当于html里的标签把，微信小程序有自己的一套标签，可以在官方文档里看</p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/component/" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/component/</a></p>
+<p>这里写一下老师讲的基础组件和一些常用属性</p>
+<h3 id="view"><a href="#view" class="headerlink" title="view"></a>view</h3><p>view组件相当于div标签，他有四个属性</p>
+<p><code>hover-class</code>:按下的样式类</p>
+<p><code>hover-stop-propagation</code>:是否阻止本节点的祖先节点出现点击态，默认是false，在标签里加上就相当于true了，这个作用挺大的，可以防止点击子元素父元素也被点了的情况。</p>
+<p><code>hover-start-time</code>:按住多久出现点击态，这个默认就好了</p>
+<p><code>hover-stay-time</code>:手指松开后点击态保留时间，这个也默认就好了</p>
+<h3 id="text"><a href="#text" class="headerlink" title="text"></a>text</h3><p>这个相当于span，存放文本的，他有三个属性</p>
+<p><code>user-select</code>:文本是否可选，这个属性会让文本节点显示为inline-block。手机上长按会出现选中文字来复制等等，就是靠他设置的</p>
+<p><code>space</code>:显示连续空格</p>
+<p><code>decode</code>:是否解码。应该是html编码把，</p>
+<h3 id="image"><a href="#image" class="headerlink" title="image"></a>image</h3><p>微信小程序不能大于2M，所以不要像开发网站一样在同级目录下创建images存放图片，最好用远程路径或者云开发，而且要压缩图片</p>
+<p><code>src</code>：图片地址</p>
+<p><code>mode</code>:图片裁剪、缩放的模式，最常用的是widthFix</p>
+<p><code>show-menu-by-longpress</code>:开启长按图片显示识别小程序码菜单</p>
+<p>这三个常用，其他的以后再深入把</p>
+<h3 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h3><p>超链接，相当于a标签</p>
+<p><code>url</code>:当前小程序内的跳转连接，相当于href</p>
+<p><code>open-type</code>:跳转方式</p>
+<p>默认值为navigate，保留当前页面，跳转到应用内的某个页面。但是不能跳到 tabbar 页面。</p>
+<p>最常用的有reLaunch，关闭所有页面，打开到应用内的某个页面</p>
+<h3 id="scroll-view"><a href="#scroll-view" class="headerlink" title="scroll-view"></a>scroll-view</h3><p>可滚动视图区域，滚动在手机上也是常用的，通常配合flex弹性布局来使用，在wxss里加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display:flex;</span><br><span class="line">flex:none;</span><br></pre></td></tr></table></figure>
+
+<p>flex:none，就是flex:0 0 auto的简写，意思是不放大不缩小，项目占据原始大小</p>
+<p>横向滚动也可以配合下面代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.子类名&#123;</span><br><span class="line">  display: inline-block; &#x2F;*行内块元素显示一行*&#x2F;</span><br><span class="line">&#125;</span><br><span class="line">.父类名&#123;</span><br><span class="line">  white-space: nowarp; &#x2F;*超出不换行*&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>scroll-x</code>:允许横向滚动，默认false</p>
+<p><code>scroll-y</code>:允许纵向滚动，默认false</p>
+<h3 id="swiper-item"><a href="#swiper-item" class="headerlink" title="swiper-item"></a>swiper-item</h3><p>只能放在swiper组件中，宽高自动设置为100%</p>
+<p><code>item-id</code>:该swiper-item的标识符</p>
+<h3 id="swiper"><a href="#swiper" class="headerlink" title="swiper"></a>swiper</h3><p>滑块视图容器，里面只能放swiper-item组件</p>
+<p>通常用来做图片轮播，在wxss里把height设置为rpx单位(可以根据屏幕宽度进行自适应)</p>
+<p><code>indicator-dots</code>:是否显示面板指示点，默认为false</p>
+<p><code>indicator-color</code>:指示点颜色</p>
+<p><code>indicator-active-color</code>:当前选中的指示点颜色</p>
+<p><code>autoplay</code>:是否自动切换，默认为false</p>
+<p><code>interval</code>:自动切换时间间隔，默认5000ms</p>
+<p><code>circular</code>:是否采用衔接滑动，默认为false</p>
+<p><code>vertical</code>:滑动方向是否为纵向，默认是横向</p>
+<p><code>previous-margin</code>:前边距，可用于露出前一项的一小部分</p>
+<p><code>next-margin</code>:后边距，可用于露出前一项的一小部分</p>
+<h3 id="button"><a href="#button" class="headerlink" title="button"></a>button</h3><p>按钮组件</p>
+<p><code>size</code>:按钮大小，改mini变小</p>
+<p><code>type</code>:按钮的样式类型，primary为绿色 default为白色 warn为红色</p>
+<p><code>plain</code>:按钮是否镂空，背景色透明。默认为false</p>
+<p><code>disabled</code>:是否禁用。默认为false</p>
+<p><code>loading</code>:名称前是否带loading图标。默认为false，加载的时候用</p>
+<p><code>open-type</code>:微信开放能力。他的功能很强大，可以打开客服会话(contact)、获取用户信息(getUserInfo)、打开app(launchApp)等等</p>
+<p><code>form-type</code>:用于form组件，点击分别会触发form组件的submit/reset事件</p>
+<h3 id="input"><a href="#input" class="headerlink" title="input"></a>input</h3><p>输入框</p>
+<p><code>type</code>:input的类型。text文本输入键盘、number数字输入键盘、idcard身份证输入键盘、digit带小数点的数字键盘</p>
+<p><code>placeholder</code>:输入框为空时占位符</p>
+<p><code>disabled</code>:是否禁用</p>
+<p><code>maxlength</code>:最大输入长度</p>
+<p><code>cursor-spacing</code>:指定光标与键盘的距离</p>
+<p><code>focus</code>:获取焦点</p>
+<p><code>confirm-type</code>:设置键盘右下角按钮的文字(发送、搜索下一个等等)，仅在type=’text’时生效</p>
+<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>开关选择器</p>
+<p><code>checked</code>:是否选中，默认false</p>
+<h3 id="textarea"><a href="#textarea" class="headerlink" title="textarea"></a>textarea</h3><p>多行输入框</p>
+<h3 id="icon"><a href="#icon" class="headerlink" title="icon"></a>icon</h3><p>图标组件</p>
+<p><code>type</code>:icon的类型，有success、info、search等等很多</p>
+<p><code>size</code>:icon的大小</p>
+<p><code>color</code>:icon的颜色，同css的color</p>
+<h3 id="progress"><a href="#progress" class="headerlink" title="progress"></a>progress</h3><p>进度条</p>
+<p><code>percent</code>:百分比0-100</p>
+<p><code>show-info</code>:在进度条右侧显示百分比</p>
+<h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="小程序配置"><a href="#小程序配置" class="headerlink" title="小程序配置"></a>小程序配置</h3><p>参考官方文档</p>
+<h4 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h4><p>这个之前在目录结构里说过一些，这里再具体看看</p>
+<p>pages</p>
+<p>用于指定小程序由哪些页面组成，每一项都对应一个页面的 路径（含文件名） 信息。文件名不需要写文件后缀，框架会自动去寻找对应位置的 <code>.json</code>, <code>.js</code>, <code>.wxml</code>, <code>.wxss</code> 四个文件进行处理。未指定 <code>entryPagePath</code> 时，数组的第一项代表小程序的初始页面（首页）。</p>
+<p>window</p>
+<p>用于设置小程序的状态栏、导航条、标题、窗口背景色。</p>
+<p><code>navigationBarBackgroundColor</code>:导航栏背景颜色</p>
+<p><code>navigationBarTextStyle</code>:导航栏标题颜色，仅支持black/white</p>
+<p><code>navigationBarTitleText</code>:导航栏标题文字内容</p>
+<p><code>backgroundColor</code>:窗口的背景色，这个只有再下拉刷新的时候看得见颜色</p>
+<p><code>enablePullDownRefresh</code>:是否开启全局的下拉刷新。默认false</p>
+<p><code>backgroundTextStyle</code>:下拉loading的样式，仅支持dark/light</p>
+<p>tabBar 对象类型，用{ }包裹</p>
+<p>如果小程序是一个多 tab 应用（客户端窗口的底部或顶部有 tab 栏可以切换页面），可以通过 tabBar 配置项指定 tab 栏的表现，以及 tab 切换时显示的对应页面。</p>
+<p><code>list</code>:tab的列表，最少2个，最多5个tab。数组类型用[ ]包裹</p>
+<p>list有四个属性：</p>
+<p><code>pagePath</code>:页面路径，必须在pages中先定义。string类型</p>
+<p><code>text</code>:tab上按钮文字</p>
+<p><code>iconPath</code>:图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。当position为top时，不显示 icon。</p>
+<p><code>selectedIconPath</code>:选中时的图片路径，icon 大小限制为 40kb，建议尺寸为 81px * 81px，不支持网络图片。当position为top时，不显示 icon。</p>
+<p><code>color</code>:tab上的文字默认颜色，仅支持十六进制颜色</p>
+<p><code>selectedColor</code>:tab上的文字选中时的颜色，仅支持十六进制颜色</p>
+<p><code>backgroundColor</code>:tab的背景色，仅支持十六进制颜色</p>
+<p><code>position</code>:tabBar的位置，仅支持bottom/top</p>
+<h4 id="页面配置"><a href="#页面配置" class="headerlink" title="页面配置"></a>页面配置</h4><p>每一个小程序页面也可以使用 <code>.json</code> 文件来对本页面的窗口表现进行配置。页面中配置项在当前页面会覆盖 <code>app.json</code> 的 <code>window</code> 中相同的配置项。文件内容为一个 JSON 对象，他的属性和全局配置里的window差不多</p>
+<h3 id="WXML语法"><a href="#WXML语法" class="headerlink" title="WXML语法"></a>WXML语法</h3><h4 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h4><p>WXML 中的动态数据均来自对应 Page 的 data。数据绑定用胡子语法(双大括号)将变量包起来，语法和flask框架的变量一样</p>
+<p>data里可以放string、array、object。字符串用双引号””包裹，数组用中括号[]包裹，对象用花括号{}包裹</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210519210411325.png" alt="image-20210519210411325"></p>
+<p>用的时候，字符串直接用，数组要写索引，对象要写属性</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210519210424168.png" alt="image-20210519210424168"></p>
+<h4 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h4><p>wx:if</p>
+<p>在框架中，使用 <code>wx:if=&quot;&quot;</code> 来判断是否需要渲染该代码块，也可以用 <code>wx:elif</code> 和 <code>wx:else</code> 来添加一个 else 块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;view wx:if&#x3D;&quot;&#123;&#123;length &gt; 5&#125;&#125;&quot;&gt; 1 &lt;&#x2F;view&gt;</span><br><span class="line">&lt;view wx:elif&#x3D;&quot;&#123;&#123;length &gt; 2&#125;&#125;&quot;&gt; 2 &lt;&#x2F;view&gt;</span><br><span class="line">&lt;view wx:else&gt; 3 &lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果要写js代码的话，必要要放在{{}}里。</p>
+<p>block wx:if</p>
+<p>因为 <code>wx:if</code> 是一个控制属性，需要将它添加到一个标签上。如果要一次性判断多个组件标签，可以使用一个 <code>&lt;block/&gt;</code> 标签将多个组件包装起来，并在上边使用 <code>wx:if</code> 控制属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;block wx:if&#x3D;&quot;&#123;&#123;true&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;view&gt; view1 &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;view&gt; view2 &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;block&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;block/&gt;</code> 并不是一个组件，它仅仅是一个包装元素，不会在页面中做任何渲染，只接受控制属性。</p>
+<h4 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h4><p>wx:for</p>
+<p>在组件上使用 <code>wx:for</code> 控制属性绑定一个数组，即可使用数组中各项的数据重复渲染该组件。</p>
+<p>默认数组的当前项的下标默认为 <code>index</code>，数组当前项的值默认为 <code>item</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;view wx:for&#x3D;&quot;&#123;&#123;[111,222,333,444]&#125;&#125;&quot;&gt;&#123;&#123;index&#125;&#125;、&#123;&#123;item&#125;&#125;&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>wx:for-item</code> 可以指定数组当前元素的变量名，</p>
+<p>使用 <code>wx:for-index</code> 可以指定数组当前下标的变量名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;view wx:for&#x3D;&quot;&#123;&#123;[1, 2, 3, 4, 5, 6, 7, 8, 9]&#125;&#125;&quot; wx:for-item&#x3D;&quot;i&quot;&gt;</span><br><span class="line">  &lt;view wx:for&#x3D;&quot;&#123;&#123;[1, 2, 3, 4, 5, 6, 7, 8, 9]&#125;&#125;&quot; wx:for-item&#x3D;&quot;j&quot;&gt;</span><br><span class="line">    &lt;view wx:if&#x3D;&quot;&#123;&#123;i &lt;&#x3D; j&#125;&#125;&quot;&gt;</span><br><span class="line">      &#123;&#123;i&#125;&#125; * &#123;&#123;j&#125;&#125; &#x3D; &#123;&#123;i * j&#125;&#125;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>wx:key</p>
+<p>如果列表中项目的位置会动态改变或者有新的项目添加到列表中，并且希望列表中的项目保持自己的特征和状态（如input中的输入内容，switch的选中状态），需要使用 <code>wx:key</code> 来指定列表中项目的唯一的标识符。</p>
+<p><code>wx:key</code> 的值以两种形式提供</p>
+<p>字符串，代表在 for 循环的 array 中 item 的某个 property，该 property 的值需要是列表中唯一的字符串或数字，且不能动态改变。</p>
+<p>保留关键字 <code>*this</code> 代表在 for 循环中的 item 本身，这种表示需要 item 本身是一个唯一的字符串或者数字。</p>
+<p>当数据改变触发渲染层重新渲染的时候，会校正带有 key 的组件，框架会确保他们被重新排序，而不是重新创建，以确保使组件保持自身的状态，并且提高列表渲染时的效率。</p>
+<p>如不提供 <code>wx:key</code>，会报一个 <code>warning</code>， 如果明确知道该列表是静态，或者不必关注其顺序，可以选择忽略。把它设置成<code>*this</code>或者<code>index</code>就行了。</p>
+<p>说实话这里没看懂什么意思，以后碰到再深入看看把</p>
+<h3 id="框架接口"><a href="#框架接口" class="headerlink" title="框架接口"></a>框架接口</h3><h4 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h4><p>page</p>
+<p>写在js文件里</p>
+<p>注册小程序中的一个页面。接受一个 <code>Object</code> 类型参数，其指定页面的初始数据、生命周期回调、事件处理函数等。</p>
+<p>生命周期函数,在满足某些条件的情况下,自动触发的事件.</p>
+<p>属性：</p>
+<p><code>data</code>:页面初始数据</p>
+<p><code>onLoad</code>:生命周期回调—监听页面加载</p>
+<p><code>onShow</code>:生命周期回调—监听页面显示</p>
+<p><code>onReady</code>:生命周期回调—监听页面初次渲染完成</p>
+<p><code>onHide</code>:生命周期回调—监听页面隐藏</p>
+<p><code>onUnload</code>:生命周期回调—监听页面卸载</p>
+<p><code>onPullDownRefresh</code>:监听用户下拉动作</p>
+<p><code>onReachBottom</code>:页面上拉触底事件的处理函数</p>
+<p><code>onShareAppMessage</code>:用户点击右上角转发</p>
+<p>等等还有很多</p>
+<h2 id="事件系统"><a href="#事件系统" class="headerlink" title="事件系统"></a>事件系统</h2><p><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/event.html</a></p>
+<h3 id="什么时事件"><a href="#什么时事件" class="headerlink" title="什么时事件"></a>什么时事件</h3><p>事件是视图层到逻辑层的通讯方式。</p>
+<p>事件可以将用户的行为反馈到逻辑层进行处理。</p>
+<p>事件可以绑定在组件上，当达到触发事件，就会执行逻辑层(js文件)中对应的事件处理函数。</p>
+<p>事件对象可以携带额外信息，如 id, dataset, touches。</p>
+<h3 id="事件使用"><a href="#事件使用" class="headerlink" title="事件使用"></a>事件使用</h3><p>用bind在组件中绑定一个事件处理函数</p>
+<h3 id="事件分类"><a href="#事件分类" class="headerlink" title="事件分类"></a>事件分类</h3><p>冒泡事件：当一个组件上的事件被触发后，该事件会向父节点传递。</p>
+<p>非冒泡事件：当一个组件上的事件被触发后，该事件不会向父节点传递。</p>
+<p>冒泡事件：</p>
+<p><code>tap</code>:手指触摸后马上离开。相当于click</p>
+<p><code>touchstart</code>:手指触摸动作开始</p>
+<p><code>touchend</code>:手指触摸动作结束</p>
+<p>等等</p>
+<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><p>当组件触发事件时，逻辑层绑定该事件的处理函数会收到一个事件对象。</p>
+<p>常用的是<code>currentTarget</code>:当前组件的一些属性值集合，他常用的属性是<code>dataset</code>:当前组件上由<code>data-</code>开头的自定义属性组成的集合。</p>
+<h3 id="事件处理函数"><a href="#事件处理函数" class="headerlink" title="事件处理函数"></a>事件处理函数</h3><p>首先绑定组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;view bindtap&#x3D;&quot;mytap&quot; data-title&#x3D;&quot;微信小程序&quot;&gt;&#123;&#123;title&#125;&#125;&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在js里面写函数，用this.setData来修改data里的值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data: &#123;</span><br><span class="line">  title:&quot;小程序&quot;</span><br><span class="line">&#125;,</span><br><span class="line">mytap: function(res)&#123;</span><br><span class="line">  var title&#x3D;res.currentTarget.dataset.title;</span><br><span class="line">  this.setData(&#123;</span><br><span class="line">    title:title</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>如果要获取data里的参数用<code>this.data.title</code></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV1WQ4y1T7D8?p=1" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1WQ4y1T7D8?p=1</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/20/wx-small-program1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/05/20/wx-small-program2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            微信小程序学习笔记2
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/05/17/project-end/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">数据可视化-项目完结</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

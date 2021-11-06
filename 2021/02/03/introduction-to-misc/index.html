@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    misc入门之图片隐写 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-misc入门" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  misc入门之图片隐写
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/03/introduction-to-misc/" class="article-date">
+  <time datetime="2021-02-03T14:43:41.000Z" itemprop="datePublished">2021-02-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/misc/">misc</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>misc</p>
+<h1 id="主要类型："><a href="#主要类型：" class="headerlink" title="主要类型："></a>主要类型：</h1><h2 id="1-数据编码、图形密码"><a href="#1-数据编码、图形密码" class="headerlink" title="1.数据编码、图形密码"></a>1.数据编码、图形密码</h2><h2 id="2-图片隐写"><a href="#2-图片隐写" class="headerlink" title="2.图片隐写"></a>2.图片隐写</h2><h2 id="3-音频-amp-视频隐写"><a href="#3-音频-amp-视频隐写" class="headerlink" title="3.音频&amp;视频隐写"></a>3.音频&amp;视频隐写</h2><a id="more"></a>
+<h2 id="4-流量分析"><a href="#4-流量分析" class="headerlink" title="4.流量分析"></a>4.流量分析</h2><h2 id="5-内存取证-在磁盘里隐藏一些东西"><a href="#5-内存取证-在磁盘里隐藏一些东西" class="headerlink" title="5.内存取证-在磁盘里隐藏一些东西"></a>5.内存取证-在磁盘里隐藏一些东西</h2><h2 id="6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息"><a href="#6-游戏隐写-打通关获得flag或者游戏中的地图之类的信息" class="headerlink" title="6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息"></a>6.游戏隐写-打通关获得flag或者游戏中的地图之类的信息</h2><h1 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h1><h2 id="010editor-winhex"><a href="#010editor-winhex" class="headerlink" title="010editor/winhex"></a>010editor/winhex</h2><h2 id="图片十六进制文件头文件尾-文件模板"><a href="#图片十六进制文件头文件尾-文件模板" class="headerlink" title="图片十六进制文件头文件尾+文件模板"></a>图片十六进制文件头文件尾+文件模板</h2><h2 id="文件属性-exiftools"><a href="#文件属性-exiftools" class="headerlink" title="文件属性(exiftools)"></a>文件属性(exiftools)</h2><h2 id="kali"><a href="#kali" class="headerlink" title="kali"></a>kali</h2><h1 id="010editor："><a href="#010editor：" class="headerlink" title="010editor："></a>010editor：</h1><p>一个字节由两位十六进制数组成</p>
+<p>010左侧显示十六进制右侧显示字符串，如果一个字节不能显示成字符，则会显示成”.”</p>
+<p>alt+4打开模板,没有模板的文件可以用F5加载模板</p>
+<p>010里复制是ctrl+shift+c粘贴是v，kali同理</p>
+<p>010里找不到图片的宽高，可以用图片文件属性的像素值(十进制)，然后转换成十六进制，再在010里搜索找到第一个，然后可以进行修改等<br>文件头到文件尾为图片内容，其余部分为多余或隐藏内容</p>
+<h1 id="文件头尾："><a href="#文件头尾：" class="headerlink" title="文件头尾："></a>文件头尾：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">JPEG (jpg)，                        　　文件头：FFD8FF　　　　　　　　　　　　　　　　　　　　　　　 文件尾：FF D9　　　　　　　　　　　　　　　</span><br><span class="line">PNG (png)，                       　　 文件头：89504E47　　　　　　　　　　　　　　　　　　　　　　文件尾：AE 42 60 82</span><br><span class="line">GIF (gif)，                           　　文件头：47494638　　　　　　　　　　　　　　　　　　　　　　文件尾：00 3B                                                                 </span><br><span class="line">ZIP Archive (zip)，                     文件头：504B0304　　　　　　　　　　　　　　　　　　　　  文件尾：50 4B</span><br><span class="line">kdmv                                    文件头：4B444D56</span><br><span class="line">TIFF (tif)，                           　  文件头：49492A00　　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">Windows Bitmap (bmp)，      　  文件头：424D　　　　　　　　　　　　　　　　　　　　　　　　 </span><br><span class="line">CAD (dwg)，                        　  文件头：41433130　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">Adobe Photoshop (psd)，          文件头：38425053　　　　　　　　　　　　　　　　　　　　　</span><br><span class="line">Rich Text Format (rtf)，             文件头：7B5C727466　　　　　　　　　　　　　　　　　　　　  </span><br><span class="line">XML (xml)，                              文件头：3C3F786D6C　　　　　　　　　　　　　　　　　　　　 </span><br><span class="line">HTML (html)，                           文件头：68746D6C3E</span><br><span class="line">Email [thorough only] (eml)，     文件头：44656C69766572792D646174653A</span><br><span class="line">Outlook Express (dbx)，            文件头：CFAD12FEC5FD746F</span><br><span class="line">Outlook (pst)，                         文件头：2142444E</span><br><span class="line">MS Word&#x2F;Excel (xls.or.doc)，      文件头：D0CF11E0</span><br><span class="line">MS Access (mdb)，                    文件头：5374616E64617264204A</span><br><span class="line">WordPerfect (wpd)，                  文件头：FF575043</span><br><span class="line">Adobe Acrobat (pdf)，               文件头：255044462D312E</span><br><span class="line">Quicken (qdf)，                         文件头：AC9EBD8F</span><br><span class="line">Windows Password (pwl)，         文件头：E3828596</span><br><span class="line">RAR Archive (rar)，                    文件头：52617221</span><br><span class="line">Wave (wav)，                            文件头：57415645</span><br><span class="line">AVI (avi)，                                 文件头：41564920</span><br><span class="line">Real Audio (ram)，                     文件头：2E7261FD</span><br><span class="line">Real Media (rm)，                       文件头：2E524D46</span><br><span class="line">MPEG (mpg)，                           文件头：000001BA</span><br><span class="line">MPEG (mpg)，                           文件头：000001B3</span><br><span class="line">Quicktime (mov)，                     文件头：6D6F6F76</span><br><span class="line">Windows Media (asf)，               文件头：3026B2758E66CF11</span><br><span class="line">MIDI (mid)，                              文件头：4D546864</span><br></pre></td></tr></table></figure>
+
+<h1 id="图片隐写分类："><a href="#图片隐写分类：" class="headerlink" title="图片隐写分类："></a>图片隐写分类：</h1><h2 id="简单类隐写："><a href="#简单类隐写：" class="headerlink" title="简单类隐写："></a>简单类隐写：</h2><h3 id="1-属性"><a href="#1-属性" class="headerlink" title="1.属性"></a>1.属性</h3><h3 id="2-文件末尾藏字符串"><a href="#2-文件末尾藏字符串" class="headerlink" title="2.文件末尾藏字符串"></a>2.文件末尾藏字符串</h3><h3 id="3-文件包含"><a href="#3-文件包含" class="headerlink" title="3.文件包含"></a>3.文件包含</h3><h3 id="4-修改文件头"><a href="#4-修改文件头" class="headerlink" title="4.修改文件头"></a>4.修改文件头</h3><h2 id="图种隐写："><a href="#图种隐写：" class="headerlink" title="图种隐写："></a>图种隐写：</h2><h3 id="5-gif动图-用PS或者stegsolve查看每一帧"><a href="#5-gif动图-用PS或者stegsolve查看每一帧" class="headerlink" title="5.gif动图-用PS或者stegsolve查看每一帧"></a>5.gif动图-用PS或者stegsolve查看每一帧</h3><h3 id="6-png（bmp）"><a href="#6-png（bmp）" class="headerlink" title="6.png（bmp）"></a>6.png（bmp）</h3><h3 id="7-jpg"><a href="#7-jpg" class="headerlink" title="7.jpg"></a>7.jpg</h3><h2 id="特征明显的隐写："><a href="#特征明显的隐写：" class="headerlink" title="特征明显的隐写："></a>特征明显的隐写：</h2><h3 id="8-双图隐写"><a href="#8-双图隐写" class="headerlink" title="8.双图隐写"></a>8.双图隐写</h3><h3 id="9-stegpy"><a href="#9-stegpy" class="headerlink" title="9.stegpy"></a>9.stegpy</h3><h3 id="10-silenteye"><a href="#10-silenteye" class="headerlink" title="10.silenteye"></a>10.silenteye</h3><h1 id="文件包含："><a href="#文件包含：" class="headerlink" title="文件包含："></a>文件包含：</h1><p>一张图片文件尾后面藏着另一张图片，通过查找文件头文件尾判断</p>
+<p>直接在010editor里新建一个文件，把后面的十六进制复制到新建文件保存为正确后缀名就可以分离出来</p>
+<h1 id="kali-1"><a href="#kali-1" class="headerlink" title="kali:"></a>kali:</h1><h2 id="1-strings命令：查找可打印的字符串，以换行符或空字符结束"><a href="#1-strings命令：查找可打印的字符串，以换行符或空字符结束" class="headerlink" title="1.strings命令：查找可打印的字符串，以换行符或空字符结束"></a>1.strings命令：查找可打印的字符串，以换行符或空字符结束</h2><p>strings file | grep pass可以查找文件中指定的字符串</p>
+<h2 id="2-grep命令：查找文件里符合条件的字符串"><a href="#2-grep命令：查找文件里符合条件的字符串" class="headerlink" title="2.grep命令：查找文件里符合条件的字符串"></a>2.grep命令：查找文件里符合条件的字符串</h2><p>-a 不忽略二进制数据<br>grep -a “xxx” file</p>
+<h2 id="3-file命令：用来探测给定文件的类型"><a href="#3-file命令：用来探测给定文件的类型" class="headerlink" title="3.file命令：用来探测给定文件的类型"></a>3.file命令：用来探测给定文件的类型</h2><h2 id="4-binwalk工具分离文件"><a href="#4-binwalk工具分离文件" class="headerlink" title="4.binwalk工具分离文件"></a>4.binwalk工具分离文件</h2><p>binwalk -e file提取文件<br>binwalk -D/-dd=jpeg file分解指定类型文件</p>
+<h2 id="5-foremost工具分离所有文件"><a href="#5-foremost工具分离所有文件" class="headerlink" title="5.foremost工具分离所有文件"></a>5.foremost工具分离所有文件</h2><p>foremost file 会得到一个output文件夹</p>
+<h2 id="6-dd命令分离指定文件"><a href="#6-dd命令分离指定文件" class="headerlink" title="6.dd命令分离指定文件"></a>6.dd命令分离指定文件</h2><p>dd if=file of=输出文件 bs=1 skip=24437  //bs设置每次读取1块，skip是指从文件开头跳过24437个块开始复制，这个值可以用binwalk来查看</p>
+<h1 id="gif图种："><a href="#gif图种：" class="headerlink" title="gif图种："></a>gif图种：</h1><p>用PS或者stegsolve查看每一帧</p>
+<p>用Ulead gif工具查看帧的时间间隔，可以把时间间隔换成二进制、莫斯或者培根之类的</p>
+<h1 id="png（bmp）图种："><a href="#png（bmp）图种：" class="headerlink" title="png（bmp）图种："></a>png（bmp）图种：</h1><p>破坏文件头一定不能显示，破坏文件尾还有可能能显示</p>
+<p>png图片有IHDR(文件头数据块header chunk)和IDAT(图像数据块image data chunk)和IEND(图像结束数据块image end data chunk)<br>IHDR包含图片的宽和高和颜色等基本信息，因此可以在IHDR里修改宽和高<br>有些题目会把png文件头删了，所以看到IHDR和IDAT时，就可以判断为png文件，把文件头加上</p>
+<p>CRC即循环冗余校验</p>
+<p>CRC校验码由文件头数据块标识和IHDR共十七位字节进行CRC计算得到，后面四个字节为该png图片的CRC32校验值</p>
+<p>利用CRC校验可以用python脚本爆破png图片的正确高和宽</p>
+<p>通过010的工具计算校验值，若不相同则应该把高度调大，一般都是调大</p>
+<p>pngcheck工具：</p>
+<p>pngcheck.win64.exe -v file查看文件块IDAT，正常的块在65524的时候就满了，若有的IDAT块没有到65524，则这个IDAT块是有问题的，因为他本来应该并入到上一个块里。</p>
+<h1 id="zlib隐写："><a href="#zlib隐写：" class="headerlink" title="zlib隐写："></a>zlib隐写：</h1><p>zlib是一种数据格式，用于存储压缩后的数据</p>
+<p>查看异常的IDAT块，78 9C是zlib压缩的标志</p>
+<p>把从78 9C到00之前的内容复制到python脚本可以解压缩zlib内容，也可以用binwalk -e file直接分解出flag</p>
+<h1 id="lsb隐写："><a href="#lsb隐写：" class="headerlink" title="lsb隐写："></a>lsb隐写：</h1><p>最低有效位隐写，原理就是图片中的像数一般是由三种颜色组成，即三原色，由这三种原色可以组成其他各种颜色，例如在PNG图片的储存中，每个颜色会有8bit，LSB隐写就是修改了像数中的最低的1bit，在人眼看来是看不出来区别的，也把信息隐藏起来了。譬如我们想把’A’隐藏进来的话，如下图，就可以把A转成16进制的0x61再转成二进制的01100001，再修改为红色通道的最低位为这些二进制串。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/640760-20160129212637693-390049790.png" alt="test1"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/640760-20160129212704114-2030955630.png" alt="test2"></p>
+<p>可以用stegsolve查看RGB通道的最低位，然后用data extract查看ascii值<br>stegsolve中Alpha是透明度的颜色通道</p>
+<p>也可以用zsteg工具查看通道信息</p>
+<p>kali里zsteg file查看lsb信息或者zsteg file -a尝试所有已知的组合</p>
+<p>导出内容：zsteg -e 所在通道 file &gt; 输出文件名</p>
+<p>之所以归类在png（bmp）图种是因为png是无损压缩，bmp是没有经过压缩的，你修改的信息不会丢失，而像jpg图片对像素进行了有损压缩，你修改的信息可能会被压缩的过程破坏。</p>
+<p>加密lsb隐写，用cloacked-pixel工具的lsb.py脚本来解</p>
+<p><code>python2 lsb.py extract &lt;stego_file&gt; &lt;out_file&gt; &lt;password&gt;</code></p>
+<p>bmp或者pdf文件解密可以用wbStego4.3open工具直接解密</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=2</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/02/03/introduction-to-misc/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/02/04/encode/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            misc之数据编码
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/09/26/SQL-injection-study-notes/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">sql注入学习笔记</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

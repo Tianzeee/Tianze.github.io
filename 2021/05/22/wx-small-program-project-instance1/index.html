@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    微信小程序项目实例学习笔记1 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-微信小程序项目实例学习笔记1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  微信小程序项目实例学习笔记1
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/22/wx-small-program-project-instance1/" class="article-date">
+  <time datetime="2021-05-21T16:10:10.000Z" itemprop="datePublished">2021-05-22</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">10 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>学完基础之后，跟着老师做个项目案例<a id="more"></a></p>
+<h2 id="尺寸"><a href="#尺寸" class="headerlink" title="尺寸"></a>尺寸</h2><p>官网建议设计师用iPhone6作为视觉稿的标准，因为iPhone6的1px=2rpx，这样换算起来方便，比如屏幕宽度为375px，共有750个物理像素，那么直接用750rpx就行了(750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素)</p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html</a></p>
+<blockquote>
+<p>rpx之前说过可以根据屏幕自适应，通过rpx，我们只需要根据750的设计稿写代码即可，不必担心在各个平台的适配情况。一次开发，在各个平台都会长得一模一样！</p>
+</blockquote>
+<p>把设计图修改为750px宽，可以在PS里面用图像大小(Ctrl+Alt+I)长宽比约束后设置宽度为750像素，这样我们用选框工具量多少就给多少rpx就可以了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521192049652.png" alt="image-20210521192049652"></p>
+<p>看完我还是不太懂他是怎么做到自适应的，反正就这么用吧</p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>可以开着官方文档，一边做一边查文档。</p>
+<h2 id="项目案例"><a href="#项目案例" class="headerlink" title="项目案例"></a>项目案例</h2><p><a href="https://edu.newsight.cn/works_xingqing.php?cid=102&amp;id=1340" target="_blank" rel="noopener">https://edu.newsight.cn/works_xingqing.php?cid=102&amp;id=1340</a></p>
+<p>按照链接里的项目做一个实例</p>
+<h3 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a>项目初始化</h3><h4 id="全局配置设置window"><a href="#全局配置设置window" class="headerlink" title="全局配置设置window"></a>全局配置设置window</h4><p>因为项目导航栏背景是黑色，所以把新建项目里的<code>&quot;navigationBarBackgroundColor&quot;: &quot;#fff&quot;</code>删掉就行了，因为他默认是黑色</p>
+<p>修改导航栏标题颜色为白色，默认是黑色，所以把他改成<code>&quot;navigationBarTextStyle&quot;:&quot;white&quot;</code></p>
+<p>修改导航栏标题<code>&quot;navigationBarTitleText&quot;: &quot;新视觉实训&quot;</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521193141834.png" alt="image-20210521193141834"></p>
+<h4 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h4><p>因为新建项目会生成一些初始化代码，不需要他们，把页面的wxml、wxss、js和全局样式app.wxss里初始化的内容删掉</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521194206555.png" alt="image-20210521194206555"></p>
+<p>因为js里要存放上图所示的对象，所以输入page选择第二个，就会出现内容为空的page对象</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521193428128.png" alt="image-20210521193428128"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521193857749.png" alt="image-20210521193857749"></p>
+<h3 id="首页头部模块布局"><a href="#首页头部模块布局" class="headerlink" title="首页头部模块布局"></a>首页头部模块布局</h3><p>index.wxml:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;container hdcon&#39;&gt;</span><br><span class="line">    &lt;navigator open-type&#x3D;&quot;switchTab&quot; url&#x3D;&quot;&#x2F;pages&#x2F;index&#x2F;index&quot; class&#x3D;&#39;logo&#39;&gt;</span><br><span class="line">      &lt;image mode&#x3D;&quot;heightFix&quot; src&#x3D;&quot;&#x2F;images&#x2F;logo.png&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;view  class&#x3D;&#39;kefu&#39;&gt;</span><br><span class="line">      &lt;button open-type&#x3D;&quot;contact&quot; class&#x3D;&quot;btn&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">      &lt;image mode&#x3D;&quot;heightFix&quot; src&#x3D;&quot;&#x2F;images&#x2F;xiaoxi.png&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里学到了一个标签可以用空格来加多个类名，如第二行的<code>class=&#39;container hdcon&#39;</code>，至于躲什么要用这两个类是因为，这个头部的container可以在其他页面复用，所以可以写到全局样式app.wxss里，然后用hdcon类来写首页头部容器自己的特有样式。</p>
+<p>用button按钮覆盖图像来做一个点击图标出现联系客服的效果</p>
+<p>index.wxss:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">.header&#123;</span><br><span class="line">  width:100%; &#x2F;*或者750rpx*&#x2F;</span><br><span class="line">  height:90rpx;</span><br><span class="line">  border: 1px solid red;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">  align-items: center;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon navigator,.hdcon .kefu&#123;</span><br><span class="line">  height:50rpx;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon image&#123;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">.kefu&#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  animation: dh linear 1s infinite alternate;</span><br><span class="line">&#125;</span><br><span class="line">.kefu .btn&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  top:0;</span><br><span class="line">  left:0;</span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>css一直是我的软肋，学的不是很精，布局这一块老是弄得很乱，写不出理想的布局，跟着老师写有些也是似懂非懂，所以记录一下。</p>
+<p>header类布局一个宽高的框来放头部内容，边框可以去掉，这里加上只是为了看看容器有多大</p>
+<p>hdcon类表示头部容器(header-container)，把他设置成弹性布局，这样就使两张图在一个水平方向上，<code>justify-content: space-between</code>设置项目在主轴上两端对齐，<code>align-items: center;</code>设置项目与交叉轴中点对齐(相当于垂直居中)，<code>height:100%</code>继承父类header的高</p>
+<p>因为头部要用的两个图标在PS里量出来高是50像素，所以把height设置成50rpx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.hdcon navigator,.hdcon .kefu&#123;</span><br><span class="line">  height:50rpx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面也是继承父类的高：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.hdcon image&#123;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里把kefu类设置为相对定位，用于他子类btn的绝对定位做参考。animation调用全局样式里的自定义动画，linear设置动画从头到尾速度相同，动画完成周期为1s，infinite动画无限循环播放，alternate先执行一遍动画，然后再反向执行一遍动画</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.kefu&#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  animation: dh linear 1s infinite alternate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>btn类设置绝对定位，相对于父类kefu类。然后百分比宽高，离左上0px，设置成透明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.kefu .btn&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  top:0;</span><br><span class="line">  left:0;</span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>app.wxss:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">  padding:0 26rpx;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes dh&#123;</span><br><span class="line">  0%,50%,100%&#123;</span><br><span class="line">    opacity: 1;</span><br><span class="line">  &#125;</span><br><span class="line">  25%&#123;</span><br><span class="line">    opacity: 0;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>container类设置内边距和box-sizing为border-box。因为所有页面都需要用到头部有内边距的容器，所以把他放在全局样式里</p>
+<blockquote>
+<p>box-sizing参考第三篇文章</p>
+<p>在 CSS 盒子模型的默认定义里，你对一个元素所设置的 width 与 height 只会应用到这个元素的内容区。</p>
+<p>如果这个元素有任何的 border 或 padding ，绘制到屏幕上时的盒子宽度和高度会加上设置的边框和内边距值。这意味着当你调整一个元素的宽度和高度时需要时刻注意到这个元素的边框和内边距。当我们实现响应式布局时，这个特点尤其烦人。</p>
+<p>box-sizing 属性可以被用来调整这些表现:</p>
+<p>content-box 是默认值。如果你设置一个元素的宽为100px，那么这个元素的内容区会有100px 宽，并且任何边框和内边距的宽度都会被增加到最后绘制出来的元素宽度中。</p>
+<p>border-box 告诉浏览器：你想要设置的边框和内边距的值是包含在width内的。也就是说，如果你将一个元素的width设为100px，那么这100px会包含它的border和padding，内容区的实际宽度是width减去(border + padding)的值。大多数情况下，这使得我们更容易地设定一个元素的宽高。</p>
+</blockquote>
+<p>然后用@keyframes关键帧来做自定义动画0%、50%和100%时，opacity为1(不透明)，到25%时opacity为0透明</p>
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521214857571.png" alt="image-20210521214857571"></p>
+<p>当然右边那个消息图标会闪动，截图看不到效果</p>
+<h3 id="海报轮播模块布局"><a href="#海报轮播模块布局" class="headerlink" title="海报轮播模块布局"></a>海报轮播模块布局</h3><p>index.wxml新增：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class&#x3D;&#39;banner&#39;&gt;</span><br><span class="line">  &lt;swiper indicator-dots autoplay circular&gt;</span><br><span class="line">    &lt;swiper-item&gt;&lt;image src&#x3D;&#39;&#x2F;images&#x2F;banner1.jpg&#39;&gt;&lt;&#x2F;image&gt;&lt;&#x2F;swiper-item&gt;</span><br><span class="line">    &lt;swiper-item&gt;&lt;image src&#x3D;&#39;&#x2F;images&#x2F;banner2.jpg&#39;&gt;&lt;&#x2F;image&gt;&lt;&#x2F;swiper-item&gt;</span><br><span class="line">    &lt;swiper-item&gt;&lt;image src&#x3D;&#39;&#x2F;images&#x2F;banner3.jpg&#39;&gt;&lt;&#x2F;image&gt;&lt;&#x2F;swiper-item&gt;</span><br><span class="line">  &lt;&#x2F;swiper&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>indicator-dots显示指示点，autoplay自动切换，circular无缝滑动</p>
+<p>index.wxss新增：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.banner&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height:295rpx;</span><br><span class="line">  border: 1px solid green;</span><br><span class="line">&#125;</span><br><span class="line">.banner swiper&#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.banner image&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为轮播的图片高295px，所以height设置成295rpx，border边框只是为了测试看用的。因为swiper组件有个150px默认高度，他会超出banner组件，所以把他设置成100%，当然宽也100%。banner模块里的image也设置宽高100%</p>
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210521231300346.png" alt="image-20210521231300346"></p>
+<h3 id="专业分类导航滑动模块"><a href="#专业分类导航滑动模块" class="headerlink" title="专业分类导航滑动模块"></a>专业分类导航滑动模块</h3><p>因为横向滚动有两种实现方式，一种注释了的实现，一种没注释的实现。这里顺便记一下快捷键Ctrl+/可以把选中内容注释，和Pycharm一样很方便</p>
+<p>index.wxml新增：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;scroll-view class&#x3D;&#39;major&#39; scroll-x&gt;</span><br><span class="line">  &lt;!-- &lt;view class&#x3D;&#39;majorcon&#39;&gt; --&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng1.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;平面设计&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng2.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;室内设计&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng3.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;UI设计&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng4.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;影视后期&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;navigator class&#x3D;&#39;box&#39; url&#x3D;&quot;&quot;&gt;</span><br><span class="line">      &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;kecheng5.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;WEB前端&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">  &lt;!-- &lt;&#x2F;view&gt; --&gt;</span><br><span class="line">&lt;&#x2F;scroll-view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里就是在可滚动视图组件里加了五个导航组件，每个导航组件里有图片和文字</p>
+<p>index.wxss新增：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* .majorcon&#123;</span><br><span class="line">  padding: 20rpx 0;</span><br><span class="line">  display: flex;</span><br><span class="line">  width: 825rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .box&#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">  width: 165rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .pic&#123;</span><br><span class="line">  width: 100rpx;</span><br><span class="line">  height: 100rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .txt&#123;</span><br><span class="line">  font-size: 26rpx;</span><br><span class="line">&#125; *&#x2F;</span><br><span class="line">.major&#123;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">  padding: 30rpx 0;</span><br><span class="line">&#125;</span><br><span class="line">.major .box&#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">  width: 165rpx;</span><br><span class="line">  display: inline-block;</span><br><span class="line">&#125;</span><br><span class="line">.major .pic&#123;</span><br><span class="line">  width: 100rpx;</span><br><span class="line">  height: 100rpx;</span><br><span class="line">&#125;</span><br><span class="line">.major .txt&#123;</span><br><span class="line">  font-size: 26rpx;</span><br><span class="line">  margin-top: 8rpx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为PS里量图标宽高是100px，所以pic里面宽高设置100rpx，字体大小同理</p>
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522000515689.png" alt="image-20210522000515689"></p>
+<p>下面一排可以横向滚动，截图看不出来</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV1WQ4y1T7D8?p=25" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1WQ4y1T7D8?p=25</a></p>
+<p><a href="https://my.oschina.net/cc4zj/blog/1831241" target="_blank" rel="noopener">https://my.oschina.net/cc4zj/blog/1831241</a></p>
+<p><a href="https://note.wyzda.com/e8d3d4c02933292f62cce95760ee40dc" target="_blank" rel="noopener">https://note.wyzda.com/e8d3d4c02933292f62cce95760ee40dc</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html</a></p>
+<p><a href="https://www.runoob.com/css/css-positioning.html" target="_blank" rel="noopener">https://www.runoob.com/css/css-positioning.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/22/wx-small-program-project-instance1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/05/23/wx-small-program-project-instance2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            微信小程序项目实例学习笔记2
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/05/20/wx-small-program2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">微信小程序学习笔记2</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

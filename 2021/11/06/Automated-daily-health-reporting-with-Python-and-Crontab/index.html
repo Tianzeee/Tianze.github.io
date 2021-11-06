@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Python与crontab实现自动化每日健康上报 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-Python与crontab自动化实现每日健康上报" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Python与crontab实现自动化每日健康上报
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/06/Automated-daily-health-reporting-with-Python-and-Crontab/" class="article-date">
+  <time datetime="2021-11-06T09:30:32.000Z" itemprop="datePublished">2021-11-06</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%A0%A1%E5%9B%AD%E7%9B%B8%E5%85%B3/">校园相关</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">11 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>持续了快两年的疫情，改变了很多事也打乱了很多人生活的节奏(对我这个死宅来说几乎没啥影响)，就是每天的健康上报经常会忘，所以为了偷懒，就突发奇想利用脚本实现每日自动化上报。<a id="more"></a></p>
+<h2 id="实现过程分析"><a href="#实现过程分析" class="headerlink" title="实现过程分析"></a>实现过程分析</h2><h3 id="电脑上对模拟器里的企业微信进行抓包分析"><a href="#电脑上对模拟器里的企业微信进行抓包分析" class="headerlink" title="电脑上对模拟器里的企业微信进行抓包分析"></a>电脑上对模拟器里的企业微信进行抓包分析</h3><p>因为健康打卡的url链接在首届和电脑的浏览器上不能直接打开，所以我想只能通过模拟器里装企业微信进行抓包分析，我用了网上比较推荐的夜神模拟器，用Bp抓包，首先设置模拟器wifi代理，然后安装CA证书，就可以将流量代理到bp上，这些基操就不多写了（网上文章很多），直接上图</p>
+<p>一共抓到三个包</p>
+<p>第一个包是一个302跳转，跳转到第二个包，这个包不知道是什么意思，感觉有点多余</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106181215379.png" alt="image-20211106181215379"></p>
+<p>第二个包才是真正的提交页面</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106181306381.png" alt="image-20211106181306381"></p>
+<p>第三个是表单提交的包</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106181408269.png" alt="image-20211106181408269"></p>
+<p>分析请求的url里，前面都是固定的，只有两个参数是变化的，一个是_time/后面的时间戳，另一个就是code/后面的一串编码，不知道是什么编码，我尝试用cyberchef的magic模块来进行检测</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106182907524.png" alt="image-20211106182907524"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106183308291.png" alt="image-20211106183308291"></p>
+<p>看起来好像是Base64编码，然而解密出来的内容是加密的，不知道算法就很难搞，不知道这个code参数是什么意思，这里就不管它了，因为我经过测试发现，即使只用这个单一不变的code来发包也同样能够健康上报成功。</p>
+<p>然后分析POST包的提交内容，显然是url编码，由于我Bp字体乱码问题用不了decode模块，直接去在线url解码平台，解码之后的数据如下</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106184420185.png" alt="image-20211106184420185"></p>
+<p>其实就是健康上报页面的form表单内的内容，这里我把学号和手机号进行了马赛克的脱敏操作防止信息泄露，举个例子其中的dkjtdz参数就是健康上报页面的打卡具体地址（必填），这里我一直写的是杭商院，其他的一些参数（如地区、绿码等等）对每个人来说都是通用的不用改，只需要改姓名、学号、手机号就行了。</p>
+<p>分析好之后就可以用Python进行POST发包实现健康上报了</p>
+<h3 id="利用Python的requests模块模拟POST请求发包来实现健康上报"><a href="#利用Python的requests模块模拟POST请求发包来实现健康上报" class="headerlink" title="利用Python的requests模块模拟POST请求发包来实现健康上报"></a>利用Python的requests模块模拟POST请求发包来实现健康上报</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import smtplib</span><br><span class="line">import time</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.utils import formataddr</span><br><span class="line"></span><br><span class="line"># name&#x3D;input(&quot;请输入姓名:&quot;)</span><br><span class="line"># xh&#x3D;input(&quot;请输入学号:&quot;)</span><br><span class="line"># sj&#x3D;input(&quot;请输入手机号:&quot;)</span><br><span class="line"># email&#x3D;input(&quot;请输入邮箱:&quot;)</span><br><span class="line"></span><br><span class="line">name&#x3D;&quot;朱文豪&quot;</span><br><span class="line">xh&#x3D;&quot;xxxxxxxx34&quot; </span><br><span class="line">sj&#x3D;&quot;xxxxxxxxxxx&quot;</span><br><span class="line">email&#x3D;&quot;1252448508@qq.com&quot;</span><br><span class="line">time&#x3D;time.strftime(&quot;%Y&#x2F;%m&#x2F;%d&quot;, time.localtime())</span><br><span class="line"></span><br><span class="line">def healthsubmit(name,xh,sj,time,email):</span><br><span class="line">    url&#x3D;&quot;http:&#x2F;&#x2F;qy.zjhzcc.edu.cn&#x2F;ami&#x2F;ihs.php&#x2F;Index&#x2F;icon_yqtb&#x2F;id&#x2F;27&#x2F;_sign&#x2F;5E29795015AFD5127A14DFA86A579F7140B159F3&#x2F;wtype&#x2F;student&#x2F;_time&#x2F;1635955731&#x2F;code&#x2F;qJP0xu9Cgiu9QUvpypw9gAJyBktl8jFiBQ37YZ90Q-A.html&quot;</span><br><span class="line">    headers&#x3D;&#123;</span><br><span class="line">        &quot;Host&quot;: &quot;qy.zjhzcc.edu.cn&quot;,</span><br><span class="line">        &quot;Content-Length&quot;:&quot;565&quot;,</span><br><span class="line">        &quot;Cache-Control&quot;: &quot;max-age&#x3D;0&quot;,</span><br><span class="line">        &quot;Origin&quot;: &quot;http:&#x2F;&#x2F;qy.zjhzcc.edu.cn&quot;,</span><br><span class="line">        &quot;Upgrade-Insecure-Requests&quot;: &quot;1&quot;,</span><br><span class="line">        &quot;Content-Type&quot;: &quot;application&#x2F;x-www-form-urlencoded&quot;,</span><br><span class="line">        &quot;User-Agent&quot;: &quot;Mozilla&#x2F;5.0 (Linux; Android 7.1.2; SM-G955N Build&#x2F;NRD90M.G955NKSU1AQDC; wv) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Version&#x2F;4.0 Chrome&#x2F;75.0.3770.143 Mobile Safari&#x2F;537.36 wxwork&#x2F;3.1.19 ColorScheme&#x2F;Light MicroMessenger&#x2F;7.0.1 NetType&#x2F;WIFI Language&#x2F;zh Lang&#x2F;zh&quot;,</span><br><span class="line">        &quot;Accept&quot;: &quot;text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,image&#x2F;webp,image&#x2F;apng,*&#x2F;*;q&#x3D;0.8,application&#x2F;signed-exchange;v&#x3D;b3&quot;,</span><br><span class="line">        &quot;Referer&quot;: &quot;http:&#x2F;&#x2F;qy.zjhzcc.edu.cn&#x2F;ami&#x2F;ihs.php&#x2F;Index&#x2F;icon_yqtb&#x2F;id&#x2F;27&#x2F;_sign&#x2F;5E29795015AFD5127A14DFA86A579F7140B159F3&#x2F;wtype&#x2F;student&#x2F;_time&#x2F;1635955731&#x2F;code&#x2F;qJP0xu9Cgiu9QUvpypw9gAJyBktl8jFiBQ37YZ90Q-A.html&quot;,</span><br><span class="line">        &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,</span><br><span class="line">        &quot;Accept-Language&quot;: &quot;zh-CN,zh;q&#x3D;0.9,en-US;q&#x3D;0.8,en;q&#x3D;0.7&quot;,</span><br><span class="line">        &quot;Cookie&quot;: &quot;PHPSESSID&#x3D;ph5pv47p86i2kk54es8kk8nm67&quot;,</span><br><span class="line">        &quot;X-Requested-With&quot;: &quot;com.tencent.wework&quot;,</span><br><span class="line">        &quot;Connection&quot;: &quot;close&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    data&#x3D;&#123;</span><br><span class="line">        &quot;tbrq&quot;:time,</span><br><span class="line">        &quot;txr&quot;:name,</span><br><span class="line">        &quot;lx&quot;:&quot;Xs&quot;,</span><br><span class="line">        &quot;gh&quot;:xh,</span><br><span class="line">        &quot;bm&quot;:&quot;人工智能与电子商务学院&quot;,</span><br><span class="line">        &quot;bj&quot;:&quot;计科1901&quot;,</span><br><span class="line">        &quot;sj&quot;:sj,</span><br><span class="line">        &quot;jtzz&quot;:&quot;低风险区（大杭州内）&quot;,</span><br><span class="line">        &quot;jtdz&quot;:&quot;&quot;,</span><br><span class="line">        &quot;addr&quot;:&quot;浙江省杭州市&quot;,</span><br><span class="line">        &quot;ip&quot;:&quot;36.22.152.16&quot;,</span><br><span class="line">        &quot;area&quot;:&quot;浙江省&quot;,</span><br><span class="line">        &quot;dkjtdz&quot;:&quot;杭商院&quot;,</span><br><span class="line">        &quot;yqfk&quot;:&quot;健康&quot;,</span><br><span class="line">        &quot;jkm&quot;:&quot;已申领，绿码&quot;,</span><br><span class="line">        &quot;xmfl&quot;:&quot;否&quot;,</span><br><span class="line">        &quot;hxrq&quot;:&quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    res&#x3D;requests.post(url,headers&#x3D;headers,data&#x3D;data)</span><br><span class="line">    #print(res.text)</span><br><span class="line">    my_sender &#x3D; &#39;1252448508@qq.com&#39;  # 发件人邮箱账号</span><br><span class="line">    my_pass &#x3D; &#39;xxxxxxxxx&#39;  # 发件人邮箱密码</span><br><span class="line">    my_user &#x3D; email  # 收件人邮箱账号，我这边发送给自己</span><br><span class="line">    ret &#x3D; True</span><br><span class="line">    try:</span><br><span class="line">        msg &#x3D; MIMEText(res.text, &#39;plain&#39;, &#39;utf-8&#39;)</span><br><span class="line">        msg[&#39;From&#39;] &#x3D; my_sender  # 括号里的对应发件人邮箱昵称、发件人邮箱账号</span><br><span class="line">        msg[&#39;To&#39;] &#x3D; my_user  # 括号里的对应收件人邮箱昵称、收件人邮箱账号</span><br><span class="line">        msg[&#39;Subject&#39;] &#x3D; &quot;每日疫情签到情况：&quot;  # 邮件的主题，也可以说是标题</span><br><span class="line"></span><br><span class="line">        server &#x3D; smtplib.SMTP_SSL(&quot;smtp.qq.com&quot;, 465)  # 发件人邮箱中的SMTP服务器，端口是25</span><br><span class="line">        server.login(my_sender, my_pass)  # 括号中对应的是发件人邮箱账号、邮箱密码</span><br><span class="line">        server.sendmail(my_sender, my_user, msg.as_string())  # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件</span><br><span class="line">        server.quit()  # 关闭连接</span><br><span class="line">    except Exception:  # 如果 try 中的语句没有执行，则会执行下面的 ret&#x3D;False</span><br><span class="line">        ret &#x3D; False</span><br><span class="line">    if ret:</span><br><span class="line">        print(&quot;邮件发送成功&quot;)</span><br><span class="line">        print(&quot;健康上报完成&quot;)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;邮件发送失败&quot;)</span><br><span class="line">        print(&quot;健康上报失败&quot;)</span><br><span class="line"></span><br><span class="line">if __name__&#x3D;&#x3D;&quot;__main__&quot;:</span><br><span class="line">    # print(&quot;---------------&quot;)</span><br><span class="line">    # print(&quot;[*]杭商院健康上报脚本启动&quot;)</span><br><span class="line">    healthsubmit(name,xh,sj,time,email)</span><br><span class="line">    healthsubmit(&quot;金正阳&quot;,&quot;xxxxxxxx31&quot;,&quot;xxxxxxxxxxx&quot;,time,&quot;xxxxxxx@qq.com&quot;)</span><br><span class="line">    healthsubmit(&quot;卢雨诚&quot;,&quot;xxxxxxxx36&quot;,&quot;xxxxxxxxxxx&quot;,time,&quot;xxxxxxx@qq.com&quot;)</span><br><span class="line">    healthsubmit(&quot;黄晔莹&quot;,&quot;xxxxxxxx26&quot;,&quot;xxxxxxxxxxx&quot;,time,&quot;xxxxxxx@qq.com&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>代码分为两个部分，第一部分是用requests模块进行POST请求，第二部分是用smtplib库将POST请求返回的上报完成情况发送到个人邮箱进行提醒，两部分都在healthsubmit函数中完成，出于安全的考虑我将代码中我和我室友的个人信息（学号、手机号）以及smtp的授权码进行了脱敏，本地测试成功，然后就将文件放到服务器上设置crontab定时任务，实现每日自动上报。</p>
+<h3 id="crontab定时任务设置"><a href="#crontab定时任务设置" class="headerlink" title="crontab定时任务设置"></a>crontab定时任务设置</h3><p>基本思路就是先将写好的python脚本上传到服务器，然后写一个.sh文件作为入口，然后在.sh文件中执行该py脚本（不用sh入口直接在crontab里运行py脚本也可以），然后设置crontab定时任务，让服务器在每天的0时1分的时候自动执行健康上报的脚本。</p>
+<p>1.在ssh客户端上安装lrzsz，然后就可以将本地文件直接传到服务器上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install lrzsz</span><br></pre></td></tr></table></figure>
+
+<p>2.sh文件内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;home&#x2F;ubuntu</span><br><span class="line">python3 healthsubmit.py &gt;&gt; hist</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106191417968.png" alt="c"></p>
+<p>3.设置crontab定时任务</p>
+<p>使用<code>crontab -e</code>命令来编辑cron任务，由于我之前用新的ssh客户端，用该命令进去是nano编辑器不是vim导致我不会退出，所以用了另一种方式来创建cron任务，先将要运行的命令放到rootcron文件，然后执行<code>crontab rootcron</code>就可以将该文件提交给cron进程。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/%E6%88%AA%E5%B1%8F2021-11-06%20%E4%B8%8B%E5%8D%887.18.00.png" alt="截屏2021-11-06 下午7.18.00"></p>
+<p>前面的五个参数分别代表：分钟、小时、日、月、星期，第六个参数就是要运行的命令</p>
+<p>所以我这里的意思是，在每天的0时1分自动运行写好的健康上报脚本，由于crontab运行完会有输出信息，日积月累，日志信息会非常大可能影响系统正常运行，所以就需要重定向，命令中的<code>&gt; /dev/null 2&gt;&amp;1</code>的意思就是将输出信息重定向到/dev/null，因为/dev/null代表空设备文件，它会丢弃一切写入的数据。</p>
+<p>经过今天（11月6日）的测试，我和我室友都成功在0时1分的时候完成了健康上报，成功解放了双手</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106193853117.png" alt="image-20211106193853117"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106193908993.png" alt="image-20211106193908993"></p>
+<h2 id="需要思考的问题"><a href="#需要思考的问题" class="headerlink" title="需要思考的问题"></a>需要思考的问题</h2><h3 id="code参数的具体含义"><a href="#code参数的具体含义" class="headerlink" title="code参数的具体含义"></a>code参数的具体含义</h3><p>这个问题虽然影响不大，但是如果能成功解码，获取其内容的话，就可以根据它的含义来让代码自动生成并编码进行拼接请求</p>
+<h3 id="cookie的时间问题"><a href="#cookie的时间问题" class="headerlink" title="cookie的时间问题"></a>cookie的时间问题</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106195546706.png" alt="image-20211106195546706"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20211106200259415.png" alt="image-20211106200259415"></p>
+<p>这是我在手机端抓的包，可以看到Set-Cookie的expire过期时间为1969-12-31T23:59:59.000Z，经过查询在Set-Cookie时，如果没有设置expire过期时间的话，chrome就会显示为1969-12-31T23:59:59.000Z，这个过期时间代表这个cookie是session cookie（会话cookie），浏览器关闭之后就失效了</p>
+<p>但是奇怪的是，这个脚本我测试了两天，即使企业微信的cookie由于我在手机端和电脑端的切换导致cookie已经发生了变化，但是我用前两天的cookie进行请求也成功完成了健康上报，所以不知道这个cookie我能用到什么时候</p>
+<h3 id="代码的可用性有待提高"><a href="#代码的可用性有待提高" class="headerlink" title="代码的可用性有待提高"></a>代码的可用性有待提高</h3><p>我写的Python代码太low了，需要事先在代码中写好需要上报的人的个人信息，我想如果之后有更多的人需要我帮忙挂的话，我又要改代码然后再重新传到服务器上，这显然是麻烦且没必要的。所以如果要改的话，我想应该再加上数据库的联动，有了数据库就可以通过对数据库的增删改来控制需要挂脚本的人，或者可以做个GUI的图形化工具，发给别人来提交个人信息到数据库。另外，还有一个思路就是创建一个excel表格，只要增删表格内容，然后让python自动获取表中的内容进行健康上报就行了。这两个方法本质上都是对一个可变数据集的读取然后循环进行健康上报。</p>
+<p>这些仅仅是我的个人想法，如果以后有时间和需求的话，我可能会改进一下代码。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://testingpai.com/article/1612340448369" target="_blank" rel="noopener">http://testingpai.com/article/1612340448369</a></p>
+<p><a href="https://www.cnblogs.com/wjrblogs/p/13683812.html" target="_blank" rel="noopener">https://www.cnblogs.com/wjrblogs/p/13683812.html</a></p>
+<p><a href="https://tianzeee.github.io/2021/03/31/python-requests-learning/" target="_blank" rel="noopener">https://tianzeee.github.io/2021/03/31/python-requests-learning/</a></p>
+<p><a href="https://www.cnblogs.com/netsa/p/7992280.html" target="_blank" rel="noopener">https://www.cnblogs.com/netsa/p/7992280.html</a></p>
+<p><a href="https://www.136.la/shida/show-108833.html" target="_blank" rel="noopener">https://www.136.la/shida/show-108833.html</a></p>
+<p><a href="https://www.petefreitag.com/item/854.cfm" target="_blank" rel="noopener">https://www.petefreitag.com/item/854.cfm</a></p>
+<p><a href="https://dengxj.blog.csdn.net/article/details/104853830" target="_blank" rel="noopener">https://dengxj.blog.csdn.net/article/details/104853830</a></p>
+<p><a href="https://blog.csdn.net/Deep_Rayne/article/details/109599171" target="_blank" rel="noopener">https://blog.csdn.net/Deep_Rayne/article/details/109599171</a></p>
+<p><a href="https://www.cnblogs.com/kerrycode/p/3238346.html" target="_blank" rel="noopener">https://www.cnblogs.com/kerrycode/p/3238346.html</a></p>
+<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html" target="_blank" rel="noopener">https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/11/06/Automated-daily-health-reporting-with-Python-and-Crontab/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2021/05/30/JAVA-GUI/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">JAVA实验课大作业笔记</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

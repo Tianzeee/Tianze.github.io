@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    JAVA实验课大作业笔记 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-JAVA实验课大作业笔记" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  JAVA实验课大作业笔记
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/30/JAVA-GUI/" class="article-date">
+  <time datetime="2021-05-29T16:06:01.000Z" itemprop="datePublished">2021-05-30</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>Java实验大作业是做一个GUI，我分配到的是高铁售票系统<a id="more"></a></p>
+<h2 id="简单交互"><a href="#简单交互" class="headerlink" title="简单交互"></a>简单交互</h2><p>初期的时候以为只要做一个在控制台(Console)里交互显示的就可以了，做完找老师验收才知道要做GUI。</p>
+<p>看了老师给的作品，看懂之后，照着它依葫芦画瓢，抄抄改改写写做完了交互的。</p>
+<p>写之前，根据自己分配到的题目，列了个提纲规划一下自己要实现的功能以及要创建的数据表有哪些，如下：(字丑见谅Orz)</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529221703751.png" alt="image-20210529221703751"></p>
+<p>大概过程就是创建三个对象分别为Paid(已购信息)、Passenger(乘客信息)、Railway(高铁信息)，每个对象里面都是简单的定义成员变量以及给每个成员变量写好设定方法(set)和获取方法(get)，然后写数据库查询(sql)的类，然后写对应不同功能的视图类(view)，最后就是创建一个主程序入口用户交互。项目结构如下：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529222511025.png" alt="image-20210529222511025"></p>
+<p>util包和window包是后面GUI的时候写的</p>
+<p>mysql表及结构：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530001312358.png" alt="image-20210530001312358"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530001349781.png" alt="image-20210530001349781"></p>
+<h2 id="GUI图形化"><a href="#GUI图形化" class="headerlink" title="GUI图形化"></a>GUI图形化</h2><p>本来也想看看老师给的成品，然后自己抄抄改改写写就好了，但是好多GUI的东西都看不懂，索性就直接把第九章的自学了，把书上的每一个Example都敲了一遍，学完再回来写GUI就觉得简单多了</p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>看书自学完第九章GUI，看书的时候除了学了GUI组件之外还学到了之前老师没讲到的内部类和Lambda表达式，看的时候有些地方不是很明白，但不影响我coding。然后看书上用的插件是JavaFX，照着书上教程安装结果报错了，网上搜了很久，发现关于这个插件的信息很少而且有的也是年代久远，没有找到解决办法，于是搜了下其他的GUI插件，就找到了WindowBuilder的教程(前两篇参考文章)，讲的很详细，安装完之后看了教程基本学会了怎么用。</p>
+<h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>跟之前一样，写之前先用笔写了个草稿，如下，就是规划好了菜单栏。(字太丑了~~)</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529232559640.png" alt="image-20210529232559640"></p>
+<h3 id="主要过程"><a href="#主要过程" class="headerlink" title="主要过程"></a>主要过程</h3><p>登录界面直接复制的，懒得写了。把老师给的成品看了一下，登录进之后主要就是一个主界面(MainFrame)，然后菜单栏里的每个界面对应一个java文件，每个界面无非也就是初始化(initComponents)然后再加上一些响应事件。界面用插件设置好组件并且写完动作事件之后，在最后设置可见，然后在主界面里面的动作事件里<code>new classname()</code>就可以响应了</p>
+<h3 id="学到的点"><a href="#学到的点" class="headerlink" title="学到的点"></a>学到的点</h3><p>1.每个界面用插件做好之后，在最后加上下面两句代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setLocationRelativeTo(getOwner());</span><br><span class="line">setVisible(true);</span><br></pre></td></tr></table></figure>
+
+<p>第一个可加可不加，只是一个相对位置。第二个一定要加，不然点击就不会显示了</p>
+<p>2.写的时候遇到了要把String类型转为int类型，网上搜了下可以用<code>Integer.parseInt()</code>函数实现</p>
+<p>3.我看老师给的作品里有提示框，查询完之后根据查询返回的int结果来判断是否成功，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JOptionPane.showMessageDialog(null, &quot;添加成功&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>提示并退出</p>
+<p>4.关闭窗体用<code>dispose()</code>可以实现，比如在退出按钮的动作里加上这个就可以实现退出了</p>
+<h3 id="查询多结果处理"><a href="#查询多结果处理" class="headerlink" title="查询多结果处理"></a>查询多结果处理</h3><p>查询所有车次信息这种功能可能会出现多条数据，一开始不知道怎么办，因为他查出来的数据是动态的，有多少条我不知道不能提前做好多少个文本框，另外因为我没法运行老师的作品，不知道它是怎么写的。所以自己想了个办法，就是创建JScrollPane，里面再加一个JPanel，每一个查出的结果都创建为一个JTextField然后加到JPanel里，这样不就可以实现滚动了嘛，多了就可以有滚动条了，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">btnNewButton.addActionListener(new ActionListener() &#123;</span><br><span class="line">			public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">				int n&#x3D;0,c&#x3D;0;</span><br><span class="line">				String inf;</span><br><span class="line">				List&lt;Railway&gt; list&#x3D;RailwayView.allRailwayView();</span><br><span class="line">				for(Railway r:list) &#123;					</span><br><span class="line">					n++;</span><br><span class="line">					JTextField textField &#x3D; new JTextField();</span><br><span class="line">					textField.setBounds(0, c, 412, 21);</span><br><span class="line">					panel.add(textField);</span><br><span class="line">					textField.setColumns(10);</span><br><span class="line">					inf&#x3D;&quot;日期:&quot;+r.getDate()+&quot; 时间:&quot;+r.getTime()+&quot; 商务座:&quot;+r.getSy()+&quot; 一等座:&quot;+r.getYy()+&quot; 二等座:&quot;+r.getEy()+&quot; 车号:&quot;+r.getCh();</span><br><span class="line">					textField.setText(inf);</span><br><span class="line">					c+&#x3D;20;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235015172.png" alt="image-20210529235015172"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235023201.png" alt="image-20210529235023201"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235029134.png" alt="image-20210529235029134"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235034975.png" alt="image-20210529235034975"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210529235042695.png" alt="image-20210529235042695"></p>
+<p>具体的功能页面懒得截了</p>
+<h2 id="登录功能存在SQL注入漏洞"><a href="#登录功能存在SQL注入漏洞" class="headerlink" title="登录功能存在SQL注入漏洞"></a>登录功能存在SQL注入漏洞</h2><p>因为我的登录功能的java是直接复制老师的，我看到它里面用的是statement来查询的，再加上它的查询语句是直接拼接且没有做任何过滤，导致了漏洞的存在。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530104806423.png" alt="image-20210530104806423"></p>
+<p>这里我使用万能密码<code>&#39; or 1=1#</code>就能绕过登录验证了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530104953371.png" alt="image-20210530104953371"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530105008468.png" alt="image-20210530105008468"></p>
+<p>成功进入并且是管理员身份，因为在user表中第一条数据就是admin用户，用万能密码登录后会返回所有数据，根据登录的逻辑<code>result.next()</code>取到的数据就是第一条admin用户，所以登录的身份是admin</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530105258266.png" alt="image-20210530105258266"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530105536845.png" alt="image-20210530105536845"></p>
+<p>如果不是admin用户的话，菜单栏里的前两个菜单是被禁用的。</p>
+<p>修复方法是使用prepareStatement预编译SQL语句，把查询函数用prepareStatement修改了下果然万能密码失效了，网上查了些文章，大概原理就是预编译的sql语句是带着占位符的，并且查询前已经被预编译一次了，之后不会再次编译，只会把接受到动态参数当成一个属性进行解析查询，这样即使接收到<code>&#39; or 1=1</code>这样的参数也只会把他当成属性值来处理而不会作为SQL指令，讲得不是很清楚，可查看(前两篇除外的)参考文章。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530110456054.png" alt="image-20210530110456054"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210530110841874.png" alt="image-20210530110841874"></p>
+<p>但是使用prepareStatement就一定安全了吗，前几天刚好看到Ms08067安全实验室公众号里发的Java注入漏洞精选文章里看到一篇名为 “<a href="https://www.cnblogs.com/iyangyuan/p/4809494.html" target="_blank" rel="noopener">用java PreparedStatement就不用担心sql注入了吗？</a>“ 的文章，顿时吸引了我的注意力，因为我觉得预编译应该不能再注入了，看完之后又学到了新的思路。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>写这个GUI的过程遇到了很多的问题，越做到后面越感觉力不从心，因为我觉得我一开始的草稿没有写好，每个数据库里的表的结构没有协调好，因为一个功能(比如购票、退票等等)会牵扯到很多数据表牵一发而动全身，比如购票之后会在paid表里加一条数据，然后passenger表也要相应的加一条数据，但是这个联动没有做好，导致可能购票成功之后只在paid表里加了数据，passenger表没有加上，所以最后我修改了一些东西，把passenger表里的好多列都删了。</p>
+<p>写完之后感觉还有很多优化的点，比如购买了没有的车次要怎么处理，查询没有的车号要怎么处理等等，以及表的结构也有很多问题，基本的功能实现了，但是觉得写的非常烂，还有很大的提升空间。</p>
+<p>所以总结下来就是前期准备工作很重要，要提前想好每个表要有哪些字段，才可以完美地实现需要的功能。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>链接：<a href="https://pan.baidu.com/s/1yOZf_D4k8T91tw1ol_Lo5Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1yOZf_D4k8T91tw1ol_Lo5Q</a><br>提取码：xcsy </p>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>这个Java的GUI感觉可以写一些小工具，之前ctf做misc题的时候用到的很多工具(比如Stegsolve等等)可能就是用Java的GUI来写的把，以后有想法的话可以自己做一些小工具，感觉挺好玩的。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/cnds123/article/details/103237529" target="_blank" rel="noopener">https://blog.csdn.net/cnds123/article/details/103237529</a></p>
+<p><a href="https://blog.csdn.net/yerenyuan_pku/article/details/82861589" target="_blank" rel="noopener">https://blog.csdn.net/yerenyuan_pku/article/details/82861589</a></p>
+<p><a href="https://www.zhihu.com/question/43581628" target="_blank" rel="noopener">https://www.zhihu.com/question/43581628</a></p>
+<p><a href="https://www.cnblogs.com/yaochc/p/4957833.html" target="_blank" rel="noopener">https://www.cnblogs.com/yaochc/p/4957833.html</a></p>
+<p><a href="https://www.php.cn/mysql-tutorials-418692.html" target="_blank" rel="noopener">https://www.php.cn/mysql-tutorials-418692.html</a></p>
+<p><a href="https://blog.csdn.net/weixin_45179130/article/details/90761966" target="_blank" rel="noopener">https://blog.csdn.net/weixin_45179130/article/details/90761966</a></p>
+<p><a href="https://juejin.cn/post/6844904036106256397" target="_blank" rel="noopener">https://juejin.cn/post/6844904036106256397</a></p>
+<p><a href="https://blog.nowcoder.net/n/be73b8f592504ae8b1d00368433061be" target="_blank" rel="noopener">https://blog.nowcoder.net/n/be73b8f592504ae8b1d00368433061be</a></p>
+<p><a href="https://www.cnblogs.com/iyangyuan/p/4809494.html" target="_blank" rel="noopener">https://www.cnblogs.com/iyangyuan/p/4809494.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/30/JAVA-GUI/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/11/06/Automated-daily-health-reporting-with-Python-and-Crontab/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Python与crontab实现自动化每日健康上报
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/05/23/wx-small-program3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">微信小程序学习笔记3</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

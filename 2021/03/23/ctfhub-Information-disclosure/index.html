@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    CTFHUB信息泄露 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-CTFHUB信息泄露" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  CTFHUB信息泄露
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/23/ctfhub-Information-disclosure/" class="article-date">
+  <time datetime="2021-03-23T08:21:26.000Z" itemprop="datePublished">2021-03-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="0x00目录遍历"><a href="#0x00目录遍历" class="headerlink" title="0x00目录遍历"></a>0x00目录遍历</h2><p>这题比较简单，目录一个个翻过去就能找到flag<a id="more"></a></p>
+<h2 id="0x01PHPINFO"><a href="#0x01PHPINFO" class="headerlink" title="0x01PHPINFO"></a>0x01PHPINFO</h2><blockquote>
+<p><code>phpinfo()</code> 是php中查看相关信息的函数，当在页面中执行<code>phpinfo()</code>函数时，php会将自身的所有信息全部打印出来。在phpinfo中会泄露很多服务端的一些信息.例如安装的一些模块、网站绝对路径、服务器自身的操作系统、使用的组件版本等等，在phpinfo中获得的这些信息会为下一步的渗透/做题提供一些帮助</p>
+</blockquote>
+<p>打开题目，直接ctrl+f搜索ctfhub</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210322213030561.png" alt="image-20210322213030561"></p>
+<h2 id="备份文件下载"><a href="#备份文件下载" class="headerlink" title="备份文件下载"></a>备份文件下载</h2><h3 id="网站源码"><a href="#网站源码" class="headerlink" title="网站源码"></a>网站源码</h3><blockquote>
+<p>当开发人员在线上环境中对源代码进行了备份操作，并且将备份文件放在了 web 目录下，就会引起网站源码泄露。</p>
+</blockquote>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323081920199.png" alt="image-20210323081920199"></p>
+<p>1.dirsearch扫描</p>
+<p><code>python3 dirsearch.py -u http://challenge-cf9faace3a6f6f4f.sandbox.ctfhub.com:10080/ -e *</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323082219705.png" alt="image-20210323082219705"></p>
+<p>可以看到有一个<a href="http://www.zip备份文件，访问并下载" target="_blank" rel="noopener">www.zip备份文件，访问并下载</a></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323082504903.png" alt="image-20210323082504903"></p>
+<p>注意，下载文件里没有flag，需要访问线上环境，也就是<a href="http://challenge-cf9faace3a6f6f4f.sandbox.ctfhub.com:10080/flag_884925986.txt" target="_blank" rel="noopener">http://challenge-cf9faace3a6f6f4f.sandbox.ctfhub.com:10080/flag_884925986.txt</a>  得到flag</p>
+<p>2.写python脚本</p>
+<p>参考CSDN上某位师傅的脚本</p>
+<figure class="highlight plain"><figcaption><span>requests</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">url &#x3D; &quot;http:&#x2F;&#x2F;challenge-d43c376975fe79c9.sandbox.ctfhub.com:10080&#x2F;&quot;</span><br><span class="line">a &#x3D; [&#39;web&#39;,&#39;website&#39;,&#39;backup&#39;,&#39;back&#39;,&#39;www&#39;,&#39;wwwroot&#39;,&#39;temp&#39;]</span><br><span class="line">b &#x3D; [&#39;tar&#39;,&#39;tar.gz&#39;,&#39;zip&#39;,&#39;rar&#39;]</span><br><span class="line"></span><br><span class="line">for i in a:</span><br><span class="line">	for j in b:</span><br><span class="line">		pos &#x3D; url + i + &#39;.&#39; + j</span><br><span class="line">		r &#x3D; requests.get(pos)</span><br><span class="line">		print(i)</span><br><span class="line">		print(j)</span><br><span class="line">		print(r)</span><br><span class="line">————————————————</span><br><span class="line">版权声明：本文为CSDN博主「这里是青」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</span><br><span class="line">原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;a597934448&#x2F;article&#x2F;details&#x2F;105431367</span><br></pre></td></tr></table></figure>
+
+<h3 id="bak文件"><a href="#bak文件" class="headerlink" title="bak文件"></a>bak文件</h3><blockquote>
+<p>考点：bak文件泄露</p>
+<p>有些时候网站管理员可能为了方便，会在修改某个文件的时候先复制一份，将其命名为xxx.bak。而大部分Web Server对bak文件并不做任何处理，导致可以直接下载，从而获取到网站某个文件的源代码</p>
+</blockquote>
+<p>1.直接访问<a href="http://challenge-690f816819d034d4.sandbox.ctfhub.com:10080/index.php.bak下载打开得到flag" target="_blank" rel="noopener">http://challenge-690f816819d034d4.sandbox.ctfhub.com:10080/index.php.bak下载打开得到flag</a></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323083630723.png" alt="image-20210323083630723"></p>
+<p>2.dirsearch扫描</p>
+<p>找不到文件，就扫一下看看</p>
+<p>3.curl访问</p>
+<p>命令行里<code>curl http://challenge-690f816819d034d4.sandbox.ctfhub.com:10080/index.php.bak</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323083933053.png" alt="image-20210323083933053"></p>
+<h3 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h3><blockquote>
+<p>当开发人员在线上环境中使用 vim 编辑器，在使用过程中会留下 vim 编辑器缓存，当vim异常退出时，缓存会一直留在服务器上，引起网站源码泄露。</p>
+<p>考点：vim交换文件名</p>
+<p>在使用vim时会创建临时缓存文件，关闭vim时缓存文件则会被删除，当vim异常退出后，因为未处理缓存文件，导致可以通过缓存文件恢复原始文件内容</p>
+<p>以 index.php 为例：第一次产生的交换文件名为 <code>.index.php.swp</code></p>
+<p>再次意外退出后，将会产生名为 <code>.index.php.swo</code> 的交换文件</p>
+<p>第三次产生的交换文件则为 <code>.index.php.swn</code></p>
+</blockquote>
+<p>注意：index前面有’.’</p>
+<p>1.curl访问</p>
+<p>但是不知道为什么我curl不能直接查看，需要用–output -1.txt来导出文件</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323084800873.png" alt="image-20210323084800873"></p>
+<p>2.直接访问.index.php.swp文件下载查看</p>
+<p><a href="http://challenge-24655e45a7e82dcd.sandbox.ctfhub.com:10080/.index.php.swp" target="_blank" rel="noopener">http://challenge-24655e45a7e82dcd.sandbox.ctfhub.com:10080/.index.php.swp</a></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323084941771.png" alt="image-20210323084941771"></p>
+<p>看了官方wp，除了用编辑器查看外，可以用vim编辑原有文件，例如下载的<code>.index.php.swp</code>，则说明之前编辑的文件名为<code>index.php</code></p>
+<p><code>vim index.php</code>会提示是否恢复，选择R恢复查看原始内容，具体内容可以看官方wp<a href="https://writeup.ctfhub.com/Skill/Web/信息泄露/备份文件下载/qRLpeHeAKJtXs9uV68pmjv.html" target="_blank" rel="noopener">https://writeup.ctfhub.com/Skill/Web/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/qRLpeHeAKJtXs9uV68pmjv.html</a></p>
+<h3 id="DS-Store"><a href="#DS-Store" class="headerlink" title=".DS_Store"></a>.DS_Store</h3><blockquote>
+<p>.DS_Store 是 Mac OS 保存文件夹的自定义属性的隐藏文件。通过.DS_Store可以知道这个目录里面所有文件的清单。</p>
+</blockquote>
+<p>1.直接访问下载</p>
+<p><a href="http://challenge-698e43df72eaa635.sandbox.ctfhub.com:10080/.DS_Store" target="_blank" rel="noopener">http://challenge-698e43df72eaa635.sandbox.ctfhub.com:10080/.DS_Store</a></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323085943221.png" alt="image-20210323085943221"></p>
+<p>不知道为什么这里有空格隔开了，自行把空格去掉然后访问</p>
+<p>2.curl</p>
+<p>3.利用工具解析</p>
+<p>官方wp中写到可以用Python-dsstore来解析.DS_Store文件<a href="https://writeup.ctfhub.com/Skill/Web/信息泄露/备份文件下载/R95hfDpwDbP2gQ6uEhj3x.html" target="_blank" rel="noopener">https://writeup.ctfhub.com/Skill/Web/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD/R95hfDpwDbP2gQ6uEhj3x.html</a></p>
+<h2 id="Git泄露"><a href="#Git泄露" class="headerlink" title="Git泄露"></a>Git泄露</h2><h3 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h3><blockquote>
+<p>当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当,可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。</p>
+</blockquote>
+<p>扫描发现git目录有内容</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323092056411.png" alt="image-20210323092056411"></p>
+<p>然后用Githack工具clone目标源代码到本地</p>
+<p><code>python GitHack.py http://challenge-bb79305d79fd9c62.sandbox.ctfhub.com:10080/.git/</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323133647117.png" alt="image-20210323133647117"></p>
+<p>执行git log查看历史记录</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323133738535.png" alt="image-20210323133738535"></p>
+<p>可以看到当前版本为remove flag，而flag在add flag的提交记录里。</p>
+<p>解法一：通过与add flag对比</p>
+<p><code>git diff 330e</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323134023453.png" alt="image-20210323134023453"></p>
+<p>解法二：切换到add flag这个版本</p>
+<p><code>git reset --hard 330e</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323134213626.png" alt="image-20210323134213626"></p>
+<p>得到一个txt文件，打开获得flag</p>
+<h3 id="Stash"><a href="#Stash" class="headerlink" title="Stash"></a>Stash</h3><blockquote>
+<p>考点：git 泄露 <code>.git/refs/stash</code></p>
+<p>stash 用于保存 git 工作状态到 git 栈，在需要的时候再恢复。</p>
+</blockquote>
+<p>用Githack工具把源代码clone到本地</p>
+<p><code>python GitHack http://challenge-62efc1b2c479abdf.sandbox.ctfhub.com:10080/.git/</code></p>
+<p>git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。</p>
+<p>git stash pop: 从Git栈中读取最近一次保存的内容，恢复工作区的相关内容。由于可能存在多个Stash的内容，所以用栈来管理，pop会从最近的一个stash中读取内容并恢复。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323135315081.png" alt="image-20210323135315081"></p>
+<h3 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h3><p>直接Githack下载到本地就有flag</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323135819169.png" alt="image-20210323135819169"></p>
+<h2 id="SVN泄露"><a href="#SVN泄露" class="headerlink" title="SVN泄露"></a>SVN泄露</h2><blockquote>
+<p>当开发人员使用 SVN 进行版本控制，对站点自动部署。如果配置不当,可能会将.svn文件夹直接部署到线上环境。这就引起了 SVN 泄露漏洞。</p>
+</blockquote>
+<p>这里贴一个漏洞库<a href="https://vulwiki.readthedocs.io/zh_CN/latest/web/svn/" target="_blank" rel="noopener">https://vulwiki.readthedocs.io/zh_CN/latest/web/svn/</a></p>
+<p>利用dvcs-ripper工具里的rip-svn.pl脚本进行clone.我在本地跑脚本报错，所以就在kali里测试</p>
+<p><code>./rip-svn.pl -u http://challenge-cf93aa0fbd9e2635.sandbox.ctfhub.com:10080/.svn/</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323160142906.png" alt="image-20210323160142906"></p>
+<p><code>cat wc.db | grep -a flag</code></p>
+<p>有个flag文件，尝试访问了一下，并没有得到flag</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323160444530.png" alt="image-20210323160444530"></p>
+<p>去pristine文件夹看看，成功找到flag</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323160717397.png" alt="image-20210323160717397"></p>
+<h2 id="HG泄露"><a href="#HG泄露" class="headerlink" title="HG泄露"></a>HG泄露</h2><blockquote>
+<p>当开发人员使用 Mercurial 进行版本控制，对站点自动部署。如果配置不当,可能会将.hg 文件夹直接部署到线上环境。这就引起了 hg 泄露漏洞。</p>
+</blockquote>
+<p>还是用dvcs-ripper下载源代码</p>
+<p><code>./rip-hg.pl -v -u http://challenge-151201cbebbbeb85.sandbox.ctfhub.com:10080/.hg/</code></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323161442938.png" alt="image-20210323161442938"></p>
+<p>查看.hg/store/fncache或者直接<code>grep -r flag *</code>找到flag文件，访问得到flag</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210323161756847.png" alt="image-20210323161756847"></p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://blog.csdn.net/a597934448/article/details/105431367" target="_blank" rel="noopener">https://blog.csdn.net/a597934448/article/details/105431367</a></p>
+<p><a href="https://writeup.ctfhub.com/categories/Skill/Web/信息泄露/" target="_blank" rel="noopener">https://writeup.ctfhub.com/categories/Skill/Web/%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2/</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/1682519" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1682519</a></p>
+<p><a href="https://www.jianshu.com/p/ea88b6a22fcb" target="_blank" rel="noopener">https://www.jianshu.com/p/ea88b6a22fcb</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/03/23/ctfhub-Information-disclosure/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/03/24/nepctf-little_trick/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            nepctf-little_trick
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/03/03/SSRF/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">浅谈SSRF</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

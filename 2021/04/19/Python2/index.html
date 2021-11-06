@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Python学习笔记2 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-Python学习笔记2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Python学习笔记2
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/19/Python2/" class="article-date">
+  <time datetime="2021-04-19T13:53:53.000Z" itemprop="datePublished">2021-04-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">9 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>循环语句、字符串、列表<a id="more"></a></p>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p>for 循环可以遍历任何可迭代对象，迭代对象有：字符串、列表、元组、字典等等</p>
+<p><code>range()</code>函数返回一个可迭代对象(类型为对象)</p>
+<p>range(stop)  start默认从0开始<br>range(start, stop[, step])  左闭右开区间[start,stop) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#range三种写法</span><br><span class="line">for i in range(5): #[0,5)</span><br><span class="line">for i in range(0,5): #[0,5)</span><br><span class="line">for i in range(0,5,1)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#遍历字符串</span><br><span class="line">city&#x3D;&quot;hangzhou&quot;</span><br><span class="line">for i in city:</span><br><span class="line">	print(i,end&#x3D;&#39;\t&#39;) #end结尾输出</span><br><span class="line">#遍历列表</span><br><span class="line">a&#x3D;[&quot;aa&quot;,&#39;bb&#39;,&#39;cc&#39;,&#39;dd&#39;]</span><br><span class="line">for i in a:</span><br><span class="line">	print(i,end&#x3D;&#39;\t&#39;)</span><br><span class="line">for i in range(len(a)): #列表索引必须是整数</span><br><span class="line">    print(i,a[i])</span><br></pre></td></tr></table></figure>
+
+<p>以求1到100的和为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sum&#x3D;0</span><br><span class="line">for i in range(1,101):</span><br><span class="line">	sum+&#x3D;i</span><br><span class="line">print(sum)</span><br></pre></td></tr></table></figure>
+
+<p>用一行输出的简便写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(sum(range(1,101)))</span><br></pre></td></tr></table></figure>
+
+<p>这题在四月份HW面试深信服的时候面试官问过一模一样的问题，当时只知道用for循环所以没答出来印象很深，真是书到用时方恨少。</p>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while 判断条件(condition)：</span><br><span class="line">    执行语句(statements)……</span><br></pre></td></tr></table></figure>
+
+<p>python没有do while循环</p>
+<p>python中while可以用else语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">count&#x3D;0</span><br><span class="line">while count&lt;5:</span><br><span class="line">	print(count,&quot;小于5&quot;)</span><br><span class="line">	count+&#x3D;1 #python没有i++的写法</span><br><span class="line">else:</span><br><span class="line">	print(count,&quot;大于等于5&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>这个else感觉有点鸡肋，意义不大啊，不加也一样。</p>
+<h2 id="break、continue、pass"><a href="#break、continue、pass" class="headerlink" title="break、continue、pass"></a>break、continue、pass</h2><p>break结束循环</p>
+<p>continue跳过本次循环</p>
+<p>pass是空语句，用作占位语句，不做任何事情</p>
+<p>用for循环写一个九九乘法表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in range(1,10):</span><br><span class="line">    for j in range(1,i+1):</span><br><span class="line">        print(f&quot;&#123;i&#125;*&#123;j&#125;&#x3D;&#123;i*j&#125;&quot;,end&#x3D;&#39;\t&#39;)</span><br><span class="line">    print(&quot;\n&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>字符串用单引号、双引号、三引号括起来，特殊字符用<code>\</code>转义，因为单引号在内容上用的比较多(如英文I’m a boy)所以推荐用双引号包裹</p>
+<p>python源码文件默认用<code>utf-8</code>编码，字符串用<code>unicode</code>编码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">word&#x3D;&#39;字符串&#39;</span><br><span class="line">sentence&#x3D;&#39;这是一个句子&#39;</span><br><span class="line">paragraph&#x3D;&#39;&#39;&#39;</span><br><span class="line">	这是第一段</span><br><span class="line">	这是第二段</span><br><span class="line">&#39;&#39;&#39; </span><br><span class="line">print(word)</span><br><span class="line">print(sentence)</span><br><span class="line">print(paragraph)</span><br></pre></td></tr></table></figure>
+
+<p>常用转义符：<code>\\</code>、<code>\&#39;</code>、<code>\&quot;</code>、<code>\n</code>、<code>\t</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#my_str&#x3D;&quot;I&#39;m a student.&quot;</span><br><span class="line">my_str&#x3D;&#39;I\&#39;m a student.&#39;</span><br><span class="line">print(my_str)</span><br></pre></td></tr></table></figure>
+
+<p>字符串拼接：</p>
+<p><code>+</code>拼接字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str&#x3D;&quot;hangzhou&quot;</span><br><span class="line">print(str+&quot;,你好&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>字符串截取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">str&#x3D;&quot;hangzhou&quot;</span><br><span class="line">print(str[0:6]) #切片，从0开始，截取长度为6，左闭右开区间，同range(start,end,step)</span><br><span class="line">print(str[0:7:2])</span><br><span class="line">print(str[3:])</span><br><span class="line">print(str[:5])</span><br><span class="line">print(str*3) #*重复打印</span><br><span class="line">print(&quot;hello\nhangzhou&quot;)</span><br><span class="line">print(r&quot;hello\nhangzhou&quot;) #在字符串前面加r，raw原始字符串不转义内容</span><br></pre></td></tr></table></figure>
+
+<p>字符串方法</p>
+<p>一共有40种方法，下面是常用的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.decode(&quot;utf-8&quot;)</span><br><span class="line">.encode(&quot;utf-8&quot;)</span><br><span class="line">.isalnum(),所有字符都是字母或数字返回true否则false</span><br><span class="line">.isalpha(),所有字符都是字母返回true否则false</span><br><span class="line">.isdigit(),字符串只包含数字则true否则false</span><br><span class="line">.isnumeric()，字符串只包含数字则true否则false，这个与上面的区别是罗马数字和汉字数字等等不同</span><br><span class="line">.join(seq)方法用于将序列中的元素以指定的字符连接生成一个新的字符串。序列包括字符串、列表和元组</span><br><span class="line">.len(string)获取字符串长度，方便循环</span><br><span class="line">.lstrip([chars])删除左边的空格或指定字符,chars指定字符，默认为空格</span><br><span class="line">.rstrip([chars])删除右边的空格或指定字符,chars指定字符，默认为空格</span><br><span class="line">.split(str&#x3D;&quot;&quot;, num&#x3D;string.count(str))通过指定分隔符对字符串进行切片，如果第二个参数 num 有指定值，则分割为 num+1 个子字符串。和join正好相反</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">s1&#x3D;&quot;-&quot;</span><br><span class="line">s2&#x3D;&quot;&quot;</span><br><span class="line">seq&#x3D;(&quot;z&quot;,&quot;w&quot;,&quot;h&quot;)</span><br><span class="line">print(s1.join(seq)) #输出z-w-h</span><br><span class="line">print(s2.join(seq)) #输出zwh</span><br><span class="line"></span><br><span class="line">str &#x3D; &quot;this is string example....wow!!!&quot;</span><br><span class="line">print (str.split( ))       # 以空格为分隔符</span><br><span class="line">print (str.split(&#39;i&#39;,1))   # 以 i 为分隔符</span><br><span class="line">print (str.split(&#39;w&#39;))     # 以 w 为分隔符</span><br><span class="line">#输出如下:</span><br><span class="line">#[&#39;this&#39;, &#39;is&#39;, &#39;string&#39;, &#39;example....wow!!!&#39;]</span><br><span class="line">#[&#39;th&#39;, &#39;s is string example....wow!!!&#39;]</span><br><span class="line">#[&#39;this is string example....&#39;, &#39;o&#39;, &#39;!!!&#39;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>列表用<code>[]</code>表示，用逗号分隔元素，列表元素类型可以不同，支持数字、字符串甚至可以嵌套列表</p>
+<p>列表元素用下标访问，下标从0开始，-1为末尾</p>
+<p>列表可以用<code>+</code>拼接，用<code>*</code>重复，用<code>[ : : ]</code>切片，用for循环遍历列表</p>
+<p>用法示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">list0&#x3D;[&#39;a&#39;,1]</span><br><span class="line">list1&#x3D;[&#39;b&#39;,2]</span><br><span class="line">list2&#x3D;list0+list1 #list2&#x3D;[&#39;a&#39;,1,&#39;b&#39;,2]</span><br><span class="line">print(list2[0:4:2]) #输出[&#39;a&#39;,&#39;b&#39;]</span><br><span class="line">print(list0[0]) #输出a</span><br><span class="line"></span><br><span class="line">for i in list2:</span><br><span class="line">	print(i)</span><br><span class="line"></span><br><span class="line"># while循环可以操作它的下标,for循环不行</span><br><span class="line">i&#x3D;0</span><br><span class="line">while i&lt;len(list2):</span><br><span class="line">	print(&quot;第&#123;&#125;个为:&#123;&#125;&quot;.format(i,list2[i]))</span><br><span class="line">	i+&#x3D;1</span><br></pre></td></tr></table></figure>
+
+<p>常用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#增:</span><br><span class="line">list0&#x3D;[1,2]</span><br><span class="line">list1&#x3D;[3,4]</span><br><span class="line">list0.append(5) #将元素添加到末尾</span><br><span class="line">list0.append(list1) #将列表当作一个元素添加到末尾</span><br><span class="line">list0.extend(list1) #将列表中每个元素依次加入末尾</span><br><span class="line">list0.insert(1,2) #insert(下标,元素) 指定位置前插入</span><br><span class="line"></span><br><span class="line">#删:</span><br><span class="line">moviename&#x3D;[&quot;加勒比海盗&quot;,&quot;骇客帝国&quot;,&quot;第一滴血&quot;,&quot;指环王&quot;,&quot;速度与激情&quot;,&quot;指环王&quot;]</span><br><span class="line">del moviename[2] #指定位置删除或者整体删除del moviename</span><br><span class="line">del moviename #删除整个列表</span><br><span class="line">moviename.pop() #弹出末尾元素,可赋给变量</span><br><span class="line">moviename.remove(&quot;指环王&quot;) #删除匹配到的第一个元素</span><br><span class="line"></span><br><span class="line">#改:</span><br><span class="line">namelist&#x3D;[&quot;小张&quot;,&quot;小王&quot;,&quot;小李&quot;]</span><br><span class="line">namelist[1]&#x3D;&quot;小何&quot; #直接修改指定下标的内容就行</span><br><span class="line">print(namelist) #输出[&quot;小张&quot;,&quot;小何&quot;,&quot;小李&quot;]</span><br><span class="line"></span><br><span class="line">#查:在不在的意思 用in&#x2F;not in判断</span><br><span class="line">namelist&#x3D;[&quot;小张&quot;,&quot;小王&quot;,&quot;小李&quot;]</span><br><span class="line">findName&#x3D;input(&quot;请输入要查找的姓名：&quot;)</span><br><span class="line">if findName in namelist:</span><br><span class="line">    print(&quot;找到&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;没找到&quot;)</span><br><span class="line">mylist&#x3D;[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;a&quot;,&quot;b&quot;]</span><br><span class="line">print(mylist.index(&quot;a&quot;,1,4)) #可以查找指定下标范围的元素并返回找到对应数据的下标</span><br><span class="line">print(mylist.index(&quot;a&quot;,1,3)) #左闭右开区间[1,3),找不到会报错</span><br><span class="line">print(mylist.count(&quot;b&quot;)) #统计某个元素个数</span><br><span class="line"></span><br><span class="line">#排:</span><br><span class="line">a&#x3D;[1,2,3,4]</span><br><span class="line">print(a) #输出[1,2,3,4]</span><br><span class="line">a.reverse() #将列表元素反转</span><br><span class="line">print(a) #输出[4,3,2,1]</span><br><span class="line">a.sort() #升序排序</span><br><span class="line">print(a) #输出[1,2,3,4]</span><br><span class="line">a.sort(reverse&#x3D;True) #降序</span><br><span class="line">print(a) #输出[4,3,2,1]</span><br></pre></td></tr></table></figure>
+
+<p>嵌套列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">schoolnames&#x3D;[[&quot;北京大学&quot;,&quot;清华大学&quot;],[&quot;浙江大学&quot;,&quot;杭州电子科技大学&quot;],[&quot;浙江师范大学&quot;,&quot;浙江工业大学&quot;]]</span><br><span class="line">print(schoolnames[0]) #输出[&#39;北京大学&#39;, &#39;清华大学&#39;]</span><br><span class="line">print(schoolnames[0][1]) #相当于二维数组差不多,输出清华大学</span><br></pre></td></tr></table></figure>
+
+<h2 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h2><h3 id="练习一"><a href="#练习一" class="headerlink" title="练习一"></a>练习一</h3><p>把8个老师随机分配到3个办公室</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">offices&#x3D;[[],[],[]]</span><br><span class="line">teachers&#x3D;[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;]</span><br><span class="line">for teacher in teachers:</span><br><span class="line">	index&#x3D;random.randint(0,2)</span><br><span class="line">	offices[index].append(teacher)</span><br><span class="line">i&#x3D;1</span><br><span class="line">for office in offices:</span><br><span class="line">	print(f&quot;办公室&#123;i&#125;的人数为:&#123;len(office)&#125;&quot;)</span><br><span class="line">	i+&#x3D;1</span><br><span class="line">	for teacher in office:</span><br><span class="line">		print(f&quot;&#123;teacher&#125;&quot;,end&#x3D;&#39;\t&#39;)</span><br><span class="line">	print(&quot;\n&quot;)</span><br><span class="line">	print(&quot;-&quot;*30)</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习二"><a href="#练习二" class="headerlink" title="练习二"></a>练习二</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210419215034179.png" alt="image-20210419215034179"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">products&#x3D;[[&quot;iphone&quot;,6888],[&quot;MacPro&quot;,14800],[&quot;小米6&quot;,2499],[&quot;Coffee&quot;,31],[&quot;Book&quot;,60],[&quot;Nike&quot;,699]]</span><br><span class="line">i&#x3D;0</span><br><span class="line">print(&quot;-&quot;*6,end&#x3D;&#39;\t&#39;)</span><br><span class="line">print(&quot;商品列表&quot;,end&#x3D;&quot;\t&quot;)</span><br><span class="line">print(&quot;-&quot;*6,end&#x3D;&#39;\n&#39;)</span><br><span class="line">for product in products:</span><br><span class="line">    print(&quot;&#123;&#125;&quot;.format(i),end&#x3D;&#39;\t&#39;)</span><br><span class="line">    i+&#x3D;1</span><br><span class="line">    for x in product:</span><br><span class="line">        print(&quot;&#123;&#125;&quot;.format(x),end&#x3D;&#39;\t\t&#39;)</span><br><span class="line">    print(&quot;\n&quot;)</span><br><span class="line"></span><br><span class="line">prod&#x3D;[]</span><br><span class="line">sum&#x3D;0</span><br><span class="line">while 1:</span><br><span class="line">    tem&#x3D;input(&quot;请输入想买的商品编号：&quot;)</span><br><span class="line">    if(tem&#x3D;&#x3D;&#39;q&#39;):</span><br><span class="line">        print(&quot;购物车商品有：&quot;,end&#x3D;&#39;&#39;)</span><br><span class="line">        for i in prod:</span><br><span class="line">            print(&quot;&#123;&#125;&quot;.format(i),end&#x3D;&#39; &#39;)</span><br><span class="line">        print(&quot;总价格为：&#123;&#125;&quot;.format(sum))</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        prod.append(products[int(tem)][0])</span><br><span class="line">        sum+&#x3D;products[int(tem)][1]</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/04/19/Python2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/20/Python3/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Python学习笔记3
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/04/18/Python1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Python学习笔记1</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

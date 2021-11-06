@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    微信小程序项目实例学习笔记2 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-微信小程序项目实例学习笔记2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  微信小程序项目实例学习笔记2
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/23/wx-small-program-project-instance2/" class="article-date">
+  <time datetime="2021-05-23T05:04:47.000Z" itemprop="datePublished">2021-05-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">5.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">24 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>续一，完成项目实例剩下内容<a id="more"></a></p>
+<h2 id="学员作品模块布局"><a href="#学员作品模块布局" class="headerlink" title="学员作品模块布局"></a>学员作品模块布局</h2><p>index.wxml新增：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class&#x3D;&#39;works&#39;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;container&#39;&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;pubTitle&#39;&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;学员作品&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;more&#39;&gt;更多&gt;&lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;wkMain&#39;&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp1.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;UI设计作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;UI Design Works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp2.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;室内设计作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;Interior Design Works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp3.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;平面设计作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;Graphic Design Works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp4.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;网页设计作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;Web design works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp5.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;电商设计作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;E-business design works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp6.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;影视后期作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;Late Film and Television Works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp7.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;建筑景观作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;Architectural landscape works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;box&#39;&gt;</span><br><span class="line">        &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&quot;&#x2F;images&#x2F;xszp8.jpg&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;ceng&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;tit&#39;&gt;三维仿真作品&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;line&#39;&gt;&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;des&#39;&gt;3D simulation works&lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;!-- 蒙版遮罩层 --&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最外层有一个works类，然后里面再套一个之前写在全局样式里的container类增加左右内边距，pubTitle类里有一个文字类txt和导航类more，与pubTitle同级的类wkMain存放作品主要内容，一共八个作品，每一个作品展示是一个导航box类，里面包括图像和覆盖在图片上的蒙版遮罩层ceng类，遮罩层里包括标题tit类、一条横线line类和描述des类</p>
+<p>index.wxss新增：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">.pubTitle&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">  height: 60rpx;</span><br><span class="line">  align-items: center;</span><br><span class="line">  margin-bottom: 40rpx;</span><br><span class="line">&#125;</span><br><span class="line">.pubTitle .txt&#123;</span><br><span class="line">  font-size: 40rpx;</span><br><span class="line">  height: 100%;</span><br><span class="line">  position: relative;</span><br><span class="line">  padding-left: 20rpx;</span><br><span class="line">&#125;</span><br><span class="line">.pubTitle .txt::before&#123;</span><br><span class="line">  display: block;</span><br><span class="line">  width: 8rpx;</span><br><span class="line">  height: 34rpx;</span><br><span class="line">  background: #d80b07;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 0;</span><br><span class="line">  top: 13rpx;</span><br><span class="line">&#125;</span><br><span class="line">.pubTitle .more&#123;</span><br><span class="line">  font-size: 34rpx;</span><br><span class="line">  color: #666;</span><br><span class="line">&#125;</span><br><span class="line">.works&#123;</span><br><span class="line">  background-color: #f0f3f8;</span><br><span class="line">  padding: 90rpx 0 70rpx;</span><br><span class="line">&#125;</span><br><span class="line">.wkMain&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-wrap: wrap;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">&#125;</span><br><span class="line">.wkMain .box&#123;</span><br><span class="line">  width: 344rpx;</span><br><span class="line">  height: 214rpx;</span><br><span class="line">  margin-bottom: 10rpx;</span><br><span class="line">  position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.wkMain .pic&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.wkMain .ceng&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  background: rgba(0,0,0,0.5);</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 0;</span><br><span class="line">  left: 0;</span><br><span class="line">  color: #fff;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">  &#x2F;* 内填充 *&#x2F;</span><br><span class="line">  padding: 0 20rpx;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  &#x2F;* 内填充 *&#x2F;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.wkMain .ceng .tit&#123;</span><br><span class="line">  font-size: 34rpx;</span><br><span class="line">&#125;</span><br><span class="line">.wkMain .ceng .des&#123;</span><br><span class="line">  opacity: 0.6;</span><br><span class="line">  text-transform: uppercase;</span><br><span class="line">  font-size: 24rpx;</span><br><span class="line">  letter-spacing: 5rpx;</span><br><span class="line">&#125;</span><br><span class="line">.wkMain .ceng .line&#123;</span><br><span class="line">  width: 50rpx;</span><br><span class="line">  height: 2rpx;</span><br><span class="line">  background: #fff;</span><br><span class="line">  margin: 10rpx 0 20rpx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>pubTitle类：用弹性布局，<code>justify-content: space-between;</code>和<code>align-items: center;</code>让txt类和more类两端对齐并且垂直对齐，用PS量设计图尺寸，高度60rpx，底部外边距40rpx。因为这个布局其他地方要用到所以可以写到全局样式里</p>
+<p>pubTitle类里的txt类：加了一个左部内边距，为一条小红块腾出空间，然后设置了相对定位也是为了小红块的定位做参考</p>
+<p>pubTitle类里的txt类的:before选择器：在元素前插入内容(小红块)，用PS量设计图尺寸，宽8rpx高34rpx，用PS吸颜色设置背景色，因为只是一个小红块没有具体内容所以设置<code>content: &quot;&quot;</code>，使用绝对定位，然后用<code>left: 0;top: 13rpx;</code>调整位置让他位于txt文字类左边，因为整个pubTitle类高60rpx，而小红块自己有34rpx，算一下为了让他垂直居中，就要距离顶部13rpx((60-34)/2)</p>
+<p>pubTitle类里的more类：PS量字体大小34rpx，吸颜色#666</p>
+<p>works类：因为整个学员作品模块有个灰色背景色，所以在在外层works类设置背景色，并且内容上下有留空，所以设置内边距，距离顶部90rpx距离底部70rpx</p>
+<p>wkMain类：这是存放8个作品的外层容器，设置弹性布局，两端对齐，并且有换行</p>
+<p>wkMain类里的box类：这是每个具体作品的容器，PS量高，设置214rpx，宽因为要考虑整个宽750rpx，并且两边有26rpx的内边距，剩下698rpx，因为想让每行显示两个作品并且两作品之间留有空白，所以设置宽为344rpx，然后每行也要有空间，所以设置底部外边距10rpx，设置相对定位是为了之后要用的蒙版的绝对定位做准备</p>
+<p>wkMain类里的pic类：设置图片宽高100%</p>
+<p>wkMain类里的ceng类：这是蒙版遮罩层，设置宽高100%，背景颜色使用<code>rgba(0,0,0,0.5)</code>设置为黑色并且一半的透明度，然后设置绝对定位，相对box类左0顶0正好完全覆盖整个作品，设置字体颜色白色(PS吸的)，因为ceng类里面还有三个类，想让他们上下排列所以使用弹性布局，<code>flex-direction: column</code>设置主轴为垂直方向，起点在上沿，<code>justify-content: center</code>设置项目在主轴上居中对齐，<code>align-items: center</code>设置项目在交叉轴上居中对齐，设置这两个为了让那三个类水平垂直都居中，为了不让字体超出边框，设置<code>padding: 0 20rpx;box-sizing: border-box</code>来增加内填充，最后是字体居中</p>
+<p>xkMain类里的ceng类里的tit类：作品小标题，PS量后设置字体大小34rpx</p>
+<p>xkMain类里的ceng类里的des类：作品描述，设置不透明度0.6，<code>text-transform: uppercase</code>全部大写，PS量设置字体大小24rpx，<code>letter-spacing: 5rpx</code>设置字符间距5rpx</p>
+<p>xkMain类里的ceng类里的line类：这个就是一条白线，PS量宽50rpx高2rpx，背景为白色，然后设置外边距，距离顶部10rpx，距离底部20rpx</p>
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522162234228.png" alt="image-20210522162234228"></p>
+<h2 id="行业动态及底部模块"><a href="#行业动态及底部模块" class="headerlink" title="行业动态及底部模块"></a>行业动态及底部模块</h2><p>index.wxml新增：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class&#x3D;&#39;dynamic&#39;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;container&#39;&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;pubTitle&#39;&gt;</span><br><span class="line">      &lt;view class&#x3D;&#39;txt&#39;&gt;行业动态&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;more&#39;&gt;更多&gt;&lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;  </span><br><span class="line">    &lt;view class&#x3D;&#39;dyMain&#39;&gt;</span><br><span class="line">      &lt;navigator class&#x3D;&#39;dyItem&#39; wx:for&#x3D;&quot;&#123;&#123;5&#125;&#125;&quot;&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;pic&#39;&gt;</span><br><span class="line">          &lt;image src&#x3D;&#39;&#x2F;images&#x2F;xszp1.jpg&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;view class&#x3D;&#39;txt&#39;&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;title&#39;&gt;标题内容&lt;&#x2F;view&gt;</span><br><span class="line">          &lt;view class&#x3D;&#39;info&#39;&gt;</span><br><span class="line">            &lt;text space&#x3D;&quot;ensp&quot;&gt;作者 ：王进  -  时间：2021-05-22&lt;&#x2F;text&gt;</span><br><span class="line">          &lt;&#x2F;view&gt;</span><br><span class="line">        &lt;&#x2F;view&gt;</span><br><span class="line">      &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line">&lt;view class&#x3D;&#39;footer&#39;&gt;</span><br><span class="line">  &lt;image class&#x3D;&#39;pic&#39; mode&#x3D;&quot;widthFix&quot; src&#x3D;&#39;&#x2F;images&#x2F;logo.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;text&#39;&gt;- 高端实训品牌- &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面最外层有一个dynamic类，因为顶部内容和上一个模块一样，所以复制过来container类，下面是主体内容dyMain类，里面是五个导航dyItem类，每个导航里有一个图片pic类和一个文本txt类，文本txt类里又有一个标题title类和信息info类。</p>
+<p>下面的页脚是footer类，里面有一个图片pic类和一个放文字的text类</p>
+<p>index.wxss新增:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">.dynamic&#123;</span><br><span class="line">  padding: 90rpx 0 70rpx;</span><br><span class="line">&#125;</span><br><span class="line">.dyItem&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  padding: 15rpx 0;</span><br><span class="line">  border: 1px dashed #eee;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">&#125;</span><br><span class="line">.dyItem .pic&#123;</span><br><span class="line">  width: 230rpx;</span><br><span class="line">  height: 150rpx;</span><br><span class="line">&#125;</span><br><span class="line">.dyItem .pic image&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.dyItem .txt&#123;</span><br><span class="line">  width: 440rpx;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">&#125;</span><br><span class="line">.dyItem .title&#123;</span><br><span class="line">  font-size: 34rpx;</span><br><span class="line">&#125;</span><br><span class="line">.dyItem .info&#123;</span><br><span class="line">  font-size: 26rpx;</span><br><span class="line">  color: #888;</span><br><span class="line">&#125;</span><br><span class="line">.footer&#123;</span><br><span class="line">  padding: 30rpx 0;</span><br><span class="line">  background-color: #f2f2f2;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.footer .pic&#123;</span><br><span class="line">  width: 180rpx;</span><br><span class="line">&#125;</span><br><span class="line">.footer .text&#123;</span><br><span class="line">  font-size: 25rpx;</span><br><span class="line">  color: #666;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>dynamic类：设置内边距，距离顶部90rpx，距离底部70rpx</p>
+<p>dyItem类：设置弹性布局，然后两端对齐(图片在左，txt类在右)，然后加个内边距上下15rpx左右0rpx，再加个虚线边框</p>
+<p>dyItem类里的pic类：PS量尺寸，设置宽230rpx高150rpx</p>
+<p>dyItem类里pic类里的image组件：宽高100%，继承父级pic类的宽高</p>
+<p>dyItem类里的txt类：宽度考虑内边距和要留空所以设置440rpx，使用弹性布局，设置主轴为垂直方向并且两端对齐，这样就可以让里面的title类和info类上下分布了</p>
+<p>dyItem类里的title类：设置字体大小34rpx</p>
+<p>dyItem类里的info类：设置字体大小26rpx，颜色#888</p>
+<p>footer类：设置内边距上下30rpx左右0rpx，背景颜色为灰色，设置文本居中，让图片和文字都居中</p>
+<p>footer类里的pic类：根据图片宽度设置180rpx</p>
+<p>footer类里的text类：设置字体大小25rpx，颜色#666</p>
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522172052923.png" alt="image-20210522172052923"></p>
+<p>因为里面的图片素材没有所以懒得改了直接就for5个出来。到这里，整个首页就做完了，跟着老师把首页写完，主要是想学习小程序页面怎么写顺便复习一下前端的html和css。由于时间问题想快速进入下一阶段(逻辑层)，所以其他页面不写了，后面用的是老师给的完整版实例</p>
+<h2 id="tabBar栏目导航配置"><a href="#tabBar栏目导航配置" class="headerlink" title="tabBar栏目导航配置"></a>tabBar栏目导航配置</h2><p>全局配置里的pages新建两个新页面，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;pages&quot;:[</span><br><span class="line">    &quot;pages&#x2F;index&#x2F;index&quot;,</span><br><span class="line">    &quot;pages&#x2F;logs&#x2F;logs&quot;,</span><br><span class="line">    &quot;pages&#x2F;works&#x2F;works&quot;,</span><br><span class="line">    &quot;pages&#x2F;dynamic&#x2F;dynamic&quot;</span><br><span class="line">  ],</span><br></pre></td></tr></table></figure>
+
+<p>index和logs页面是项目初始化就有的，下面两个是新建的页面</p>
+<p>然后在全局配置里新建一个tabBar对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&quot;tabBar&quot;: &#123;</span><br><span class="line">    &quot;color&quot;: &quot;#B6B6B6&quot;,</span><br><span class="line">    &quot;selectedColor&quot;: &quot;#fe9132&quot;,</span><br><span class="line">    &quot;list&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;index&#x2F;index&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;首页&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;&#x2F;images&#x2F;home.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;&#x2F;images&#x2F;home-h.png&quot;</span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;works&#x2F;works&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;作品&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;&#x2F;images&#x2F;user.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;&#x2F;images&#x2F;user-h.png&quot;</span><br><span class="line">      &#125;,&#123;</span><br><span class="line">        &quot;pagePath&quot;: &quot;pages&#x2F;dynamic&#x2F;dynamic&quot;,</span><br><span class="line">        &quot;text&quot;: &quot;动态&quot;,</span><br><span class="line">        &quot;iconPath&quot;: &quot;&#x2F;images&#x2F;list.png&quot;,</span><br><span class="line">        &quot;selectedIconPath&quot;: &quot;&#x2F;images&#x2F;list-h.png&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>加了<code>color</code>和<code>selectedColor</code>，因为图片选中时颜色是黄色未选中时是灰色，所以给文字也设置选中时颜色为黄色未选中时灰色，用PS吸一下颜色就可以了，然后再加个<code>list</code>数组存放跳转的地址、文字、图标路径、选中时图标路径</p>
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522184045814.png" alt="image-20210522184045814"></p>
+<h2 id="内页的页面架构布局"><a href="#内页的页面架构布局" class="headerlink" title="内页的页面架构布局"></a>内页的页面架构布局</h2><p>内页指的应该是二级页面，二级页面就是左上角有返回键的页面(如下图)，需要按返回键返回的都叫上一界面的二级界面。一级页面应该就是tab页面(底部三个页面)</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522221311665.png" alt="image-20210522221311665"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522221359380.png" alt="image-20210522221359380"></p>
+<p>这里做的内页就是点击首页的横向滚动区的导航跳转的页面，如下图</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210522221532509.png" alt="image-20210522221532509"></p>
+<p>首先在全局配置里新建一个页面(我这里叫ps页面)，然后把首页里写的导航里的url改成ps这个页面实现跳转，下面是内页具体代码</p>
+<p>ps.wxml:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class&#x3D;&quot;header&quot;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;container hdcon&#39;&gt;</span><br><span class="line">    &lt;navigator open-type&#x3D;&quot;switchTab&quot; url&#x3D;&quot;&#x2F;pages&#x2F;index&#x2F;index&quot; class&#x3D;&#39;logo&#39;&gt;</span><br><span class="line">      &lt;image mode&#x3D;&quot;heightFix&quot; src&#x3D;&quot;&#x2F;images&#x2F;logo.png&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">    &lt;&#x2F;navigator&gt;</span><br><span class="line">    &lt;view  class&#x3D;&#39;kefu&#39;&gt;</span><br><span class="line">      &lt;button open-type&#x3D;&quot;contact&quot; class&#x3D;&quot;btn&quot;&gt;&lt;&#x2F;button&gt;</span><br><span class="line">      &lt;image mode&#x3D;&quot;heightFix&quot; src&#x3D;&quot;&#x2F;images&#x2F;xiaoxi.png&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line"></span><br><span class="line">&lt;view class&#x3D;&#39;banner&#39;&gt;</span><br><span class="line">  &lt;image src&#x3D;&#39;&#x2F;images&#x2F;psbanner.jpg1 (1).jpg&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line">&lt;view class&#x3D;&#39;psBox&#39;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;psBoxTit&#39;&gt;</span><br><span class="line">    专业软件技能</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;psBoxConOne&#39;&gt;  </span><br><span class="line">    &lt;view class&#x3D;&#39;item&#39;&gt;</span><br><span class="line">      &lt;image src&#x3D;&#39;&#x2F;images&#x2F;photoshop.png1.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view&gt;photoshop&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;item&#39;&gt;</span><br><span class="line">      &lt;image src&#x3D;&#39;&#x2F;images&#x2F;ai.png2.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view&gt;Ai&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;item&#39;&gt;</span><br><span class="line">      &lt;image src&#x3D;&#39;&#x2F;images&#x2F;id.png3.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view&gt;Id&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;item&#39;&gt;</span><br><span class="line">      &lt;image src&#x3D;&#39;&#x2F;images&#x2F;CDR.png4.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view&gt;CDR&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;item&#39;&gt;</span><br><span class="line">      &lt;image src&#x3D;&#39;&#x2F;images&#x2F;acrobat.png6.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">      &lt;view&gt;Acrobat&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt; </span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line">&lt;view class&#x3D;&#39;psBox&#39; wx:for&#x3D;&quot;&#123;&#123;5&#125;&#125;&quot;&gt;&lt;!-- wx:for测试用 --&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;psBoxTit&#39;&gt;</span><br><span class="line">    专业软件技能</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;psBoxCon&#39;&gt;</span><br><span class="line">    &lt;image class&#x3D;&#39;pic&#39; src&#x3D;&#39;&#x2F;images&#x2F;psmajor02.jpg2.jpg&#39; mode&#x3D;&quot;widthFix&quot;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;text&#39;&gt;</span><br><span class="line">      &lt;view&gt;人像精修&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;view&gt;商业广告片调色&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;view&gt;商业海报级视觉精修&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;view&gt;卡通人物制作&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;view&gt;2.5D插画制作&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;view&gt;3D文字视觉特效制作&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;view&gt;平面广告创意&lt;&#x2F;view&gt;</span><br><span class="line">      &lt;view&gt;合成特效制作&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt; </span><br><span class="line">&lt;&#x2F;view&gt;</span><br><span class="line"></span><br><span class="line">&lt;view class&#x3D;&#39;footer&#39;&gt;</span><br><span class="line">  &lt;image class&#x3D;&#39;pic&#39; mode&#x3D;&quot;widthFix&quot; src&#x3D;&#39;&#x2F;images&#x2F;logo.png&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;text&#39;&gt;- 高端实训品牌 -&lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最上面的header容器和最下面的footer容器都是从首页里复制过来的，banner容器放的是一张大图，psBox容器是主题，一共有6个psBox容器，因为第一个和后面五个内容稍有差别所以单独写出来了，后面五个内容几乎一样，只是里面的字要改，为了测试直接用wx:for五个相同的，内容不改了，达到预期效果就好。每个psBox里有一个标题psBoxTit类和内容psBoxCon类(第一个为了区别叫psBoxConOne)，第一个内容类里有5个item类，每个item类里包括图片和文字，后面5个内容类里直接是是图片和文字</p>
+<p>ps.wxss:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">.header&#123;</span><br><span class="line">  width:100%; &#x2F;*或者750rpx*&#x2F;</span><br><span class="line">  height:90rpx;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon&#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: space-between;</span><br><span class="line">  align-items: center;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon navigator,.hdcon .kefu&#123;</span><br><span class="line">  height:50rpx;</span><br><span class="line">&#125;</span><br><span class="line">.hdcon image&#123;</span><br><span class="line">  height:100%;</span><br><span class="line">&#125;</span><br><span class="line">.kefu&#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  animation: dh linear 1s infinite alternate;</span><br><span class="line">&#125;</span><br><span class="line">.kefu .btn&#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  top:0;</span><br><span class="line">  left:0;</span><br><span class="line">  opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.banner&#123;</span><br><span class="line">  &#x2F;* width: 750rpx; *&#x2F;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.banner image&#123;</span><br><span class="line">  display: block;&#x2F;*图像是行内元素，行元素和下面会有个间隔，把他转成块元素就好了*&#x2F;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 1080rpx; &#x2F;* 或者在image组件里写mode&#x3D;&#39;widthFix&#39; 宽度不变高度自适应 *&#x2F;</span><br><span class="line">&#125;</span><br><span class="line">.psBox&#123;</span><br><span class="line">  padding: 80rpx 0;</span><br><span class="line">  background-color: #1c356e;&#x2F;*QQ截图Ctrl+C可以吸取十六进制颜色*&#x2F;</span><br><span class="line">&#125;</span><br><span class="line">.psBox:nth-child(2n)&#123;</span><br><span class="line">  background-color: #fff;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxTit&#123;</span><br><span class="line">  width: 490rpx;</span><br><span class="line">  height: 70rpx;</span><br><span class="line">  background-color: #de2e05;</span><br><span class="line">  border-radius: 70rpx;</span><br><span class="line">  color: #fff;</span><br><span class="line">  text-align: center;</span><br><span class="line">  line-height: 70rpx;</span><br><span class="line">  font-size: 40rpx;</span><br><span class="line">  margin: 0 auto;</span><br><span class="line">  position: relative;</span><br><span class="line">  margin-bottom: 40rpx;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxTit::before&#123;</span><br><span class="line">  display: block;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  border: 2px dotted #de2e05;</span><br><span class="line">  border-radius: 70rpx;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 0;</span><br><span class="line">  left: 0;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  transform: scale(1.03,1.2);</span><br><span class="line">&#125;</span><br><span class="line">.psBoxCon image&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxCon .text&#123;</span><br><span class="line">  padding: 40rpx 26rpx 0;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-wrap: wrap;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxCon .text view&#123;</span><br><span class="line">  width: 50%;</span><br><span class="line">  font-size: 30rpx;</span><br><span class="line">  line-height: 1.8em;</span><br><span class="line">  position: relative;</span><br><span class="line">  padding-left: 18rpx;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxCon .text view::before&#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  display: block;</span><br><span class="line">  width: 10rpx;</span><br><span class="line">  height: 10rpx;</span><br><span class="line">  border-radius: 50%;</span><br><span class="line">  background-color: #000;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 0;</span><br><span class="line">  top: 50%;</span><br><span class="line">  margin-top: -5rpx;</span><br><span class="line">&#125;</span><br><span class="line">.psBox:nth-child(2n-1) .psBoxCon .text&#123;</span><br><span class="line">  color: #fff;</span><br><span class="line">&#125;</span><br><span class="line">.psBox:nth-child(2n-1) .text view::before&#123;</span><br><span class="line">  background-color: #fff;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxConOne&#123;</span><br><span class="line">  color: #fff;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-wrap: wrap;</span><br><span class="line">  justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxConOne .item&#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">  padding: 30rpx;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxConOne image&#123;</span><br><span class="line">  width: 150rpx;</span><br><span class="line">  height: 150rpx;</span><br><span class="line">&#125;</span><br><span class="line">.psBoxConOne .item view&#123;</span><br><span class="line">  text-transform: uppercase;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.footer&#123;</span><br><span class="line">  padding: 30rpx 0;</span><br><span class="line">  background-color: #f2f2f2;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">.footer .pic&#123;</span><br><span class="line">  width: 180rpx;</span><br><span class="line">&#125;</span><br><span class="line">.footer .text&#123;</span><br><span class="line">  font-size: 25rpx;</span><br><span class="line">  color: #666;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>头部的header样式和底部的footer样式是从首页样式拿过来的，我用空格分开了，中间部分是这个新页面需要的样式。另外，样式太多为了省时就记录一下自己觉得重点的和难的地方。</p>
+<p>banner类里image：为什么要用块级展示在注释里写了，这是之前我不知道的</p>
+<p>psBox类：主要记录一下QQ截图的时候可以用Ctrl+C吸取十六进制颜色，这样就不用打开PS了，是个小trick</p>
+<p>psBox的nth-child选择器：这个选择器之前学CSS的时候没见过，记录一下，该选择器匹配同类型中的第 n 个同级兄弟元素，因为想要做的效果是奇数的psBox背景色是蓝色，偶数背景色是白色，所以用到这个选择器，可以用关键字(odd代表奇数、even代表偶数)或者公式(an+b)，a代表一个循环的大小，N是一个计数器（从0开始），以及b是偏移量</p>
+<p>psBoxTit类的before选择器：用点线边框围住标题，和之前的小红块类似，内容设为空，然后用绝对定位来参考父级的相对定位，设置top和left为0，有border加<code>box-sizing: border-box</code>，但是仅仅这样的话就完全贴住背景颜色看不出边框线了，所以用<code>transform: scale(1.03,1.2)</code>来进行放大，这个属性之前用的也很少，这里记录一下， Transform属性应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜等。</p>
+<p>psBoxCon类里text类里view里的before选择器：和之前小红块类似，也是在每个文本前面加一个小圆圈图标</p>
+<p>psBoxConOne类里的item类里的view：<code>text-transform: uppercase</code>转换为大写字母</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.runoob.com/" target="_blank" rel="noopener">https://www.runoob.com/</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/23/wx-small-program-project-instance2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/05/23/wx-small-program3/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            微信小程序学习笔记3
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/05/22/wx-small-program-project-instance1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">微信小程序项目实例学习笔记1</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Tianze&#39;s Blog</title>
+  
+  <subtitle>����&#39;&#39;</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2021-11-06T12:25:15.979Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Blog of Tianze</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python与crontab实现自动化每日健康上报</title>
+    <link href="http://yoursite.com/2021/11/06/Automated-daily-health-reporting-with-Python-and-Crontab/"/>
+    <id>http://yoursite.com/2021/11/06/Automated-daily-health-reporting-with-Python-and-Crontab/</id>
+    <published>2021-11-06T09:30:32.000Z</published>
+    <updated>2021-11-06T12:25:15.979Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;持续了快两年的疫情，改变了很多事也打乱了很多人生活的节奏(对我这个死宅来说几乎没啥影响)，就是每天的健康上报经常会忘，所以为了偷懒，就突发奇想利用脚本实现每日自动化上报。
+    
+    </summary>
+    
+    
+      <category term="校园相关" scheme="http://yoursite.com/categories/%E6%A0%A1%E5%9B%AD%E7%9B%B8%E5%85%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JAVA实验课大作业笔记</title>
+    <link href="http://yoursite.com/2021/05/30/JAVA-GUI/"/>
+    <id>http://yoursite.com/2021/05/30/JAVA-GUI/</id>
+    <published>2021-05-29T16:06:01.000Z</published>
+    <updated>2021-05-30T03:26:12.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Java实验大作业是做一个GUI，我分配到的是高铁售票系统
+    
+    </summary>
+    
+    
+      <category term="JAVA" scheme="http://yoursite.com/categories/JAVA/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>微信小程序学习笔记3</title>
+    <link href="http://yoursite.com/2021/05/23/wx-small-program3/"/>
+    <id>http://yoursite.com/2021/05/23/wx-small-program3/</id>
+    <published>2021-05-23T15:35:48.000Z</published>
+    <updated>2021-05-23T15:37:16.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;续二，学习剩下的自定义组件、数据接口调用、页面数据渲染并修改时间戳等等
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>微信小程序项目实例学习笔记2</title>
+    <link href="http://yoursite.com/2021/05/23/wx-small-program-project-instance2/"/>
+    <id>http://yoursite.com/2021/05/23/wx-small-program-project-instance2/</id>
+    <published>2021-05-23T05:04:47.000Z</published>
+    <updated>2021-05-23T05:06:34.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;续一，完成项目实例剩下内容
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>微信小程序项目实例学习笔记1</title>
+    <link href="http://yoursite.com/2021/05/22/wx-small-program-project-instance1/"/>
+    <id>http://yoursite.com/2021/05/22/wx-small-program-project-instance1/</id>
+    <published>2021-05-21T16:10:10.000Z</published>
+    <updated>2021-05-23T05:05:46.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学完基础之后，跟着老师做个项目案例
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>微信小程序学习笔记2</title>
+    <link href="http://yoursite.com/2021/05/20/wx-small-program2/"/>
+    <id>http://yoursite.com/2021/05/20/wx-small-program2/</id>
+    <published>2021-05-20T10:04:08.000Z</published>
+    <updated>2021-05-23T15:37:30.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面学了一些基础组件和框架知识，现在学习API的知识
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>微信小程序学习笔记1</title>
+    <link href="http://yoursite.com/2021/05/20/wx-small-program1/"/>
+    <id>http://yoursite.com/2021/05/20/wx-small-program1/</id>
+    <published>2021-05-20T00:37:34.000Z</published>
+    <updated>2021-05-23T15:37:40.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学校的创业学院有学长招人做小程序之类的开发，所以学习一下小程序开发
+    
+    </summary>
+    
+    
+      <category term="微信小程序" scheme="http://yoursite.com/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化-项目完结</title>
+    <link href="http://yoursite.com/2021/05/17/project-end/"/>
+    <id>http://yoursite.com/2021/05/17/project-end/</id>
+    <published>2021-05-17T06:52:52.000Z</published>
+    <updated>2021-05-17T06:53:52.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;经过之前的学习，最后再把词云页面和团队页面做一下，项目就完结啦
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化-WordCloud简单应用</title>
+    <link href="http://yoursite.com/2021/05/17/simple-wordcloud/"/>
+    <id>http://yoursite.com/2021/05/17/simple-wordcloud/</id>
+    <published>2021-05-17T05:47:23.000Z</published>
+    <updated>2021-05-17T05:49:04.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;运用词云，也可以做出很多好看的图片，用于数据可视化
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化-Echarts应用</title>
+    <link href="http://yoursite.com/2021/05/16/Echarts-use/"/>
+    <id>http://yoursite.com/2021/05/16/Echarts-use/</id>
+    <published>2021-05-16T08:57:41.000Z</published>
+    <updated>2021-05-17T02:18:14.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面看了下echarts的基础，现在用echarts来做一个显示电影评分的图在score.html上
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化-Echarts入门</title>
+    <link href="http://yoursite.com/2021/05/16/Echart-study/"/>
+    <id>http://yoursite.com/2021/05/16/Echart-study/</id>
+    <published>2021-05-16T06:54:01.000Z</published>
+    <updated>2021-05-16T07:06:34.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学习Echarts来制作数据可视化要用的图表
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化-首页制作</title>
+    <link href="http://yoursite.com/2021/05/15/homepage/"/>
+    <id>http://yoursite.com/2021/05/15/homepage/</id>
+    <published>2021-05-15T14:51:21.000Z</published>
+    <updated>2021-05-16T04:55:28.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学完Flask框架的基础后，跟着老师应用flask做了几个页面来显示前面爬到的电影数据
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化-Flask学习笔记2</title>
+    <link href="http://yoursite.com/2021/05/15/Flask2/"/>
+    <id>http://yoursite.com/2021/05/15/Flask2/</id>
+    <published>2021-05-15T10:38:13.000Z</published>
+    <updated>2021-05-15T10:46:42.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面基本了解了一下Flask框架，现在学习一下基础语法
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数据可视化-Flask学习笔记1</title>
+    <link href="http://yoursite.com/2021/05/14/Flask1/"/>
+    <id>http://yoursite.com/2021/05/14/Flask1/</id>
+    <published>2021-05-14T04:43:28.000Z</published>
+    <updated>2021-05-17T06:04:14.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Flask框架比较轻便容易上手，适合入门学习，可以用来完成数据可视化项目
+    
+    </summary>
+    
+    
+      <category term="数据可视化" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习笔记7-SQLite模块及应用</title>
+    <link href="http://yoursite.com/2021/05/13/Python-SQLite/"/>
+    <id>http://yoursite.com/2021/05/13/Python-SQLite/</id>
+    <published>2021-05-13T01:08:23.000Z</published>
+    <updated>2021-05-17T04:38:22.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前面使用xlwt模块爬取数据到excel表中，这次用sqlite3模块爬取数据到数据库中。
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>应用xlwt爬取豆瓣电影Top250实例</title>
+    <link href="http://yoursite.com/2021/05/11/crawler-of-douban-top250/"/>
+    <id>http://yoursite.com/2021/05/11/crawler-of-douban-top250/</id>
+    <published>2021-05-11T00:57:18.000Z</published>
+    <updated>2021-05-13T01:08:50.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用requests、re、BeautifulSoup、xlwt库来实现爬取豆瓣电影top250相关信息
+    
+    </summary>
+    
+    
+      <category term="爬虫相关" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习笔记6-re和xlwt模块</title>
+    <link href="http://yoursite.com/2021/05/06/Python6/"/>
+    <id>http://yoursite.com/2021/05/06/Python6/</id>
+    <published>2021-05-06T01:25:25.000Z</published>
+    <updated>2021-05-11T00:26:18.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;用requests获取到数据，然后用BeautifulSoup解析数据，最后用re来提取数据，用xlwt将数据写入Excel文件里
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习笔记5-BeautifulSoup模块</title>
+    <link href="http://yoursite.com/2021/04/29/Python5/"/>
+    <id>http://yoursite.com/2021/04/29/Python5/</id>
+    <published>2021-04-29T01:29:43.000Z</published>
+    <updated>2021-05-06T01:32:04.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前几天因为英语期中考，想考好点所以花了大量时间看学术英语，考完可以继续学习爬虫了。前面学了Python的基本语法以及requests库，现在学一下BeautifulSoup库。
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>爬虫准备工作</title>
+    <link href="http://yoursite.com/2021/04/21/preparation-for-crawler/"/>
+    <id>http://yoursite.com/2021/04/21/preparation-for-crawler/</id>
+    <published>2021-04-21T10:47:35.000Z</published>
+    <updated>2021-04-21T11:42:38.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;以爬取豆瓣电影Top250为例子来学习
+    
+    </summary>
+    
+    
+      <category term="爬虫相关" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>初识爬虫</title>
+    <link href="http://yoursite.com/2021/04/21/web-crawler/"/>
+    <id>http://yoursite.com/2021/04/21/web-crawler/</id>
+    <published>2021-04-21T07:43:04.000Z</published>
+    <updated>2021-04-21T07:46:16.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不仅介绍了爬虫，还讲了应用场景，受益匪浅
+    
+    </summary>
+    
+    
+      <category term="爬虫相关" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3/"/>
+    
+    
+  </entry>
+  
+</feed>

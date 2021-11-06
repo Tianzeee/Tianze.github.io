@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    数据可视化-Flask学习笔记2 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-数据可视化-Flask学习笔记2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  数据可视化-Flask学习笔记2
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/15/Flask2/" class="article-date">
+  <time datetime="2021-05-15T10:38:13.000Z" itemprop="datePublished">2021-05-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">数据可视化</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">12 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>前面基本了解了一下Flask框架，现在学习一下基础语法<a id="more"></a></p>
+<h2 id="MVC架构"><a href="#MVC架构" class="headerlink" title="MVC架构"></a>MVC架构</h2><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515173849937.png" alt="image-20210515173849937"></p>
+<blockquote>
+<p>这就是传说中的MVC：Model-View-Controller，中文名“模型-视图-控制器”。<br>Python处理URL的函数就是C：Controller，Controller负责业务逻辑，比如检查用户名是否存在，取出用户信息等等；<br>包含变量的模板就是V：View，View负责显示逻辑，通过简单地替换一些变量，View最终输出的就是用户看到的HTML。<br>MVC中的Model在哪？Model是用来传给View的，这样View在替换变量的时候，就可以从Model中取出相应的数据。<br>——摘自第四篇参考文章</p>
+</blockquote>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>前面说过static文件夹存放一些静态文件，比如css、js等，templates文件夹存放模板，模板就是HTML文件，只不过里面除了基本的HTML之外，还有一些需要Jinja2渲染的变量等等。</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由就是根据用户访问的路径匹配相应的视图函数</p>
+<p>路由的本质是URL绑定，装饰器<code>@app.route()</code>把一个函数绑定在一个URL上</p>
+<h3 id="基础路由"><a href="#基础路由" class="headerlink" title="基础路由"></a>基础路由</h3><p>这就是一个最简单的路由，通过访问根路径<code>http://127.0.0.1:5000/</code>，返回html相关内容(这里就是Hello World!)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&#39;&#x2F;&#39;) #路由解析,通过用户访问的路径匹配相应的函数</span><br><span class="line">def hello_world():</span><br><span class="line">    return &#39;Hello World!&#39;</span><br></pre></td></tr></table></figure>
+
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515184502472.png" alt="image-20210515184502472"></p>
+<p>Werkzeug(请求路由转发)和Jinja2(模板渲染)就是这个意思</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.route(&quot;&#x2F;index&quot;) #这两行代码是Werkzeug干的，帮助判断哪个路径执行哪个函数</span><br><span class="line">def hello():</span><br><span class="line">    return &quot;你好&quot; #返回是jinja2实现的</span><br></pre></td></tr></table></figure>
+
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515184528285.png" alt="image-20210515184528285"></p>
+<h3 id="接受动态参数的路由"><a href="#接受动态参数的路由" class="headerlink" title="接受动态参数的路由"></a>接受动态参数的路由</h3><p>动态参数用<code>&lt;&gt;</code>包裹，通过访问路径，获取动态的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#通过访问路径，获取用户的字符串参数</span><br><span class="line">@app.route(&quot;&#x2F;user&#x2F;&lt;name&gt;&quot;)</span><br><span class="line">def welcome(name):</span><br><span class="line">    return &quot;你好,&#123;&#125;&quot;.format(name)</span><br><span class="line">    </span><br><span class="line">#通过访问路径，获取用户的整形参数。此外，还有float类型</span><br><span class="line">@app.route(&quot;&#x2F;user&#x2F;&lt;int:id&gt;&quot;)</span><br><span class="line">def welcome2(id):</span><br><span class="line">    return &quot;你好,&#123;&#125;号的会员&quot;.format(id)</span><br></pre></td></tr></table></figure>
+
+<p>要注意，路由路径不能重复，用户通过唯一路径访问特定的函数</p>
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515184232321.png" alt="image-20210515184232321"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515184310924.png" alt="image-20210515184310924"></p>
+<h2 id="渲染"><a href="#渲染" class="headerlink" title="渲染"></a>渲染</h2><p>通过<code>render_template()</code>函数渲染网页文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">返回给用户渲染后的网页文件</span><br><span class="line">@app.route(&quot;&#x2F;&quot;)</span><br><span class="line">def index():</span><br><span class="line">    return render_template(&quot;index.html&quot;)</span><br><span class="line">    #jinja2会帮你检查html里有没有什么jinja2能识别的符号，如果有就把它转成html</span><br></pre></td></tr></table></figure>
+
+<p>index.html:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    今天是&#123;&#123; var &#125;&#125;欢迎光临。&lt;br&#x2F;&gt;</span><br><span class="line">    今天值班的有：&lt;br&#x2F;&gt;</span><br><span class="line">    &#123;% for data in list %&#125; &lt;!--&#123;# &#123;%  %&#125; #&#125;用大括号和百分号括起来是控制语句，for循环和if等等--&gt;</span><br><span class="line">       &lt;li&gt; &#123;&#123; data &#125;&#125; &lt;&#x2F;li&gt;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line"></span><br><span class="line">    任务:&lt;br&#x2F;&gt;  &lt;!--了解一下如何在页面打印表格，以及如何迭代--&gt;</span><br><span class="line">        &lt;table border&#x3D;&quot;1&quot;&gt;</span><br><span class="line">            &#123;% for key,value in task.items() %&#125;</span><br><span class="line">                &lt;!--迭代器，把字典转换成了这种格式的列表[(key,value),(key,value),(key,value)]，字典的items()方法以列表返回可遍历的(键, 值) 元组数组。--&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123; key &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123; value &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                &lt;&#x2F;tr&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;&#x2F;table&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--&#123;#  #&#125;是Jinja2注释</span><br><span class="line">    既然模板能够复用，那么它里面的内容确定不可能写死对吧，若是写成固定值那每一个页面的内容都成了同样的了，因此模板就须要写成变量的形式，经过给变量传值来修改模板对应的内容。在flask中，变量的写法是&#123;# &#123;&#123; 变量值 &#125;&#125; #&#125;这种两个大括号（又叫大胡须）的形式。在模板文件中使用变量的语法是双大括号&#123;# &#123;&#123;  &#125;&#125; #&#125;，将变量写在两个大括号里，接收服务器传过来的变量,然后通过Jinja2来解析这个变量，这种语法在前端叫胡子语法，两个大括号又叫大胡须--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>render_template()</code>里用逗号分隔写变量，向页面传递变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#向页面传递一个变量</span><br><span class="line">@app.route(&quot;&#x2F;&quot;)</span><br><span class="line">def index2():</span><br><span class="line">    time&#x3D;datetime.date.today() #普通变量</span><br><span class="line">    name&#x3D;[&quot;小张&quot;,&quot;小王&quot;,&quot;小赵&quot;] #列表类型</span><br><span class="line">    task&#x3D;&#123;&quot;任务&quot;:&quot;打扫卫生&quot;,&quot;时间&quot;:&quot;3小时&quot;&#125; #字典类型</span><br><span class="line">    return render_template(&quot;index.html&quot;,var&#x3D;time,list&#x3D;name,task&#x3D;task)</span><br><span class="line">    # 前者(var、list、task)是网页渲染里用的变量，后者(time、name、task)是函数里定义的变量。常用的写法是最后那种(task&#x3D;task)，前面写法只是为了区分清楚谁是谁</span><br><span class="line">	#render_template的功能是先引入index.html，同时根据后面传入的参数，对html进行修改渲染。</span><br></pre></td></tr></table></figure>
+
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515184151838.png" alt="image-20210515184151838"></p>
+<h2 id="反向路由"><a href="#反向路由" class="headerlink" title="反向路由"></a>反向路由</h2><p>反向路由顾名思义就是通过视图函数表现出url地址，本质是根据函数名反向生成url，使用函数url_for()来针对一个特定的函数构建一个URL(根据函数匹配路径)</p>
+<p>路由也可以修改当前的http方法来打开，flask路由默认的http方法是GET，下面使用<code>methods=[&#39;POST&#39;,&#39;GET&#39;]</code>将http方法改为POST与GET。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#表单提交</span><br><span class="line">@app.route(&quot;&#x2F;test&#x2F;register&quot;) #路径</span><br><span class="line">def register():</span><br><span class="line">    return render_template(&quot;test&#x2F;register.html&quot;) #templates文件夹下的文件结构</span><br><span class="line"></span><br><span class="line">#接受表单提交的路由，需要指定methods为post</span><br><span class="line">@app.route(&quot;&#x2F;test&#x2F;result&quot;,methods&#x3D;[&#39;POST&#39;,&#39;GET&#39;]) #methods不写，默认是get</span><br><span class="line">def result():</span><br><span class="line">    if request.method&#x3D;&#x3D;&quot;POST&quot;:</span><br><span class="line">        result&#x3D;request.form #获得表单字典,name值是键，输入的内容是值</span><br><span class="line">        return render_template(&quot;test&#x2F;result.html&quot;,result&#x3D;result)</span><br></pre></td></tr></table></figure>
+
+<p>register.html:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!--url_for(&quot;result&quot;)里的result指向app.py中的result()函数</span><br><span class="line">    反向路由,本质是根据函数名反向生成url，使用函数url_for()来针对一个特定的函数构建一个URL</span><br><span class="line">    根据函数匹配路径</span><br><span class="line">    不要写死url，因为可能换端口换域名，用url_for可以帮你动态地找到你所需要的路径</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;&#123;&#123; url_for(&#39;result&#39;) &#125;&#125;&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">        &lt;p&gt;姓名:&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;name&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;年龄:&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;age&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;性别:&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;sex&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line">        &lt;p&gt;地址:&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;address&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;提交&quot;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>result.html:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;table border&#x3D;&quot;1&quot;&gt;</span><br><span class="line">            &#123;% for key,value in result.items() %&#125;</span><br><span class="line">                &lt;!--迭代器，把字典转换成了这种格式的列表[(key,value),(key,value),(key,value)],字典的items()方法以列表返回可遍历的(键, 值) 元组数组。--&gt;</span><br><span class="line">                &lt;tr&gt;</span><br><span class="line">                    &lt;th&gt;&#123;&#123; key &#125;&#125;&lt;&#x2F;th&gt;</span><br><span class="line">                    &lt;td&gt;&#123;&#123; value &#125;&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                &lt;&#x2F;tr&gt;</span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>结果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515184022757.png" alt="image-20210515184022757"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210515184046531.png" alt="image-20210515184046531"></p>
+<h2 id="完整笔记"><a href="#完整笔记" class="headerlink" title="完整笔记"></a>完整笔记</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf-8 -*-</span><br><span class="line">from flask import Flask,render_template,request </span><br><span class="line">#导入Flask类,render_template模板引擎,.request中包含了前端发送过来的所有数据 ，请求的 request 对象中保存了一次HTTP请求的一切信息。</span><br><span class="line">#模板的位置放在templates文件夹下面，一般是html文件.</span><br><span class="line">#模板简单理解就是把前后的代码分离让开发者高效的开发，让代码结构清晰，耦合度降低</span><br><span class="line">import datetime</span><br><span class="line">app &#x3D; Flask(__name__) #初始化了一个对象,导入了flask框架</span><br><span class="line"></span><br><span class="line"># 这就是传说中的MVC：Model-View-Controller，中文名“模型-视图-控制器”。</span><br><span class="line"># Python处理URL的函数就是C：Controller，Controller负责业务逻辑，比如检查用户名是否存在，取出用户信息等等；</span><br><span class="line"># 包含变量&#123;&#123; name &#125;&#125;的模板就是V：View，View负责显示逻辑，通过简单地替换一些变量，View最终输出的就是用户看到的HTML。</span><br><span class="line"># MVC中的Model在哪？Model是用来传给View的，这样View在替换变量的时候，就可以从Model中取出相应的数据。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># @app.route(&#39;&#x2F;&#39;) #路由解析,通过用户访问的路径匹配相应的函数</span><br><span class="line"># def hello_world():</span><br><span class="line">#     return &#39;Hello World!&#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@app.route(&quot;&#x2F;index&quot;) #这两行代码是Werkzeug干的，帮助判断哪个路径执行哪个函数</span><br><span class="line">def hello():</span><br><span class="line">    return &quot;你好&quot; #返回是jinja2实现的</span><br><span class="line"></span><br><span class="line">#动态参数用&lt;&gt;包裹，通过访问路径，获取用户的字符串参数</span><br><span class="line">@app.route(&quot;&#x2F;user&#x2F;&lt;name&gt;&quot;)</span><br><span class="line">def welcome(name):</span><br><span class="line">    return &quot;你好,&#123;&#125;&quot;.format(name)</span><br><span class="line"></span><br><span class="line">#通过访问路径，获取用户的整形参数。此外，还有float类型</span><br><span class="line">@app.route(&quot;&#x2F;user&#x2F;&lt;int:id&gt;&quot;)</span><br><span class="line">def welcome2(id):</span><br><span class="line">    return &quot;你好,&#123;&#125;号的会员&quot;.format(id)</span><br><span class="line"></span><br><span class="line">#路由路径不能重复，用户通过唯一路径访问特定的函数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 返回给用户渲染后的网页文件</span><br><span class="line"># @app.route(&quot;&#x2F;&quot;)</span><br><span class="line"># def index():</span><br><span class="line">#     return render_template(&quot;index.html&quot;)</span><br><span class="line">#     #jinja2会帮你检查html里有没有什么jinja2能识别的符号，如果有就把它转成html</span><br><span class="line"></span><br><span class="line">#向页面传递一个变量</span><br><span class="line">@app.route(&quot;&#x2F;&quot;)</span><br><span class="line">def index2():</span><br><span class="line">    time&#x3D;datetime.date.today() #普通变量</span><br><span class="line">    name&#x3D;[&quot;小张&quot;,&quot;小王&quot;,&quot;小赵&quot;] #列表类型</span><br><span class="line">    task&#x3D;&#123;&quot;任务&quot;:&quot;打扫卫生&quot;,&quot;时间&quot;:&quot;3小时&quot;&#125; #字典类型</span><br><span class="line">    return render_template(&quot;index.html&quot;,var&#x3D;time,list&#x3D;name,task&#x3D;task)</span><br><span class="line">    # 前者(var、list、task)是网页渲染用的，后者(time、name、task)是函数里定义的。</span><br><span class="line">    # 常用的写法是最后那种(task&#x3D;task)，前面写法只是为了区分清楚谁是谁</span><br><span class="line"></span><br><span class="line">#render_template的功能是先引入index.html，同时根据后面传入的参数，对html进行修改渲染。</span><br><span class="line"></span><br><span class="line">#表单提交</span><br><span class="line">@app.route(&quot;&#x2F;test&#x2F;register&quot;) #路径</span><br><span class="line">def register():</span><br><span class="line">    return render_template(&quot;test&#x2F;register.html&quot;) #templates文件夹下的文件结构</span><br><span class="line"></span><br><span class="line">#接受表单提交的路由，需要指定methods为post</span><br><span class="line">@app.route(&quot;&#x2F;test&#x2F;result&quot;,methods&#x3D;[&#39;POST&#39;,&#39;GET&#39;]) #methods不写，默认是get</span><br><span class="line">def result():</span><br><span class="line">    if request.method&#x3D;&#x3D;&quot;POST&quot;:</span><br><span class="line">        result&#x3D;request.form #获得表单字典,name值是键，输入的内容是值</span><br><span class="line">        return render_template(&quot;test&#x2F;result.html&quot;,result&#x3D;result)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    app.run() #Flask应用程序实例的run方法启动WEB服务器</span><br></pre></td></tr></table></figure>
+
+<p>感觉笔记写的比较乱，博客写的也很乱，虽然自己看得懂Orz，表述能力还有待提高！</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.bilibili.com/video/BV12E411A7ZQ?t=322&amp;p=31" target="_blank" rel="noopener">https://www.bilibili.com/video/BV12E411A7ZQ?t=322&amp;p=31</a></p>
+<p><a href="https://www.jb51.net/article/167477.htm" target="_blank" rel="noopener">https://www.jb51.net/article/167477.htm</a></p>
+<p><a href="https://m9u.cn/post/flask/flask_render_template/" target="_blank" rel="noopener">https://m9u.cn/post/flask/flask_render_template/</a></p>
+<p><a href="https://blog.csdn.net/GeekLeee/article/details/52505605" target="_blank" rel="noopener">https://blog.csdn.net/GeekLeee/article/details/52505605</a></p>
+<p><a href="https://blog.csdn.net/weiyongxuan/article/details/48544629" target="_blank" rel="noopener">https://blog.csdn.net/weiyongxuan/article/details/48544629</a></p>
+<p><a href="https://blog.csdn.net/wei18791957243/article/details/85123870" target="_blank" rel="noopener">https://blog.csdn.net/wei18791957243/article/details/85123870</a></p>
+<p><a href="https://www.shangmayuan.com/a/b37f40a8816041f8a106f22a.html" target="_blank" rel="noopener">https://www.shangmayuan.com/a/b37f40a8816041f8a106f22a.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/15/Flask2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/05/15/homepage/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            数据可视化-首页制作
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/05/14/Flask1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">数据可视化-Flask学习笔记1</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

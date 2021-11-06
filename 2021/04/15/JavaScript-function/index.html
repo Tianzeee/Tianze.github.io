@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    JavaScript函数学习笔记 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-JavaScript函数学习笔记" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  JavaScript函数学习笔记
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/15/JavaScript-function/" class="article-date">
+  <time datetime="2021-04-15T15:05:07.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">9 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>学完基础，再学一下函数相关内容<a id="more"></a></p>
+<h2 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h2><h3 id="JavaScript函数定义"><a href="#JavaScript函数定义" class="headerlink" title="JavaScript函数定义"></a>JavaScript函数定义</h3><p>用<code>function</code>定义函数，函数可以通过声明定义，也可以是一个表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function functionname(parameters)&#123;</span><br><span class="line">	执行的代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数表达式可以放在变量里，该变量可以作为函数使用，这样的函数也叫匿名函数(函数没有名字)，通过变量名来调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var x &#x3D; function(a,b)&#123;return a*b&#125;;</span><br><span class="line">var a &#x3D; x(1,2);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Function-构造函数"><a href="#Function-构造函数" class="headerlink" title="Function()构造函数"></a>Function()构造函数</h3><p>除了用<code>function</code>关键字来定义函数，还可以用内置的JavaScript函数构造器<code>Function()</code>定义函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var myfunction &#x3D; new Function(&quot;a&quot;,&quot;b&quot;,&quot;return a*b&quot;);</span><br><span class="line">var x &#x3D; myfunction(1,2);</span><br></pre></td></tr></table></figure>
+
+<p>这个构造函数和上面定义的一样，因为JavaScript要避免用<code>new</code>关键字，所以感觉这个构造函数有点鸡肋</p>
+<h3 id="函数提升-Hoisting"><a href="#函数提升-Hoisting" class="headerlink" title="函数提升(Hoisting)"></a>函数提升(Hoisting)</h3><p>变量和函数的声明会被JavaScript解释器提升到最顶部，所以变量和函数可以在声明前使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add(1,2);</span><br><span class="line">function add(a,b)&#123;</span><br><span class="line">	return a+b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>匿名函数无法提升</p>
+<h3 id="自调用函数"><a href="#自调用函数" class="headerlink" title="自调用函数"></a>自调用函数</h3><p>自调用函数会自动调用，不能自调用声明的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(function ()&#123;</span><br><span class="line">	var x &#x3D; &quot;hello world&quot;;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>它实际上是匿名函数的自我调用</p>
+<h3 id="函数是对象"><a href="#函数是对象" class="headerlink" title="函数是对象"></a>函数是对象</h3><p>用<code>typeof</code>判断函数类型会返回”function”，但把函数描述为一个对象更加准确，函数有属性和方法。</p>
+<p>arguments.length属性返回函数调用时接收到的参数个数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function add(a,b)&#123;</span><br><span class="line">	reutnr arguments.length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>toString()方法将函数作为一个字符串返回：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add(a,b)&#123;</span><br><span class="line">	return a+b;</span><br><span class="line">&#125;</span><br><span class="line">var txt&#x3D;add.toString();</span><br></pre></td></tr></table></figure>
+
+<p> 函数定义作为对象的属性，称之为对象方法。（这个我不太理解，先记住再说</p>
+<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>ES6新增了箭头函数，箭头函数的语法更简洁：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(参数1, 参数2, …, 参数N) &#x3D;&gt; &#123; 函数声明 &#125;</span><br><span class="line"></span><br><span class="line">(参数1, 参数2, …, 参数N) &#x3D;&gt; 表达式(单一)</span><br><span class="line">&#x2F;&#x2F; 相当于：(参数1, 参数2, …, 参数N) &#x3D;&gt;&#123; return 表达式; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有一个参数时，圆括号是可选的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(单一参数) &#x3D;&gt; &#123;函数声明&#125;</span><br><span class="line">单一参数 &#x3D;&gt; &#123;函数声明&#125;</span><br></pre></td></tr></table></figure>
+
+<p>没有参数的函数应该写成一对圆括号:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">() &#x3D;&gt; &#123;函数声明&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; ES5</span><br><span class="line">var x &#x3D; function(x, y) &#123;</span><br><span class="line">     return x * y;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; ES6</span><br><span class="line">const x &#x3D; (x, y) &#x3D;&gt; x * y;</span><br></pre></td></tr></table></figure>
+
+<p>有的箭头函数都没有自己的this。 不适合定义一个对象的方法。</p>
+<p>当我们使用箭头函数的时候，箭头函数会默认帮我们绑定外层 this 的值，所以在箭头函数中 this 的值和外层的 this 是一样的。</p>
+<p>箭头函数是不能提升的，所以需要在使用之前定义。</p>
+<p>使用 const 比使用 var 更安全，因为函数表达式始终是一个常量。</p>
+<p>如果函数部分只是一个语句，则可以省略 return 关键字和大括号 {}，这样做是一个比较好的习惯:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const x &#x3D; (x, y) &#x3D;&gt; &#123; return x * y &#125;;</span><br><span class="line">&#x2F;&#x2F;相当于:</span><br><span class="line">const x &#x3D; (x, y) &#x3D;&gt;  x*y;</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h2><p>JavaScript函数对参数不做任何检查</p>
+<h3 id="参数规则"><a href="#参数规则" class="headerlink" title="参数规则"></a>参数规则</h3><p>函数定义时形参不指定数据类型</p>
+<p>函数对实参没有类型检测，对实参的个数也没有检测</p>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><p>ES5中如果函数调用不给实参，参数默认为<code>undefined</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function add(a,b)&#123;</span><br><span class="line">	if(b&#x3D;&#x3D;undefined) b&#x3D;0;</span><br><span class="line">	return a+b;	</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;或者写成下面这样</span><br><span class="line">function add(a,b)&#123;</span><br><span class="line">	b&#x3D;b||0;</span><br><span class="line">	return a+b;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;如果b有实参，b||0返回b，因为b是true，否则返回0，因为undefined是false</span><br></pre></td></tr></table></figure>
+
+<p>如果函数调用时设置了过多的参数，参数将无法被引用，因为无法找到对应的参数名。 只能使用 arguments 对象来调用。</p>
+<p>ES6函数可以设置默认参数，判断undefined或者||操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function add(a,b&#x3D;10)&#123;</span><br><span class="line">	&#x2F;&#x2F;b&#x3D;10 if not passed or undefined</span><br><span class="line">	return a+b;</span><br><span class="line">&#125;</span><br><span class="line">add(1,2);&#x2F;&#x2F;输出3</span><br><span class="line">add(1);&#x2F;&#x2F;输出11</span><br></pre></td></tr></table></figure>
+
+<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><p>函数有个内置的arguments对象，包含了函数调用时的参数数组，通过这种方式可以很方便的找到参数里的最大值或者求和：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function findmax()&#123;</span><br><span class="line">	var i,max&#x3D;arguments[0];</span><br><span class="line">	if(arguments.length&#x3D;&#x3D;1) return max;</span><br><span class="line">	for(i&#x3D;1;i&lt;arguments.length;i++)&#123;</span><br><span class="line">		if(arguments[i]&gt;max) max&#x3D;arguments[i];</span><br><span class="line">	&#125;</span><br><span class="line">	return max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function sum()&#123;</span><br><span class="line">	var i,sum&#x3D;0;</span><br><span class="line">	for(i&#x3D;0;i&lt;arguments.length;i++)&#123;</span><br><span class="line">		sum+&#x3D;arguments[i];</span><br><span class="line">	&#125;</span><br><span class="line">	return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数相关"><a href="#参数相关" class="headerlink" title="参数相关"></a>参数相关</h3><p>函数调用时如果引用对象的值，那么函数内修改对象的属性会作用于函数外，修改对象属性在函数外是可见的，相当于C语言的引用。</p>
+<h2 id="JavaScript函数调用"><a href="#JavaScript函数调用" class="headerlink" title="JavaScript函数调用"></a>JavaScript函数调用</h2><p>JavaScript 函数有 4 种调用方式。</p>
+<p>每种方式的不同在于 this 的初始化。</p>
+<h3 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h3><p>this指向当前对象</p>
+<h3 id="作为函数调用"><a href="#作为函数调用" class="headerlink" title="作为函数调用"></a>作为函数调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function add(a,b)&#123;</span><br><span class="line">	return a+b;</span><br><span class="line">&#125;</span><br><span class="line">add(1,2);</span><br></pre></td></tr></table></figure>
+
+<p>这个函数不属于任何对象，但是它是默认的全局对象，在HTML中默认的全局对象是HTML页面，所以函数属于HTML页面，在浏览器中的页面对象是浏览器窗口(window对象)，所以它也是window对象的函数，所以可以用<code>window.add(1,2)</code>来调用函数。</p>
+<h3 id="函数作为方法调用"><a href="#函数作为方法调用" class="headerlink" title="函数作为方法调用"></a>函数作为方法调用</h3><p>JavaScript可以将函数定义为对象的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myName&#x3D;&#123;</span><br><span class="line">	firstName&#x3D;&#39;tian&#39;,</span><br><span class="line">	lastName&#x3D;&#39;ze&#39;,</span><br><span class="line">	fullName: function()&#123;</span><br><span class="line">		return this.firstName+&quot; &quot;+this.lastName;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">myName.fullName();</span><br></pre></td></tr></table></figure>
+
+<p>对象方法调用函数时，this指向该对象</p>
+<h3 id="用构造函数调用函数"><a href="#用构造函数调用函数" class="headerlink" title="用构造函数调用函数"></a>用构造函数调用函数</h3><p>函数调用前用<code>new</code>关键字调用构造函数，构造函数的调用会创建一个新的对象，新对象会继承构造函数的属性和方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function name(arg1,arg2)&#123;</span><br><span class="line">	this.firstName&#x3D;arg1;</span><br><span class="line">	this.lastName&#x3D;arg2;</span><br><span class="line">&#125;</span><br><span class="line">var a&#x3D;new name(&quot;Tian&quot;,&quot;ze&quot;);</span><br><span class="line">x.firstName; &#x2F;&#x2F;返回&quot;Tian&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数方法调用函数"><a href="#函数方法调用函数" class="headerlink" title="函数方法调用函数"></a>函数方法调用函数</h3><p>函数是对象，对象有属性和方法，<code>call()</code>和<code>apply()</code>是预定义的调用函数的两个函数方法，两个方法的第一个参数必须是对象本身。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var obj1;</span><br><span class="line">function add(a,b)&#123;</span><br><span class="line">	return a+b;</span><br><span class="line">&#125;</span><br><span class="line">obj1&#x3D;add.call(obj1,1,2);	&#x2F;&#x2F;返回3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj2,myarray;</span><br><span class="line">function add(a,b)&#123;</span><br><span class="line">	return a+b;</span><br><span class="line">&#125;</span><br><span class="line">myarray&#x3D;[1,2];</span><br><span class="line">obj2&#x3D;add.apply(obj2,myarray);	&#x2F;&#x2F;返回3</span><br></pre></td></tr></table></figure>
+
+<p>两个方法第一个参数都是对象本身，第二个参数有区别：apply传入的是一个参数数组，call直接传参。</p>
+<h2 id="JavaScript闭包"><a href="#JavaScript闭包" class="headerlink" title="JavaScript闭包"></a>JavaScript闭包</h2><p>JavaScript 变量可以是局部变量或全局变量。</p>
+<p>私有变量可以用到闭包。</p>
+<p>函数内定义的为局部变量，函数外定义的为全局变量，在web页面中全局变量属于window对象，全局变量可以用于页面上的所有脚本。</p>
+<p>注：变量声明时如果不用<code>var</code>关键字，即使在函数内定义也是全局变量</p>
+<h3 id="计数器困境"><a href="#计数器困境" class="headerlink" title="计数器困境"></a>计数器困境</h3><p>使用全局变量计数器，用函数让它递增</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var counter&#x3D;0;</span><br><span class="line">function add()&#123;</span><br><span class="line">	return counter++;</span><br><span class="line">&#125;</span><br><span class="line">add();</span><br><span class="line">add();	&#x2F;&#x2F;计数器为2</span><br></pre></td></tr></table></figure>
+
+<p>问题来了，页面上任何脚本都能改变计数器，如果在函数内声明计数器就无法实现计数的功能了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	var counter&#x3D;0;</span><br><span class="line">	return counter++;</span><br><span class="line">&#125;</span><br><span class="line">add();</span><br><span class="line">add();	&#x2F;&#x2F;本想输出2,但输出是1</span><br></pre></td></tr></table></figure>
+
+<p>内嵌函数可以解决这个问题</p>
+<h3 id="JavaScript内嵌函数"><a href="#JavaScript内嵌函数" class="headerlink" title="JavaScript内嵌函数"></a>JavaScript内嵌函数</h3><p>JavaScript函数可以访问上一层的作用域，嵌套函数可以访问上一层的函数变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function add()&#123;</span><br><span class="line">	var counter&#x3D;0;</span><br><span class="line">	function plus()&#123;</span><br><span class="line">		counter++;</span><br><span class="line">	&#125;</span><br><span class="line">	plus();</span><br><span class="line">	return counter;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果能在外部访问plus()函数就可以解决计数器困境，可以利用闭包做到。</p>
+<h3 id="JavaScript闭包-1"><a href="#JavaScript闭包-1" class="headerlink" title="JavaScript闭包"></a>JavaScript闭包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var add&#x3D;(function ()&#123;</span><br><span class="line">	var counter&#x3D;0;	&#x2F;&#x2F;只在add赋值时执行一次</span><br><span class="line">	return function()&#123;return counter++;&#125;</span><br><span class="line">&#125;)();</span><br><span class="line">add();</span><br><span class="line">add();	&#x2F;&#x2F;计数器为2</span><br></pre></td></tr></table></figure>
+
+<p>变量add指定了函数自我调用的返回值</p>
+<p>自我调用函数只执行一次，设置计数器为0</p>
+<p>add变量可以当函数来用，它可以访问函数上一层作用域的计数器</p>
+<p>这就是闭包，它使函数拥有私有变量变成可能</p>
+<p>计数器受匿名函数的作用域保护，只能通过add方法修改</p>
+<p>闭包这个点不是很懂，看了下面网友的一些笔记后有点明白了，闭包用于面向对象编程的”封装性”，相当于java类里面的一个公用接口，因为JavaScript没有访问修饰符所以不能创建私有属性，外部可以通过闭包访问私有属性。</p>
+<blockquote>
+<p>此技巧是js为其没有“访问修饰符”而创建出“私有属性”。</p>
+<p>以包含面向对象编程语言的基本特征“封装性”的很妙的处理方法。</p>
+</blockquote>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.runoob.com/js/js-function-definition.html" target="_blank" rel="noopener">https://www.runoob.com/js/js-function-definition.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/04/15/JavaScript-function/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/18/Python1/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Python学习笔记1
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/04/14/BrowserWorking-and-optimize/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">浏览器工作原理及前端优化学习</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    微信小程序学习笔记3 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-微信小程序学习笔记3" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  微信小程序学习笔记3
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/05/23/wx-small-program3/" class="article-date">
+  <time datetime="2021-05-23T15:35:48.000Z" itemprop="datePublished">2021-05-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">14 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>续二，学习剩下的自定义组件、数据接口调用、页面数据渲染并修改时间戳等等<a id="more"></a></p>
+<h2 id="自定义组件"><a href="#自定义组件" class="headerlink" title="自定义组件"></a>自定义组件</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>自定义组件可以方便我们复用写过的代码，提高代码重用率和工作效率，把很多地方都要用到的相同的代码写成组件就可以减少代码量提高工作效率，就好比之前项目里的header和footer这两个类，在首页上也有，跳转到平面设计二级页面也要用，如果要复制就比较麻烦，用自定义组件直接封装好这两个东西，要用的时候直接引用就好了，这就类似PHP里面的文件包含include，把写好的代码拿过来用。另外，他也方便多人协同开发，每个人写不同的组件，要用的时候直接引用就可以了</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>在根目录下创建一个新文件夹，存放组件库，名字可以随便取，但是为了方便他人理解最好命名为components，然后在components文件夹下再创建新的文件夹，名字就是自定义组件的名字比如我想在wxml里用<code>&lt;tianze&gt;&lt;/tianze&gt;</code>这个组件，那么就取名叫tianze，然后右键tianze文件夹点击新建component再取名tianze，然后会出来四个文件(tianze.js、tianze.json、tianze.wxml、tianze.wxss)，然后在tianze.wxml里写内容，tianze.wxss里写样式，写完之后，在你需要用到自定义组件的页面里的json文件里有个<code>usingComponents</code>对象，在里面加上<code>&quot;tianze&quot;:&quot;/components/tianze/tianze&quot;</code>，属性名是组件名属性值是组件路径，这样在index.wxml里就可以用<code>&lt;tianze&gt;&lt;/tianze&gt;</code>这个自定义组件了</p>
+<p>注意：不要取header和footer名，因为html里有这俩个标签了，命名最好用驼峰命名法，这样看到就知道是自定义组件了，另外自定义组件单标签、对标签都可以使用</p>
+<h3 id="将头部和底部用自定义组件独立出来"><a href="#将头部和底部用自定义组件独立出来" class="headerlink" title="将头部和底部用自定义组件独立出来"></a>将头部和底部用自定义组件独立出来</h3><p>就把index.wxml里的header类复制到新建的HdView组件的wxml里，把index.wxss里的header类样式也复制到HdView组件的wxss里，然后在index.json里加上<code>&quot;HdView&quot;:&quot;/components/HdView/HdView&quot;</code>然后把index.wxml里的header删掉替换成<code>&lt;HdView&gt;&lt;/HdView&gt;</code>就可以了，底部同理</p>
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523135300695.png" alt="image-20210523135300695"></p>
+<h3 id="自定义组件的属性传值"><a href="#自定义组件的属性传值" class="headerlink" title="自定义组件的属性传值"></a>自定义组件的属性传值</h3><p>这里以下图为例，将自定义自己的属性传值</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523142657028.png" alt="image-20210523142657028"></p>
+<p>1.在自定义组件的js里的properti中，设置自定义属性，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">properties: &#123;</span><br><span class="line">	&#x2F;&#x2F;myTitle和myUrl是自定义是属性名，需要指定type类型(String、Number、Array、Object等等)，指定value默认值</span><br><span class="line">    myTitle:&#123;</span><br><span class="line">      type:String,</span><br><span class="line">      value:&quot;&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    myUrl:&#123;</span><br><span class="line">      type:String,</span><br><span class="line">      value:&quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>2.在wxml中渲染从前端传递过来的属性，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;view class&#x3D;&#39;pubTitle&#39;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;txt&#39;&gt;&#123;&#123;myTitle&#125;&#125;&lt;&#x2F;view&gt;</span><br><span class="line">  &lt;navigator url&#x3D;&quot;&#123;&#123;myUrl&#125;&#125;&quot; class&#x3D;&#39;more&#39; open-type&#x3D;&quot;reLaunch&quot;&gt;更多&gt;&lt;&#x2F;navigator&gt;</span><br><span class="line">&lt;&#x2F;view&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3.在自定义组件上设置属性值，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;PubTitle myTitle&#x3D;&quot;学员作品&quot; myUrl&#x3D;&quot;&#x2F;pages&#x2F;works&#x2F;works&quot;&gt;&lt;&#x2F;PubTitle&gt;</span><br><span class="line">&lt;PubTitle myTitle&#x3D;&quot;行业动态&quot; myUrl&#x3D;&quot;&#x2F;pages&#x2F;dynamic&#x2F;dynamic&quot;&gt;&lt;&#x2F;PubTitle&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样就能实现不同的字体显示和不同的跳转，因为works页面和dynamic页面是tabBar页面，所以导航组件的open-type要设置成reLaunch，不然默认的值无法跳转</p>
+<h2 id="数据接口的调用方法"><a href="#数据接口的调用方法" class="headerlink" title="数据接口的调用方法"></a>数据接口的调用方法</h2><p>调用api接口，在之前的微信小程序API里的网络说过，参考 <a href="https://tianzeee.github.io/2021/05/20/wx-small-program2/#网络" target="_blank" rel="noopener">https://tianzeee.github.io/2021/05/20/wx-small-program2/#%E7%BD%91%E7%BB%9C</a></p>
+<h2 id="将数据渲染到页面并修改时间戳"><a href="#将数据渲染到页面并修改时间戳" class="headerlink" title="将数据渲染到页面并修改时间戳"></a>将数据渲染到页面并修改时间戳</h2><p>这里是将首页行业动态里的图片、标题、作者和时间从网络接口动态获取到，并且渲染到页面</p>
+<p>下图是原本的行业动态：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523162418740.png" alt="image-20210523162418740"></p>
+<p>用老师做好的api来获取数据 <a href="https://ku.qingnian8.com/show.php?cid=16&amp;id=64&amp;type=list" target="_blank" rel="noopener">https://ku.qingnian8.com/show.php?cid=16&amp;id=64&amp;type=list</a></p>
+<p>打开接口地址看看：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523165323851.png" alt="image-20210523165323851"></p>
+<p>默认应该是下面这样杂乱无章的json数据</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523165402825.png" alt="image-20210523165402825"></p>
+<p>在谷歌商场里安装一个叫JSON Viewer的插件，数据就可以变得如下图清楚了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523165233025.png" alt="image-20210523165233025"></p>
+<p>直接调用api的话会报错，需要在详情-本地设置里勾选不校验合法域名……，然后就可以看到数据了，如图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523154831702.png" alt="image-20210523154831702"></p>
+<p>修改index.js在页面加载函数里写网络请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">onLoad: function (options) &#123;</span><br><span class="line">   &#x2F;&#x2F;发送网络请求获取真实的行业动态数据</span><br><span class="line">   wx.request(&#123;</span><br><span class="line">     url: &#39;https:&#x2F;&#x2F;ku.qingnian8.com&#x2F;school&#x2F;list.php&#39;,</span><br><span class="line">     success:res&#x3D;&gt;&#123;</span><br><span class="line">       res.data.forEach(item&#x3D;&gt;&#123;</span><br><span class="line">         var time&#x3D;item.posttime*1000;</span><br><span class="line">         var d&#x3D;new Date(time);</span><br><span class="line">         var year&#x3D;d.getFullYear();</span><br><span class="line">         var month&#x3D;d.getMonth()+1;</span><br><span class="line">         month&#x3D;((month&gt;&#x3D;10)?&quot;:&quot;:&quot;:0&quot;)+month;</span><br><span class="line">         var day&#x3D;d.getDate();</span><br><span class="line">         day&#x3D;((day&gt;&#x3D;10)?&quot;:&quot;:&quot;:0&quot;)+day;</span><br><span class="line">         var posttime&#x3D;year+month+day;</span><br><span class="line">         item.posttime&#x3D;posttime;</span><br><span class="line">       &#125;)</span><br><span class="line">       this.setData(&#123;</span><br><span class="line">         dataList:res.data</span><br><span class="line">       &#125;)</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>由于api提供的时间是时间戳数据，时间戳是1970年1月1日到现在具体的某个时间所经过的时间，php记录的时间戳是秒数，js记录的是毫秒数。</p>
+<p>如下图</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523163133800.png" alt="image-20210523163133800"></p>
+<p>因为<code>res.data</code>是请求服务器返回的数据，他是一个数组，里面有9个对象，用<code>forEach</code>函数循环遍历每个<code>res.data</code>里的对象用js处理，要将时间戳转换成具体时间就先乘1000然后用Date函数获取具体时间，剩下的js就是获取年月日，然后用三目运算符判断一下如果是个位数前面加个”:0”，这样不论月和日是单位数还是个位数都是两位数看起来好看，这里有一个要注意的点是函数获取的月份范围是0-11，所以要手动加1，最后拼接出一个具体的posttime然后赋值给item.posttime，最后用<code>this.setData</code>函数设置一个dataList变量并把res.data赋给他，这个dataList就会到data对象里了，这样前端渲染的时候就可以用了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523163405676.png" alt="image-20210523163405676"></p>
+<p>修改index.wxml，把请求api获取到的数据渲染到前端上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;navigator class&#x3D;&#39;dyItem&#39; wx:for&#x3D;&quot;&#123;&#123;dataList&#125;&#125;&quot;&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;pic&#39;&gt;</span><br><span class="line">    &lt;image src&#x3D;&#39;&#123;&#123;item.picurl&#125;&#125;&#39;&gt;&lt;&#x2F;image&gt;</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;view class&#x3D;&#39;txt&#39;&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;title&#39;&gt;&#123;&#123;item.title&#125;&#125;&lt;&#x2F;view&gt;</span><br><span class="line">    &lt;view class&#x3D;&#39;info&#39;&gt;</span><br><span class="line">      &lt;text space&#x3D;&quot;ensp&quot;&gt;作者:&#123;&#123;item.author&#125;&#125;  -  时间:&#123;&#123;item.posttime&#125;&#125;&lt;&#x2F;text&gt;</span><br><span class="line">    &lt;&#x2F;view&gt;</span><br><span class="line">  &lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;navigator&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523164829289.png" alt="image-20210523164829289"></p>
+<p>本来我们希望行业动态里是5个导航组件，因为接口每一页默认返回9个对象，那么<code>wx:for=&quot;&quot;</code>就会在行业动态里生成9个导航组件，为了让他变成5个需要在请求的时候加上请求参数num就可以了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523170059126.png" alt="image-20210523170059126"></p>
+<p>修改js代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">onLoad: function (options) &#123;</span><br><span class="line">  &#x2F;&#x2F;发送网络请求获取真实的行业动态数据</span><br><span class="line">  wx.request(&#123;</span><br><span class="line">    url: &#39;https:&#x2F;&#x2F;ku.qingnian8.com&#x2F;school&#x2F;list.php&#39;,</span><br><span class="line">    data:&#123;</span><br><span class="line">      num:5</span><br><span class="line">    &#125;,</span><br><span class="line">    success:res&#x3D;&gt;&#123;</span><br><span class="line">      res.data.forEach(item&#x3D;&gt;&#123;</span><br><span class="line">        var time&#x3D;item.posttime*1000;</span><br><span class="line">        var d&#x3D;new Date(time);</span><br><span class="line">        var year&#x3D;d.getFullYear();</span><br><span class="line">        var month&#x3D;d.getMonth()+1;</span><br><span class="line">        month&#x3D;((month&gt;&#x3D;10)?&quot;:&quot;:&quot;:0&quot;)+month;</span><br><span class="line">        var day&#x3D;d.getDate();</span><br><span class="line">        day&#x3D;((day&gt;&#x3D;10)?&quot;:&quot;:&quot;:0&quot;)+day;</span><br><span class="line">        var posttime&#x3D;year+month+day;</span><br><span class="line">        item.posttime&#x3D;posttime;</span><br><span class="line">      &#125;)</span><br><span class="line">      console.log(res.data)</span><br><span class="line">      this.setData(&#123;</span><br><span class="line">        dataList:res.data</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>其实就只是加了一个data请求属性里面写上请求个数为5就行了</p>
+<p>效果图：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523170341735.png" alt="image-20210523170341735"></p>
+<p>看他的接口参数还有页数也可以写进请求参数里</p>
+<h2 id="ES6模块化封装公共函数"><a href="#ES6模块化封装公共函数" class="headerlink" title="ES6模块化封装公共函数"></a>ES6模块化封装公共函数</h2><p>前面获取日期的时候用js写了一大堆代码去拼接出一个最终的函数，放在那里面很乱很多，而且可能其他地方也会用到，所以干脆就把他封装成一个公共函数来用</p>
+<p>参考官方文档的框架下框架接口里有个模块化 <a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/require.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/reference/api/require.html</a></p>
+<p>之前说过utils文件夹是公共文件夹，可以在里面存放js等文件。那我就再utils文件夹里新建文件名为public.js，各种功能的js代码网上很多搜一下可以复制过来，然后只要根据他要求的参数会调用就可以了，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">var common&#x3D;&#123;</span><br><span class="line">  getStrLen:function(str,len)&#123;</span><br><span class="line">    if(str.length&gt;len)&#123;</span><br><span class="line">      return str.substr(0,len)+&quot;...&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">      return str;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getMyData:function(timestamp, formats)&#123;</span><br><span class="line">    &#x2F;&#x2F; formats格式包括</span><br><span class="line">    &#x2F;&#x2F; 1. Y-m-d</span><br><span class="line">    &#x2F;&#x2F; 2. Y-m-d H:i:s</span><br><span class="line">    &#x2F;&#x2F; 3. Y年m月d日</span><br><span class="line">    &#x2F;&#x2F; 4. Y年m月d日 H时i分</span><br><span class="line">    formats &#x3D; formats || &#39;Y-m-d&#39;;</span><br><span class="line">    var zero &#x3D; function (value) &#123;</span><br><span class="line">        if (value &lt; 10) &#123;</span><br><span class="line">            return &#39;0&#39; + value;</span><br><span class="line">        &#125;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;;</span><br><span class="line">    var timestamp&#x3D;timestamp*1000;</span><br><span class="line">    var myDate &#x3D; timestamp? new Date(timestamp): new Date();</span><br><span class="line">    var year &#x3D; myDate.getFullYear();</span><br><span class="line">    var month &#x3D; zero(myDate.getMonth() + 1);</span><br><span class="line">    var day &#x3D; zero(myDate.getDate());</span><br><span class="line">    var hour &#x3D; zero(myDate.getHours());</span><br><span class="line">    var minite &#x3D; zero(myDate.getMinutes());</span><br><span class="line">    var second &#x3D; zero(myDate.getSeconds());</span><br><span class="line">    return formats.replace(&#x2F;Y|m|d|H|i|s&#x2F;ig, function (matches) &#123;</span><br><span class="line">        return (&#123;</span><br><span class="line">            Y: year,</span><br><span class="line">            m: month,</span><br><span class="line">            d: day,</span><br><span class="line">            H: hour,</span><br><span class="line">            i: minite,</span><br><span class="line">            s: second</span><br><span class="line">        &#125;)[matches];</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">module.exports&#x3D;common</span><br><span class="line">&#x2F;&#x2F;其他写法如下,只能返回单个函数</span><br><span class="line">&#x2F;&#x2F; export function fun() &#123;</span><br><span class="line">&#x2F;&#x2F; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在public.js文件里写模块，里面写了一个common对象，对象里有两个函数，一个是限制标题显示字数超过部分用…表示，一个是将时间戳转换为时间的函数，最后用<code>module.exports=common</code>将common对象向外暴露，这样外面就能用了。</p>
+<p>然后修改index.js文件，引入上面写好的模块public.js文件，然后把原来处理时间戳的代码删除，直接用模块里写好的函数就可以了，index.js内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import common from &quot;..&#x2F;..&#x2F;utils&#x2F;public.js&quot;;</span><br><span class="line">Page(&#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * 页面的初始数据</span><br><span class="line">   *&#x2F;</span><br><span class="line">  data: &#123;</span><br><span class="line">  </span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * 生命周期函数--监听页面加载</span><br><span class="line">   *&#x2F;</span><br><span class="line">  onLoad: function (options) &#123;</span><br><span class="line">    &#x2F;&#x2F;发送网络请求获取真实的行业动态数据</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">      url: &#39;https:&#x2F;&#x2F;ku.qingnian8.com&#x2F;school&#x2F;list.php&#39;,</span><br><span class="line">      data:&#123;</span><br><span class="line">        num:5</span><br><span class="line">      &#125;,</span><br><span class="line">      success:res&#x3D;&gt;&#123;</span><br><span class="line">        res.data.forEach(item&#x3D;&gt;&#123;</span><br><span class="line">          item.posttime&#x3D;common.getMyData(item.posttime,&quot;Y-m-d&quot;)</span><br><span class="line">          item.title&#x3D;common.getStrLen(item.title,25)</span><br><span class="line">        &#125;)</span><br><span class="line">        this.setData(&#123;</span><br><span class="line">          dataList:res.data</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>引入方法和python引入模块差不多，路径好像只能用相对路径，使用绝对路径我报错了，引入后在监听页面加载函数里，加个遍历函数里面调用模块的两个函数就可以了。其实这个标题限制文字长度可以用css去写，这里只是用他来理解模块化的应用</p>
+<h2 id="代码整合及小程序上线流程"><a href="#代码整合及小程序上线流程" class="headerlink" title="代码整合及小程序上线流程"></a>代码整合及小程序上线流程</h2><p>首先解决一下两个报错</p>
+<p>第一个：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523225147855.png" alt="image-20210523225147855"></p>
+<p>这里只要在<code>wx:for</code>后面加上<code>wx:key=&quot;index&quot;</code>就可以了，具体参考之前的列表渲染里面有写这个问题 <a href="https://tianzeee.github.io/2021/05/20/wx-small-program/#列表渲染" target="_blank" rel="noopener">https://tianzeee.github.io/2021/05/20/wx-small-program/#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93</a></p>
+<p>第二个：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523225412919.png" alt="image-20210523225412919"></p>
+<p>翻译过来是说：有些选择器在组件wxss中是不允许的，包括标签名称选择器、ID选择器和属性选择器。网上查说组件和引用组件的页面不能使用id选择器( #a )、属性选择器( [a] )和标签名选择器，请改用类选择器。所以要把HdView.wxss第12行和15行的标签名选择器改为类选择器，在HdView.wxml里给导航组件加个<code>class=&#39;logo&#39;</code>，给图像组件加上<code>class=&#39;hdPic&#39;</code>，然后wxss里改成类选择器就可以了，这样两个报错就解决了。</p>
+<p>另外，之前在监听页面加载函数里写了个request请求，可以把onLoad中调用的东西独立出去，这样看起来简洁，找代码的时候单独找对应的方法就可以了，就是封装的思想，把常用的方法比较多的代码独立出去，用的时候再调用就可以了，具体如下：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523230742151.png" alt="image-20210523230742151"></p>
+<h3 id="小程序上线流程"><a href="#小程序上线流程" class="headerlink" title="小程序上线流程"></a>小程序上线流程</h3><p>1.在微信工作平台 <a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">https://mp.weixin.qq.com/</a> 里点击小程序，跳转到 <a href="https://mp.weixin.qq.com/cgi-bin/wx?token=&amp;lang=zh_CN" target="_blank" rel="noopener">https://mp.weixin.qq.com/cgi-bin/wx?token=&amp;lang=zh_CN</a> 然后注册一个号，注册之后完善一些信息填写等等</p>
+<p>2.找到里面的AppID替换掉原来使用的测试号<img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523232653453.png" alt="image-20210523232653453"></p>
+<p>3.在开发设置里添加api请求时的合法域名</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523232832463.png" alt="image-20210523232832463"></p>
+<p>4.在微信开发者工具里上传</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523232244481.png" alt="image-20210523232244481"></p>
+<p>5.上传完成后在版本管理就可以看到了</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210523233044339.png" alt="image-20210523233044339"></p>
+<p>6.点击提交审核，等审核通过后点击上线就可以了</p>
+<p>具体可以参考官方的小程序发布流程，因为提交审核要填写很多数据，我这里就不弄了，上线没法展示了。到这里B站的小程序基础课就学完了，后面看看跟着学长做点东西吧</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cnblogs.com/hellman/p/11007936.html" target="_blank" rel="noopener">https://www.cnblogs.com/hellman/p/11007936.html</a></p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/reference/api/module.html" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/reference/api/module.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/05/23/wx-small-program3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/05/30/JAVA-GUI/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            JAVA实验课大作业笔记
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/05/23/wx-small-program-project-instance2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">微信小程序项目实例学习笔记2</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

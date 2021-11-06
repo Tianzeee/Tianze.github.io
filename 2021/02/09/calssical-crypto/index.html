@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Crypto—之古典密码学入门 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-Crypto—之古典密码学入门" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Crypto—之古典密码学入门
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/02/09/calssical-crypto/" class="article-date">
+  <time datetime="2021-02-09T08:52:29.000Z" itemprop="datePublished">2021-02-09</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/crypto/">crypto</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="Crypto之古典密码学"><a href="#Crypto之古典密码学" class="headerlink" title="Crypto之古典密码学"></a>Crypto之古典密码学</h2><h3 id="什么是密码学"><a href="#什么是密码学" class="headerlink" title="什么是密码学"></a>什么是密码学</h3><blockquote>
+<p>密码学是一个多面的世界，对一些人来说，它是一个侦探与保密的世界，对另一些人来说，它是数学与计算机的世界。<a id="more"></a>无论你如何看待它，密码学都是神秘而富有冒险色彩的。它还超越了传统的学术学科。它不只是计算机科学的内容，密码学的研究包括历史、政治学、工程、语言军事学、伦理、数学和工业技术学等。<br>——《经典密码学与现代密码学》</p>
+</blockquote>
+<p>古典密码学主要关注信息的保密书写和传递，以及与其相对应的破译方法。<br>现代密码学不只关注信息保密问题，还同时涉及信息完整性验证、信息发布的不可抵赖性、以及在分布式计算中产生的来源于内部和外部的攻击的所有信息安全问题。</p>
+<p>CTF 中的古典密码学题目有时也会出现在杂项里面，古典加密常常不给出加密算法，需要判断或者尝试一下。<br>而 CTF 中的现代加密常常会给出加密算法，或者以一些形式提示某种常用的加密算法。即通过公开的加密算法和题目给的条件来思考解密的算法并加以实现。</p>
+<p>在有关密码学的一些描述中，常使用Alice和Bob作为两个想要传递消息的两个人，Eve是想要从传递的密文中窃取明文信息的人。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209120459595.png" alt="image-20210209120459595"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209120955560.png" alt="image-20210209120955560"></p>
+<h3 id="凯撒加密"><a href="#凯撒加密" class="headerlink" title="凯撒加密"></a>凯撒加密</h3><p>凯撒加密（Caesar cipher）是一种最简单且最广为人知的加密技术，它属于替代加密，明文中的所有字母都在字母表上向后（或向前）按照一个固定数目进行偏移后被替换成密文。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209121100813.png" alt="image-20210209121100813"></p>
+<p>凯撒加密会生成一个一一对应的密码表，加密和解密过程都是通过查表完成的。<br>和很多其他的单表替换加密一样，凯撒加密是十分不安全的。可以把移位值看作密钥key，不难想到，在明文空间为26个英文字母时，有效的密钥只有25个。所以很容易枚举出来。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209121257633.png" alt="image-20210209121257633"></p>
+<h3 id="关键词加密"><a href="#关键词加密" class="headerlink" title="关键词加密"></a>关键词加密</h3><p>关键词加密（keyword cipher）也是一种单表替代加密，与凯撒加密不同之处在于密钥可以更为复杂，加密时需要选择一个关键词，如果这个关键词有重复的字母，去除第一次出现之外的所有的相同的字母。例如，如果选定的关键词为“success”，则使用“suce”。<br>将该关键词写在字母表的下方，并用字母表的其他字母按标准的顺序填写余下的空间。这样就构建了字母一一对应的关系，加密时用下面一行中的字母对应替换上面一行的字母；解密时用上面一行中的字母对应替换下面一行的字母。</p>
+<p>ACTF2020 Crypto Keysar</p>
+<p>Cipher : agqr{yue_stdcgciup_padas}<br>Key : angstromcf</p>
+<p>前10个字母先用key填充，后面的按字母表顺序展开。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209122033770.png" alt="image-20210209122033770"></p>
+<table>
+<thead>
+<tr>
+<th><strong>a</strong></th>
+<th><strong>g</strong></th>
+<th><strong>q</strong></th>
+<th><strong>r</strong></th>
+<th><strong>{</strong></th>
+<th><strong>y</strong></th>
+<th><strong>u</strong></th>
+<th><strong>e</strong></th>
+<th><strong>_</strong></th>
+<th><strong>s</strong></th>
+<th><strong>t</strong></th>
+<th><strong>d</strong></th>
+<th><strong>c</strong></th>
+<th><strong>g</strong></th>
+<th><strong>c</strong></th>
+<th><strong>i</strong></th>
+<th><strong>u</strong></th>
+<th><strong>p</strong></th>
+<th><strong>_</strong></th>
+<th><strong>p</strong></th>
+<th><strong>a</strong></th>
+<th><strong>d</strong></th>
+<th><strong>a</strong></th>
+<th><strong>s</strong></th>
+<th><strong>}</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>c</td>
+<td>t</td>
+<td>f</td>
+<td>{</td>
+<td>y</td>
+<td>u</td>
+<td>m</td>
+<td>_</td>
+<td>d</td>
+<td>e</td>
+<td>l</td>
+<td>i</td>
+<td>c</td>
+<td>i</td>
+<td>o</td>
+<td>u</td>
+<td>s</td>
+<td>_</td>
+<td>s</td>
+<td>a</td>
+<td>l</td>
+<td>a</td>
+<td>d</td>
+<td>}</td>
+</tr>
+</tbody></table>
+<p>按照上面的表格，对应解密得到flag：actf{yum_delicious_salad}</p>
+<h3 id="仿射加密"><a href="#仿射加密" class="headerlink" title="仿射加密"></a>仿射加密</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209122154303.png" alt="image-20210209122154303"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209122558041.png" alt="image-20210209122558041"></p>
+<p>解密时需要计算（或枚举）密钥数字对中 a 的逆元，也就是 a 对 26 的模反数。<br>模反数可以简单理解为整数环中的倒数，a 乘以 a 的模反数对 26 取模等于 1。例如 5 对 26 的逆元就是 21。<br>所以一个数乘以 a，再乘以 a 的逆元，就能算回原来的数。</p>
+<p>求逆元可以用 Python 的第三方包 gmpy2 的 invert 函数：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209122647392.png" alt="image-20210209122647392"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209122910508.png" alt="image-20210209122910508"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209122915509.png" alt="image-20210209122915509"></p>
+<p>这里a的-1指的是a的逆元</p>
+<p>举个例子：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209134020025.png" alt="image-20210209134020025"></p>
+<p>其中<img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209134034113.png" alt="image-20210209134034113"></p>
+<p>所以尽管套了三层，还是可以当作普通的仿射加密进行破解。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209134104885.png" alt="image-20210209134104885"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209134135454.png" alt="image-20210209134135454"></p>
+<h3 id="单表替代密码分析"><a href="#单表替代密码分析" class="headerlink" title="单表替代密码分析"></a>单表替代密码分析</h3><p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209134530393.png" alt="image-20210209134530393"></p>
+<p>所以枚举的方式获取字母间的对应关系显然是难以承受的。</p>
+<p>可以利用不同的英文字母在文段中的出现频率特征，来帮助我们判断某个字母被替换成了某个字母的可能性。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209134550283.png" alt="image-20210209134550283"></p>
+<p>词频分析不仅针对单个字母的出现频率，同时有很多连续的两个字母出现频率较高（双联字母 bigrams），也可以辅助我们进行分析。<br>以下是平均在1000个单词中，各双联字母出现的次数：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209134749931.png" alt="image-20210209134749931"></p>
+<p>另外，如果有一个较大的单词库，还可以通过单词的格式，进一步帮助我们缩小可能的范围，例如单词happy，为12334格式，success为1233411格式，那么被进行单表替换后，它的格式并不会发生改变。<br>这种模式匹配的优点在于即使密文长度较短，也能尽可能找到接近真相的结果。<br><a href="https://quipqiup.com/" target="_blank" rel="noopener">https://quipqiup.com/</a></p>
+<h3 id="维吉尼亚加密"><a href="#维吉尼亚加密" class="headerlink" title="维吉尼亚加密"></a>维吉尼亚加密</h3><p>维吉尼亚密码是使用一系列凯撒密码组成密码字母表的加密算法，属于多表密码。为了生成密码，需要使用表格法。这一表格包括了26行字母表，每一行都由前一行向左偏移一位得到。具体使用哪一行字母表进行加密是基于密钥进行的，在过程中会不断地变换。</p>
+<p>加密<br>明文：ATTACKATDAWN<br>选择关键词：LEMON，重复关键词，直到长度和明文相同，作为密钥：LEMONLEMONLE<br>通过等长的明文和密钥，依次查表得到密文：LXFOPVEFRNHR</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209135355450.png" alt="image-20210209135355450"></p>
+<p>解密<br>解密的过程则与加密相反。例如：根据密钥第一个字母 L 所对应的 L 行字母表，发现密文第一个字母 L 位于 A 列，因而明文第一个字母为 A 。密钥第二个字母 E 对应 E 行字母表，而密文第二个字母 X 位于此行 T 列，因而明文第二个字母为 T。以此类推便可得到明文。</p>
+<p>维吉尼亚加密可以避免直接的词频分析攻击，密文在统计上没有明显的规律，但是仍然有方法可以对其进行破解。<br>首先提出破解方法的 Frederick Kasiski 是基于这样一个简单的观察<strong>“密钥的重复部分与明文中的重复部分的连接，在密文中也产生一个重复部分”</strong>。<br>如果一个字符串在明文中重复，并且被密钥相同的部分加密，那么在密文中也会出现重复的字符串。</p>
+<p>举个例子：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209140739793.png" alt="image-20210209140739793"></p>
+<p>关键词 “RUN” 的长度为 3，密文串“KIOV”的间距是 9，密文串 “NU”的间距是 6，这些间距都是关键词长度的倍数，这样重复足够多次，可以帮助我们判断关键词的长度。</p>
+<p>一旦确定了关键词的长度，余下的问题就只是如何使用该信息去找到真正的关键词了。关键词的长度揭示了密文可以被如何破解成单码加密的一个集合。<br>关键词的长度为n，那么破解维吉尼亚加密的问题就变成了解决n个单表加密的问题，需要有足够长的密文，然后通过词频分析逐个解决问题。</p>
+<h3 id="替换和编码"><a href="#替换和编码" class="headerlink" title="替换和编码"></a>替换和编码</h3><p>古典加密还包括很多种形式的简单替换或编码，这些替换也常常出现杂项中，如摩尔斯电码、福尔摩斯跳舞的小人、敲击码、培根密码……</p>
+<p>摩尔斯电码：用一个电键可以敲击出点、划以及中间的停顿。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209141751042.png" alt="image-20210209141751042"></p>
+<p>福尔摩斯跳舞的小人：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209141800402.png" alt="image-20210209141800402"></p>
+<p>敲击码：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209141810694.png" alt="image-20210209141810694"></p>
+<p>培根密码：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209141926930.png" alt="image-20210209141926930"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209142100897.png" alt="image-20210209142100897"></p>
+<p>使用 Python 脚本进制转换</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209142114307.png" alt="image-20210209142114307"></p>
+<p>字符串(str)类型和字节(bytes)类型相互转换</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209142127954.png" alt="image-20210209142127954"></p>
+<p>Base64编码解码</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209142135885.png" alt="image-20210209142135885"></p>
+<p>整数和字节类型的转换</p>
+<p>这种类型转换在密码方向题目中很常见，整数类型可以直接参与数学计算，字节类型会展示可读的字符</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210209142153434.png" alt="image-20210209142153434"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://www.bilibili.com/video/BV1VA411u7Tg?p=5" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1VA411u7Tg?p=5</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/02/09/calssical-crypto/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/02/18/View-WiFi-password/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            命令查看连过的WIFI密码
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/02/08/arp-spoof/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">ARP欺骗</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

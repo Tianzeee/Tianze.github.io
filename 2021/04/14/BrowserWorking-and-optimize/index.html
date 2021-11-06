@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+   
+  <meta name="keywords" content="����,Tianze" />
+   
+  <meta name="description" content="����˳Ӧ δ����ӭ ��ʱ���� �ȹ����� &#39;&#39;" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    浏览器工作原理及前端优化学习 |  Tianze&#39;s Blog
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Tianze's Blog" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-浏览器工作原理及前端优化学习" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  浏览器工作原理及前端优化学习
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/14/BrowserWorking-and-optimize/" class="article-date">
+  <time datetime="2021-04-14T08:06:21.000Z" itemprop="datePublished">2021-04-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">3.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">13 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p>前面学了DOM，现在再看浏览器的渲染比较好理解。<a id="more"></a></p>
+<h1 id="浏览器工作原理"><a href="#浏览器工作原理" class="headerlink" title="浏览器工作原理"></a>浏览器工作原理</h1><h2 id="浏览器组件结构"><a href="#浏览器组件结构" class="headerlink" title="浏览器组件结构"></a>浏览器组件结构</h2><p>1.用户界面，包括地址栏、前进/后退/刷新/停止/主页等按钮、书签菜单等。除了浏览器主窗口显示用户请求的页面外，其他显示的各个部分都属于用户界面。</p>
+<p>2.浏览器引擎，处于用户界面和渲染引擎之间，负责在两者之间传递操作</p>
+<p>3.渲染引擎，负责显示请求的内容，对于HTML，就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。</p>
+<p>4.网络，负责网络调用，如HTTP请求</p>
+<p>5.JavaScript解释器，解析和执行JavaScript代码，比如chrome的javascript解释器是V8</p>
+<p>6.用户界面后端，用于绘制基本的窗口小部件，比如下拉框和窗口</p>
+<p>7.数据存储，这是数据持久层，浏览器需要将各种数据保存在本地硬盘，比如cookie</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/20210414145207.png" alt=""></p>
+<p>Chrome浏览器每个标签页都对应一个渲染引擎实例，每个标签页都是一个进程，一定程度上说明了Chrome浏览器比较占内存的原因</p>
+<h2 id="渲染引擎的工作流程"><a href="#渲染引擎的工作流程" class="headerlink" title="渲染引擎的工作流程"></a>渲染引擎的工作流程</h2><blockquote>
+<p>渲染引擎，我们一般也称为浏览器内核，可以说是浏览器最重要的一个模块。 Firefox使用基于Mozilla的Gecko，而Safari和Chrome使用的是Webkit。渲染引擎主要工作就是依据HTMl、XML、CSS等代码文档的描述，把页面显示出来。</p>
+</blockquote>
+<h3 id="流程示意图"><a href="#流程示意图" class="headerlink" title="流程示意图"></a>流程示意图</h3><p>Webkit：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/20210414151428.png" alt="image-20210414151428745"></p>
+<p>Gecko：</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/image-20210414151530114.png" alt="image-20210414151530114"></p>
+<p>两个渲染引擎虽然叫法不一样，但是整体流程基本差不多。</p>
+<p>1.首先，渲染引擎通过网络组件获取请求的内容(HTML、CSS、JS代码等)</p>
+<p>2.获取到内容后，渲染引擎会进行下列流程进行渲染工作</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/flow.png" alt="image"></p>
+<h3 id="渲染过程"><a href="#渲染过程" class="headerlink" title="渲染过程"></a>渲染过程</h3><p>1.解析HTML生成DOM树</p>
+<p>2.解析CSS生成CSSOM树</p>
+<p>3.将DOM树和CSSOM树合并生成渲染树(Render Tree)</p>
+<p>4.遍历渲染树开始布局，计算每个节点的位置大小信息。</p>
+<p>5.绘制渲染树，渲染引擎会遍历渲染树，通过用户界面后端，将节点绘制出来。</p>
+<h3 id="构建DOM树"><a href="#构建DOM树" class="headerlink" title="构建DOM树"></a>构建DOM树</h3><p>HTML 文档中的所有内容皆是节点，各节点之间拥有层级关系，如父子关系、兄弟关系等，彼此相连，构成DOM树。最常见的几种节点有：文档节点、元素节点、文本节点、属性节点、注释节点。</p>
+<p>DOM节点树中节点与HTML文档中内容一一对应，DOM树构建过程：读取html文档，将字节转换成字符，确定tokens（标签），再将tokens转换成节点，以节点构建 DOM 树。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/1227776-20180608181358236-1251504382.png" alt="img"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/1227776-20180608180854559-1390993721.png" alt="img"></p>
+<h3 id="构建CSSOM树"><a href="#构建CSSOM树" class="headerlink" title="构建CSSOM树"></a>构建CSSOM树</h3><p> CSS文档中，所有元素皆是节点，与HTML文件中的标签节点一一对应。CSS中各节点之间同样拥有层级关系，如父子关系、兄弟关系等，彼此相连，构成CSSOM树。</p>
+<p>在构建DOM树的过程中，在 HTML 文档的 head 标签中遇到 link 标签，该标签引用了一个外部CSS样式表。由于预见到需要利用该CSS资源来渲染页面，浏览器会立即发出对该CSS资源的请求，并进行CSSDOM树的构建。</p>
+<p>CSSOM树构建过程与DOM树构建流程一致：读取CSS文档，将字节转换成字符，确定tokens（标签），再将tokens转换成节点，以节点构建 CSSOM 树。</p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/1227776-20180611113449533-1302562356.png" alt="img"></p>
+<p><img src="https://gitee.com/hollow-heart/typora-image/raw/master/1227776-20180611113210061-2009638399.png" alt="img"></p>
+<p>.CSS文件，又名层叠样式表。当CSSOM树生成节点时，每一个节点首先会继承其父节点的所有样式，层叠覆盖，然后再以”向下级联”的规则，为该节点应用更具体的样式，递归生成CSSOM树。譬如，上右图中第二层的p节点，有父节点body，因此该p将继承body节点的样式：”font-size: 16px;”。然后再应用该p节点自身的样式：”font-weight: bold;”。所以最终该p节点的样式为：”font-size: 16px;font-weight: bold;”。</p>
+<h3 id="渲染阻塞——加载JS"><a href="#渲染阻塞——加载JS" class="headerlink" title="渲染阻塞——加载JS"></a>渲染阻塞——加载JS</h3><p>若在构建DOM树的过程中，当 HTML 解析器遇到一个 script 标记时，即遇到了js，将立即阻塞DOM树的构建，将控制权移交给 JavaScript 引擎，等到 JavaScript 引擎运行完毕，浏览器才会从中断的地方恢复DOM树的构建。<br>其根本原因在于，JS会对DOM节点进行操作，浏览器无法预测未来的DOM节点的具体内容，为了防止无效操作，节省资源，只能阻塞DOM树的构建。譬如，若不阻塞DOM树的构建，若JS删除了某个DOM节点A，那么浏览器为构建此节点A花费的资源就是无效的。</p>
+<p>若在HTML头部加载JS文件，由于JS阻塞，会推迟页面的首绘。为了加快页面渲染，一般将JS文件放到HTML底部进行加载，或是对JS文件执行async或defer加载。</p>
+<p>如果JavaScript脚本还操作了CSSOM，而正好这个CSSOM还没有下载和构建，浏览器甚至会延迟脚本执行和构建DOM，直至完成其CSSOM的下载和构建。</p>
+<p>所以，script 标签的位置很重要。实际使用时，可以遵循下面两个原则：</p>
+<p>CSS 优先：引入顺序上，CSS 资源先于 JavaScript 资源。<br>JS置后：我们通常把JS代码放到页面底部，且JavaScript 应尽量少影响 DOM 的构建。</p>
+<p>当解析html的时候，会把新来的元素插入dom树里面，同时去查找css，然后把对应的样式规则应用到元素上，查找样式表是按照从右到左的顺序去匹配的。</p>
+<p>例如： div p {font-size: 16px}，会先寻找所有p标签并判断它的父标签是否为div之后才会决定要不要采用这个样式进行渲染）。<br>所以，我们平时写CSS时，尽量用id和class，千万不要过渡层叠。</p>
+<h3 id="构建渲染树"><a href="#构建渲染树" class="headerlink" title="构建渲染树"></a>构建渲染树</h3><p>通过DOM树和CSS规则树我们便可以构建渲染树。浏览器会先从DOM树的根节点开始遍历每个可见节点。对每个可见节点，找到其适配的CSS样式规则并应用。</p>
+<p>渲染树构建完成后，每个节点都是可见节点并且都含有其内容和对应规则的样式。这也是渲染树与DOM树的最大区别所在。渲染树是用于显示，那些不可见的元素当然就不会在这棵树中出现了，譬如。除此之外，display等于none的也不会被显示在这棵树里头，但是visibility等于hidden的元素是会显示在这棵树里头的。</p>
+<p>渲染树（Render Tree）由DOM树、CSSOM树合并而成，但并不是必须等DOM树及CSSOM树加载完成后才开始合并构建渲染树。三者的构建并无先后条件，亦非完全独立，而是会有交叉，并行构建。因此会形成一边加载，一边解析，一边渲染的工作现象。</p>
+<h3 id="渲染树布局"><a href="#渲染树布局" class="headerlink" title="渲染树布局"></a>渲染树布局</h3><p>布局阶段会从渲染树的根节点开始遍历，然后确定每个节点对象在页面上的确切大小与位置，布局阶段的输出是一个盒子模型，它会精确地捕获每个元素在屏幕内的确切位置与大小。</p>
+<h3 id="渲染树绘制"><a href="#渲染树绘制" class="headerlink" title="渲染树绘制"></a>渲染树绘制</h3><p>在绘制阶段，遍历渲染树，调用渲染器的paint()方法在屏幕上显示其内容。渲染树的绘制工作是由浏览器的UI后端组件完成的。</p>
+<h3 id="页面的重绘-repaint-和重排-reflow"><a href="#页面的重绘-repaint-和重排-reflow" class="headerlink" title="页面的重绘(repaint)和重排(reflow)"></a>页面的重绘(repaint)和重排(reflow)</h3><p>根据渲染树布局，计算CSS样式，即每个节点在页面中的大小和位置等几何信息。HTML默认是流式布局的，CSS和js会打破这种布局，改变DOM的外观样式以及大小和位置。这时就要提到两个重要概念：repaint和reflow。</p>
+<p>replaint：屏幕的一部分重画，不影响整体布局，比如某个CSS的背景色变了，但元素的几何尺寸和位置不变。</p>
+<p>reflow：也称回流，当渲染树节点发生改变，影响了节点的几何属性（如宽、高、内边距、外边距、或是float、position、display：none;等等），导致节点位置发生变化，此时触发浏览器重排（reflow），需要重新生成渲染树。譬如JS为某个p标签节点添加新的样式：”display:none;”。导致该p标签被隐藏起来，该p标签之后的所有节点位置都会发生改变。此时浏览器需要重新生成渲染树，重新布局，即重排（reflow）。</p>
+<p>重排必将引起重绘，而重绘不一定会引起重排，并且我们应该减少和避免repaint和reflow。</p>
+<h1 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h1><h2 id="提高网页加载速度的必要性"><a href="#提高网页加载速度的必要性" class="headerlink" title="提高网页加载速度的必要性"></a>提高网页加载速度的必要性</h2><p>总而言之就是增加用户体验好感</p>
+<h2 id="前端性能优化方案"><a href="#前端性能优化方案" class="headerlink" title="前端性能优化方案"></a>前端性能优化方案</h2><h3 id="减少DNS查找"><a href="#减少DNS查找" class="headerlink" title="减少DNS查找"></a>减少DNS查找</h3><p>DNS查找，即浏览器根据url中域名，查找该域名对应的服务器IP地址，然后才能根据服务器IP地址，下载到文件。</p>
+<p>一般而言，电脑会进行DNS缓存，包括浏览器缓存、系统缓存、路由器缓存、ISP DNS缓存。所以，浏览器DNS查找顺序一般是这样的：浏览器缓存→系统缓存→路由器缓存→ISP DNS 缓存→递归搜索。</p>
+<p>递归搜索，即ISP的DNS服务器从根域名开始进行递归查询，查找时间一般为20-120ms。</p>
+<p>若没有DNS缓存，才会执行DNS递归搜索。但是显而易见，第一次访问网站首页时，是不会有DNS缓存的，必然会执行DNS查找。而每一个DNS查找，需要耗时20-120ms。因此，减少DNS查找能加快网页加载速度。</p>
+<p>实例：将网站所需的文件下载到本地，而不是调用别人支持的CDN。</p>
+<h3 id="CSS优先加载，JS延迟加载"><a href="#CSS优先加载，JS延迟加载" class="headerlink" title="CSS优先加载，JS延迟加载"></a>CSS优先加载，JS延迟加载</h3><p>在解析HTML文件，构建DOM树时，一旦遇到link标记时，即遇到了CSS样式表，将之下载，便可立即构建渲染树，从而立即呈现页面效果。</p>
+<p>而一旦遇到script 标记时，即遇到了JS脚本，将立即阻塞DOM树的构建，将控制权移交给 JavaScript 引擎，等到 JavaScript 引擎运行完毕，浏览器才会从中断的地方恢复渲染树的构建。</p>
+<p>若将引入JS脚本的链接放到HTML页面顶部，那么在加载该页面时，一旦遇到JS，页面渲染就会停滞，出现一段时间的灰色空白，直到JS加载完成，才会出现页面内容，这对用户体验是不友好的。因此，我们需要将JS脚本放置到页面底部，或者让JS脚本异步或是延迟加载。</p>
+<p>从严格意义上来说，CSS的优先加载及JS的延迟加载并不能从根本上提升网页加载速度，但是它们能使网页更快被渲染出来，使页面内容逐步呈现，增加用户等待的耐心，提升用户体验。</p>
+<h3 id="减少HTTP请求"><a href="#减少HTTP请求" class="headerlink" title="减少HTTP请求"></a>减少HTTP请求</h3><p>HTTP请求，即客户端到服务器端的请求消息，包括资源请求、数据处理等。</p>
+<p>　　HTTP请求需从客户端发起请求，然后由服务器端进行数据处理，然后再返回数据或资源。一般而言，耗时据请求资源的大小，服务器网速，约数ms-数百ms之间。请求资源越大，所花费的时间越长，服务器网速越慢，所花费的时间也越长。</p>
+<p>　　一般而言，完成了DNS查找后，接下来便是进行HTTP请求，获取资源。首先下载HTML文件，然后解析HTML文件，根据HTML内容，获取CSS、JS及图片文件。每一个CSS链接、JS链接以及图片链接都是一个HTTP请求。</p>
+<p>　　每一个HTTP请求都需要花费额外的时间。因此，我们可以将一些可合并的资源进行合并，譬如将所有页面的css合并成一个style.css文件，譬如将所有页面的js合并成一个function.js文件，再譬如将一批小图标利用ps合成一张图片（此手段效果最显著，也最常用）。虽然有时文件会变大，但是在HTTP请求中，请求下载一个大小为100KB的资源文件，比请求下载两个大小为50KB的资源文件要快。</p>
+<h3 id="缩小文件"><a href="#缩小文件" class="headerlink" title="缩小文件"></a>缩小文件</h3><p>众所周知，HTTP请求中，返回的资源越大，HTTP请求所花费的时间越长，因此，缩小资源文件可以提升HTTP请求的速度，进而提升页面加载速度。不仅如此，还能节省服务器流量及空间。</p>
+<p>一般而言，缩小文件主要是指图片压缩，也包括CSS、JS文件压缩，网上有成熟的代码在线压缩工具，譬如：<a href="http://tool.oschina.net/jscompress/" target="_blank" rel="noopener">在线JS/CSS/HTML 压缩</a></p>
+<p>而图片压缩主要是指图片在不同的格式下、不同的分辨率下保存，其大小将会有巨大的差异。譬如同一张图片的png格式与jpg格式肉眼看起来几乎没有区别，但是其大小相差了约5倍。而jpg格式中级也比高级要小约莫1倍。当然，图片的不同格式有不同的用处，且分辨率越高，图片也越清晰。</p>
+<p>因此，根据需求为图片选择合适的格式及分辨率，就能得到最小的图片文件。</p>
+<p>具体操作：在ps中打开图片，同时按下ctrl+alt+shift+s，打开”存储为web所用格式”弹框，即可任意选择保存图片的格式及分辨率。</p>
+<h3 id="善用缓存"><a href="#善用缓存" class="headerlink" title="善用缓存"></a>善用缓存</h3><p>避免在HTML文件中使用style标签插入CSS样式，及使用script标签插入JS脚本。若在HTML文件中插入CSS及JS，那么它们无法进入缓存，每次刷新页面，都要重新加载，不但浪费了浏览器资源，拖慢了页面加载速度，而且显得冗余且复用性低，不利于日后的维护。因此，将CSS样式与JS脚本分离出来，形成CSS文件及JS文件，就能进入缓存，进而提高页面加载速度。</p>
+<p>灵活使用cookie和localstorage。在使用接口时，灵活使用cookie和localstorage来缓存接口返回的信息，避免不必要的接口查询，从而提升页面加载速度。譬如：在登录页面登录时，缓存好用户信息，设置过期时间。在进入用户个人中心页面时，若数据并未过期，可以直接从缓存中取用户信息，不必再调起接口去获取用户信息。</p>
+<h3 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h3><p>这块没仔细看，可以参考最后一篇文章</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://moxiaoxi.info/2016/01/30/Browser/" target="_blank" rel="noopener">https://moxiaoxi.info/2016/01/30/Browser/</a></p>
+<p><a href="https://juejin.cn/post/6844903565610188807" target="_blank" rel="noopener">https://juejin.cn/post/6844903565610188807</a></p>
+<p><a href="https://segmentfault.com/a/1190000017019877" target="_blank" rel="noopener">https://segmentfault.com/a/1190000017019877</a></p>
+<p><a href="https://www.cnblogs.com/chenyoumei/p/9156849.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenyoumei/p/9156849.html</a></p>
+<p><a href="https://www.cnblogs.com/chenyoumei/p/9167238.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenyoumei/p/9167238.html</a></p>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2021/04/14/BrowserWorking-and-optimize/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2021/04/15/JavaScript-function/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            JavaScript函数学习笔记
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/04/13/shift-vulnerability/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">shift后门漏洞复现</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020-2021
+        <i class="ri-heart-fill heart_icon"></i> Blog of Tianze
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        Powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+        <span class="division">|</span>
+        Theme - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Tianze&#39;s Blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/literature">文集</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/url">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['曾经沧海难为水，除却巫山不是云', '物来顺应，未来不迎，当时不杂，既过不恋', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+  
+<script src="/js/clickLove.js"></script>
+
+
+
+<!-- 复制 -->
+
+  
+<link rel="stylesheet" href="/css/clipboard.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=27927357&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>
